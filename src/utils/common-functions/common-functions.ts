@@ -3,7 +3,7 @@ import { DidDocument, LegalRegistrationNumberDto, Service, VerifiableCredentialD
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import crypto, { X509Certificate } from 'crypto'
-import { AppConst, AppMessages } from '../contants'
+import { AppConst, AppMessages } from '../constants'
 
 class Utils {
 	generateDID(didId: string, publicKeyJwk: any, services: Service[]): unknown {

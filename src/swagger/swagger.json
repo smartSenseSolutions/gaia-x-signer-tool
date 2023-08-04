@@ -1,0 +1,1554 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "REST API for SmartSense Gaia-X Signer Tool",
+		"version": "1.0.0"
+	},
+	"servers": [{ "url": "http://localhost:8000/" }],
+	"paths": {
+		"/createWebDID": {
+			"post": {
+				"summary": "Create Web DID",
+				"description": "Required domain name to create did:web",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateDIDSchemaBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/onBoardToGaiaX": {
+			"post": {
+				"summary": "On board to Gaia-X",
+				"description": "Generate Legal Person and Service Offer Credentials",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OnBoardGaiaXSchemaBody"
+							},
+							"examples": {
+								"LegalParticipant": {
+									"value": {
+										"domain": "greenworld.proofsense.in",
+										"templateId": "LegalParticipant",
+										"privateKeyUrl": "https://example.com",
+										"data": {
+											"legalName": "Green World",
+											"legalRegistrationType": "leiCode",
+											"legalRegistrationNumber": "9695007586GCAKPYJ703",
+											"headquarterAddress": "BE-BRU",
+											"legalAddress": "BE-BRU"
+										}
+									}
+								},
+								"ServiceOffering": {
+									"value": {
+										"domain": "dev.smartproof.in",
+										"tenant": "smart",
+										"templateId": "ServiceOffering",
+										"privateKeyUrl": "https://example.com",
+										"data": {
+											"name": "AWS S3 Service",
+											"fileName": "s3Service.json",
+											"description": "Amazon S3 bucket is a public cloud storage resource.",
+											"policyUrl": "https://aws.amazon.com/privacy/?nc1=f_pr",
+											"termsAndConditionsUrl": "https://aws.amazon.com/service-terms/",
+											"termsAndConditionsHash": "4f598faf41fb29a44d63ec413730d55fabd2d249f1976fee1c8eec8003d7f539",
+											"requestType": "API",
+											"accessType": "digital",
+											"formatType": "application/json"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/createVC": {
+			"post": {
+				"summary": "Create verifiable credential",
+				"description": "Generate verifiable credential along with proof",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateVCSchemaBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/createVP": {
+			"post": {
+				"summary": "Create a Verifiable Presentation",
+				"description": "Generate Legal Person, Service Offering or Compliance Credential VP ",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateVPSchemaBody"
+							},
+							"examples": {
+								"createVPforLegalParticipant": {
+									"summary": "Verifiable Presentation of Legal Participant",
+									"value": {
+										"privateKeyUrl": "preSigned.url",
+										"holderDID": "did:web:dev01.proofsense.in",
+										"claims": [
+											{
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
+												"type": ["VerifiableCredential"],
+												"id": "did:web:dev01.proofsense.in",
+												"issuer": "did:web:dev01.proofsense.in",
+												"issuanceDate": "2023-04-14T13:15:23.997Z",
+												"credentialSubject": {
+													"id": "https://dev01.proofsense.in/.well-known/participant.json",
+													"type": "gx:LegalParticipant",
+													"gx:legalName": "smartproof",
+													"gx:legalRegistrationNumber": {
+														"gx:taxID": "123abc"
+													},
+													"gx:headquarterAddress": {
+														"gx:countrySubdivisionCode": "BE-BRU"
+													},
+													"gx:legalAddress": {
+														"gx:countrySubdivisionCode": "BE-BRU"
+													},
+													"gx-terms-and-conditions:gaiaxTermsAndConditions": "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
+												},
+												"proof": {
+													"type": "JsonWebSignature2020",
+													"created": "2023-04-14T13:15:24.468Z",
+													"proofPurpose": "assertionMethod",
+													"verificationMethod": "did:web:dev01.proofsense.in",
+													"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..BqtTjMvkRRtLc5eP_KA2N3nlsAJis_36V9gnA5xvF4Eu_8eNPPEj59aI2OrcmeYRRx0liz632twATqy60BixlsV2788_1WOAF0mc8BOa2H_svJRxScefpQwEVc-4TQADoubNKP_4bVnWTKJNgku53LK0e3kJ9JcmkmxmVmPWgdMwrW8wl_RiU2MJPNvmzB4HtuSxV8N7AmVdQlEZ8Vy-PEBDchGUzKD4zyyPuKDtL2bQzF7hBkUdrTCQuTuPHS_cZU7d_JOkkt-xS5JREng-ZnDD9yJxZ2tTsi2ahJbPzTZioJuurU6IXoC1gcVBW7laZWP9TbmGlj2chX_vlC93gQ"
+												}
+											}
+										]
+									}
+								},
+								"createVPforMultipleCredentials": {
+									"summary": " Create VP for Multiple Credentials",
+									"value": {
+										"privateKeyUrl": "preSigned.url",
+										"holderDID": "did:web:dev01.proofsense.in",
+										"claims": [
+											{
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
+												"type": ["VerifiableCredential"],
+												"id": "did:web:dev01.proofsense.in",
+												"issuer": "did:web:dev01.proofsense.in",
+												"issuanceDate": "2023-04-14T13:15:23.997Z",
+												"credentialSubject": {
+													"id": "https://dev01.proofsense.in/.well-known/participant.json",
+													"type": "gx:LegalParticipant",
+													"gx:legalName": "smartproof",
+													"gx:legalRegistrationNumber": {
+														"gx:taxID": "123abc"
+													},
+													"gx:headquarterAddress": {
+														"gx:countrySubdivisionCode": "BE-BRU"
+													},
+													"gx:legalAddress": {
+														"gx:countrySubdivisionCode": "BE-BRU"
+													},
+													"gx-terms-and-conditions:gaiaxTermsAndConditions": "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
+												},
+												"proof": {
+													"type": "JsonWebSignature2020",
+													"created": "2023-04-14T13:15:24.468Z",
+													"proofPurpose": "assertionMethod",
+													"verificationMethod": "did:web:dev01.proofsense.in",
+													"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..BqtTjMvkRRtLc5eP_KA2N3nlsAJis_36V9gnA5xvF4Eu_8eNPPEj59aI2OrcmeYRRx0liz632twATqy60BixlsV2788_1WOAF0mc8BOa2H_svJRxScefpQwEVc-4TQADoubNKP_4bVnWTKJNgku53LK0e3kJ9JcmkmxmVmPWgdMwrW8wl_RiU2MJPNvmzB4HtuSxV8N7AmVdQlEZ8Vy-PEBDchGUzKD4zyyPuKDtL2bQzF7hBkUdrTCQuTuPHS_cZU7d_JOkkt-xS5JREng-ZnDD9yJxZ2tTsi2ahJbPzTZioJuurU6IXoC1gcVBW7laZWP9TbmGlj2chX_vlC93gQ"
+												}
+											},
+											{
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
+												"type": ["VerifiableCredential"],
+												"id": "did:web:dev.smartproof.in",
+												"issuer": "did:web:dev.smartproof.in",
+												"issuanceDate": "2023-04-14T09:27:31.710Z",
+												"credentialSubject": {
+													"id": "https://dev.smartproof.in/.well-known/serviceComplianceService.json",
+													"type": "gx:ServiceOffering",
+													"gx:providedBy": {
+														"id": "https://dev.smartproof.in/.well-known/participant.json"
+													},
+													"gx:policy": "",
+													"gx:termsAndConditions": {
+														"gx:URL": "https://aws.amazon.com/service-terms/",
+														"gx:hash": "4f598faf41fb29a44d63ec413730d55fabd2d249f1976fee1c8eec8003d7f539"
+													},
+													"gx:dataAccountExport": {
+														"gx:requestType": "API",
+														"gx:accessType": "digital",
+														"gx:formatType": "application/json"
+													}
+												},
+												"proof": {
+													"type": "JsonWebSignature2020",
+													"created": "2023-04-14T09:27:33.924Z",
+													"proofPurpose": "assertionMethod",
+													"verificationMethod": "did:web:dev.smartproof.in",
+													"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..eguyP8IBKxW6imgUdZwx1Uil9eQh7Jm2OdMGEzQWzsEogw23ya6Lpr4WADoZibhkYPirq0lYryiiiORD1A22IlB8AgSaFkC8a6FdFQgU21g-76yzFyxmQN9HUkDp2DWRwhwS6pP3RIDmRuZDycxe_Mym4MoLEya4xEP1dYby5ezYNn6Yi9oT0xSTAXd4UaifnU2SyDLBfDobzjuX1VVQcmepZisI4QPbPc5DjS4DIPZMPLd_EY6ZLO4MLXlGia2Y2yooVTlBLuOzxMFx_FeSMcrKyLWgLB4DTn_EpXYy88V8EWAx-BEsu6w2zGHFIRuZiKk9tjwoL2OXSftnljYiJA"
+												}
+											}
+										]
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								},
+								"examples": {
+									"createVPforLegalParticipant": {
+										"summary": "Verifiable Presentation of Legal Participant",
+										"value": {
+											"data": {
+												"verifiablePresentation": {
+													"@context": [
+														"https://www.w3.org/2018/credentials/v1",
+														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													],
+													"type": ["VerifiablePresentation"],
+													"verifiableCredential": [
+														{
+															"@context": [
+																"https://www.w3.org/2018/credentials/v1",
+																"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+															],
+															"type": ["VerifiableCredential"],
+															"id": "did:web:dev01.proofsense.in",
+															"issuer": "did:web:dev01.proofsense.in",
+															"issuanceDate": "2023-04-14T13:15:23.997Z",
+															"credentialSubject": {
+																"id": "https://dev01.proofsense.in/.well-known/participant.json",
+																"type": "gx:LegalParticipant",
+																"gx:legalName": "smartproof",
+																"gx:legalRegistrationNumber": {
+																	"gx:taxID": "123abc"
+																},
+																"gx:headquarterAddress": {
+																	"gx:countrySubdivisionCode": "BE-BRU"
+																},
+																"gx:legalAddress": {
+																	"gx:countrySubdivisionCode": "BE-BRU"
+																},
+																"gx-terms-and-conditions:gaiaxTermsAndConditions": "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
+															},
+															"proof": {
+																"type": "JsonWebSignature2020",
+																"created": "2023-04-14T13:15:24.468Z",
+																"proofPurpose": "assertionMethod",
+																"verificationMethod": "did:web:dev01.proofsense.in",
+																"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..BqtTjMvkRRtLc5eP_KA2N3nlsAJis_36V9gnA5xvF4Eu_8eNPPEj59aI2OrcmeYRRx0liz632twATqy60BixlsV2788_1WOAF0mc8BOa2H_svJRxScefpQwEVc-4TQADoubNKP_4bVnWTKJNgku53LK0e3kJ9JcmkmxmVmPWgdMwrW8wl_RiU2MJPNvmzB4HtuSxV8N7AmVdQlEZ8Vy-PEBDchGUzKD4zyyPuKDtL2bQzF7hBkUdrTCQuTuPHS_cZU7d_JOkkt-xS5JREng-ZnDD9yJxZ2tTsi2ahJbPzTZioJuurU6IXoC1gcVBW7laZWP9TbmGlj2chX_vlC93gQ"
+															}
+														}
+													],
+													"proof": {
+														"type": "JsonWebSignature2020",
+														"created": "2023-04-20T09:06:52.855Z",
+														"proofPurpose": "assertionMethod",
+														"verificationMethod": "did:web:dev01.proofsense.in",
+														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..naqd59ApWkqtnh0T1NgDAwS_Mg5jYJ_GH5hiOYoChwCPsBYt55RrhM0wj5fV75MyHyy44k0q0KhBnhzh6MbAMshha178Q_mUYm50a42ztF6DT5QV-10jlgjUVJqMpqyBSfAQumzlciG6xj8X-LUhA-aTaI46t7MBRJ-uvyLJ3l5TK4gUbmr3r6_dIRf_dqWKXSo1tWkTNitwkG4_H6_Rgdzu_ahNvdqTCIdo3ztY67m8ZAvoNWCd4Fzadnm7VjkyNDFVetCsheg-2BiOzLtOme5Fq9WiyjyQn3ZhaqE71sjdTAFx24RcSmpna1u29CYUx7uK4q_RzEqDS-DI16YhNA"
+													}
+												}
+											},
+											"message": "VP created successfully."
+										}
+									},
+									"createVPforMultipleCredentials": {
+										"summary": " Create VP for Multiple Credentials",
+										"value": {
+											"data": {
+												"verifiablePresentation": {
+													"@context": [
+														"https://www.w3.org/2018/credentials/v1",
+														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													],
+													"type": ["VerifiablePresentation"],
+													"verifiableCredential": [
+														{
+															"@context": [
+																"https://www.w3.org/2018/credentials/v1",
+																"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+															],
+															"type": ["VerifiableCredential"],
+															"id": "did:web:dev01.proofsense.in",
+															"issuer": "did:web:dev01.proofsense.in",
+															"issuanceDate": "2023-04-14T13:15:23.997Z",
+															"credentialSubject": {
+																"id": "https://dev01.proofsense.in/.well-known/participant.json",
+																"type": "gx:LegalParticipant",
+																"gx:legalName": "smartproof",
+																"gx:legalRegistrationNumber": {
+																	"gx:taxID": "123abc"
+																},
+																"gx:headquarterAddress": {
+																	"gx:countrySubdivisionCode": "BE-BRU"
+																},
+																"gx:legalAddress": {
+																	"gx:countrySubdivisionCode": "BE-BRU"
+																},
+																"gx-terms-and-conditions:gaiaxTermsAndConditions": "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
+															},
+															"proof": {
+																"type": "JsonWebSignature2020",
+																"created": "2023-04-14T13:15:24.468Z",
+																"proofPurpose": "assertionMethod",
+																"verificationMethod": "did:web:dev01.proofsense.in",
+																"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..BqtTjMvkRRtLc5eP_KA2N3nlsAJis_36V9gnA5xvF4Eu_8eNPPEj59aI2OrcmeYRRx0liz632twATqy60BixlsV2788_1WOAF0mc8BOa2H_svJRxScefpQwEVc-4TQADoubNKP_4bVnWTKJNgku53LK0e3kJ9JcmkmxmVmPWgdMwrW8wl_RiU2MJPNvmzB4HtuSxV8N7AmVdQlEZ8Vy-PEBDchGUzKD4zyyPuKDtL2bQzF7hBkUdrTCQuTuPHS_cZU7d_JOkkt-xS5JREng-ZnDD9yJxZ2tTsi2ahJbPzTZioJuurU6IXoC1gcVBW7laZWP9TbmGlj2chX_vlC93gQ"
+															}
+														},
+														{
+															"@context": [
+																"https://www.w3.org/2018/credentials/v1",
+																"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+															],
+															"type": ["VerifiableCredential"],
+															"id": "did:web:dev.smartproof.in",
+															"issuer": "did:web:dev.smartproof.in",
+															"issuanceDate": "2023-04-14T09:27:31.710Z",
+															"credentialSubject": {
+																"id": "https://dev.smartproof.in/.well-known/serviceComplianceService.json",
+																"type": "gx:ServiceOffering",
+																"gx:providedBy": {
+																	"id": "https://dev.smartproof.in/.well-known/participant.json"
+																},
+																"gx:policy": "",
+																"gx:termsAndConditions": {
+																	"gx:URL": "https://aws.amazon.com/service-terms/",
+																	"gx:hash": "4f598faf41fb29a44d63ec413730d55fabd2d249f1976fee1c8eec8003d7f539"
+																},
+																"gx:dataAccountExport": {
+																	"gx:requestType": "API",
+																	"gx:accessType": "digital",
+																	"gx:formatType": "application/json"
+																}
+															},
+															"proof": {
+																"type": "JsonWebSignature2020",
+																"created": "2023-04-14T09:27:33.924Z",
+																"proofPurpose": "assertionMethod",
+																"verificationMethod": "did:web:dev.smartproof.in",
+																"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..eguyP8IBKxW6imgUdZwx1Uil9eQh7Jm2OdMGEzQWzsEogw23ya6Lpr4WADoZibhkYPirq0lYryiiiORD1A22IlB8AgSaFkC8a6FdFQgU21g-76yzFyxmQN9HUkDp2DWRwhwS6pP3RIDmRuZDycxe_Mym4MoLEya4xEP1dYby5ezYNn6Yi9oT0xSTAXd4UaifnU2SyDLBfDobzjuX1VVQcmepZisI4QPbPc5DjS4DIPZMPLd_EY6ZLO4MLXlGia2Y2yooVTlBLuOzxMFx_FeSMcrKyLWgLB4DTn_EpXYy88V8EWAx-BEsu6w2zGHFIRuZiKk9tjwoL2OXSftnljYiJA"
+															}
+														}
+													],
+													"proof": {
+														"type": "JsonWebSignature2020",
+														"created": "2023-04-20T09:06:36.826Z",
+														"proofPurpose": "assertionMethod",
+														"verificationMethod": "did:web:dev01.proofsense.in",
+														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..IIhb0E7Zhnh6bj9vuBaKoX2UaR9ZB248HwBPq-1RilmJmHzUQR19556b6XdosXl4WNJ8f0GBnACbUSETYsUOVcEe91YAhqQSF7RYl7-flGmtDsbpKtWR8XXCW7WCBQCQ2-LY0l7bvOy1_92YqiL60JQeo-6HAGb7xXwaREfLI2DD5kRLb7dCd3_UXtIRo9_qTawH4BWCxWT8QjUKcBregNd0derLvyaxGEokJacpQs3jUsFMlqfbpxYhmBpBYP6A3I_Wyzu5CtQNSM7FkKbsR8dsbd0jAU1MuMp4JO4TAIdZ1AgjbyF5vQr6ZSsvISRG1V_GVkNlqhaZVpiHwEQGBw"
+													}
+												}
+											},
+											"message": "VP created successfully."
+										}
+									}
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/verify": {
+			"post": {
+				"summary": "Verify proof of a VC or a VP",
+				"description": " Validate Signature of VC or VP ",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/VerifySigSchemaBody"
+							},
+							"examples": {
+								"verifyLegalParticipantVC": {
+									"summary": "VC of Legal Participant",
+									"value": {
+										"policies": ["checkSignature"],
+										"credential": {
+											"@context": [
+												"https://www.w3.org/2018/credentials/v1",
+												"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+											],
+											"type": ["VerifiableCredential"],
+											"id": "did:web:dev02.proofsense.in",
+											"issuer": "did:web:dev02.proofsense.in",
+											"issuanceDate": "2023-04-14T15:17:43.729Z",
+											"credentialSubject": {
+												"id": "did:web:dev02.proofsense.in",
+												"type": "gx:LegalParticipant",
+												"gx:legalName": "Dev Smartproof",
+												"gx:legalRegistrationNumber": {
+													"gx:taxID": "0762747721"
+												},
+												"gx:headquarterAddress": {
+													"gx:countrySubdivisionCode": "BE-BRU"
+												},
+												"gx:legalAddress": {
+													"gx:countrySubdivisionCode": "BE-BRU"
+												},
+												"gx-terms-and-conditions:gaiaxTermsAndConditions": "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
+											},
+											"proof": {
+												"type": "JsonWebSignature2020",
+												"created": "2023-04-14T15:17:47.310Z",
+												"proofPurpose": "assertionMethod",
+												"verificationMethod": "did:web:dev02.proofsense.in",
+												"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..GcGvjfjUgye5g-drmydUz3p1hzNb83qZtW5fl7FelFkEmZcsDWGXVSjFP8D3u6jwhO5y_bMdV16FVLk9JaXuqIpJKZJo9qx63zJp1VS2xXbPHmX7VNvhDEIkAUtalp2OaRiU5tWt3NQSIST-AGvFbMPohF3injCCcJzJYgarUe48j7PnOviL0Z6ES0_7kU_ydj1giJ-xm49EZoIddCUtoshQ3nxsvICdD4MZoru6OWkMJRIJLb5cUVPezkmvLsyKbVniWNIecG766B3t-7RZ0h8g6okAwViZLUlCeJENkY_QDH1t2erHHQ2C6ifsAD4oTY8U3A6sjPdLSuuhVtTa5w"
+											}
+										}
+									}
+								},
+								"verifyLegalParticipantVP": {
+									"summary": "VP of Legal Participant",
+									"value": {
+										"policies": ["checkSignature"],
+										"credential": {
+											"@context": [
+												"https://www.w3.org/2018/credentials/v1",
+												"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+											],
+											"type": ["VerifiablePresentation"],
+											"verifiableCredential": [
+												{
+													"@context": [
+														"https://www.w3.org/2018/credentials/v1",
+														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													],
+													"type": ["VerifiableCredential"],
+													"id": "did:web:dev01.proofsense.in",
+													"issuer": "did:web:dev01.proofsense.in",
+													"issuanceDate": "2023-04-14T13:15:23.997Z",
+													"credentialSubject": {
+														"id": "https://dev01.proofsense.in/.well-known/participant.json",
+														"type": "gx:LegalParticipant",
+														"gx:legalName": "smartproof",
+														"gx:legalRegistrationNumber": {
+															"gx:taxID": "123abc"
+														},
+														"gx:headquarterAddress": {
+															"gx:countrySubdivisionCode": "BE-BRU"
+														},
+														"gx:legalAddress": {
+															"gx:countrySubdivisionCode": "BE-BRU"
+														},
+														"gx-terms-and-conditions:gaiaxTermsAndConditions": "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
+													},
+													"proof": {
+														"type": "JsonWebSignature2020",
+														"created": "2023-04-14T13:15:24.468Z",
+														"proofPurpose": "assertionMethod",
+														"verificationMethod": "did:web:dev01.proofsense.in",
+														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..BqtTjMvkRRtLc5eP_KA2N3nlsAJis_36V9gnA5xvF4Eu_8eNPPEj59aI2OrcmeYRRx0liz632twATqy60BixlsV2788_1WOAF0mc8BOa2H_svJRxScefpQwEVc-4TQADoubNKP_4bVnWTKJNgku53LK0e3kJ9JcmkmxmVmPWgdMwrW8wl_RiU2MJPNvmzB4HtuSxV8N7AmVdQlEZ8Vy-PEBDchGUzKD4zyyPuKDtL2bQzF7hBkUdrTCQuTuPHS_cZU7d_JOkkt-xS5JREng-ZnDD9yJxZ2tTsi2ahJbPzTZioJuurU6IXoC1gcVBW7laZWP9TbmGlj2chX_vlC93gQ"
+													}
+												}
+											],
+											"proof": {
+												"type": "JsonWebSignature2020",
+												"created": "2023-04-19T13:05:20.321Z",
+												"proofPurpose": "assertionMethod",
+												"verificationMethod": "did:web:dev01.proofsense.in",
+												"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..aEkoK7uhpVeg_msm_he7PDrS2V6j-WSeeRJfmmt1hO-TKmiz29W3coL5U2DniGlX-TkTAaPHhZwQ95HBJaJc9Qmb97sH5w4QhDfADO8q0txIqFDOCvGSjIJutygLtGCDePhdyZPCzhPOpFWs1DcEkjJKyA4kqHG3Vq-NaR0WM8X3a7UwjKYTpCpJ9RxzxzVo9fch3P8EUKCrtCqxCKyT9cQbcZY0ShDGfnLlHaHoUUyuFm0SkLjXjU8FGTKQFwzDoWQ8QJzOrrh6WvweJx0_HT0Ouw6fKHgqLJzcP67WXT6UlZ_vsXVo2nj-Gt2QLR9ioDrj8Yi2XIcAIMEiiiHRaA"
+											}
+										}
+									}
+								},
+								"verifyMultipleVC": {
+									"summary": "Verify VP of multiple VCs",
+									"value": {
+										"policies": ["checkSignature"],
+										"credential": {
+											"@context": [
+												"https://www.w3.org/2018/credentials/v1",
+												"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+											],
+											"type": ["VerifiablePresentation"],
+											"verifiableCredential": [
+												{
+													"@context": [
+														"https://www.w3.org/2018/credentials/v1",
+														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													],
+													"type": ["VerifiableCredential"],
+													"id": "did:web:dev01.proofsense.in",
+													"issuer": "did:web:dev01.proofsense.in",
+													"issuanceDate": "2023-04-14T13:15:23.997Z",
+													"credentialSubject": {
+														"id": "https://dev01.proofsense.in/.well-known/participant.json",
+														"type": "gx:LegalParticipant",
+														"gx:legalName": "smartproof",
+														"gx:legalRegistrationNumber": {
+															"gx:taxID": "123abc"
+														},
+														"gx:headquarterAddress": {
+															"gx:countrySubdivisionCode": "BE-BRU"
+														},
+														"gx:legalAddress": {
+															"gx:countrySubdivisionCode": "BE-BRU"
+														},
+														"gx-terms-and-conditions:gaiaxTermsAndConditions": "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
+													},
+													"proof": {
+														"type": "JsonWebSignature2020",
+														"created": "2023-04-14T13:15:24.468Z",
+														"proofPurpose": "assertionMethod",
+														"verificationMethod": "did:web:dev01.proofsense.in",
+														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..BqtTjMvkRRtLc5eP_KA2N3nlsAJis_36V9gnA5xvF4Eu_8eNPPEj59aI2OrcmeYRRx0liz632twATqy60BixlsV2788_1WOAF0mc8BOa2H_svJRxScefpQwEVc-4TQADoubNKP_4bVnWTKJNgku53LK0e3kJ9JcmkmxmVmPWgdMwrW8wl_RiU2MJPNvmzB4HtuSxV8N7AmVdQlEZ8Vy-PEBDchGUzKD4zyyPuKDtL2bQzF7hBkUdrTCQuTuPHS_cZU7d_JOkkt-xS5JREng-ZnDD9yJxZ2tTsi2ahJbPzTZioJuurU6IXoC1gcVBW7laZWP9TbmGlj2chX_vlC93gQ"
+													}
+												},
+												{
+													"@context": [
+														"https://www.w3.org/2018/credentials/v1",
+														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													],
+													"type": ["VerifiableCredential"],
+													"id": "did:web:dev.smartproof.in",
+													"issuer": "did:web:dev.smartproof.in",
+													"issuanceDate": "2023-04-14T09:27:31.710Z",
+													"credentialSubject": {
+														"id": "https://dev.smartproof.in/.well-known/serviceComplianceService.json",
+														"type": "gx:ServiceOffering",
+														"gx:providedBy": {
+															"id": "https://dev.smartproof.in/.well-known/participant.json"
+														},
+														"gx:policy": "",
+														"gx:termsAndConditions": {
+															"gx:URL": "https://aws.amazon.com/service-terms/",
+															"gx:hash": "4f598faf41fb29a44d63ec413730d55fabd2d249f1976fee1c8eec8003d7f539"
+														},
+														"gx:dataAccountExport": {
+															"gx:requestType": "API",
+															"gx:accessType": "digital",
+															"gx:formatType": "application/json"
+														}
+													},
+													"proof": {
+														"type": "JsonWebSignature2020",
+														"created": "2023-04-14T09:27:33.924Z",
+														"proofPurpose": "assertionMethod",
+														"verificationMethod": "did:web:dev.smartproof.in",
+														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..eguyP8IBKxW6imgUdZwx1Uil9eQh7Jm2OdMGEzQWzsEogw23ya6Lpr4WADoZibhkYPirq0lYryiiiORD1A22IlB8AgSaFkC8a6FdFQgU21g-76yzFyxmQN9HUkDp2DWRwhwS6pP3RIDmRuZDycxe_Mym4MoLEya4xEP1dYby5ezYNn6Yi9oT0xSTAXd4UaifnU2SyDLBfDobzjuX1VVQcmepZisI4QPbPc5DjS4DIPZMPLd_EY6ZLO4MLXlGia2Y2yooVTlBLuOzxMFx_FeSMcrKyLWgLB4DTn_EpXYy88V8EWAx-BEsu6w2zGHFIRuZiKk9tjwoL2OXSftnljYiJA"
+													}
+												}
+											],
+											"proof": {
+												"type": "JsonWebSignature2020",
+												"created": "2023-04-20T09:06:36.826Z",
+												"proofPurpose": "assertionMethod",
+												"verificationMethod": "did:web:dev01.proofsense.in",
+												"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..IIhb0E7Zhnh6bj9vuBaKoX2UaR9ZB248HwBPq-1RilmJmHzUQR19556b6XdosXl4WNJ8f0GBnACbUSETYsUOVcEe91YAhqQSF7RYl7-flGmtDsbpKtWR8XXCW7WCBQCQ2-LY0l7bvOy1_92YqiL60JQeo-6HAGb7xXwaREfLI2DD5kRLb7dCd3_UXtIRo9_qTawH4BWCxWT8QjUKcBregNd0derLvyaxGEokJacpQs3jUsFMlqfbpxYhmBpBYP6A3I_Wyzu5CtQNSM7FkKbsR8dsbd0jAU1MuMp4JO4TAIdZ1AgjbyF5vQr6ZSsvISRG1V_GVkNlqhaZVpiHwEQGBw"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								},
+								"examples": {
+									"VC/VP": {
+										"summary": "Example response for both a VC or VP",
+										"value": {
+											"data": {
+												"checkSignature": true
+											},
+											"message": "Signature verification successful"
+										}
+									}
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/get/trust-index": {
+			"post": {
+				"summary": "Calculation of Trust index, Veracity & Transperency",
+				"description": "Calculates Trust index, Veracity & Transperency using holder VC and self description of service offering",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetTrustIndexSchemaBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								},
+								"examples": {
+									"trustIndex": {
+										"summary": "Trust index, Veracity & Transperency of service offering",
+										"value": {
+											"message": "Success",
+											"data": {
+												"veracity": 0.25,
+												"transparency": 1.4,
+												"trustIndex": 0.825,
+												"certificateDetails": {
+													"validFrom": "Apr 21 00:00:00 2023 GMT",
+													"validTo": "Apr 20 23:59:59 2024 GMT",
+													"subject": {
+														"jurisdictionCountry": "DE",
+														"jurisdictionSate": "Hamburg",
+														"jurisdictionLocality": "Hamburg",
+														"businessCategory": "Private Organization",
+														"serialNumber": "HRB 170364",
+														"country": "DE",
+														"state": "Hamburg",
+														"locality": "Hamburg",
+														"organization": "deltaDAO AG",
+														"commonName": "www.delta-dao.com"
+													},
+													"issuer": {
+														"commonName": "DigiCert EV RSA CA G2",
+														"organization": "DigiCert Inc",
+														"country": "US"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/gaia-x/legal-participant": {
+			"post": {
+				"summary": "LegalParticipant On GaiaX",
+				"description": "LegalParticipant On GaiaX",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OnBoardGaiaXSchemaBody"
+							},
+							"examples": {
+								"LegalParticipant": {
+									"value": {
+										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"issuer": "did:web:greenworld.proofsense.in",
+										"verificationMethod": "did:web:greenworld.proofsense.in",
+										"vcs": {
+											"legalParticipant": {
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://w3id.org/security/suites/jws-2020/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
+												"type": ["VerifiableCredential"],
+												"id": "did:web:greenworld.proofsense.in",
+												"issuer": "did:web:greenworld.proofsense.in",
+												"issuanceDate": "2023-07-28T11:13:53.734Z",
+												"credentialSubject": {
+													"id": "https://greenworld.proofsense.in/.well-known/participant.json#0",
+													"type": "gx:LegalParticipant",
+													"gx:legalName": "Green World",
+													"gx:legalRegistrationNumber": {
+														"id": "https://greenworld.proofsense.in/.well-known/participant.json#1"
+													},
+													"gx:headquarterAddress": {
+														"gx:countrySubdivisionCode": "BE-BRU"
+													},
+													"gx:legalAddress": {
+														"gx:countrySubdivisionCode": "BE-BRU"
+													}
+												}
+											},
+											"legalRegistrationNumber": {
+												"@context": ["https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/participant"],
+												"type": "gx:legalRegistrationNumber",
+												"id": "https://greenworld.proofsense.in/.well-known/participant.json#1",
+												"gx:leiCode": "9695007586GCAKPYJ703"
+											},
+											"gaiaXTermsAndConditions": {
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://w3id.org/security/suites/jws-2020/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
+												"type": ["VerifiableCredential"],
+												"issuanceDate": "2023-07-28T11:13:56.533Z",
+												"credentialSubject": {
+													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+													"type": "gx:GaiaXTermsAndConditions",
+													"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
+													"id": "https://greenworld.proofsense.in/.well-known/participant.json#2"
+												},
+												"issuer": "did:web:greenworld.proofsense.in",
+												"id": "did:web:greenworld.proofsense.in"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/gaia-x/service-offering": {
+			"post": {
+				"summary": "Compline service offering SD",
+				"description": "Creates VP for service offering and sends it to compliance service",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ComplineSOSchemaBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								},
+								"examples": {
+									"serviceOffering": {
+										"summary": "Sign Service offering SD from compliance service",
+										"value": {
+											"data": {
+												"selfDescriptionCredential": {
+													"@context": "https://www.w3.org/2018/credentials/v1",
+													"type": ["VerifiablePresentation"],
+													"verifiableCredential": [
+														{
+															"@context": [
+																"https://www.w3.org/2018/credentials/v1",
+																"https://w3id.org/security/suites/jws-2020/v1",
+																"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+															],
+															"type": ["VerifiableCredential"],
+															"id": "did:web:greenworld.proofsense.in",
+															"issuer": "did:web:greenworld.proofsense.in",
+															"issuanceDate": "2023-07-28T11:13:53.734Z",
+															"credentialSubject": {
+																"id": "https://greenworld.proofsense.in/.well-known/participant.json#0",
+																"type": "gx:LegalParticipant",
+																"gx:legalName": "Green World",
+																"gx:legalRegistrationNumber": {
+																	"id": "https://greenworld.proofsense.in/.well-known/participant.json#1"
+																},
+																"gx:headquarterAddress": {
+																	"gx:countrySubdivisionCode": "BE-BRU"
+																},
+																"gx:legalAddress": {
+																	"gx:countrySubdivisionCode": "BE-BRU"
+																}
+															},
+															"proof": {
+																"type": "JsonWebSignature2020",
+																"created": "2023-08-01T10:49:34.385Z",
+																"proofPurpose": "assertionMethod",
+																"verificationMethod": "did:web:greenworld.proofsense.in",
+																"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..jdGGZGI57Wf4HOk6RzZh6O59G-tSDWm2X0-ZN4Lsn_zHSW2nMHsG9KLqy_RaM9kbknYm-NOIHkpx4j-Hk-m6GgZt5j5DSbFn86q64X3RDaerWjNUf8H6QpXxayCc1gC5O3sys6ge4CjJ8iYzCET5LfVxW2WUcsOlhIWqXAtfTsO41Q_jk5WT2swBlOyGgluPkmWGe6Zf4-qVMuS_bNbeQrpknc0LltaVnfThExPypwmBoBGwRObkuZ34exDLRGPkOq5I0F_qm2DIRdRsPXfZCOA0EF9QTcWECj7IukcMspVVWYrrhXlb_TiUsVhr7pzcTxuSs9gjsr-kRsJB2m5H_Q"
+															}
+														},
+														{
+															"@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1"],
+															"type": "VerifiableCredential",
+															"id": "https://greenworld.proofsense.in/.well-known/participant.json#1",
+															"issuer": "did:web:registration.lab.gaia-x.eu:development",
+															"issuanceDate": "2023-08-01T10:49:30.286Z",
+															"credentialSubject": {
+																"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+																"type": "gx:legalRegistrationNumber",
+																"id": "https://greenworld.proofsense.in/.well-known/participant.json#1",
+																"gx:leiCode": "9695007586GCAKPYJ703",
+																"gx:leiCode-countryCode": "FR"
+															},
+															"evidence": [
+																{
+																	"gx:evidenceURL": "https://api.gleif.org/api/v1/lei-records/",
+																	"gx:executionDate": "2023-08-01T10:49:30.285Z",
+																	"gx:evidenceOf": "gx:leiCode"
+																}
+															],
+															"proof": {
+																"type": "JsonWebSignature2020",
+																"created": "2023-08-01T10:49:31.297Z",
+																"proofPurpose": "assertionMethod",
+																"verificationMethod": "did:web:registration.lab.gaia-x.eu:development#X509-JWK2020",
+																"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..L2MbENKa5z78bvSsBoCi5VSPp0djHmrZ1SCbP-phIzBtadn3Z9v20CGvaThAM2CgzN8FQLAfg5mQKnu1kC870zkLLmXvGqQBjV5Yx8PdGADFDpisUMfb7_6EvV-t7t6cRGOqR9_uksImRWfQDp80a5LjhjDK6v2G0MkuOoJJQWV9zMw5G94Y4P0B-HnP5SJqKIcSrHJPmZvvisLZKlfapXzr2teokoi8r_qnNwQwpZ6q_iKI4GKgHmdLuPfzJqhL6fxkZytRZsjaORbM2bDIe72iu0f0s7Q9Hq5ApWw6bnTNmjB7Iz_QX5VSmfOiIFtZ6MU9O7QxqAlSFkdh7_wk_A"
+															}
+														},
+														{
+															"@context": [
+																"https://www.w3.org/2018/credentials/v1",
+																"https://w3id.org/security/suites/jws-2020/v1",
+																"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+															],
+															"type": ["VerifiableCredential"],
+															"issuanceDate": "2023-07-28T11:13:56.533Z",
+															"credentialSubject": {
+																"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+																"type": "gx:GaiaXTermsAndConditions",
+																"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
+																"id": "https://greenworld.proofsense.in/.well-known/participant.json#2"
+															},
+															"issuer": "did:web:greenworld.proofsense.in",
+															"id": "did:web:greenworld.proofsense.in",
+															"proof": {
+																"type": "JsonWebSignature2020",
+																"created": "2023-08-01T10:49:37.503Z",
+																"proofPurpose": "assertionMethod",
+																"verificationMethod": "did:web:greenworld.proofsense.in",
+																"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..CXb7ErijPZ3L1Y7r0NGdKiM_K2SYSkN-bdPF8v7xcYARQydzNeJ3rm0M3UKjDJVcBQKaC4Ye1e1_IoeeZJox9kDthOaVnuell08S9f4JM7QCu_MCnCjSoREAoFg772t-5jW4RwkdG4cdcUd8xjTG-Kw8WLxskAM-FsvYYN5D4TGk-81mibz06wrszcC2uf0QZtXJrAvJIRZd6rkQPN1dP6tKb4SWwsV5vHzb6Y3DRENKRUK443bt5tc9TGSnm_Fc0-rpCZ5SUe2LYO3CMh9UbAZiYimKejsLNGybRqplV-y3bEAv9YHY_m5TrvajPa9kWIf7ePMxAqxyhZgV4y1LAA"
+															}
+														},
+														{
+															"@context": [
+																"https://www.w3.org/2018/credentials/v1",
+																"https://w3id.org/security/suites/jws-2020/v1",
+																"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+															],
+															"type": "VerifiableCredential",
+															"id": "did:web:greenworld.proofsense.in",
+															"issuer": "did:web:greenworld.proofsense.in",
+															"issuanceDate": "2023-07-12T09:37:01.595Z",
+															"credentialSubject": {
+																"id": "https://greenworld.proofsense.in/.well-known/serviceComplianceService.json",
+																"type": "gx:ServiceOffering",
+																"gx:providedBy": {
+																	"id": "https://greenworld.proofsense.in/.well-known/participant.json#0"
+																},
+																"gx:termsAndConditions": {
+																	"gx:URL": "http://termsandconds.com",
+																	"gx:hash": "d8402a23de560f5ab34b22d1a142feb9e13b3143"
+																},
+																"gx:dataAccountExport": {
+																	"gx:requestType": "API",
+																	"gx:accessType": "digital",
+																	"gx:formatType": "application/json"
+																},
+																"gx:policy": ""
+															},
+															"proof": {
+																"type": "JsonWebSignature2020",
+																"created": "2023-08-02T06:58:05.018Z",
+																"proofPurpose": "assertionMethod",
+																"verificationMethod": "did:web:greenworld.proofsense.in",
+																"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..DT3WkyL3DoFtaPih8sJoiUInFv3Gs7QFaRNwW-fv4axLBX_1bA4oC3NrhlFMhrFG26SL3RKyr92nqdmHgMHWejNFM0BsROZVQa4VGQ_GnlMxv7sqn73_fP9ALR5yMcgM_6as9m1fuRC3NGA8CZieqlDb94tVrGK6VFzkecFT6Et6hktV7xaJOQW-Tjqp_Ub7wCBrd5nbhUyY_u9NSSimoEY0W6U1wem1zdi9ZMclmuRpvXqSHitJjBtzc1Vh-pJapO6imznSo-Rl0U85Y2UMRedE_4HaYtzTUgIRWx0UFhXCTEZRIo53wEcYvfT19ybo5o4-COdhoFnmlV3DULNVOA"
+															}
+														}
+													]
+												},
+												"complianceCredential": {
+													"@context": [
+														"https://www.w3.org/2018/credentials/v1",
+														"https://w3id.org/security/suites/jws-2020/v1",
+														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													],
+													"type": ["VerifiableCredential"],
+													"id": "https://compliance.lab.gaia-x.eu/development/credential-offers/806920a9-ffb1-47c0-8aab-d04a060a779e",
+													"issuer": "did:web:compliance.lab.gaia-x.eu:development",
+													"issuanceDate": "2023-08-02T06:58:17.870Z",
+													"expirationDate": "2023-10-31T06:58:17.870Z",
+													"credentialSubject": [
+														{
+															"type": "gx:compliance",
+															"id": "https://greenworld.proofsense.in/.well-known/participant.json#0",
+															"integrity": "sha256-42807844dc6857179809f82953cb440cfe539ee30051ae2e89e95b472bf0cf75",
+															"version": "22.10"
+														},
+														{
+															"type": "gx:compliance",
+															"id": "https://greenworld.proofsense.in/.well-known/participant.json#1",
+															"integrity": "sha256-9a7643bcf9a748c7f5b5dc8c32e8cb778564896889efab711b7d9d5471aee289",
+															"version": "22.10"
+														},
+														{
+															"type": "gx:compliance",
+															"id": "https://greenworld.proofsense.in/.well-known/participant.json#2",
+															"integrity": "sha256-e7562102e69d04f6d661bfb85ce4f0a26c1c238cf47975bb91051e22802126f0",
+															"version": "22.10"
+														},
+														{
+															"type": "gx:compliance",
+															"id": "https://greenworld.proofsense.in/.well-known/serviceComplianceService.json",
+															"integrity": "sha256-26f1ecfbe9214d4145d8d93c269deefd542624edcad4df8903ff4f5760f0ca01",
+															"version": "22.10"
+														}
+													],
+													"proof": {
+														"type": "JsonWebSignature2020",
+														"created": "2023-08-02T06:58:18.575Z",
+														"proofPurpose": "assertionMethod",
+														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..bvLTB_FwHFG3L9QE1rRczTobGA-EqEPEn3SZz9cRLqTuDdpptPaTCK108qCLKn10NemKFg6Mf2r9l1N0MbpUNaDysBhwtDPlubkVapanryIjh7I3kN6C8bmVkKpP4kZMQhghSF8A68lKV-eeGW-ZdTILzHImjdAMqAaQJO1WMP4c_ty1AZGVPv5QP58ERIqF0HxBSjW0_ha9BdlLR8VhmRplglKYAWUYtoHMFPRjeDfqDaFNLiJGRfAEN4LN3_a4MCuuxISRNi-3r4qMkYAsJDflYFsFp86SO2QEyBJMxS2wERYAGkQb4_bcUX4y6xUzBQEQ0eDL02-DZdIR7dLCFw",
+														"verificationMethod": "did:web:compliance.lab.gaia-x.eu:development#X509-JWK2020"
+													}
+												},
+												"trustIndex": {
+													"veracity": 0.25,
+													"transparency": 1,
+													"trustIndex": 0.625,
+													"certificateDetails": {
+														"validFrom": "May  8 04:31:20 2023 GMT",
+														"validTo": "Aug  6 04:31:19 2023 GMT",
+														"subject": {
+															"jurisdictionCountry": null,
+															"jurisdictionSate": null,
+															"jurisdictionLocality": null,
+															"businessCategory": null,
+															"serialNumber": null,
+															"country": null,
+															"state": null,
+															"locality": null,
+															"organization": null,
+															"commonName": "greenworld.proofsense.in"
+														},
+														"issuer": {
+															"commonName": "R3",
+															"organization": "Let's Encrypt",
+															"country": "US"
+														}
+													}
+												}
+											},
+											"message": "Service offering SD signed successfully"
+										}
+									}
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/gaia-x/verify" : {
+			"post": {
+				"summary": "Verify Legal Participant",
+				"description": "Validate signature of Issuer , Holder for Participant Url",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/VerifyLPSchemaBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								},
+								"examples": {
+									"verifyLP": {
+										"summary": "Verify Legal Participant",
+										"value": {
+											"message": "Success",
+											"data": {
+												"integrityCheck": true,
+												"holderSignature": true,
+												"complianceSignature": true,
+												"complianceCheck": true,
+												"valid": true
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"SuccessSchemaResponse": {
+				"properties": {
+					"data": {
+						"type": "object"
+					},
+					"message": {
+						"type": "string"
+					}
+				}
+			},
+			"ErrorSchemaResponse": {
+				"properties": {
+					"error": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				}
+			},
+			"CreateDIDSchemaBody": {
+				"required": ["domain"],
+				"properties": {
+					"domain": {
+						"type": "string",
+						"example": "dev.smartproof.in"
+					},
+					"tenant": {
+						"type": "string",
+						"example": "smart"
+					},
+					"services": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"type": {
+									"type": "string",
+									"example": "CredentialRegistry"
+								},
+								"serviceEndpoint": {
+									"type": "string",
+									"example": "https://ssi.eecc.de/api/registry/vcs"
+								}
+							}
+						}
+					}
+				}
+			},
+			"OnBoardGaiaXSchemaBody": {
+				"required": ["domain"],
+				"properties": {
+					"domain": {
+						"type": "string",
+						"example": "gaiaxapi.proofsense.in"
+					},
+					"tenant": {
+						"type": "string",
+						"example": "Hella"
+					},
+					"templateId": {
+						"type": "string",
+						"example": "LegalParticipant"
+					},
+					"privateKeyUrl": {
+						"type": "string",
+						"example": "https://example.com"
+					},
+					"data": {
+						"type": "object"
+					}
+				}
+			},
+			"CreateVCSchemaBody": {
+				"required": ["issuerDid", "subjectDid", "templateId", "privateKeyUrl", "credentialOffer"],
+				"properties": {
+					"issuerDid": {
+						"type": "string",
+						"example": "did:web:gaiaxapi.proofsense.in:Hella"
+					},
+					"subjectDid": {
+						"type": "string",
+						"example": "did:web:gaiaxapi.proofsense.in:Hella"
+					},
+
+					"templateId": {
+						"type": "string",
+						"example": "LegalParticipant"
+					},
+					"privateKeyUrl": {
+						"type": "string",
+						"example": "https://example.com"
+					},
+
+					"credentialOffer": {
+						"type": "object",
+						"properties": {
+							"legalName": {
+								"type": "string",
+								"example": "Hella"
+							},
+							"legalRegistrationType": {
+								"type": "string",
+								"example": "vatID"
+							},
+							"legalRegistrationNumber": {
+								"type": "string",
+								"example": "FR79537407926"
+							},
+							"headquarterAddress": {
+								"type": "string",
+								"example": "BE-BRU"
+							},
+							"legalAddress": {
+								"type": "string",
+								"example": "BE-BRU"
+							}
+						}
+					}
+				}
+			},
+			"CreateVPSchemaBody": {
+				"required": ["claims", "privateKeyUrl", "holderDID"],
+				"properties": {
+					"holderDID": {
+						"type": "string",
+						"example": "did:web:dev.smartproof.in"
+					},
+					"privateKeyUrl": {
+						"type": "string",
+						"example": "https://example.com"
+					},
+					"claims": {
+						"type": "array",
+						"example": [
+							{
+								"@context": [
+									"https://www.w3.org/2018/credentials/v1",
+									"https://registry.lab.gaia-x.eu/main/api/trusted-shape-registry/v1/shapes/jsonld/termsandconditions#",
+									"https://registry.lab.gaia-x.eu/main/api/trusted-shape-registry/v1/shapes/jsonld/participant#"
+								],
+								"type": ["VerifiableCredential", "gx:LegalParticipant"],
+								"id": "did:web:dev01.proofsense.in",
+								"issuer": "did:web:dev01.proofsense.in",
+								"issuanceDate": "2023-04-11T05:44:44.421Z",
+								"credentialSubject": {
+									"id": "did:web:dev01.proofsense.in",
+									"gx:legalName": "Proof Sense",
+									"gx:legalRegistrationNumber": {
+										"gx:taxID": "0762747721"
+									},
+									"gx:headquarterAddress": {
+										"gx:countrySubdivisionCode": "BE-BRU"
+									},
+									"gx:legalAddress": {
+										"gx:countrySubdivisionCode": "BE-BRU"
+									}
+								},
+								"proof": {
+									"type": "JsonWebSignature2020",
+									"created": "2023-04-11T05:44:50.619Z",
+									"proofPurpose": "assertionMethod",
+									"verificationMethod": "did:web:dev01.proofsense.in",
+									"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..PtMOEMBKg7JDBomlTaogZO38JuZPFj_ke8YAnI9IXLV3KQZMD8TUSOfsKlh8P9UGI7dKS_kMZIjgU3TxIuaiWY7PczxRnyTJpSVyWa5ckhNrtEzhKg73rfx2rrlbp3uofWDqezDnQRkukSiBKQXtiHHdqgyDnonUnfEfxdj56bJIULfsXwjQY4F_z4oXA1cGJ8SBQoqdxjDxIkp7BVuFhv2zA8BwcQF7N-p9RzB1-DTddWEiF_iCjTDC3HkGW3dkD9QjWX25Q-LYvXYzTzGhkuntlLaxtw5MC7-lopIVHAE4kYlR-4sPxbMyVBwasocs8BUIpT0OtCIrgoChsN9yCA"
+								}
+							}
+						]
+					}
+				}
+			},
+			"VerifySigSchemaBody": {
+				"required": ["policies", "credential"],
+				"properties": {
+					"policies": {
+						"type": "array",
+						"example": ["checkSignature"]
+					},
+					"credential": {
+						"type": "object",
+						"example": {
+							"@context": [
+								"https://www.w3.org/2018/credentials/v1",
+								"https://registry.lab.gaia-x.eu/main/api/trusted-shape-registry/v1/shapes/jsonld/termsandconditions#",
+								"https://registry.lab.gaia-x.eu/main/api/trusted-shape-registry/v1/shapes/jsonld/participant#"
+							],
+							"type": ["VerifiablePresentation"],
+							"verifiableCredential": [
+								{
+									"@context": [
+										"https://www.w3.org/2018/credentials/v1",
+										"https://registry.lab.gaia-x.eu/main/api/trusted-shape-registry/v1/shapes/jsonld/termsandconditions#",
+										"https://registry.lab.gaia-x.eu/main/api/trusted-shape-registry/v1/shapes/jsonld/participant#"
+									],
+									"type": ["VerifiableCredential", "gx:LegalParticipant"],
+									"id": "did:web:dev.smartproof.in",
+									"issuer": "did:web:dev.smartproof.in",
+									"issuanceDate": "2023-04-13T09:18:14.453Z",
+									"credentialSubject": {
+										"id": "did:web:dev.smartproof.in",
+										"gx:legalName": "Proof Sense",
+										"gx:legalRegistrationNumber": {
+											"gx:taxID": "0762747721"
+										},
+										"gx:headquarterAddress": {
+											"gx:countrySubdivisionCode": "BE-BRU"
+										},
+										"gx:legalAddress": {
+											"gx:countrySubdivisionCode": "BE-BRU"
+										}
+									},
+									"proof": {
+										"type": "JsonWebSignature2020",
+										"created": "2023-04-13T09:18:20.136Z",
+										"proofPurpose": "assertionMethod",
+										"verificationMethod": "did:web:dev.smartproof.in",
+										"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..RovCobjqoNZuPpWgUhpDPm19pEP7pfJ2eZejYL_dS4w3fCVmVUINks9YDKzpD93mneHcmYRk-WTTIYs6tBl9D2LurI6LilCdUN7Yb84WrLBcNvtRSBwI-0E_iKx3Rbk8ZAQCy98pIByKzZ00z3a3x9jaxhp1XUyH1GmA6bsOznN6wPga_alIaF4r4y-w60z_sJyLr8B6jRCogCxyzE27tbHas8vbLhX1QiNA3rosEgnefboroiExIe_AkMdLgWmFcvjwo_m5B69JqRS0d2NLuwvVDwFvIP7QrIiHe0zHjZpVyRH32DjFxReLMGEdinIJJ6Lxv54waZAcEDmiUNR57w"
+									}
+								}
+							],
+							"proof": {
+								"type": "JsonWebSignature2020",
+								"created": "2023-04-13T09:19:01.517Z",
+								"proofPurpose": "assertionMethod",
+								"verificationMethod": "did:web:dev.smartproof.in",
+								"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Z1Dpf3vT0bL2ZVQFN4RrDoA3RtTvXBrw3bGz_PqGMPgfIKfU4nfwDiLJZosyZDhTyMSt7r4JGZVbfMdRI4NQuAw-INspCKvCkd3K6MMLMOAvA8AFrLQ8BQbMwvLrcXGmnyloIlwhWsJid2-T6_SBDd89oz1E8h3-uMNZdGtf316u6MP2gFbcWQyvL-Cf4Ygl-RvO2donFV5bJ3zmsMg88e9pWn3fwWAU1ZbZKzmPxQqvm4vYQ3MRqVOjbL6ha6IJUZr5hbppW_splx0VbFAlXs1L3zV7HdEmjSBoZN8vTsvTOt1InjL_JrjQDBNmuxOemMifEnm359oBqndd--54Mg"
+							}
+						}
+					}
+				}
+			},
+			"GetTrustIndexSchemaBody": {
+				"required": ["participantSD", "serviceOfferingSD"],
+				"properties": {
+					"participantSD": {
+						"type": "string",
+						"example": "https://www.delta-dao.com/.well-known/participant.json"
+					},
+					"serviceOfferingSD": {
+						"type": "string",
+						"example": "https://delta-dao.com/.well-known/serviceGaiaxDLTNetwork.json"
+					}
+				}
+			},
+			"ComplineSOSchemaBody": {
+				"required": ["privateKey", "legalParticipantURL", "issuer", "verificationMethod", "vcs"],
+				"properties": {
+					"privateKey": {
+						"type": "string",
+						"example": "Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+					},
+					"legalParticipantURL": {
+						"type": "string",
+						"example": "https://greenworld.proofsense.in/.well-known/participant.json"
+					},
+					"issuer": {
+						"type": "string",
+						"example": "did:web:greenworld.proofsense.in"
+					},
+					"verificationMethod": {
+						"type": "string",
+						"example": "did:web:greenworld.proofsense.in"
+					},
+					"vcs": {
+						"type": "object",
+						"example": {
+							"serviceOffering": {
+								"@context": [
+									"https://www.w3.org/2018/credentials/v1",
+									"https://w3id.org/security/suites/jws-2020/v1",
+									"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+								],
+								"type": "VerifiableCredential",
+								"id": "did:web:greenworld.proofsense.in",
+								"issuer": "did:web:greenworld.proofsense.in",
+								"issuanceDate": "2023-07-12T09:37:01.595Z",
+								"credentialSubject": {
+									"id": "https://greenworld.proofsense.in/.well-known/serviceComplianceService.json",
+									"type": "gx:ServiceOffering",
+									"gx:providedBy": {
+										"id": "https://greenworld.proofsense.in/.well-known/participant.json#0"
+									},
+									"gx:termsAndConditions": {
+										"gx:URL": "http://termsandconds.com",
+										"gx:hash": "d8402a23de560f5ab34b22d1a142feb9e13b3143"
+									},
+									"gx:dataAccountExport": {
+										"gx:requestType": "API",
+										"gx:accessType": "digital",
+										"gx:formatType": "application/json"
+									},
+									"gx:policy": ""
+								}
+							}
+						}
+					}
+				}
+			},
+			"VerifyLPSchemaBody" : {
+				"required": ["participantUrl" , "policies"],
+				"properties" : {
+					"participantUrl": {
+						"type": "string",
+						"example": "https://greenworld.proofsense.in/.well-known/participant.json"
+					},
+					"policies": {
+						"type": "array",
+						"example": ["integrityCheck", "holderSignature", "complianceSignature", "complianceCheck"]
+					}
+				}
+			}
+		}
+	}
+}

@@ -38,6 +38,7 @@ export class AppMessages {
 	static readonly SD_SIGN_VALIDATION_FAILED = 'Service offering SD validation failed'
 	static readonly COMPLIANCE_CRED_FOUND_FAILED = 'Compliance Credential not found'
 	static readonly PARTICIPANT_VC_INVALID = 'Verifiable Credential not valid'
+	static readonly VALIDATION_ERROR = 'Validation Error, please provide valid req.body'
 }
 
 export const ROUTES = {
@@ -47,6 +48,6 @@ export const ROUTES = {
 	V1_APIS: {
 		LEGAL_PARTICIPANT: '/gaia-x/legal-participant',
 		SERVICE_OFFERING: '/gaia-x/service-offering',
-		VERIFY: '/verify'
+		VERIFY: '/gaia-x/verify'
 	}
 }

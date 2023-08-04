@@ -1,0 +1,7 @@
+PORT=8000
+COMPLIANCE_SERVICE="https://compliance.lab.gaia-x.eu/development/api/credential-offers"
+REGISTRY_TRUST_ANCHOR_URL="https://registry.lab.gaia-x.eu/main/api/trustAnchor/chain"
+KAFKA_BROKERS=broker.com:20186
+SSL_CA="-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+SSL_CERTIFICATE="-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+SSL_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"

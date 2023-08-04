@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 // import swaggerUi from 'swagger-ui-express'
 import bodyParser from 'body-parser'
+
 // import * as swaggerDocument from './swagger.json'
 // import { routes as routesV0 } from './routesV0'
 // import { routesV1 } from './routesV1'
@@ -21,7 +22,7 @@ app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 app.all('/*', (req: Request, res: Response) => {
-	console.log('Invalid Route Handler ', 'Invalid Route Fired : ' + req.path, {})
+	console.log('Invalid Route Handler ', 'Invalid Route Fired : ' + req.path)
 	return res.status(400).json({
 		status: 400,
 		message: 'Bad Request'

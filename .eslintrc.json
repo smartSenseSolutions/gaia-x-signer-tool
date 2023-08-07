@@ -6,7 +6,8 @@
     "parser": "@typescript-eslint/parser",
     "plugins": [
         "@typescript-eslint",
-        "prettier"
+        "prettier",
+        "more"
     ],
     "extends": [
         "eslint:recommended",
@@ -40,6 +41,7 @@
         "@typescript-eslint/no-var-requires": "off",
         "no-useless-escape": "off",
         "require-yield": "off",
-        "@typescript-eslint/no-namespace": "off"
+        "@typescript-eslint/no-namespace": "off",
+        "more/no-hardcoded-password": 2
     }
 }

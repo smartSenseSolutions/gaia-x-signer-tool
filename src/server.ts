@@ -14,7 +14,7 @@ const port: number = Number(process.env.PORT) || 8000
 		})
 		server.timeout = 400000
 	} catch (err) {
-		console.error(__filename, `Unable to connect to the server : `, err)
+		console.error(`Unable to connect to the server : `, err)
 		process.exit(1)
 	}
 })()

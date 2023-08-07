@@ -16,7 +16,7 @@ app.get('/health', (req: Request, res: Response) => {
 app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 routes(app)
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.all('/*', (req: Request, res: Response) => {
 	console.log('Invalid Route Handler ', 'Invalid Route Fired : ' + req.path)

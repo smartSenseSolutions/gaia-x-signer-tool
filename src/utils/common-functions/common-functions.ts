@@ -570,7 +570,7 @@ class Utils {
 			}
 
 			// get the DID Document
-			const ddo = await this.getDDOfromDID(proof.verificationMethod, resolver)
+			const ddo = await this.getDDOfromDID(credentialContent.issuer, resolver)
 			if (!ddo) {
 				logger.error(__filename, 'verification', `❌ DDO not found for given did: '${proof.verificationMethod}' in proof`, '')
 				throw new Error(`DDO not found for given did: '${proof.verificationMethod}' in proof`)
@@ -578,7 +578,7 @@ class Utils {
 
 			// get the public keys from the DID Document
 			// eslint-disable-next-line no-unsafe-optional-chaining
-			const verMethod = ddo?.didDocument?.verificationMethod?.find((verMethod: VerificationMethod) => verMethod.controller == proof.verificationMethod)
+			const verMethod = ddo?.didDocument?.verificationMethod?.find((veriMethod: VerificationMethod) => veriMethod.id == proof.verificationMethod)
 			const publicKeyJwk = verMethod?.publicKeyJwk
 			if (!publicKeyJwk) {
 				throw new Error('publicKeyJwk not found in ddo')

@@ -317,6 +317,26 @@ class SignerToolController {
 			})
 		}
 	}
+
+	CreateWebDID = async (req: Request, res: Response): Promise<void> => {
+		try {
+			const { domain, tenant, services } = req.body
+			const didId = tenant ? `did:web:${domain}:${tenant}` : `did:web:${domain}`
+			const x5uURL = tenant ? `https://${domain}/${tenant}/x509CertificateChain.pem` : `https://${domain}/.well-known/x509CertificateChain.pem`
+			const certificate = (await axios.get(x5uURL)).data as string
+			const publicKeyJwk = await Utils.generatePublicJWK(jose, AppConst.RSA_ALGO, certificate, x5uURL)
+			const did = Utils.generateDID(didId, publicKeyJwk, services)
+			res.status(200).json({
+				data: { did },
+				message: AppMessages.DID_SUCCESS
+			})
+		} catch (e) {
+			res.status(500).json({
+				error: (e as Error).message,
+				message: AppMessages.DID_FAILED
+			})
+		}
+	}
 }
 
 export default new SignerToolController()

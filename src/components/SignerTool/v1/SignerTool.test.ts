@@ -1,7 +1,7 @@
 import supertest from 'supertest'
 import app from '../../../app'
 import STATUS_CODES from 'http-status-codes'
-import { AppMessages } from '../../../utils/constants'
+import { AppMessages, ROUTES } from '../../../utils/constants'
 import Utils from '../../../utils/common-functions'
 
 const participantJson = {
@@ -190,7 +190,7 @@ describe('/verifyLegalParticipant', () => {
 					message: AppMessages.VALIDATION_ERROR
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
 						expect(response.body).toEqual(error)
@@ -206,7 +206,7 @@ describe('/verifyLegalParticipant', () => {
 					message: AppMessages.VALIDATION_ERROR
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
@@ -215,7 +215,7 @@ describe('/verifyLegalParticipant', () => {
 				body.participantUrl = 'abc'
 
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
@@ -235,7 +235,7 @@ describe('/verifyLegalParticipant', () => {
 					message: AppMessages.VALIDATION_ERROR
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
@@ -243,7 +243,7 @@ describe('/verifyLegalParticipant', () => {
 					})
 				body.policies = ['invalid policies']
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
@@ -262,7 +262,7 @@ describe('/verifyLegalParticipant', () => {
 					message: AppMessages.SIG_VERIFY_FAILED
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
@@ -280,7 +280,7 @@ describe('/verifyLegalParticipant', () => {
 					message: AppMessages.PARTICIPANT_VC_FOUND_FAILED
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
@@ -298,7 +298,7 @@ describe('/verifyLegalParticipant', () => {
 					message: AppMessages.PARTICIPANT_VC_INVALID
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
@@ -314,7 +314,7 @@ describe('/verifyLegalParticipant', () => {
 				error.error = 'VC not found'
 				error.message = AppMessages.PARTICIPANT_VC_FOUND_FAILED
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
@@ -335,7 +335,7 @@ describe('/verifyLegalParticipant', () => {
 					message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
@@ -352,7 +352,7 @@ describe('/verifyLegalParticipant', () => {
 				})
 
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
@@ -372,7 +372,7 @@ describe('/verifyLegalParticipant', () => {
 					message: `Credential Type not supported`
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
@@ -385,7 +385,7 @@ describe('/verifyLegalParticipant', () => {
 					return { ...mockParticipantJson }
 				})
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
@@ -431,7 +431,7 @@ describe('/verifyLegalParticipant', () => {
 					message: "VC with type 'gx:LegalParticipant' not found!!"
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
@@ -459,7 +459,7 @@ describe('/verifyLegalParticipant', () => {
 				}
 
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.OK)
@@ -481,7 +481,7 @@ describe('/verifyLegalParticipant', () => {
 					error: 'Verification failed due to xyz reason'
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
@@ -504,7 +504,7 @@ describe('/verifyLegalParticipant', () => {
 					}
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.OK)
@@ -526,7 +526,7 @@ describe('/verifyLegalParticipant', () => {
 					error: 'Verification failed due to xyz reason'
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
@@ -550,7 +550,7 @@ describe('/verifyLegalParticipant', () => {
 				}
 
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.OK)
@@ -575,7 +575,7 @@ describe('/verifyLegalParticipant', () => {
 				}
 
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.OK)
@@ -597,7 +597,7 @@ describe('/verifyLegalParticipant', () => {
 					}
 				}
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.OK)
@@ -620,7 +620,7 @@ describe('/verifyLegalParticipant', () => {
 				}
 
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.OK)
@@ -645,7 +645,7 @@ describe('/verifyLegalParticipant', () => {
 				}
 
 				await supertest(app)
-					.post(`/v1/verify`)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.OK)

@@ -4,6 +4,7 @@ import * as jose from 'jose'
 import jsonld from 'jsonld'
 import crypto, { X509Certificate } from 'crypto'
 import { AppConst, AppMessages } from '../constants'
+import { logger } from '../logger'
 
 class Utils {
 	generateDID(didId: string, publicKeyJwk: any, services: Service[]): unknown {
@@ -105,10 +106,9 @@ class Utils {
 			}
 			const url = `${process.env.REGISTRATION_SERVICE as string}?vcid=${legalRegistrationNumberVCUrl}`
 			const regVC = await axios.post(url, request)
-			// console.log(regVC.data)
 			return regVC.data
 		} catch (error) {
-			console.log(`❌ RegistrationNumber failed | Error: ${error}`)
+			logger.error(__filename, 'generateRegistrationNumber', `❌ RegistrationNumber failed | Error: ${error}`, '')
 			throw new Error(`❌ RegistrationNumber failed | Error: ${error}`)
 		}
 	}
@@ -169,19 +169,19 @@ class Utils {
 			verifiableCredential
 		)
 		const hash = this.sha256(crypto, canonizedSD)
-		console.log(`📈 Hashed canonized SD ${hash}`)
+		logger.debug(__filename, 'generateProof', `📈 Hashed canonized SD ${hash}`, '')
 
 		// const privateKey = (await axios.get(he.decode(privateKeyUrl))).data as string
 		const privateKey = process.env.PRIVATE_KEY as string
 		const proof = await this.createProof(jose, didId, rsaAlso, hash, privateKey)
-		console.log(proof ? '🔒 SD signed successfully' : '❌ SD signing failed')
+		logger.debug(__filename, 'generateProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', '')
+
 		const x5uURL = tenant ? `https://${domain}/${tenant}/x509CertificateChain.pem` : `https://${domain}/.well-known/x509CertificateChain.pem`
-		console.log(x5uURL)
 		const certificate = (await axios.get(x5uURL)).data as string
 		const publicKeyJwk = await this.generatePublicJWK(jose, rsaAlso, certificate, x5uURL)
 
 		const verificationResult = await this.verify(jose, proof.jws.replace('..', `.${hash}.`), rsaAlso, publicKeyJwk, hash)
-		console.log(verificationResult ? '✅ Verification successful' : '❌ Verification failed')
+		logger.debug(__filename, 'generateProof', verificationResult ? '✅ Verification successful' : '❌ Verification failed', '')
 		return proof
 	}
 
@@ -202,7 +202,7 @@ class Utils {
 			if (canonized === '') throw new Error('Canonized SD is empty')
 			return canonized
 		} catch (error) {
-			console.log(`❌ Canonizing failed | Error: ${error}`)
+			logger.error(__filename, 'normalize', `❌ Canonizing failed | Error: ${error}`, '')
 			return undefined
 		}
 	}
@@ -238,7 +238,7 @@ class Utils {
 			const content = new TextDecoder().decode(result.payload)
 			return content === hash
 		} catch (error) {
-			console.log(`❌ Signature Verification Failed | error: ${error}`)
+			logger.error(__filename, 'verify', `❌ Signature Verification Failed | error: ${error}`, '')
 			throw error
 		}
 	}
@@ -271,7 +271,7 @@ class Utils {
 			}
 			return ddo
 		} catch (error) {
-			console.log(`❌ Fetching DDO failed for did: ${did}`)
+			logger.error(__filename, 'getDDOfromDID', `❌ Fetching DDO failed for did: ${did}`, '')
 			return undefined
 		}
 	}
@@ -282,7 +282,7 @@ class Utils {
 			const registryRes = await axios.post(`${process.env.REGISTRY_TRUST_ANCHOR_URL as string}/trustAnchor/chain`, { certs: certificates })
 			return registryRes.status === 200
 		} catch (error) {
-			console.log(`❌ Validation from registry failed for certificates | error: ${error}`)
+			logger.error(__filename, 'validateSslFromRegistry', `❌ Validation from registry failed for certificates | error: ${error}`, '')
 			return false
 		}
 	}
@@ -293,7 +293,7 @@ class Utils {
 			const result = registryRes?.data?.result
 			return result
 		} catch (error) {
-			console.log(`❌ Validation from registry failed for certificates | error: ${error}`)
+			logger.error(__filename, 'validateSslFromRegistryWithUri', `❌ Validation from registry failed for certificates | error: ${error}`, '')
 			return false
 		}
 	}
@@ -308,7 +308,7 @@ class Utils {
 
 			return spki === spkiX509
 		} catch (error) {
-			console.log(`❌ Comparing publicKeyJwk and pub key from certificates failed | error: ${error}`)
+			logger.error(__filename, 'comparePubKeys', `❌ Comparing publicKeyJwk and pub key from certificates failed | error: ${error}`, '')
 			return false
 		}
 	}
@@ -318,21 +318,17 @@ class Utils {
 			'^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$'
 		const url = new RegExp(urlRegex, 'i')
 		const result = str.length < 2083 && url.test(str)
-		// console.log(result)
 		return result
 	}
 
 	async issueRegistrationNumberVC(axios: any, request: LegalRegistrationNumberDto) {
 		try {
 			request.id = request.id.replace('#', '%23')
-			// console.log(request)
-			// console.log(JSON.stringify(request))
 			const url = `${process.env.REGISTRATION_SERVICE as string}?vcid=${request.id}`
 			const regVC = await axios.post(url, request)
-			// console.log(regVC.data)
 			return regVC.data
 		} catch (error) {
-			console.log(`❌ RegistrationNumber failed | Error: ${error}`)
+			logger.error(__filename, 'issueRegistrationNumberVC', `❌ RegistrationNumber failed | Error: ${error}`, '')
 			throw new Error(`❌ RegistrationNumber failed | Error: ${error}`)
 		}
 	}
@@ -354,16 +350,16 @@ class Utils {
 			verifiableCredential
 		)
 		const hash = this.sha256(crypto, canonizedSD)
-		console.log(`📈 Hashed canonized SD ${hash}`)
+		logger.info(__filename, 'addProof', `📈 Hashed canonized SD ${hash}`, '')
 
 		const proof = await this.createProof(jose, verificationMethod, rsaAlso, hash, privateKey)
-		console.log(proof ? '🔒 SD signed successfully' : '❌ SD signing failed')
+		logger.info(__filename, 'addProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', '')
 
 		const certificate = (await axios.get(x5uURL)).data as string
 		const publicKeyJwk = await this.generatePublicJWK(jose, rsaAlso, certificate, x5uURL)
 
 		const verificationResult = await this.verify(jose, proof.jws.replace('..', `.${hash}.`), rsaAlso, publicKeyJwk, hash)
-		console.log(verificationResult ? '✅ Verification successful' : '❌ Verification failed')
+		logger.info(__filename, 'addProof', verificationResult ? '✅ Verification successful' : '❌ Verification failed', '')
 		return proof
 	}
 
@@ -407,12 +403,11 @@ class Utils {
 				id: holderDID,
 				proof: { verificationMethod: participantVM }
 			} = participantSD
-			console.log(`holderDID :-${holderDID}  holderDID :- ${participantVM}`)
 
 			const ddo = await this.getDDOfromDID(holderDID, resolver)
 			if (!ddo) {
 				// Bad Data
-				console.error(`❌ DDO not found for given did: '${holderDID}' in proof`)
+				logger.error(__filename, 'calcVeracity', `❌ DDO not found for given did: '${holderDID}' in proof`, '')
 				throw new Error(`DDO not found for given did: '${holderDID}' in proof`)
 			}
 			const {
@@ -429,7 +424,6 @@ class Utils {
 
 					// get the SSL certificates from x5u url
 					const certificates = (await axios.get(x5u)).data as string
-					// console.log('certificates :- ', certificates)
 
 					const certArray = certificates.match(/-----BEGIN CERTIFICATE-----[\s\S]*?-----END CERTIFICATE-----/g)
 					if (certArray?.length) {
@@ -449,10 +443,10 @@ class Utils {
 				veracity = +(1 / keypairDepth).toFixed(2) //1 / len(keychain)
 				return { veracity, certificateDetails }
 			}
-			console.error(`❌ Participant proof verification method and did verification method id not matched`)
+			logger.error(__filename, 'calcVeracity', `❌ Participant proof verification method and did verification method id not matched`, '')
 			throw new Error('Participant proof verification method and did verification method id not matched')
 		}
-		console.error(`❌ Verifiable credential array not found in participant self description`)
+		logger.error(__filename, 'calcVeracity', `❌ Verifiable credential array not found in participant self description`, '')
 		throw new Error('Verifiable credential array not found in participant self description')
 	}
 
@@ -528,7 +522,7 @@ class Utils {
 			const transparency: number = (totalMandatoryProps + availOptProps) / totalMandatoryProps
 			return transparency
 		} catch (error) {
-			console.error(`❌ Error while calculating transparency :- error \n`, error)
+			logger.error(__filename, 'calcTransparency', `❌ Error while calculating transparency :- error \n ${error}`, '')
 			throw error
 		}
 	}
@@ -571,14 +565,14 @@ class Utils {
 		try {
 			// check if proof is of type JsonWebSignature2020
 			if (proof.type !== 'JsonWebSignature2020') {
-				console.log(`❌ signature type: '${proof.type}' not supported`)
+				logger.error(__filename, 'verification', `❌ signature type: '${proof.type}' not supported`, '')
 				throw new Error(`signature type: '${proof.type}' not supported`)
 			}
 
 			// get the DID Document
 			const ddo = await this.getDDOfromDID(proof.verificationMethod, resolver)
 			if (!ddo) {
-				console.log(`❌ DDO not found for given did: '${proof.verificationMethod}' in proof`)
+				logger.error(__filename, 'verification', `❌ DDO not found for given did: '${proof.verificationMethod}' in proof`, '')
 				throw new Error(`DDO not found for given did: '${proof.verificationMethod}' in proof`)
 			}
 
@@ -609,7 +603,7 @@ class Utils {
 			//check weather the public key from DDO(which is fetched from did) matches with the certificates of x5u(fetched from ddo)
 			const comparePubKey = await this.comparePubKeys(certificates, publicKeyJwk, jose)
 			if (!comparePubKey) {
-				console.log(`❌ Public Keys Mismatched`)
+				logger.error(__filename, 'verification', `❌ Public Keys Mismatched`, '')
 				throw new Error('Public Key Mismatched')
 			}
 
@@ -621,7 +615,7 @@ class Utils {
 			)
 
 			if (typeof canonizedCredential === 'undefined') {
-				console.log(`❌ Normalizing Credential Failed`)
+				logger.error(__filename, 'verification', `❌ Normalizing Credential Failed`, '')
 				throw new Error('Normalizing Credential Failed')
 			}
 
@@ -632,7 +626,7 @@ class Utils {
 
 			// verify Signature by retrieving the hash and then comparing it
 			const verificationResult = await this.verify(jose, proof.jws.replace('..', `.${hash}.`), AppConst.RSA_ALGO, publicKeyJwk, hash)
-			console.log(verificationResult ? `✅ ${AppMessages.SIG_VERIFY_SUCCESS}` : `❌ ${AppMessages.SIG_VERIFY_FAILED}`)
+			logger.info(__filename, 'verification', verificationResult ? `✅ ${AppMessages.SIG_VERIFY_SUCCESS}` : `❌ ${AppMessages.SIG_VERIFY_FAILED}`, '')
 			return verificationResult
 		} catch (error) {
 			throw error

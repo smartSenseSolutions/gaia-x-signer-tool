@@ -1,6 +1,7 @@
 import { body } from 'express-validator'
 import Utils from '../common-functions'
 import { AppConst } from '../constants'
+import { logger } from '../logger'
 
 class SignerToolValidation {
 	GXLegalParticipant = [
@@ -19,9 +20,9 @@ class SignerToolValidation {
 			.not()
 			.isEmpty()
 			.trim()
-			.custom(async (value) => {
+			.custom(async (value, { req }) => {
 				if (!Utils.IsValidURL(value)) {
-					console.error(`❌ Invalid legal participant self description url format`)
+					logger.error(__filename, 'ServiceOfferingValidation', `❌ Invalid legal participant self description url format`, req.custom.uuid)
 					throw new Error('Invalid legal participant self description url format')
 				}
 			}),

@@ -6,7 +6,7 @@
 	},
 	"servers": [{ "url": "http://localhost:8000/" }],
 	"paths": {
-		"/v1/gaia-x/createWebDID": {
+		"/v1/createWebDID": {
 			"post": {
 				"summary": "Create Web DID",
 				"description": "Required domain name to create did:web",
@@ -54,7 +54,7 @@
 				}
 			}
 		},
-		"/v1/gaia-x/get/trust-index": {
+		"/v1/get/trust-index": {
 			"post": {
 				"summary": "Calculation of Trust index, Veracity & Transperency",
 				"description": "Calculates Trust index, Veracity & Transperency using holder VC and self description of service offering",
@@ -487,7 +487,7 @@
 				}
 			}
 		},
-		"/v1/gaia-x/verify" : {
+		"/v1/verify" : {
 			"post": {
 				"summary": "Verify Legal Participant",
 				"description": "Validate signature of Issuer , Holder for Participant Url",

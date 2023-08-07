@@ -8,6 +8,7 @@ import web from 'web-did-resolver'
 import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
+import { logger } from '../../../utils/logger'
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
 export const privateRoute = express.Router()
@@ -22,7 +23,7 @@ class SignerToolController {
 
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
-				console.log(`❌ DDO not found for given did: '${issuer}' in proof`)
+				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
 				res.status(400).json({
 					error: `DDO not found for given did: '${issuer}' in proof`
 				})
@@ -45,7 +46,12 @@ class SignerToolController {
 			const selfDescription = Utils.createVP(vcs)
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
 			// // const complianceCredential = {}
-			console.log(complianceCredential ? '🔒 SD signed successfully (compliance service)' : '❌ SD signing failed (compliance service)')
+			if (complianceCredential) {
+				logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
+			} else {
+				logger.error(__filename, 'GXLegalParticipant', '❌ SD signing failed (compliance service)', req.custom.uuid)
+			}
+
 			// // await publisherService.publishVP(complianceCredential);
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
@@ -82,7 +88,7 @@ class SignerToolController {
 
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
-				console.error(`❌ DDO not found for given did: '${issuer}' in proof`)
+				logger.error(__filename, 'ServiceOffering', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
 				res.status(400).json({
 					error: `DDO not found for given did: '${issuer}' in proof`
 				})
@@ -101,7 +107,11 @@ class SignerToolController {
 
 			// Call compliance service to sign in gaia-x
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescriptionCredential)).data
-			console.log(complianceCredential ? '🔒 SD signed successfully (compliance service)' : '❌ SD signing failed (compliance service)')
+			if (complianceCredential) {
+				logger.info(__filename, 'ServiceOffering', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
+			} else {
+				logger.error(__filename, 'ServiceOffering', '❌ SD signing failed (compliance service)', req.custom.uuid)
+			}
 
 			const completeSD = {
 				selfDescriptionCredential: selfDescriptionCredential,
@@ -110,16 +120,16 @@ class SignerToolController {
 
 			// Calculate Veracity
 			const { veracity, certificateDetails } = await Utils.calcVeracity(verifiableCredential, resolver)
-			console.log('🔒 veracity calculated')
+			logger.debug(__filename, 'ServiceOffering', '🔒 veracity calculated', req.custom.uuid)
 
 			// Calculate Transparency
 			const { credentialSubject } = serviceOffering
 			const transparency: number = await Utils.calcTransparency(credentialSubject)
-			console.log('🔒 transparency calculated')
+			logger.debug(__filename, 'ServiceOffering', '🔒 transparency calculated', req.custom.uuid)
 
 			// Calculate TrustIndex
 			const trustIndex: number = Utils.calcTrustIndex(veracity, transparency)
-			console.log('🔒 trustIndex calculated')
+			logger.debug(__filename, 'ServiceOffering', '🔒 trustIndex calculated', req.custom.uuid)
 
 			res.status(200).json({
 				data: {
@@ -134,7 +144,8 @@ class SignerToolController {
 				message: AppMessages.SD_SIGN_SUCCESS
 			})
 		} catch (error) {
-			console.error(`❌ ${AppMessages.SD_SIGN_FAILED} :- error \n`, error)
+			logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED} :- error \n ${error}`, req.custom.uuid)
+
 			res.status(500).json({
 				error: (error as Error).message,
 				message: AppMessages.SD_SIGN_FAILED
@@ -153,19 +164,19 @@ class SignerToolController {
 				valid: false
 			}
 
-			console.log('fetching participant json...')
+			logger.debug(__filename, 'Verify', 'fetching participant json...', req.custom.uuid)
 			const participantJson = await Utils.fetchParticipantJson(participantUrl)
 
 			//check if VC not null or in other form
 			if (!participantJson?.selfDescriptionCredential?.verifiableCredential) {
-				console.log(`❌ No Verifiable Credential Found`)
+				logger.error(__filename, 'Verify', `❌ No Verifiable Credential Found`, req.custom.uuid)
 				res.status(400).json({
 					error: `VC not found`,
 					message: AppMessages.PARTICIPANT_VC_FOUND_FAILED
 				})
 				return
 			} else if (!Array.isArray(participantJson.selfDescriptionCredential.verifiableCredential)) {
-				console.log(`❌ Verifiable Credential isn't array`)
+				logger.error(__filename, 'Verify', `❌ Verifiable Credential isn't array`, req.custom.uuid)
 				res.status(400).json({
 					error: `VC not valid`,
 					message: AppMessages.PARTICIPANT_VC_INVALID
@@ -175,7 +186,7 @@ class SignerToolController {
 
 			// check if complianceCred not null
 			if (!participantJson?.complianceCredential || !participantJson?.complianceCredential?.proof) {
-				console.log(`❌ Compliance Credential Not Found`)
+				logger.error(__filename, 'Verify', `❌ Compliance Credential Not Found`, req.custom.uuid)
 				res.status(400).json({
 					error: `Compliance Credential not found`,
 					message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
@@ -186,7 +197,7 @@ class SignerToolController {
 			// check VC are of valid type
 			const { verifiableCredential, type } = participantJson.selfDescriptionCredential
 			if (!Array.isArray(type) || !(type.includes('VerifiableCredential') || type.includes('VerifiablePresentation'))) {
-				console.log(`❌ Credential Type not supported`)
+				logger.error(__filename, 'Verify', `❌ Credential Type not supported`, req.custom.uuid)
 				res.status(400).json({
 					error: `Credential Type not supported`,
 					message: `Credential Type not supported`
@@ -197,7 +208,7 @@ class SignerToolController {
 			const VC = verifiableCredential?.find((vc: VerifiableCredentialDto) => vc?.credentialSubject.type === 'gx:LegalParticipant')
 
 			if (!VC) {
-				console.log(`❌ Verifiable Credential doesn't have type 'gx:LegalParticipant'`)
+				logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have type 'gx:LegalParticipant'`, req.custom.uuid)
 				res.status(400).json({
 					error: `VC with type 'gx:LegalParticipant' not found!!`,
 					message: "VC with type 'gx:LegalParticipant' not found!!"
@@ -205,7 +216,7 @@ class SignerToolController {
 				return
 			}
 			for (const policy of policies) {
-				console.log(`Executing ${policy} check ...`)
+				logger.debug(__filename, 'Verify', `Executing ${policy} check ...`, req.custom.uuid)
 				switch (policy) {
 					case AppConst.VERIFY_LP_POLICIES[0]: {
 						// integrity check
@@ -218,7 +229,7 @@ class SignerToolController {
 
 							if (!integrityCheck) {
 								allChecksPassed = false
-								console.log(`❌ Integrity Failed`)
+								logger.error(__filename, 'Verify', `❌ Integrity Failed`, req.custom.uuid)
 								break
 							}
 						}
@@ -275,11 +286,11 @@ class SignerToolController {
 		try {
 			const { participantSD, serviceOfferingSD } = req.body
 			if (!Utils.IsValidURL(participantSD)) {
-				console.error(`❌ Invalid participant self description url format`)
+				logger.error(__filename, 'GetTrustIndex', `❌ Invalid participant self description url format`, req.custom.uuid)
 				throw new Error('Invalid participant self description url format')
 			}
 			if (!Utils.IsValidURL(serviceOfferingSD)) {
-				console.error(`❌ Invalid service offering self description url format`)
+				logger.error(__filename, 'GetTrustIndex', `❌ Invalid service offering self description url format`, req.custom.uuid)
 				throw new Error('Invalid service offering self description url format')
 			}
 
@@ -288,17 +299,17 @@ class SignerToolController {
 				selfDescriptionCredential: { verifiableCredential }
 			} = (await axios.get(participantSD)).data
 			const { veracity, certificateDetails } = await Utils.calcVeracity(verifiableCredential, resolver)
-			console.log('veracity :-', veracity)
+			logger.debug(__filename, 'GetTrustIndex', `veracity :- ${veracity}`, req.custom.uuid)
 
 			// get the json document of service offering
 			const {
 				selfDescriptionCredential: { credentialSubject }
 			} = (await axios.get(serviceOfferingSD)).data
 			const transparency: number = await Utils.calcTransparency(credentialSubject)
-			console.log('transparency :-', transparency)
+			logger.debug(__filename, 'GetTrustIndex', `transparency :-, ${transparency}`, req.custom.uuid)
 
 			const trustIndex: number = Utils.calcTrustIndex(veracity, transparency)
-			console.log('trustIndex :-', trustIndex)
+			logger.debug(__filename, 'GetTrustIndex', `trustIndex :-, ${trustIndex}`, req.custom.uuid)
 
 			res.status(200).json({
 				message: 'Success',
@@ -310,7 +321,7 @@ class SignerToolController {
 				}
 			})
 		} catch (error) {
-			console.error(`❌ ${AppMessages.TRUST_INDEX_CALC_FAILED} : ${error}`)
+			logger.error(__filename, 'GetTrustIndex', `❌ ${AppMessages.TRUST_INDEX_CALC_FAILED} : ${error}`, req.custom.uuid)
 			res.status(500).json({
 				error: (error as Error).message,
 				message: AppMessages.TRUST_INDEX_CALC_FAILED

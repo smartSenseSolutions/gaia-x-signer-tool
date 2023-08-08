@@ -44,7 +44,7 @@ class SignerToolValidation {
 
 				return true
 			}),
-		body('participantUrl').exists().isString().isURL()
+		body('url').exists().isString().isURL()
 	]
 	CreateWebDID = [
 		body('domain').not().isEmpty().trim(),

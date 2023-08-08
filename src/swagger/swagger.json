@@ -6,6 +6,72 @@
 	},
 	"servers": [{ "url": "http://localhost:8000/" }],
 	"paths": {
+		"/updateLog" : {
+			"post": {
+				"summary": "Update Log Level",
+				"description": "Update Log Level of Application",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LogLevelSchemaBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								},
+								"examples": {
+									"Log Level": {
+										"summary": "Update Log Level",
+										"value": {
+											"message": "Log Updated"
+										}
+									}
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/v1/createWebDID": {
 			"post": {
 				"summary": "Create Web DID",
@@ -704,15 +770,24 @@
 				}
 			},
 			"VerifyLPSchemaBody" : {
-				"required": ["participantUrl" , "policies"],
+				"required": ["url" , "policies"],
 				"properties" : {
-					"participantUrl": {
+					"url": {
 						"type": "string",
 						"example": "https://greenworld.proofsense.in/.well-known/participant.json"
 					},
 					"policies": {
 						"type": "array",
 						"example": ["integrityCheck", "holderSignature", "complianceSignature", "complianceCheck"]
+					}
+				}
+			},
+			"LogLevelSchemaBody" : {
+				"required" : ["logLevel"],
+				"properties" : {
+					"logLevel" :{
+						"type" : "string",
+						"example" : "silly"
 					}
 				}
 			}

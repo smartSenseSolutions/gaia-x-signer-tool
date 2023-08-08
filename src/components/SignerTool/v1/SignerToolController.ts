@@ -159,13 +159,13 @@ class SignerToolController {
 		 */
 		//todo : compliance check is remaining
 		try {
-			const { participantUrl, policies } = req.body
+			const { url, policies } = req.body
 			const verificationStatus: VerificationStatus = {
 				valid: false
 			}
 
 			logger.debug(__filename, 'Verify', 'fetching participant json...', req.custom.uuid)
-			const participantJson = await Utils.fetchParticipantJson(participantUrl)
+			const participantJson = await Utils.fetchParticipantJson(url)
 
 			//check if VC not null or in other form
 			if (!participantJson?.selfDescriptionCredential?.verifiableCredential) {

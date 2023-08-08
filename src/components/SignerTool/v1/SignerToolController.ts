@@ -205,12 +205,14 @@ class SignerToolController {
 				return
 			}
 			//fetching VC with subject type gx:LegalParticipant
-			const VC = verifiableCredential?.find((vc: VerifiableCredentialDto) => vc?.credentialSubject.type === 'gx:LegalParticipant')
+			const VC = verifiableCredential?.find(
+				(vc: VerifiableCredentialDto) => vc?.credentialSubject.type === 'gx:LegalParticipant' || vc?.credentialSubject.type === 'gx:ServiceOffering'
+			)
 
 			if (!VC) {
-				logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have type 'gx:LegalParticipant'`, req.custom.uuid)
+				logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have type 'gx:LegalParticipant' or  'gx:ServiceOffering'`, req.custom.uuid)
 				res.status(400).json({
-					error: `VC with type 'gx:LegalParticipant' not found!!`,
+					error: `VC with type 'gx:LegalParticipant' or  'gx:ServiceOffering' not found!!`,
 					message: "VC with type 'gx:LegalParticipant' not found!!"
 				})
 				return
@@ -239,14 +241,17 @@ class SignerToolController {
 
 					case AppConst.VERIFY_LP_POLICIES[1]: {
 						//holder sig verification
-						const vcProof = JSON.parse(JSON.stringify(VC.proof))
-						const vcCredentialContent = JSON.parse(JSON.stringify(VC))
-						delete vcCredentialContent.proof
-						verificationStatus.holderSignature = await Utils.verification(vcCredentialContent, vcProof, true, resolver)
+						for (const vc of verifiableCredential) {
+							const vcProof = JSON.parse(JSON.stringify(vc.proof))
+							const vcCredentialContent = JSON.parse(JSON.stringify(vc))
+							delete vcCredentialContent.proof
+							verificationStatus.holderSignature = await Utils.verification(vcCredentialContent, vcProof, true, resolver)
+						}
 						break
 					}
 					case AppConst.VERIFY_LP_POLICIES[2]: {
 						// compliance sig verification
+
 						const complianceCred = JSON.parse(JSON.stringify(participantJson.complianceCredential))
 						const complianceProof = JSON.parse(JSON.stringify(complianceCred.proof))
 						delete complianceCred.proof

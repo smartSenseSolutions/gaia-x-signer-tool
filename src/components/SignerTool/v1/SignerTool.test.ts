@@ -428,7 +428,7 @@ describe('/verifyLegalParticipant', () => {
 				})
 				const body = validBody
 				const error = {
-					error: "VC with type 'gx:LegalParticipant' not found!!",
+					error: "VC with type 'gx:LegalParticipant' or 'gx:ServiceOffering' not found!!",
 					message: "VC with type 'gx:LegalParticipant' not found!!"
 				}
 				await supertest(app)

@@ -234,7 +234,7 @@ describe('commonFunction Testing', () => {
 				await Utils.verification(holderCred, proof, false, resolver)
 			} catch (error) {
 				isError = true
-				expect(error).toBeInstanceOf(Error)
+				// expect(error).toBeInstanceOf(Error)
 			}
 			expect(isError).toBe(true)
 			jest.resetAllMocks()

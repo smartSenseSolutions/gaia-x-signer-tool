@@ -339,7 +339,13 @@ export const holderDdoJson2 = {
 				'@context': 'https://w3c-ccg.github.io/lds-jws2020/contexts/v1/',
 				id: 'did:web:greenworld.proofsense.in',
 				type: 'JsonWebKey2020',
-				controller: 'did:web:greenworld.proofsense.in'
+				controller: 'did:web:greenworld.proofsense.in',
+				publicKeyJwk: {
+					kty: 'RSA',
+					e: 'AQAB',
+					alg: 'PS256',
+					x5u: 'https://greenworld.proofsense.in/.well-known/x509CertificateChain.pem'
+				}
 			}
 		],
 		assertionMethod: ['did:web:greenworld.proofsense.in#JWK2020-RSA']

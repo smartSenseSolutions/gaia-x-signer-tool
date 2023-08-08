@@ -154,9 +154,12 @@ class SignerToolController {
 	}
 
 	Verify = async (req: Request, res: Response): Promise<void> => {
-		/* Request Body :
-		 * 1. Participant URL : EG . https://greenworld.proofsense.in/.well-known/participant.json
+		/**
+		 * Request Body :
+		  	1. url : EG . https://greenworld.proofsense.in/.well-known/participant.json
+		 	2. policies : policy we want to check
 		 */
+
 		//todo : compliance check is remaining
 		try {
 			const { url, policies } = req.body
@@ -213,7 +216,7 @@ class SignerToolController {
 				logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have type 'gx:LegalParticipant' or  'gx:ServiceOffering'`, req.custom.uuid)
 				res.status(400).json({
 					error: `VC with type 'gx:LegalParticipant' or  'gx:ServiceOffering' not found!!`,
-					message: "VC with type 'gx:LegalParticipant' not found!!"
+					message: "VC with type 'gx:LegalParticipant'  or 'gx:ServiceOffering' not found!!"
 				})
 				return
 			}

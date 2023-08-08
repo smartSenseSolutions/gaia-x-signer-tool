@@ -1,12 +1,13 @@
+import bodyParser from 'body-parser'
 import express, { Request, Response } from 'express'
 import swaggerUi from 'swagger-ui-express'
-import bodyParser from 'body-parser'
+
+import middleware from './middleware'
 import routes from './routes'
 import * as swaggerDocument from './swagger/swagger.json'
 import { logger } from './utils/logger'
-import middleware from './middleware'
-import { checkResults } from './utils/validators/commonValidation'
 import { AppValidation } from './utils/validators'
+import { checkResults } from './utils/validators/commonValidation'
 
 const app: express.Application = express()
 

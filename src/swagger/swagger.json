@@ -716,15 +716,11 @@
 				}
 			},
 			"ComplineSOSchemaBody": {
-				"required": ["privateKey", "legalParticipantURL", "issuer", "verificationMethod", "vcs"],
+				"required": ["privateKey", "issuer", "verificationMethod", "vcs"],
 				"properties": {
 					"privateKey": {
 						"type": "string",
 						"example": "Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
-					},
-					"legalParticipantURL": {
-						"type": "string",
-						"example": "https://greenworld.proofsense.in/.well-known/participant.json"
 					},
 					"issuer": {
 						"type": "string",

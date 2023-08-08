@@ -5,10 +5,12 @@ import express, { Request, Response } from 'express'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
+
 import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
 import { logger } from '../../../utils/logger'
+
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
 export const privateRoute = express.Router()
@@ -74,14 +76,12 @@ class SignerToolController {
 		try {
 			let { privateKey } = req.body
 			const {
-				legalParticipantURL,
 				verificationMethod,
 				issuer,
 				vcs: { serviceOffering }
 			} = req.body
-
+			const legalParticipantURL = serviceOffering['credentialSubject']['gx:providedBy']['id']
 			const legalParticipant = (await axios.get(legalParticipantURL)).data
-			// const legalParticipant = require('./../../legalParticipant.json')
 			const {
 				selfDescriptionCredential: { verifiableCredential }
 			} = legalParticipant
@@ -144,7 +144,7 @@ class SignerToolController {
 				message: AppMessages.SD_SIGN_SUCCESS
 			})
 		} catch (error) {
-			logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED} :- error \n ${error}`, req.custom.uuid)
+			logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED}`, req.custom.uuid, error)
 
 			res.status(500).json({
 				error: (error as Error).message,

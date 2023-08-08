@@ -7,7 +7,7 @@ import { AppConst, AppMessages } from '../constants'
 import { logger } from '../logger'
 
 class Utils {
-	generateDID(didId: string, publicKeyJwk: any, services: Service[]): unknown {
+	generateDID(didId: string, publicKeyJwk: any, services: Service[]): any {
 		const did: DidDocument = {
 			'@context': ['https://www.w3.org/ns/did/v1'],
 			id: didId,

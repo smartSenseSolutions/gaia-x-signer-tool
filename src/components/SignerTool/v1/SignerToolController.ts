@@ -341,11 +341,23 @@ class SignerToolController {
 	CreateWebDID = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const { domain, tenant, services } = req.body
+			let x5uURL = req.body.x5u
 			const didId = tenant ? `did:web:${domain}:${tenant}` : `did:web:${domain}`
-			const x5uURL = tenant ? `https://${domain}/${tenant}/x509CertificateChain.pem` : `https://${domain}/.well-known/x509CertificateChain.pem`
+
+			if (!x5uURL) {
+				x5uURL = tenant ? `https://${domain}/${tenant}/x509CertificateChain.pem` : `https://${domain}/.well-known/x509CertificateChain.pem`
+			}
 			const certificate = (await axios.get(x5uURL)).data as string
 			const publicKeyJwk = await Utils.generatePublicJWK(jose, AppConst.RSA_ALGO, certificate, x5uURL)
-			const did = Utils.generateDID(didId, publicKeyJwk, services)
+			if (!publicKeyJwk) {
+				logger.error(__filename, 'CreateWebDID', '❌ fail to create publicKeyJWK', req.custom.uuid)
+				throw new Error('fail to create publicKeyJWK')
+			}
+			const did = await Utils.generateDID(didId, publicKeyJwk, services)
+			if (!did) {
+				logger.error(__filename, 'CreateWebDID', '❌ fail to create did', req.custom.uuid)
+				throw new Error('fail to create did')
+			}
 			res.status(STATUS_CODES.OK).json({
 				data: { did },
 				message: AppMessages.DID_SUCCESS

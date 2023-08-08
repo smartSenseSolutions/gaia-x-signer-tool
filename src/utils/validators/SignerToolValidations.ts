@@ -37,19 +37,10 @@ class SignerToolValidation {
 	]
 	CreateWebDID = [
 		body('domain').not().isEmpty().trim(),
-		body('services')
-			.isArray()
-			.custom(async (services) => {
-				if (services) {
-					for (let index = 0; index < services.length; index++) {
-						await body(`services[${index}].type`).not().isEmpty().trim().escape()
-						await body(`services[${index}].serviceEndpoint`).isURL()
-					}
-				} else {
-					return true
-				}
-			})
-			.optional()
+		body('x5u').not().isEmpty().isURL().optional(),
+		body('services').isArray().optional(),
+		body('services.*.serviceEndpoint').isURL().optional(),
+		body('services.*.type').not().isEmpty().trim().escape().optional()
 	]
 	TrustIndex = [body('participantSD').not().isEmpty().trim(), body('serviceOfferingSD').not().isEmpty().trim()]
 }

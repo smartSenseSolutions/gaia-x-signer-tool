@@ -49,7 +49,7 @@ export const ROUTES = {
 		LEGAL_PARTICIPANT: '/gaia-x/legal-participant',
 		SERVICE_OFFERING: '/gaia-x/service-offering',
 		VERIFY: '/gaia-x/verify',
-		CREATE_WEB_DID: '/createWebDID',
+		CREATE_WEB_DID: '/create-web-did',
 		GET_TRUST_INDEX: '/get/trust-index'
 	}
 }

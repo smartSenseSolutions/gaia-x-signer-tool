@@ -4,10 +4,8 @@ import STATUS_CODES from 'http-status-codes'
 import { AppMessages, ROUTES } from '../../../utils/constants'
 import Utils from '../../../utils/common-functions'
 import { participantJson, holderDdoJson, ServiceOfferingParticipantJson } from '../../../assets'
-const validBody = {
-	policies: ['integrityCheck', 'holderSignature', 'complianceSignature', 'complianceCheck'],
-	url: 'https://greenworld.proofsense.in/.well-known/participant.json'
-}
+import axios from 'axios'
+const exampleCertificate = process.env.SSL_CERTIFICATE as string
 //mocking - Utils
 jest.mock('../../../utils/common-functions', () => {
 	return {
@@ -23,11 +21,21 @@ jest.mock('../../../utils/common-functions', () => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		getDDOfromDID: (did: string, resolver: any) => {
 			if (did == 'did:web:greenworld.proofsense.in') return { didDocument: holderDdoJson }
+		},
+		generatePublicJWK: () => {
+			return {}
+		},
+		generateDID: () => {
+			return {}
 		}
 	}
 })
 
-describe('/verifyLegalParticipant', () => {
+describe('/v1/gaia-x/verify', () => {
+	const validBody = {
+		policies: ['integrityCheck', 'holderSignature', 'complianceSignature', 'complianceCheck'],
+		url: 'https://greenworld.proofsense.in/.well-known/participant.json'
+	}
 	describe('Failing Cases', () => {
 		describe('validation error', () => {
 			it('empty body', async () => {
@@ -528,6 +536,193 @@ describe('/verifyLegalParticipant', () => {
 					})
 				jest.resetAllMocks()
 			})
+		})
+	})
+})
+
+describe('/v1/create-web-did', () => {
+	const validBody = {
+		domain: 'dev.smartproof.in',
+		tenant: 'smart',
+		services: [
+			{
+				type: 'CredentialRegistry',
+				serviceEndpoint: 'https://ssi.eecc.de/api/registry/vcs'
+			}
+		],
+		x5u: 'https://dev.smartproof.in/.well-known/x509CertificateChain.pem'
+	}
+	describe('failing case', () => {
+		it('validation error', async () => {
+			const error = {
+				error: "Invalid value of param 'domain'",
+				message: 'Validation Error, please provide valid req.body'
+			}
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+					expect(response.body).toEqual(error)
+				})
+			const body = {
+				domain: 'dev.smartproof.in',
+				x5u: 'abc'
+			}
+			error.error = "Invalid value of param 'x5u'"
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+					expect(response.body).toEqual(error)
+				})
+			const body2 = {
+				domain: 'dev.smartproof.in',
+				tenant: 'smart',
+				services: [
+					{
+						type: '',
+						serviceEndpoint: 'https://ssi.eecc.de/api/registry/vcs'
+					}
+				]
+			}
+			error.error = "Invalid value of param 'services[0].type'"
+
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body2)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+					expect(response.body).toEqual(error)
+				})
+			const body3 = {
+				domain: 'dev.smartproof.in',
+				tenant: 'smart',
+				services: [
+					{
+						type: 'CredentialRegistry',
+						serviceEndpoint: 'abc2'
+					}
+				]
+			}
+			error.error = "Invalid value of param 'services[0].serviceEndpoint'"
+
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body3)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+					expect(response.body).toEqual(error)
+				})
+			const body4 = {
+				domain: 'dev.smartproof.in',
+				services: 'abc'
+			}
+			error.error = "Invalid value of param 'services'"
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body4)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+					expect(response.body).toEqual(error)
+				})
+		})
+		it('Axios get certificate fails', async () => {
+			jest.spyOn(axios, 'get').mockResolvedValue(undefined)
+			const body = validBody
+			const error = {
+				error: "Cannot read properties of undefined (reading 'data')",
+				message: 'DID creation failed.'
+			}
+
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+					expect(response.body).toEqual(error)
+				})
+
+			jest.resetAllMocks()
+		})
+		it('generatePublicJWK returns undefined', async () => {
+			jest.spyOn(axios, 'get').mockResolvedValue({ data: exampleCertificate })
+			jest.spyOn(Utils, 'generatePublicJWK').mockResolvedValue(undefined)
+			const body = validBody
+			const error = {
+				error: 'fail to create publicKeyJWK',
+				message: 'DID creation failed.'
+			}
+
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+					expect(response.body).toEqual(error)
+				})
+		})
+		it('generateDID returns undefined', async () => {
+			jest.spyOn(axios, 'get').mockResolvedValue({ data: exampleCertificate })
+			jest.spyOn(Utils, 'generatePublicJWK').mockResolvedValue({})
+			jest.spyOn(Utils, 'generateDID').mockResolvedValue(undefined)
+			const body = validBody
+			const error = {
+				error: 'fail to create did',
+				message: 'DID creation failed.'
+			}
+
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+					expect(response.body).toEqual(error)
+				})
+		})
+	})
+	describe('success case', () => {
+		it('successful case', async () => {
+			const did = {
+				'@context': ['https://www.w3.org/ns/did/v1'],
+				id: 'did:web:dev.smartproof.in',
+				verificationMethod: [
+					{
+						'@context': 'https://w3c-ccg.github.io/lds-jws2020/contexts/v1/',
+						id: 'did:web:dev.smartproof.in',
+						type: 'JsonWebKey2020',
+						controller: 'did:web:dev.smartproof.in',
+						publicKeyJwk: {
+							crv: 'Ed25519',
+							kty: 'OKP',
+							alg: 'PS256',
+							x5u: 'https://dev.smartproof.in/.well-known/x509CertificateChain.pem',
+							x: 'yM1FmySIISrMqruOIjLwKpbwsaUbRLEEH6r1gDWmW4s' /*pragma: allowlist secret*/
+						}
+					}
+				],
+				assertionMethod: ['did:web:dev.smartproof.in#JWK2020-RSA']
+			}
+			jest.spyOn(axios, 'get').mockResolvedValue({ data: exampleCertificate })
+			jest.spyOn(Utils, 'generateDID').mockResolvedValue({ ...did })
+
+			const body = validBody
+			const responseData = {
+				data: {
+					did: {
+						...did
+					}
+				},
+				message: 'DID created successfully.'
+			}
+
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.OK)
+					expect(response.body).toEqual(responseData)
+				})
 		})
 	})
 })

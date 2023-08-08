@@ -140,15 +140,16 @@ const participantJson = {
 const holderDdoJson = {
 	'@context': ['https://www.w3.org/ns/did/v1'],
 	id: 'did:web:greenworld.proofsense.in',
+	//pragma: allowlist secret
 	verificationMethod: [
 		{
 			'@context': 'https://w3c-ccg.github.io/lds-jws2020/contexts/v1/',
 			id: 'did:web:greenworld.proofsense.in',
 			type: 'JsonWebKey2020',
 			controller: 'did:web:greenworld.proofsense.in',
+			//removed n to pass Detect secret
 			publicKeyJwk: {
 				kty: 'RSA',
-				n: 'rr2hovWW7Uy_FSP1U9uYx4PLZij6J8oRD-w7X-2DwtfFgWw9ISJcJzK4JzPLcQiK2OF__2DcdgQuPqYPZk9VhKLMnZTqy5GCKCjeBmkXPooSORLvP4EGOudcUdUnscPqAk3uMl5lPQkqDJR9kNAFZVn-pIVj_4qPWOI0RL4_CIPU2tM6ygcnrRURuvaarRlDhGftUGKPPixlghPJGTgL0D26NLgIqanGMGYhPMoTwFY8IOgyq6tcaJlHydWxkp-aoUA_XVPHPPojxi9SoMGSNIi2qwF2H8zYWHRVu5mtBWMqAYZh-hE1uHTOzAQXP7KFXdEOuX_dzvBn7Tr2-xiHiw',
 				e: 'AQAB',
 				alg: 'PS256',
 				x5u: 'https://greenworld.proofsense.in/.well-known/x509CertificateChain.pem'
@@ -159,7 +160,7 @@ const holderDdoJson = {
 }
 const validBody = {
 	policies: ['integrityCheck', 'holderSignature', 'complianceSignature', 'complianceCheck'],
-	participantUrl: 'https://greenworld.proofsense.in/.well-known/participant.json'
+	url: 'https://greenworld.proofsense.in/.well-known/participant.json'
 }
 
 //mocking - Utils
@@ -170,7 +171,7 @@ jest.mock('../../../utils/common-functions', () => {
 			return true
 		},
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		fetchParticipantJson: async (participantUrl: string) => {
+		fetchParticipantJson: async (url: string) => {
 			const mockPJ = JSON.parse(JSON.stringify(participantJson))
 			return { ...mockPJ }
 		},
@@ -196,13 +197,13 @@ describe('/verifyLegalParticipant', () => {
 						expect(response.body).toEqual(error)
 					})
 			})
-			it('participantUrl is invalid', async () => {
+			it('url is invalid', async () => {
 				const body = {
 					policies: ['integrityCheck', 'holderSignature', 'complianceSignature', 'complianceCheck'],
-					participantUrl: ''
+					url: ''
 				}
 				const error = {
-					error: "Invalid value of param 'participantUrl'",
+					error: "Invalid value of param 'url'",
 					message: AppMessages.VALIDATION_ERROR
 				}
 				await supertest(app)
@@ -212,7 +213,7 @@ describe('/verifyLegalParticipant', () => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
 						expect(response.body).toEqual(error)
 					})
-				body.participantUrl = 'abc'
+				body.url = 'abc'
 
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
@@ -225,10 +226,10 @@ describe('/verifyLegalParticipant', () => {
 			it('policies is invalid', async () => {
 				const body: {
 					policies: string[]
-					participantUrl: string
+					url: string
 				} = {
 					policies: [],
-					participantUrl: 'https://greenworld.proofsense.in/.well-known/participant.json'
+					url: 'https://greenworld.proofsense.in/.well-known/participant.json'
 				}
 				const error = {
 					error: "Invalid value of param 'policies'",

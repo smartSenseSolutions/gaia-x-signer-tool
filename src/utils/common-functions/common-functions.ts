@@ -540,13 +540,13 @@ class Utils {
 	}
 
 	/**
-	 * @dev - common function to fetch ParticipantJson from participantUrl
+	 * @dev - common function to fetch ParticipantJson from url
 	 *
 	 */
-	fetchParticipantJson = async (participantUrl: string) => {
+	fetchParticipantJson = async (url: string) => {
 		// eslint-disable-next-line no-useless-catch
 		try {
-			const participantJson = (await axios.get(participantUrl)).data
+			const participantJson = (await axios.get(url)).data
 			return participantJson
 		} catch (error) {
 			throw error

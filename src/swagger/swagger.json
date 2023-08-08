@@ -6,7 +6,7 @@
 	},
 	"servers": [{ "url": "http://localhost:8000/" }],
 	"paths": {
-		"/updateLog" : {
+		"/updateLog": {
 			"post": {
 				"summary": "Update Log Level",
 				"description": "Update Log Level of Application",
@@ -217,8 +217,8 @@
 								"LegalParticipant": {
 									"value": {
 										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
-										"issuer": "did:web:greenworld.proofsense.in",
-										"verificationMethod": "did:web:greenworld.proofsense.in",
+										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
 										"vcs": {
 											"legalParticipant": {
 												"@context": [
@@ -227,28 +227,30 @@
 													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 												],
 												"type": ["VerifiableCredential"],
-												"id": "did:web:greenworld.proofsense.in",
-												"issuer": "did:web:greenworld.proofsense.in",
+												"id": "did:web:casio34.smart-x.smartsenselabs.com",
+												"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
 												"issuanceDate": "2023-07-28T11:13:53.734Z",
 												"credentialSubject": {
-													"id": "https://greenworld.proofsense.in/.well-known/participant.json#0",
+													"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#0",
 													"type": "gx:LegalParticipant",
 													"gx:legalName": "Green World",
 													"gx:legalRegistrationNumber": {
-														"id": "https://greenworld.proofsense.in/.well-known/participant.json#1"
+														"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1"
 													},
 													"gx:headquarterAddress": {
 														"gx:countrySubdivisionCode": "BE-BRU"
 													},
 													"gx:legalAddress": {
 														"gx:countrySubdivisionCode": "BE-BRU"
-													}
+													},
+													"gx:parentOrganization": [{ "id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0" }],
+													"gx:subOrganization": [{ "id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0" }]
 												}
 											},
 											"legalRegistrationNumber": {
 												"@context": ["https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/participant"],
 												"type": "gx:legalRegistrationNumber",
-												"id": "https://greenworld.proofsense.in/.well-known/participant.json#1",
+												"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1",
 												"gx:leiCode": "9695007586GCAKPYJ703"
 											},
 											"gaiaXTermsAndConditions": {
@@ -263,10 +265,10 @@
 													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
 													"type": "gx:GaiaXTermsAndConditions",
 													"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
-													"id": "https://greenworld.proofsense.in/.well-known/participant.json#2"
+													"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#2"
 												},
-												"issuer": "did:web:greenworld.proofsense.in",
-												"id": "did:web:greenworld.proofsense.in"
+												"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+												"id": "did:web:casio34.smart-x.smartsenselabs.com"
 											}
 										}
 									}
@@ -553,7 +555,7 @@
 				}
 			}
 		},
-		"/v1/gaia-x/verify" : {
+		"/v1/gaia-x/verify": {
 			"post": {
 				"summary": "Verify Participant",
 				"description": "Validate signature of Issuer , Holder for Participant Url",
@@ -769,9 +771,9 @@
 					}
 				}
 			},
-			"VerifySchemaBody" : {
-				"required": ["url" , "policies"],
-				"properties" : {
+			"VerifySchemaBody": {
+				"required": ["url", "policies"],
+				"properties": {
 					"url": {
 						"type": "string",
 						"example": "https://greenworld.proofsense.in/.well-known/participant.json"
@@ -782,12 +784,12 @@
 					}
 				}
 			},
-			"LogLevelSchemaBody" : {
-				"required" : ["logLevel"],
-				"properties" : {
-					"logLevel" :{
-						"type" : "string",
-						"example" : "silly"
+			"LogLevelSchemaBody": {
+				"required": ["logLevel"],
+				"properties": {
+					"logLevel": {
+						"type": "string",
+						"example": "silly"
 					}
 				}
 			}

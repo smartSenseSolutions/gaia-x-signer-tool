@@ -2,14 +2,16 @@ import axios from 'axios'
 import crypto, { createHash } from 'crypto'
 import { Resolver } from 'did-resolver'
 import express, { Request, Response } from 'express'
+import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
+
 import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
 import { logger } from '../../../utils/logger'
-import STATUS_CODES from 'http-status-codes'
+
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
 export const privateRoute = express.Router()
@@ -35,7 +37,29 @@ class SignerToolController {
 			// privateKey = process.env.PRIVATE_KEY as string
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
-			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]
+			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
+			const vcs = []
+			if (legalParticipant.credentialSubject['gx:parentOrganization']) {
+				for (let i = 0; i < legalParticipant.credentialSubject['gx:parentOrganization'].length; i++) {
+					const lp = (await axios.get(legalParticipant.credentialSubject['gx:parentOrganization'][i].id)).data
+					const {
+						selfDescriptionCredential: { verifiableCredential }
+					} = lp
+					vcs.push(...verifiableCredential)
+				}
+			}
+
+			if (legalParticipant.credentialSubject['gx:subOrganization']) {
+				for (let i = 0; i < legalParticipant.credentialSubject['gx:subOrganization'].length; i++) {
+					const lp = (await axios.get(legalParticipant.credentialSubject['gx:subOrganization'][i].id)).data
+					const {
+						selfDescriptionCredential: { verifiableCredential }
+					} = lp
+					vcs.push(...verifiableCredential)
+				}
+			}
+			vcs.push(legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions)
+			console.log(vcs)
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
 				// eslint-disable-next-line no-prototype-builtins
@@ -45,8 +69,9 @@ class SignerToolController {
 				}
 			}
 			const selfDescription = Utils.createVP(vcs)
+			console.log(JSON.stringify(selfDescription))
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
-			// // const complianceCredential = {}
+			// const complianceCredential = {}
 			if (complianceCredential) {
 				logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
 			} else {
@@ -63,7 +88,8 @@ class SignerToolController {
 				data: completeSD,
 				message: AppMessages.VP_SUCCESS
 			})
-		} catch (e) {
+		} catch (e: any) {
+			console.log(JSON.stringify(e))
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED

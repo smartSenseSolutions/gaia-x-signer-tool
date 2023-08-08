@@ -9,6 +9,7 @@ import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } fro
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
 import { logger } from '../../../utils/logger'
+import STATUS_CODES from 'http-status-codes'
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
 export const privateRoute = express.Router()
@@ -24,7 +25,7 @@ class SignerToolController {
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
 				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `DDO not found for given did: '${issuer}' in proof`
 				})
 				return
@@ -58,12 +59,12 @@ class SignerToolController {
 				complianceCredential: complianceCredential
 			}
 
-			res.status(200).json({
+			res.status(STATUS_CODES.OK).json({
 				data: completeSD,
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e) {
-			res.status(500).json({
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED
 			})
@@ -89,7 +90,7 @@ class SignerToolController {
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
 				logger.error(__filename, 'ServiceOffering', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `DDO not found for given did: '${issuer}' in proof`
 				})
 				return
@@ -131,7 +132,7 @@ class SignerToolController {
 			const trustIndex: number = Utils.calcTrustIndex(veracity, transparency)
 			logger.debug(__filename, 'ServiceOffering', '🔒 trustIndex calculated', req.custom.uuid)
 
-			res.status(200).json({
+			res.status(STATUS_CODES.OK).json({
 				data: {
 					completeSD,
 					trustIndex: {
@@ -146,7 +147,7 @@ class SignerToolController {
 		} catch (error) {
 			logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED} :- error \n ${error}`, req.custom.uuid)
 
-			res.status(500).json({
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.SD_SIGN_FAILED
 			})
@@ -173,14 +174,14 @@ class SignerToolController {
 			//check if VC not null or in other form
 			if (!participantJson?.selfDescriptionCredential?.verifiableCredential) {
 				logger.error(__filename, 'Verify', `❌ No Verifiable Credential Found`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `VC not found`,
 					message: AppMessages.PARTICIPANT_VC_FOUND_FAILED
 				})
 				return
 			} else if (!Array.isArray(participantJson.selfDescriptionCredential.verifiableCredential)) {
 				logger.error(__filename, 'Verify', `❌ Verifiable Credential isn't array`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `VC not valid`,
 					message: AppMessages.PARTICIPANT_VC_INVALID
 				})
@@ -190,7 +191,7 @@ class SignerToolController {
 			// check if complianceCred not null
 			if (!participantJson?.complianceCredential || !participantJson?.complianceCredential?.proof) {
 				logger.error(__filename, 'Verify', `❌ Compliance Credential Not Found`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `Compliance Credential not found`,
 					message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
 				})
@@ -201,7 +202,7 @@ class SignerToolController {
 			const { verifiableCredential, type } = participantJson.selfDescriptionCredential
 			if (!Array.isArray(type) || !(type.includes('VerifiableCredential') || type.includes('VerifiablePresentation'))) {
 				logger.error(__filename, 'Verify', `❌ Credential Type not supported`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `Credential Type not supported`,
 					message: `Credential Type not supported`
 				})
@@ -214,7 +215,7 @@ class SignerToolController {
 
 			if (!VC) {
 				logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have type 'gx:LegalParticipant' or  'gx:ServiceOffering'`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `VC with type 'gx:LegalParticipant' or  'gx:ServiceOffering' not found!!`,
 					message: "VC with type 'gx:LegalParticipant'  or 'gx:ServiceOffering' not found!!"
 				})
@@ -278,12 +279,12 @@ class SignerToolController {
 			}
 
 			verificationStatus.valid = validity
-			res.status(200).json({
+			res.status(STATUS_CODES.OK).json({
 				data: { ...verificationStatus },
 				message: AppMessages.SIG_VERIFY_SUCCESS
 			})
 		} catch (error) {
-			res.status(500).json({
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.SIG_VERIFY_FAILED
 			})
@@ -319,7 +320,7 @@ class SignerToolController {
 			const trustIndex: number = Utils.calcTrustIndex(veracity, transparency)
 			logger.debug(__filename, 'GetTrustIndex', `trustIndex :-, ${trustIndex}`, req.custom.uuid)
 
-			res.status(200).json({
+			res.status(STATUS_CODES.OK).json({
 				message: 'Success',
 				data: {
 					veracity,
@@ -330,7 +331,7 @@ class SignerToolController {
 			})
 		} catch (error) {
 			logger.error(__filename, 'GetTrustIndex', `❌ ${AppMessages.TRUST_INDEX_CALC_FAILED} : ${error}`, req.custom.uuid)
-			res.status(500).json({
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.TRUST_INDEX_CALC_FAILED
 			})
@@ -345,12 +346,12 @@ class SignerToolController {
 			const certificate = (await axios.get(x5uURL)).data as string
 			const publicKeyJwk = await Utils.generatePublicJWK(jose, AppConst.RSA_ALGO, certificate, x5uURL)
 			const did = Utils.generateDID(didId, publicKeyJwk, services)
-			res.status(200).json({
+			res.status(STATUS_CODES.OK).json({
 				data: { did },
 				message: AppMessages.DID_SUCCESS
 			})
 		} catch (e) {
-			res.status(500).json({
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.DID_FAILED
 			})

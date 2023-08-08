@@ -7,6 +7,7 @@ import { logger } from './utils/logger'
 import middleware from './middleware'
 import { checkResults } from './utils/validators/commonValidation'
 import { AppValidation } from './utils/validators'
+import STATUS_CODES from 'http-status-codes'
 
 const app: express.Application = express()
 
@@ -14,7 +15,7 @@ const port = process.env.PORT
 swaggerDocument.servers[0].url = process.env.HOST || `http://localhost:${port}`
 
 app.get('/health', (req: Request, res: Response) => {
-	return res.status(200).send('healthy')
+	return res.status(STATUS_CODES.OK).send('healthy')
 })
 middleware(app)
 // body-parser
@@ -26,26 +27,29 @@ app.post('/updateLog', AppValidation.Log, checkResults, async (req: Request, res
 	try {
 		logger.setConsoleLevel(req.body.logLevel)
 		logger.setFileLevel(req.body.logLevel)
-		return res.status(200).json({
+		return res.status(STATUS_CODES.OK).json({
 			message: 'Log Updated'
 		})
 	} catch (error) {
 		logger.error(__filename, 'updateLog', `Fail to update Log Level to ${req.body.logLevel}`, req.custom.uuid)
-		return res.status(400).json({
+		return res.status(STATUS_CODES.BAD_REQUEST).json({
 			error: error,
 			message: 'Log Updated failed'
 		})
 	}
 })
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.all('/*', (req: Request, res: Response) => {
-	logger.error(__filename, 'Invalid Route Handler ', 'Invalid Route Fired : ' + req.path, req.custom.uuid)
-	return res.status(400).json({
-		status: 400,
-		message: 'Bad Request'
-	})
+	if (req.path == '/') {
+		res.redirect('/docs')
+	} else {
+		logger.error(__filename, 'Invalid Route Handler ', 'Invalid Route Fired : ' + req.path, req.custom.uuid)
+		return res.status(STATUS_CODES.BAD_REQUEST).json({
+			status: STATUS_CODES.BAD_REQUEST,
+			message: 'Bad Request'
+		})
+	}
 })
 
 export default app

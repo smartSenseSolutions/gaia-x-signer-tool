@@ -553,16 +553,16 @@
 				}
 			}
 		},
-		"/v1/verify" : {
+		"/v1/gaia-x/verify" : {
 			"post": {
-				"summary": "Verify Legal Participant",
+				"summary": "Verify Participant",
 				"description": "Validate signature of Issuer , Holder for Participant Url",
 				"requestBody": {
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/VerifyLPSchemaBody"
+								"$ref": "#/components/schemas/VerifySchemaBody"
 							}
 						}
 					}
@@ -769,7 +769,7 @@
 					}
 				}
 			},
-			"VerifyLPSchemaBody" : {
+			"VerifySchemaBody" : {
 				"required": ["url" , "policies"],
 				"properties" : {
 					"url": {

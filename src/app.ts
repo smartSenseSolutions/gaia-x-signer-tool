@@ -38,14 +38,17 @@ app.post('/updateLog', AppValidation.Log, checkResults, async (req: Request, res
 	}
 })
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.all('/*', (req: Request, res: Response) => {
-	logger.error(__filename, 'Invalid Route Handler ', 'Invalid Route Fired : ' + req.path, req.custom.uuid)
-	return res.status(400).json({
-		status: 400,
-		message: 'Bad Request'
-	})
+	if (req.path == '/') {
+		res.redirect('/docs')
+	} else {
+		logger.error(__filename, 'Invalid Route Handler ', 'Invalid Route Fired : ' + req.path, req.custom.uuid)
+		return res.status(400).json({
+			status: 400,
+			message: 'Bad Request'
+		})
+	}
 })
 
 export default app

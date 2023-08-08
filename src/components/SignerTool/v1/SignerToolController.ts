@@ -101,14 +101,12 @@ class SignerToolController {
 		try {
 			let { privateKey } = req.body
 			const {
-				legalParticipantURL,
 				verificationMethod,
 				issuer,
 				vcs: { serviceOffering }
 			} = req.body
-
+			const legalParticipantURL = serviceOffering['credentialSubject']['gx:providedBy']['id']
 			const legalParticipant = (await axios.get(legalParticipantURL)).data
-			// const legalParticipant = require('./../../legalParticipant.json')
 			const {
 				selfDescriptionCredential: { verifiableCredential }
 			} = legalParticipant
@@ -171,7 +169,7 @@ class SignerToolController {
 				message: AppMessages.SD_SIGN_SUCCESS
 			})
 		} catch (error) {
-			logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED} :- error \n ${error}`, req.custom.uuid)
+			logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED}`, req.custom.uuid, error)
 
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,

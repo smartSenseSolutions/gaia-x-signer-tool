@@ -72,7 +72,7 @@
 				}
 			}
 		},
-		"/v1/createWebDID": {
+		"/v1/create-web-did": {
 			"post": {
 				"summary": "Create Web DID",
 				"description": "Required domain name to create did:web",

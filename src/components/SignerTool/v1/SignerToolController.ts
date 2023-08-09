@@ -9,6 +9,7 @@ import web from 'web-did-resolver'
 
 import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
+import commonFunctions from '../../../utils/common-functions/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
 import { logger } from '../../../utils/logger'
 
@@ -34,7 +35,6 @@ class SignerToolController {
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
 			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
-			// privateKey = process.env.PRIVATE_KEY as string
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
 			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
@@ -107,9 +107,10 @@ class SignerToolController {
 			} = req.body
 			const legalParticipantURL = serviceOffering['credentialSubject']['gx:providedBy']['id']
 			const legalParticipant = (await axios.get(legalParticipantURL)).data
-			const {
+			let {
 				selfDescriptionCredential: { verifiableCredential }
 			} = legalParticipant
+			const { credentialSubject: serviceOfferingCS } = serviceOffering
 
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
@@ -126,6 +127,17 @@ class SignerToolController {
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 			serviceOffering.proof = proof
 			verifiableCredential.push(serviceOffering)
+
+			// Extract VC of dependant services
+
+			const dependsOn = serviceOfferingCS['gx:dependsOn']
+			for (const { id: serviceURL } of dependsOn) {
+				const {
+					selfDescriptionCredential: { verifiableCredential: childVC }
+				} = (await axios.get(serviceURL)).data
+				verifiableCredential = [...verifiableCredential, ...childVC]
+			}
+			verifiableCredential = commonFunctions.removeDuplicates(verifiableCredential, 'id')
 
 			// Create VP for service offering
 			const selfDescriptionCredential = Utils.createVP(verifiableCredential)
@@ -148,8 +160,8 @@ class SignerToolController {
 			logger.debug(__filename, 'ServiceOffering', '🔒 veracity calculated', req.custom.uuid)
 
 			// Calculate Transparency
-			const { credentialSubject } = serviceOffering
-			const transparency: number = await Utils.calcTransparency(credentialSubject)
+
+			const transparency: number = await Utils.calcTransparency(serviceOfferingCS)
 			logger.debug(__filename, 'ServiceOffering', '🔒 transparency calculated', req.custom.uuid)
 
 			// Calculate TrustIndex

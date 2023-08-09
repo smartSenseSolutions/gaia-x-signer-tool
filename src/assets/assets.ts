@@ -426,9 +426,50 @@ export const serviceOfferingTestJSON = {
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
 		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
 	},
-	invalidSO1: {
-		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
-		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	validJSON: {
+		issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:casio50.smart-x.smartsenselabs.com',
+		privateKey:
+			'LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRQ3I4aFpRSGM4emZaN3MKTTlJRWt6eld2SFlLY0hsQUwraFhISXlINEtSL1BVTzJrUlg5RFlGL0J4RnhreUViWUJaR3NObTY5NXc0bXJ5RQpFUUtiVytldGhKRDE4bjhrNVpnbERIV29zZmpLMDVVTGxSK3dWYzEwWXB6eUdlSmlsWHBCWkhuc0tnQ3JpUlcvClJMQXMzVU1EVWpMQkJmUVBrOTlWSlhJRTlTeEJpb2FVYTRDL0d6YXhVdzQyM3hiMHF4Q1VIWHJ4VktQS2sra0QKdFFESmNFK3k5T3dFZjQ2ZjNuRFVYdk84VTZKTUp6dUNJTWxsWDdHVkRLNWdGdlE4TU9Pa3hPdnBpUXV1ZlB1ZwpOSXMzSnJNQmF6cDVvWkVYK3BESFRDOTZ6RHVCVko4MVU0OE9KWVl4aWQzN05lTXJKTk9jMjZlUWlpbm44SjZNCmZLOENNU3hWQWdNQkFBRUNnZ0VBSWR0VzBtcTBPRzdWWXF3bmYvZ2dCQ1p5MWNaazBhTTlUQjNXZkJEYlF5U2sKbHlmRlhTRVNMUm1Pc1Q3bngzU3BuanpIZXAyeitKOWJYR1BmRUFsT09xZitSVGQ5R3A1TTBZcTlCajBaQUpNZAo1M3h6RTIwcHVlK0srTTdvK1VGMm83YXRuVGQrRDBpOGEvK1I4eHVVVE95Y0NzN3B5a0Z6T2RoWU5hcXpEcXB1CkJ4WWFiSnRDMEpSN21OMHk2ZWltNitDeEtleUloc2FRS05Cd21jMklHclZMN0o3TFgwbVFINXF4MWJBYjY0T0gKU3gxb2VxOVdnL1dRN3ZVTG0vaTEwc1REMmxMWmNqVGdYK1JsVjkrWm1JTXErNElwSjZsUUlTaU1jeDIxZkVSawpzdzdCeC9WZ0pKbnlwUlB2S0wwWDhIMER0aG94WXRqSGZUQXZCYmZDc1FLQmdRRE44NXRlSU1QRm1VZ01Qd1M0Cm54dzcvMnA5cHF1Z09vczl6TlR4elhIV012MkVRMVRXRmExVHk5SDJuZnAydFNzaUNPSVNBcnU1Sm9Va3ZCNXEKbVFhVFIrWlpDSWdUNE5iVTZmZUNEZTRMUWZ5eUtxQm5KdU5BUmVlMExuSGx4UHEzTU5DMEU3ZE5BWU5xbE04agpDWXBCTy8zUHhVU014SlhMNWc3K1orMzRDUUtCZ1FEVnV2Sng1YWZZejNNZnh5S0RrVzJHazd3YXEyTDNmcmFtClU2TnZadjl3UjhSb3N0SFRwWmx4aFRKZXFoNU1lcFBrNDluQ09aYmRDaGtGcGN2ZStHbTEzOXUyOCtBcm0vZmEKUXJuZk5VaXg1eEtuRlhZaXR0MzNnemJOYWlCcWJXTm1SSlEzaExmcmNWbWQ3QjQ4M3BOeVIyQW5zd2dnUkVybAphdVFlYUhrczdRS0JnR296bThPL081VHl4UDlqbzhpY2E4L1lsdzV5V3dCR0VEVnZJY1FMQUEvSHZZbHR1eHFtCmxQbW9HZjZGV25uS1ZKSzVaL0tIckV2K3ZCdkVVaDhBQ0M3OG5hRDkwRVlINUdCb3dmUXp3TFBYZERwZjF0VTYKYldkZ1pPbzZKUXVxTnVzdVpnRG1SZGlVMWpLb3grTzJjSy9SQXNJWVpJLytjNHh3ZHZ6amxRZ1pBb0dCQUxDZwpubHVoL3VRZURIWG1pNDlQVDhRM3N1d1hWdUpSeFlBTy9ySEIzTGRkbCtNdVpGa1VNWXF2R01GQ3RXZGVwWG96CkVuS0FSVHpHYTRkUFRQd25MclV2R3RSSEZxcnphaERsczlYU294RGlkWGUvTkxIYmpmUk9hNnUyV0xPYlV0bmgKTXR2dXdrL0FqTjhGa3JlYStSOG4vVDdScFpXRTJxQmRoY2ZiYnNqQkFvR0FESys0NmJtdHVJd0FrRytqNWJsYQpxSXBPRFB2QldiQzk5VnJUVU5DRGNRbDZSRVQ3NjJzdlkya2cyNlFtNUZkdTFSMDA3SHE0aXdHSmNraHUvWDlaCm81NVk4STkwVE1PU2Nvb0FLaEIrc1ZxYmlXUGhwQTlaOXRSUlRXRzQ2WGg2RWtxaGRMSTB0dWJ6eS96aUFLT1QKK052UVdxNE83Q05aTDdBZ2xMR2ZHd0U9Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=',
+		vcs: {
+			serviceOffering: {
+				type: 'VerifiableCredential',
+				id: 'did:web:casio50.smart-x.smartsenselabs.com',
+				issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
+				issuanceDate: '2023-08-09T07:02:26.961Z',
+				credentialSubject: {
+					'gx:termsAndConditions': {
+						'gx:URL': 'https://aws.amazon.com/service-terms/',
+						'gx:hash': '689be3192f5686526bdddb450463f6c2f752c23b2820a2aae35e6779889e817a'
+					},
+					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_iD3f_policy.json'],
+					'gx:dataAccountExport': {
+						'gx:requestType': 'API',
+						'gx:accessType': 'physical',
+						'gx:formatType': 'pdf'
+					},
+					'gx:aggregationOf': [
+						{
+							id: 'https://aws.amazon.com/compliance/?hp=tile&tile=security'
+						}
+					],
+					'gx:dependsOn': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_xSoK.json'
+						},
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_Mxt9.json'
+						}
+					],
+					'gx:dataProtectionRegime': 'GDPR2016',
+					type: 'gx:ServiceOffering',
+					'gx:providedBy': {
+						id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+					},
+					id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_iD3f.json'
+				},
+				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1']
+			}
+		}
 	}
 }

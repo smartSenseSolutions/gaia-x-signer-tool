@@ -106,7 +106,9 @@ class SignerToolController {
 				vcs: { serviceOffering }
 			} = req.body
 			const legalParticipantURL = serviceOffering['credentialSubject']['gx:providedBy']['id']
+			console.log('====>legalParticipantURL', legalParticipantURL)
 			const legalParticipant = (await axios.get(legalParticipantURL)).data
+			console.log('====>legalParticipant', legalParticipant)
 			let {
 				selfDescriptionCredential: { verifiableCredential }
 			} = legalParticipant
@@ -131,11 +133,15 @@ class SignerToolController {
 			// Extract VC of dependant services
 
 			const dependsOn = serviceOfferingCS['gx:dependsOn']
+			const vcId: string[] = []
 			for (const { id: serviceURL } of dependsOn) {
-				const {
-					selfDescriptionCredential: { verifiableCredential: childVC }
-				} = (await axios.get(serviceURL)).data
-				verifiableCredential = [...verifiableCredential, ...childVC]
+				if (!vcId.includes(serviceURL)) {
+					vcId.push(serviceURL)
+					const {
+						selfDescriptionCredential: { verifiableCredential: childVC }
+					} = (await axios.get(serviceURL)).data
+					verifiableCredential = [...verifiableCredential, ...childVC]
+				}
 			}
 			verifiableCredential = commonFunctions.removeDuplicates(verifiableCredential, 'id')
 

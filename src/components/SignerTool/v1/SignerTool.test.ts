@@ -790,6 +790,26 @@ describe('/gaia-x/service-offering', () => {
 					})
 			})
 		})
+		describe('general failing case', () => {
+			it('fail to fetch participant json from url', async () => {
+				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
+					throw new Error('Fail to fetch')
+				})
+				const { validJSON } = serviceOfferingTestJSON
+				const error = {
+					error: 'Fail to fetch',
+					message: AppMessages.SD_SIGN_VALIDATION_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+		})
 	})
 
 	describe('Positive scenarios', () => {})

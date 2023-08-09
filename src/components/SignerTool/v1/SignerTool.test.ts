@@ -540,7 +540,7 @@ describe('/v1/gaia-x/verify', () => {
 	})
 })
 
-describe('/v1/createWebDID', () => {
+describe('/v1/create-web-did', () => {
 	const validBody = {
 		domain: 'dev.smartproof.in',
 		tenant: 'smart',

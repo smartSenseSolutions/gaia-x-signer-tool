@@ -6,7 +6,7 @@
 	},
 	"servers": [{ "url": "http://localhost:8000/" }],
 	"paths": {
-		"/updateLog": {
+		"/v1/update-log": {
 			"post": {
 				"summary": "Update Log Level",
 				"description": "Update Log Level of Application",
@@ -16,6 +16,38 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/LogLevelSchemaBody"
+							},
+							"examples": {
+								"silly": {
+									"value": {
+										"logLevel": "silly"
+									}
+								},
+								"debug": {
+									"value": {
+										"logLevel": "debug"
+									}
+								},
+								"warn": {
+									"value": {
+										"logLevel": "warn"
+									}
+								},
+								"error": {
+									"value": {
+										"logLevel": "error"
+									}
+								},
+								"info": {
+									"value": {
+										"logLevel": "info"
+									}
+								},
+								"verbose": {
+									"value": {
+										"logLevel": "verbose"
+									}
+								}
 							}
 						}
 					}
@@ -82,6 +114,37 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/CreateDIDSchemaBody"
+							},
+
+							"examples": {
+								"Domain": {
+									"value": {
+										"domain": "dev.smartproof.in"
+									}
+								},
+								"DomainWithX5U": {
+									"value": {
+										"domain": "dev.smartproof.in",
+										"x5u": "https://dev.smartproof.in/.well-known/x509CertificateChain.pem"
+									}
+								},
+								"DomainWithTenant": {
+									"value": {
+										"domain": "dev.smartproof.in",
+										"tenant": "smart"
+									}
+								},
+								"DomainWithService": {
+									"value": {
+										"domain": "dev.smartproof.in",
+										"services": [
+											{
+												"type": "CredentialRegistry",
+												"serviceEndpoint": "https://ssi.eecc.de/api/registry/vcs"
+											}
+										]
+									}
+								}
 							}
 						}
 					}
@@ -677,6 +740,10 @@
 								}
 							}
 						}
+					},
+					"x5u": {
+						"type": "string",
+						"example": "https://dev.smartproof.in/.well-known/x509CertificateChain.pem"
 					}
 				}
 			},
@@ -784,8 +851,7 @@
 				"required": ["logLevel"],
 				"properties": {
 					"logLevel": {
-						"type": "string",
-						"example": "silly"
+						"type": "string"
 					}
 				}
 			}

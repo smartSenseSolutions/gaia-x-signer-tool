@@ -748,7 +748,6 @@ describe('/gaia-x/service-offering', () => {
 				const body = {
 					legalParticipantURL: 'verifiableCredential',
 					verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
 					vcs: {
 						serviceOffering: {
 							type: 'VerifiableCredential',
@@ -758,7 +757,7 @@ describe('/gaia-x/service-offering', () => {
 							credentialSubject: {
 								'gx:termsAndConditions': {
 									'gx:URL': 'https://aws.amazon.com/service-terms/',
-									'gx:hash': '689be3192f5686526bdddb450463f6c2f752c23b2820a2aae35e6779889e817a'
+									'gx:hash': '689be3192f5686526bdddb450463f6c2f752c23b2820a2aae35e6779889e817a' /*pragma: allowlist secret*/
 								},
 								'gx:policy': 'https://wizard-api.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/Storage service_policy.json',
 								'gx:dataAccountExport': {
@@ -777,7 +776,8 @@ describe('/gaia-x/service-offering', () => {
 							},
 							'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1']
 						}
-					}
+					},
+					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' /*pragma: allowlist secret*/
 				}
 				const error = {
 					error: "Invalid value of param 'issuer'",
@@ -795,7 +795,7 @@ describe('/gaia-x/service-offering', () => {
 				const body = {
 					legalParticipantURL: 'verifiableCredential',
 					issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
-					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+
 					vcs: {
 						serviceOffering: {
 							type: 'VerifiableCredential',
@@ -805,7 +805,7 @@ describe('/gaia-x/service-offering', () => {
 							credentialSubject: {
 								'gx:termsAndConditions': {
 									'gx:URL': 'https://aws.amazon.com/service-terms/',
-									'gx:hash': '689be3192f5686526bdddb450463f6c2f752c23b2820a2aae35e6779889e817a'
+									'gx:hash': '689be3192f5686526bdddb450463f6c2f752c23b2820a2aae35e6779889e817a' /*pragma: allowlist secret*/
 								},
 								'gx:policy': 'https://wizard-api.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/Storage service_policy.json',
 								'gx:dataAccountExport': {
@@ -824,7 +824,8 @@ describe('/gaia-x/service-offering', () => {
 							},
 							'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1']
 						}
-					}
+					},
+					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' /*pragma: allowlist secret  */
 				}
 				const error = {
 					error: "Invalid value of param 'verificationMethod'",
@@ -843,7 +844,7 @@ describe('/gaia-x/service-offering', () => {
 					legalParticipantURL: 'verifiableCredential',
 					issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 					verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' /*pragma: allowlist secret */
 				}
 				const error = {
 					error: "Invalid value of param 'vcs.serviceOffering'",

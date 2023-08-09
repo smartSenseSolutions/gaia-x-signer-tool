@@ -33,33 +33,41 @@ class SignerToolController {
 				return
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
-			// privateKey = process.env.PRIVATE_KEY as string
+			// privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			privateKey = process.env.PRIVATE_KEY as string
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
 			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
 			const vcs = []
+			const vcIds: string[] = []
 			if (legalParticipant.credentialSubject['gx:parentOrganization']) {
 				for (let i = 0; i < legalParticipant.credentialSubject['gx:parentOrganization'].length; i++) {
-					const lp = (await axios.get(legalParticipant.credentialSubject['gx:parentOrganization'][i].id)).data
-					const {
-						selfDescriptionCredential: { verifiableCredential }
-					} = lp
-					vcs.push(...verifiableCredential)
+					const lpId = legalParticipant.credentialSubject['gx:parentOrganization'][i].id
+					if (!vcIds.includes(lpId)) {
+						vcIds.push(lpId)
+						const lp = (await axios.get(lpId)).data
+						const {
+							selfDescriptionCredential: { verifiableCredential }
+						} = lp
+						vcs.push(...verifiableCredential)
+					}
 				}
 			}
 
 			if (legalParticipant.credentialSubject['gx:subOrganization']) {
 				for (let i = 0; i < legalParticipant.credentialSubject['gx:subOrganization'].length; i++) {
-					const lp = (await axios.get(legalParticipant.credentialSubject['gx:subOrganization'][i].id)).data
-					const {
-						selfDescriptionCredential: { verifiableCredential }
-					} = lp
-					vcs.push(...verifiableCredential)
+					const lpId = legalParticipant.credentialSubject['gx:subOrganization'][i].id
+					if (!vcIds.includes(lpId)) {
+						const lp = (await axios.get(lpId)).data
+						const {
+							selfDescriptionCredential: { verifiableCredential }
+						} = lp
+						vcs.push(...verifiableCredential)
+					}
 				}
 			}
 			vcs.push(legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions)
-			console.log(vcs)
+
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
 				// eslint-disable-next-line no-prototype-builtins
@@ -69,7 +77,6 @@ class SignerToolController {
 				}
 			}
 			const selfDescription = Utils.createVP(vcs)
-			console.log(JSON.stringify(selfDescription))
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
 			// const complianceCredential = {}
 			if (complianceCredential) {

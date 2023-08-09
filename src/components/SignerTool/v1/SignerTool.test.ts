@@ -5,6 +5,8 @@ import app from '../../../app'
 import Utils from '../../../utils/common-functions'
 import { AppMessages, ROUTES } from '../../../utils/constants'
 
+const serviceOfferingTestData = require('../../../../assets/so_testcase.sample.json')
+
 const participantJson = {
 	selfDescriptionCredential: {
 		'@context': 'https://www.w3.org/2018/credentials/v1',
@@ -676,113 +678,42 @@ describe('/gaia-x/service-offering', () => {
 					})
 			})
 			it('Invalid issuer value', async () => {
-				const body = {
-					legalParticipantURL: 'verifiableCredential',
-					verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
-					vcs: {
-						serviceOffering: {
-							type: 'VerifiableCredential',
-							id: 'did:web:casio34.smart-x.smartsenselabs.com',
-							issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
-							issuanceDate: '2023-08-07T07:42:56.073Z',
-							credentialSubject: {
-								'gx:termsAndConditions': {
-									'gx:URL': 'https://aws.amazon.com/service-terms/',
-									'gx:hash': '689be3192f5686526bdddb450463f6c2f752c23b2820a2aae35e6779889e817a'
-								},
-								'gx:policy': 'https://wizard-api.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/Storage service_policy.json',
-								'gx:dataAccountExport': {
-									'gx:requestType': 'API',
-									'gx:accessType': 'physical',
-									'gx:formatType': 'pdf'
-								},
-								'gx:aggregationOf': 'https://aws.amazon.com/compliance/?hp=tile&tile=security',
-								'gx:dependsOn': 'https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview',
-								'gx:dataProtectionRegime': 'GDPR2016',
-								type: 'gx:ServiceOffering',
-								'gx:providedBy': {
-									id: 'https://wizard-api.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json'
-								},
-								id: 'https://wizard-api.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/Storage service.json'
-							},
-							'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1']
-						}
-					}
-				}
+				const { invalidIssuerJSON } = serviceOfferingTestData
 				const error = {
 					error: "Invalid value of param 'issuer'",
 					message: AppMessages.VALIDATION_ERROR
 				}
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
-					.send(body)
+					.send(invalidIssuerJSON)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
 						expect(response.body).toEqual(error)
 					})
 			})
 			it('Invalid verificationMethod value', async () => {
-				const body = {
-					legalParticipantURL: 'verifiableCredential',
-					issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
-					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
-					vcs: {
-						serviceOffering: {
-							type: 'VerifiableCredential',
-							id: 'did:web:casio34.smart-x.smartsenselabs.com',
-							issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
-							issuanceDate: '2023-08-07T07:42:56.073Z',
-							credentialSubject: {
-								'gx:termsAndConditions': {
-									'gx:URL': 'https://aws.amazon.com/service-terms/',
-									'gx:hash': '689be3192f5686526bdddb450463f6c2f752c23b2820a2aae35e6779889e817a'
-								},
-								'gx:policy': 'https://wizard-api.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/Storage service_policy.json',
-								'gx:dataAccountExport': {
-									'gx:requestType': 'API',
-									'gx:accessType': 'physical',
-									'gx:formatType': 'pdf'
-								},
-								'gx:aggregationOf': 'https://aws.amazon.com/compliance/?hp=tile&tile=security',
-								'gx:dependsOn': 'https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview',
-								'gx:dataProtectionRegime': 'GDPR2016',
-								type: 'gx:ServiceOffering',
-								'gx:providedBy': {
-									id: 'https://wizard-api.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json'
-								},
-								id: 'https://wizard-api.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/Storage service.json'
-							},
-							'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1']
-						}
-					}
-				}
+				const { invalidMerificationMethodJSON } = serviceOfferingTestData
 				const error = {
 					error: "Invalid value of param 'verificationMethod'",
 					message: AppMessages.VALIDATION_ERROR
 				}
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
-					.send(body)
+					.send(invalidMerificationMethodJSON)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
 						expect(response.body).toEqual(error)
 					})
 			})
 			it('Invalid serviceOffering object', async () => {
-				const body = {
-					legalParticipantURL: 'verifiableCredential',
-					issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
-					verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-					privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
-				}
+				const { invalidSO } = serviceOfferingTestData
 				const error = {
 					error: "Invalid value of param 'vcs.serviceOffering'",
 					message: AppMessages.VALIDATION_ERROR
 				}
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
-					.send(body)
+					.send(invalidSO)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
 						expect(response.body).toEqual(error)

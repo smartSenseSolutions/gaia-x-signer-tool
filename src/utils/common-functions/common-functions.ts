@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { DidDocument, LegalRegistrationNumberDto, Service, VerifiableCredentialDto, X509CertificateDetail, SignatureDto, VerificationMethod } from '../../interface'
+import crypto, { X509Certificate } from 'crypto'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
-import crypto, { X509Certificate } from 'crypto'
+
+import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
 import { AppConst, AppMessages } from '../constants'
 import { logger } from '../logger'
 
@@ -631,6 +632,20 @@ class Utils {
 		} catch (error) {
 			throw error
 		}
+	}
+
+	removeDuplicates = (array: [], key: string) => {
+		const uniqueArray = array.filter((parentObj, index) => {
+			const { credentialSubject: parentCredentialSubject } = parentObj
+			return (
+				index ===
+				array.findIndex((childObj: any) => {
+					const { credentialSubject: childCredentialSubject } = childObj
+					return parentCredentialSubject[key] === childCredentialSubject[key]
+				})
+			)
+		})
+		return uniqueArray
 	}
 }
 

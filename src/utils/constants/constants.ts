@@ -48,8 +48,8 @@ export const ROUTES = {
 	V1_APIS: {
 		LEGAL_PARTICIPANT: '/gaia-x/legal-participant',
 		SERVICE_OFFERING: '/gaia-x/service-offering',
-		VERIFY: '/verify',
-		CREATE_WEB_DID: '/createWebDID',
+		VERIFY: '/gaia-x/verify',
+		CREATE_WEB_DID: '/create-web-did',
 		GET_TRUST_INDEX: '/get/trust-index'
 	}
 }

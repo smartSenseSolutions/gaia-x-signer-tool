@@ -425,5 +425,10 @@ export const serviceOfferingTestJSON = {
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
 		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	},
+	invalidSO1: {
+		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
 	}
 }

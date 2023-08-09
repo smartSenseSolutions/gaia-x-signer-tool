@@ -6,7 +6,7 @@
 	},
 	"servers": [{ "url": "http://localhost:8000/" }],
 	"paths": {
-		"/updateLog" : {
+		"/v1/update-log": {
 			"post": {
 				"summary": "Update Log Level",
 				"description": "Update Log Level of Application",
@@ -16,6 +16,38 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/LogLevelSchemaBody"
+							},
+							"examples": {
+								"silly": {
+									"value": {
+										"logLevel": "silly"
+									}
+								},
+								"debug": {
+									"value": {
+										"logLevel": "debug"
+									}
+								},
+								"warn": {
+									"value": {
+										"logLevel": "warn"
+									}
+								},
+								"error": {
+									"value": {
+										"logLevel": "error"
+									}
+								},
+								"info": {
+									"value": {
+										"logLevel": "info"
+									}
+								},
+								"verbose": {
+									"value": {
+										"logLevel": "verbose"
+									}
+								}
 							}
 						}
 					}
@@ -72,7 +104,7 @@
 				}
 			}
 		},
-		"/v1/createWebDID": {
+		"/v1/create-web-did": {
 			"post": {
 				"summary": "Create Web DID",
 				"description": "Required domain name to create did:web",
@@ -82,6 +114,37 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/CreateDIDSchemaBody"
+							},
+
+							"examples": {
+								"Domain": {
+									"value": {
+										"domain": "dev.smartproof.in"
+									}
+								},
+								"DomainWithX5U": {
+									"value": {
+										"domain": "dev.smartproof.in",
+										"x5u": "https://dev.smartproof.in/.well-known/x509CertificateChain.pem"
+									}
+								},
+								"DomainWithTenant": {
+									"value": {
+										"domain": "dev.smartproof.in",
+										"tenant": "smart"
+									}
+								},
+								"DomainWithService": {
+									"value": {
+										"domain": "dev.smartproof.in",
+										"services": [
+											{
+												"type": "CredentialRegistry",
+												"serviceEndpoint": "https://ssi.eecc.de/api/registry/vcs"
+											}
+										]
+									}
+								}
 							}
 						}
 					}
@@ -553,7 +616,7 @@
 				}
 			}
 		},
-		"/v1/gaia-x/verify" : {
+		"/v1/gaia-x/verify": {
 			"post": {
 				"summary": "Verify Participant",
 				"description": "Validate signature of Issuer , Holder for Participant Url",
@@ -675,6 +738,10 @@
 								}
 							}
 						}
+					},
+					"x5u": {
+						"type": "string",
+						"example": "https://dev.smartproof.in/.well-known/x509CertificateChain.pem"
 					}
 				}
 			},
@@ -769,9 +836,9 @@
 					}
 				}
 			},
-			"VerifySchemaBody" : {
-				"required": ["url" , "policies"],
-				"properties" : {
+			"VerifySchemaBody": {
+				"required": ["url", "policies"],
+				"properties": {
 					"url": {
 						"type": "string",
 						"example": "https://greenworld.proofsense.in/.well-known/participant.json"
@@ -782,12 +849,11 @@
 					}
 				}
 			},
-			"LogLevelSchemaBody" : {
-				"required" : ["logLevel"],
-				"properties" : {
-					"logLevel" :{
-						"type" : "string",
-						"example" : "silly"
+			"LogLevelSchemaBody": {
+				"required": ["logLevel"],
+				"properties": {
+					"logLevel": {
+						"type": "string"
 					}
 				}
 			}

@@ -23,7 +23,7 @@ app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 routes(app)
 // order : error , warn , info,  verbose, debug, silly
-app.post('/updateLog', AppValidation.Log, checkResults, async (req: Request, res: Response) => {
+app.post('/v1/update-log', AppValidation.Log, checkResults, async (req: Request, res: Response) => {
 	try {
 		logger.setConsoleLevel(req.body.logLevel)
 		logger.setFileLevel(req.body.logLevel)

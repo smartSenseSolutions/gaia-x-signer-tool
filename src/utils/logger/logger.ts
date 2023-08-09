@@ -1,5 +1,4 @@
 import { existsSync, mkdirSync } from 'fs'
-import { utc } from 'moment'
 import { Logger, transports } from 'winston'
 
 class Logging {
@@ -72,9 +71,9 @@ class Logging {
 		if (!existsSync(dir)) {
 			mkdirSync(dir)
 		}
-		return dir + `/logs_${utc().format('YYYY-MM-DD')}_.log`
+		const time = new Date()
+		return dir + `/logs_${time}_.log`
 	}
-
 	// set file transport object
 	private fileOption = () => {
 		return {

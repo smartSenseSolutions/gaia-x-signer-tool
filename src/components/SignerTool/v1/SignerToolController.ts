@@ -58,6 +58,7 @@ class SignerToolController {
 				for (let i = 0; i < legalParticipant.credentialSubject['gx:subOrganization'].length; i++) {
 					const lpId = legalParticipant.credentialSubject['gx:subOrganization'][i].id
 					if (!vcIds.includes(lpId)) {
+						vcIds.push(lpId)
 						const lp = (await axios.get(lpId)).data
 						const {
 							selfDescriptionCredential: { verifiableCredential }

@@ -10,6 +10,7 @@ import { AppMessages, ROUTES } from '../../../utils/constants'
 import { participantJson, holderDdoJson, ServiceOfferingParticipantJson, serviceOfferingTestJSON } from '../../../assets'
 import axios from 'axios'
 const exampleCertificate = process.env.SSL_CERTIFICATE as string
+
 //mocking - Utils
 
 jest.mock('../../../utils/common-functions', () => {
@@ -19,8 +20,14 @@ jest.mock('../../../utils/common-functions', () => {
 			return true
 		},
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		fetchParticipantJson: async (url: string) => {
+		fetchParticipantJson: async () => {
 			const mockPJ = JSON.parse(JSON.stringify(participantJson))
+			return { ...mockPJ }
+		},
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		callServiceOfferingCompliance: async () => {
+			const { validSOComplianceResponse } = serviceOfferingTestJSON
+			const mockPJ = JSON.parse(JSON.stringify(validSOComplianceResponse))
 			return { ...mockPJ }
 		},
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,6 +35,29 @@ jest.mock('../../../utils/common-functions', () => {
 			if (did == 'did:web:greenworld.proofsense.in') return { didDocument: holderDdoJson }
 		},
 		generatePublicJWK: () => {
+			return {}
+		},
+		getPublicKeys: () => {
+			const { verificationMethod } = holderDdoJson
+			const { publicKeyJwk } = verificationMethod[0]
+			return publicKeyJwk
+		},
+		addProof: () => {
+			return {}
+		},
+		removeDuplicates: () => {
+			return {}
+		},
+		createVP: () => {
+			return {}
+		},
+		calcVeracity: () => {
+			return {}
+		},
+		calcTransparency: () => {
+			return {}
+		},
+		calcTrustIndex: () => {
 			return {}
 		},
 		generateDID: () => {
@@ -790,15 +820,36 @@ describe('/gaia-x/service-offering', () => {
 					})
 			})
 		})
-		describe('general failing case', () => {
-			it('fail to fetch participant json from url', async () => {
+		describe('Unresolvable links/data', () => {
+			it('fail to resolve legal participant url', async () => {
 				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
 					throw new Error('Fail to fetch')
 				})
-				const { validJSON } = serviceOfferingTestJSON
+				const { validReqJSON: validJSON } = serviceOfferingTestJSON
 				const error = {
 					error: 'Fail to fetch',
-					message: AppMessages.SD_SIGN_VALIDATION_FAILED
+					message: AppMessages.SD_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('fail to call service offering compliance service', async () => {
+				jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
+					throw new Error('error while calling compliance service')
+				})
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				const { validReqJSON: validJSON } = serviceOfferingTestJSON
+				const error = {
+					error: 'error while calling compliance service',
+					message: AppMessages.SD_SIGN_FAILED
 				}
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
@@ -811,6 +862,5 @@ describe('/gaia-x/service-offering', () => {
 			})
 		})
 	})
-
 	describe('Positive scenarios', () => {})
 })

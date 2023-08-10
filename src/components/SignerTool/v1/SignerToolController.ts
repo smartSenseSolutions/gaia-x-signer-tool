@@ -9,7 +9,6 @@ import web from 'web-did-resolver'
 
 import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
-import commonFunctions from '../../../utils/common-functions/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
 import { logger } from '../../../utils/logger'
 
@@ -102,36 +101,41 @@ class SignerToolController {
 			let { privateKey } = req.body
 			const {
 				verificationMethod,
-				issuer,
+				issuer: issuerDID,
 				vcs: { serviceOffering }
 			} = req.body
+
+			// Data received in provided by will be the LP URL.
+			// Extract it and fetch LP JSON from the URL
 			const legalParticipantURL = serviceOffering['credentialSubject']['gx:providedBy']['id']
-			console.log('====>legalParticipantURL', legalParticipantURL)
-			const legalParticipant = (await axios.get(legalParticipantURL)).data
-			console.log('====>legalParticipant', legalParticipant)
+			const legalParticipant = await Utils.fetchParticipantJson(legalParticipantURL)
 			let {
 				selfDescriptionCredential: { verifiableCredential }
 			} = legalParticipant
-			const { credentialSubject: serviceOfferingCS } = serviceOffering
 
-			const ddo = await Utils.getDDOfromDID(issuer, resolver)
+			// Get DID document of issuer from issuer DID
+			const ddo = await Utils.getDDOfromDID(issuerDID, resolver)
 			if (!ddo) {
-				logger.error(__filename, 'ServiceOffering', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
+				logger.error(__filename, 'ServiceOffering', `❌ DDO not found for given did: '${issuerDID}' in proof`, req.custom.uuid)
 				res.status(STATUS_CODES.BAD_REQUEST).json({
-					error: `DDO not found for given did: '${issuer}' in proof`
+					error: `DDO not found for given did: '${issuerDID}' in proof`
 				})
 				return
 			}
 
+			// Extract certificate url from did document
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
+
+			// Decrypt private key(received in request) from base64 to raw string
 			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
 
+			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 			serviceOffering.proof = proof
 			verifiableCredential.push(serviceOffering)
 
 			// Extract VC of dependant services
-
+			const { credentialSubject: serviceOfferingCS } = serviceOffering
 			const dependsOn = serviceOfferingCS['gx:dependsOn']
 			const vcId: string[] = []
 			for (const { id: serviceURL } of dependsOn) {
@@ -143,21 +147,16 @@ class SignerToolController {
 					verifiableCredential = [...verifiableCredential, ...childVC]
 				}
 			}
-			verifiableCredential = commonFunctions.removeDuplicates(verifiableCredential, 'id')
+			verifiableCredential = Utils.removeDuplicates(verifiableCredential, 'id')
 
 			// Create VP for service offering
-			const selfDescriptionCredential = Utils.createVP(verifiableCredential)
+			const selfDescriptionCredentialVP = Utils.createVP(verifiableCredential)
 
 			// Call compliance service to sign in gaia-x
-			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescriptionCredential)).data
-			if (complianceCredential) {
-				logger.info(__filename, 'ServiceOffering', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
-			} else {
-				logger.error(__filename, 'ServiceOffering', '❌ SD signing failed (compliance service)', req.custom.uuid)
-			}
+			const complianceCredential = await Utils.callServiceOfferingCompliance(selfDescriptionCredentialVP)
 
 			const completeSD = {
-				selfDescriptionCredential: selfDescriptionCredential,
+				selfDescriptionCredential: selfDescriptionCredentialVP,
 				complianceCredential: complianceCredential
 			}
 
@@ -166,7 +165,6 @@ class SignerToolController {
 			logger.debug(__filename, 'ServiceOffering', '🔒 veracity calculated', req.custom.uuid)
 
 			// Calculate Transparency
-
 			const transparency: number = await Utils.calcTransparency(serviceOfferingCS)
 			logger.debug(__filename, 'ServiceOffering', '🔒 transparency calculated', req.custom.uuid)
 
@@ -187,8 +185,7 @@ class SignerToolController {
 				message: AppMessages.SD_SIGN_SUCCESS
 			})
 		} catch (error) {
-			logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED}`, req.custom.uuid, error)
-
+			// logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED}`, req.custom.uuid, error)
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.SD_SIGN_FAILED

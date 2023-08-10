@@ -634,6 +634,12 @@ class Utils {
 		}
 	}
 
+	/**
+	 *
+	 * @param array Array containing duplicate objects
+	 * @param key Identifier for comparing duplicate objects
+	 * @returns Array with unique objects
+	 */
 	removeDuplicates = (array: [], key: string) => {
 		const uniqueArray = array.filter((parentObj, index) => {
 			const { credentialSubject: parentCredentialSubject } = parentObj
@@ -646,6 +652,20 @@ class Utils {
 			)
 		})
 		return uniqueArray
+	}
+
+	/**
+	 * @dev - common function to fetch ParticipantJson from url
+	 */
+	callServiceOfferingCompliance = async (reqData: any) => {
+		// eslint-disable-next-line no-useless-catch
+		try {
+			const endpoint = process.env.COMPLIANCE_SERVICE as string
+			const { data } = await axios.post(endpoint, reqData)
+			return data
+		} catch (error) {
+			throw error
+		}
 	}
 }
 

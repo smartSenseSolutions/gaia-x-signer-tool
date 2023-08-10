@@ -43,22 +43,26 @@ jest.mock('../../../utils/common-functions', () => {
 			return publicKeyJwk
 		},
 		addProof: () => {
-			return {}
+			const { serviceOfferingProof } = serviceOfferingTestJSON
+			return serviceOfferingProof
 		},
 		removeDuplicates: () => {
-			return {}
+			const { uniqueVC } = serviceOfferingTestJSON
+			return uniqueVC
 		},
 		createVP: () => {
-			return {}
+			const { serviceOfferingVP } = serviceOfferingTestJSON
+			return serviceOfferingVP
 		},
 		calcVeracity: () => {
-			return {}
+			const { veracityResponse } = serviceOfferingTestJSON
+			return veracityResponse
 		},
 		calcTransparency: () => {
-			return {}
+			return 1
 		},
 		calcTrustIndex: () => {
-			return {}
+			return 0.625
 		},
 		generateDID: () => {
 			return {}
@@ -462,7 +466,6 @@ describe('/v1/gaia-x/verify', () => {
 						valid: true
 					}
 				}
-
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
@@ -860,7 +863,101 @@ describe('/gaia-x/service-offering', () => {
 					})
 				jest.resetAllMocks()
 			})
+			it('fail to calculate veracity: LP proof verification method and did verification method id not matched', async () => {
+				jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
+					const { validSOComplianceResponse } = serviceOfferingTestJSON
+					return validSOComplianceResponse
+				})
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				jest.spyOn(Utils, 'calcVeracity').mockImplementation(async () => {
+					throw new Error('Participant proof verification method and did verification method id not matched')
+				})
+				const { validReqJSON: validJSON } = serviceOfferingTestJSON
+				const error = {
+					error: 'Participant proof verification method and did verification method id not matched',
+					message: AppMessages.SD_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('fail to calculate veracity: Verifiable credential array not found in participant self description', async () => {
+				jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
+					const { validSOComplianceResponse } = serviceOfferingTestJSON
+					return validSOComplianceResponse
+				})
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				jest.spyOn(Utils, 'calcVeracity').mockImplementation(async () => {
+					throw new Error('Verifiable credential array not found in participant self description')
+				})
+				const { validReqJSON: validJSON } = serviceOfferingTestJSON
+				const error = {
+					error: 'Verifiable credential array not found in participant self description',
+					message: AppMessages.SD_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('fail to calculate transparency', async () => {
+				jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
+					const { validSOComplianceResponse } = serviceOfferingTestJSON
+					return validSOComplianceResponse
+				})
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				jest.spyOn(Utils, 'calcTransparency').mockImplementation(async () => {
+					throw new Error('Error while calculating transparency')
+				})
+				const { validReqJSON: validJSON } = serviceOfferingTestJSON
+				const error = {
+					error: 'Error while calculating transparency',
+					message: AppMessages.SD_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
 		})
 	})
-	describe('Positive scenarios', () => {})
+	describe('Positive scenarios', () => {
+		it('fail to calculate transparency', async () => {
+			jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
+				const { validSOComplianceResponse } = serviceOfferingTestJSON
+				return validSOComplianceResponse
+			})
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			const { validReqJSON: validJSON, successResponse } = serviceOfferingTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+					expect(response.body).toEqual(successResponse)
+				})
+			jest.resetAllMocks()
+		})
+	})
 })

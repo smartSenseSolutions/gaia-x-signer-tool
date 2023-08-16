@@ -37,14 +37,20 @@ class SignerToolController {
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
 			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
-			const vcs = []
+
+			const vcsMap = new Map()
 			if (legalParticipant.credentialSubject['gx:parentOrganization']) {
 				for (let i = 0; i < legalParticipant.credentialSubject['gx:parentOrganization'].length; i++) {
 					const lp = (await axios.get(legalParticipant.credentialSubject['gx:parentOrganization'][i].id)).data
 					const {
 						selfDescriptionCredential: { verifiableCredential }
 					} = lp
-					vcs.push(...verifiableCredential)
+					for (const vc of verifiableCredential) {
+						const lpId = vc.credentialSubject.id
+						if (!vcsMap.has(lpId)) {
+							vcsMap.set(lpId, vc)
+						}
+					}
 				}
 			}
 
@@ -54,11 +60,16 @@ class SignerToolController {
 					const {
 						selfDescriptionCredential: { verifiableCredential }
 					} = lp
-					vcs.push(...verifiableCredential)
+					for (const vc of verifiableCredential) {
+						const lpId = vc.credentialSubject.id
+						if (!vcsMap.has(lpId)) {
+							vcsMap.set(lpId, vc)
+						}
+					}
 				}
 			}
-			vcs.push(legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions)
-			console.log(vcs)
+			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]
+
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
 				// eslint-disable-next-line no-prototype-builtins
@@ -67,10 +78,12 @@ class SignerToolController {
 					vcs[index].proof = proof
 				}
 			}
+
+			vcs.push(...Array.from(vcsMap.values()))
+
 			const selfDescription = Utils.createVP(vcs)
-			console.log(JSON.stringify(selfDescription))
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
-			// const complianceCredential = {}
+			// const complianceCredential = vcs
 			if (complianceCredential) {
 				logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
 			} else {

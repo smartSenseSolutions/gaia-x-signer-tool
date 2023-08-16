@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { DidDocument, LegalRegistrationNumberDto, Service, VerifiableCredentialDto, X509CertificateDetail, SignatureDto, VerificationMethod } from '../../interface'
+import crypto, { X509Certificate } from 'crypto'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
-import crypto, { X509Certificate } from 'crypto'
+
+import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
 import { AppConst, AppMessages } from '../constants'
 import { logger } from '../logger'
 
@@ -628,6 +629,40 @@ class Utils {
 			const verificationResult = await this.verify(jose, proof.jws.replace('..', `.${hash}.`), AppConst.RSA_ALGO, publicKeyJwk, hash)
 			logger.info(__filename, 'verification', verificationResult ? `✅ ${AppMessages.SIG_VERIFY_SUCCESS}` : `❌ ${AppMessages.SIG_VERIFY_FAILED}`, '')
 			return verificationResult
+		} catch (error) {
+			throw error
+		}
+	}
+
+	/**
+	 *
+	 * @param array Array containing duplicate objects
+	 * @param key Identifier for comparing duplicate objects
+	 * @returns Array with unique objects
+	 */
+	removeDuplicates = (array: [], key: string) => {
+		const uniqueArray = array.filter((parentObj, index) => {
+			const { credentialSubject: parentCredentialSubject } = parentObj
+			return (
+				index ===
+				array.findIndex((childObj: any) => {
+					const { credentialSubject: childCredentialSubject } = childObj
+					return parentCredentialSubject[key] === childCredentialSubject[key]
+				})
+			)
+		})
+		return uniqueArray
+	}
+
+	/**
+	 * @dev - common function to fetch ParticipantJson from url
+	 */
+	callServiceOfferingCompliance = async (reqData: any) => {
+		// eslint-disable-next-line no-useless-catch
+		try {
+			const endpoint = process.env.COMPLIANCE_SERVICE as string
+			const { data } = await axios.post(endpoint, reqData)
+			return data
 		} catch (error) {
 			throw error
 		}

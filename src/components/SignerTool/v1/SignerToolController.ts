@@ -364,8 +364,17 @@ class SignerToolController {
 
 			// get the json document of service offering
 			const {
-				selfDescriptionCredential: { credentialSubject }
+				selfDescriptionCredential: { verifiableCredential: verifiableCredentialVCS }
 			} = (await axios.get(serviceOfferingSD)).data
+
+			const serviceOfferingVC = verifiableCredentialVCS.find((credential: any) => {
+				const {
+					credentialSubject: { type, id }
+				} = credential
+				return type === 'gx:ServiceOffering' && id === serviceOfferingSD
+			})
+
+			const { credentialSubject } = serviceOfferingVC
 			const transparency: number = await Utils.calcTransparency(credentialSubject)
 			logger.debug(__filename, 'GetTrustIndex', `transparency :-, ${transparency}`, req.custom.uuid)
 

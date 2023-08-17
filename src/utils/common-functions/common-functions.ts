@@ -396,10 +396,7 @@ class Utils {
 	 */
 	async calcVeracity(verifiableCredential: any, resolver: any) {
 		if (verifiableCredential.length) {
-			let keypairDepth = 1
-			let veracity = 1
-			let certificateDetails = null
-			const participantSD = verifiableCredential[0]
+			const participantSD = verifiableCredential.find((credential: any) => credential.credentialSubject.type === 'gx:LegalParticipant')
 			const {
 				id: holderDID,
 				proof: { verificationMethod: participantVM }
@@ -418,7 +415,8 @@ class Utils {
 			// There can be multiple verification methods in the did document but we have to find the one which has signed the holder vc
 			// So verificationMethod mentioned in the proof of holder SD should have to be equal to the id filed in the verification method
 			// participantSD.json >> proof >> verificationMethod === did.json >> verificationMethodArray >> verificationMethodObject >> id
-
+			let certificateDetails = null
+			let keypairDepth = 1
 			for (const verificationMethod of verificationMethodArray) {
 				if (verificationMethod.id === participantVM && verificationMethod.publicKeyJwk) {
 					const { x5u } = verificationMethod.publicKeyJwk
@@ -438,6 +436,7 @@ class Utils {
 					break
 				}
 			}
+			let veracity = 1
 			if (certificateDetails) {
 				// As per formula(1 / len(keychain)), veracity will be 1 divided by number of signing
 				// keypairs found in the certificate
@@ -514,7 +513,7 @@ class Utils {
 		const totalMandatoryProps = 5
 		let availOptProps = 0
 		try {
-			for (const optionalProp in optionalProps) {
+			for (const optionalProp of optionalProps) {
 				// eslint-disable-next-line no-prototype-builtins
 				if (credentialSubject.hasOwnProperty(optionalProp) && credentialSubject[optionalProp]) {
 					availOptProps++

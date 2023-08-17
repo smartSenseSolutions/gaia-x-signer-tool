@@ -17,6 +17,12 @@ class SignerToolValidation {
 		body('verificationMethod').not().isEmpty().trim().escape(),
 		body('vcs.serviceOffering').isObject()
 	]
+	Resource = [
+		body('privateKey').not().isEmpty().trim().escape(),
+		body('issuer').not().isEmpty().trim().escape(),
+		body('verificationMethod').not().isEmpty().trim().escape(),
+		body('vcs.resource').isObject()
+	]
 	Verify = [
 		body('policies')
 			.exists()

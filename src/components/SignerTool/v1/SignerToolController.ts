@@ -109,6 +109,111 @@ class SignerToolController {
 		}
 	}
 
+	Resource = async (req: Request, res: Response): Promise<void> => {
+		try {
+			const { issuer, verificationMethod } = req.body
+			const { resource } = req.body.vcs
+			let { privateKey } = req.body
+
+			const VC = ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(resource?.credentialSubject.type)
+			if (!VC) {
+				logger.error(
+					__filename,
+					'Verify',
+					`❌ Verifiable Credential doesn't have type 'gx:VirtualDataResource' or  'gx:PhysicalResource' or 'gx:VirtualSoftwareResource'`,
+					req.custom.uuid
+				)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `VC with type 'gx:VirtualDataResource' or 'gx:PhysicalResource' or 'gx:VirtualSoftwareResource' not found!!`,
+					message: "VC with type 'gx:VirtualDataResource' or 'gx:PhysicalResource' or 'gx:VirtualSoftwareResource' not found!!"
+				})
+				return
+			}
+
+			const ddo = await Utils.getDDOfromDID(issuer, resolver)
+			if (!ddo) {
+				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `DDO not found for given did: '${issuer}' in proof`
+				})
+				return
+			}
+			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
+			// privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			privateKey = process.env.PRIVATE_KEY
+
+			const vcsMap = new Map()
+			switch (resource?.credentialSubject.type) {
+				case 'gx:VirtualDataResource': {
+					if (resource.credentialSubject['gx:copyrightOwnedBy']) {
+						await Utils.getInnerLpVCs(resource, 'gx:copyrightOwnedBy', vcsMap)
+					}
+
+					if (resource.credentialSubject['gx:producedBy']) {
+						await Utils.getInnerLpVCs(resource, 'gx:producedBy', vcsMap)
+					}
+					break
+				}
+				case 'gx:PhysicalResource': {
+					if (resource.credentialSubject['gx:maintainedBy']) {
+						await Utils.getInnerLpVCs(resource, 'gx:maintainedBy', vcsMap)
+					}
+					if (resource.credentialSubject['gx:ownedBy']) {
+						await Utils.getInnerLpVCs(resource, 'gx:ownedBy', vcsMap)
+					}
+					if (resource.credentialSubject['gx:manufacturedBy']) {
+						await Utils.getInnerLpVCs(resource, 'gx:manufacturedBy', vcsMap)
+					}
+					break
+				}
+				case 'gx:VirtualSoftwareResource': {
+					if (resource.credentialSubject['gx:copyrightOwnedBy']) {
+						await Utils.getInnerLpVCs(resource, 'gx:copyrightOwnedBy', vcsMap)
+					}
+					break
+				}
+			}
+			const vcs = [resource]
+
+			for (let index = 0; index < vcs.length; index++) {
+				const vc = vcs[index]
+				// eslint-disable-next-line no-prototype-builtins
+				if (!vc.hasOwnProperty('proof')) {
+					const proof = await Utils.addProof(jsonld, axios, jose, crypto, vc, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
+					vcs[index].proof = proof
+				}
+			}
+
+			vcs.push(...Array.from(vcsMap.values()))
+
+			const selfDescription = Utils.createVP(vcs)
+			// const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
+			const complianceCredential = {}
+			if (complianceCredential) {
+				logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
+			} else {
+				logger.error(__filename, 'GXLegalParticipant', '❌ SD signing failed (compliance service)', req.custom.uuid)
+			}
+
+			// // await publisherService.publishVP(complianceCredential);
+			const completeSD = {
+				selfDescriptionCredential: selfDescription,
+				complianceCredential: complianceCredential
+			}
+
+			res.status(STATUS_CODES.OK).json({
+				data: completeSD,
+				message: AppMessages.VP_SUCCESS
+			})
+		} catch (e: any) {
+			console.log(JSON.stringify(e))
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+				error: (e as Error).message,
+				message: AppMessages.VP_FAILED
+			})
+		}
+	}
+
 	ServiceOffering = async (req: Request, res: Response): Promise<void> => {
 		try {
 			let { privateKey } = req.body
@@ -261,8 +366,8 @@ class SignerToolController {
 				return
 			}
 			//fetching VC with subject type gx:LegalParticipant
-			const VC = verifiableCredential?.find(
-				(vc: VerifiableCredentialDto) => vc?.credentialSubject.type === 'gx:LegalParticipant' || vc?.credentialSubject.type === 'gx:ServiceOffering'
+			const VC = verifiableCredential?.find((vc: VerifiableCredentialDto) =>
+				['gx:ServiceOffering', 'gx:LegalParticipant', 'gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(vc?.credentialSubject.type)
 			)
 
 			if (!VC) {

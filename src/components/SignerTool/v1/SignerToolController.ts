@@ -149,7 +149,8 @@ class SignerToolController {
 
 			const { credentialSubject: serviceOfferingCS } = serviceOffering
 			// Extract VC of dependant Services & Resources
-			const resolvableLinks = [...serviceOfferingCS['gx:dependsOn'], ...serviceOfferingCS['gx:aggregationOf']]
+			// const resolvableLinks = [...serviceOfferingCS['gx:dependsOn'], ...serviceOfferingCS['gx:aggregationOf']]
+			const resolvableLinks = [...serviceOfferingCS['gx:dependsOn']]
 			const vcIDs: string[] = []
 			for (const { id: vpLink } of resolvableLinks) {
 				if (!vcIDs.includes(vpLink)) {

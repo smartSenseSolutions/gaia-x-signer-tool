@@ -6,7 +6,6 @@ import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
-
 import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
@@ -536,6 +535,56 @@ class SignerToolController {
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.DID_FAILED
+			})
+		}
+	}
+
+	VerifyWebDID = async (req: Request, res: Response): Promise<void> => {
+		try {
+			const { did, verificationMethod, privateKey } = req.body
+			const ddo = await Utils.getDDOfromDID(did, resolver)
+			if (!ddo) {
+				logger.error(__filename, 'VerifyWebDID', `❌ DDO not found for given did: '${did}'`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `DDO not found for given did: '${did}'`,
+					message: AppMessages.DID_VERIFY_FAILED
+				})
+				return
+			}
+			const {
+				didDocument: { verificationMethod: verificationMethodArray }
+			} = ddo
+			const foundVerificationMethod = verificationMethodArray.find((e: any) => e.id === verificationMethod)
+			if (!foundVerificationMethod) {
+				logger.error(__filename, 'VerifyWebDID', `❌ Verification Method not found in DDO: '${verificationMethod}'`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `Verification Method not found in DDO: '${verificationMethod}'`,
+					message: AppMessages.DID_VERIFY_FAILED
+				})
+				return
+			}
+			const decodedPrivateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			// const decodedPrivateKey = process.env.PRIVATE_KEY as string
+			const hash = 'sampleText'
+			const jws = await Utils.sign(jose, AppConst.RSA_ALGO, hash, decodedPrivateKey)
+
+			try {
+				const isValid = await Utils.verify(jose, jws.replace('..', `.${hash}.`), AppConst.RSA_ALGO, foundVerificationMethod.publicKeyJwk, hash)
+				// const isValid = false
+				res.status(STATUS_CODES.OK).json({
+					data: { isValid },
+					message: isValid ? AppMessages.DID_VERIFY : AppMessages.DID_VERIFY_FAILED
+				})
+			} catch (e) {
+				res.status(STATUS_CODES.OK).json({
+					data: { isValid: false },
+					message: AppMessages.DID_VERIFY_FAILED
+				})
+			}
+		} catch (e) {
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+				error: (e as Error).message,
+				message: AppMessages.DID_VERIFY_FAILED
 			})
 		}
 	}

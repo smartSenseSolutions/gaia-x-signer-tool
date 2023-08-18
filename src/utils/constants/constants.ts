@@ -13,6 +13,8 @@ export class AppConst {
 export class AppMessages {
 	static readonly CLAIM_SIG_VERIFY_FAILED = 'Claim signature verification failed'
 	static readonly DID_SUCCESS = 'DID created successfully.'
+	static readonly DID_VERIFY = 'DID verified successfully.'
+	static readonly DID_VERIFY_FAILED = 'DID verification failed.'
 	static readonly DID_FAILED = 'DID creation failed.'
 	static readonly DID_VALIDATION = 'DID validation failed.'
 	static readonly KEYPAIR_VALIDATION = 'Key pair validation failed'
@@ -51,6 +53,7 @@ export const ROUTES = {
 		RESOURCE: '/gaia-x/resource',
 		VERIFY: '/gaia-x/verify',
 		CREATE_WEB_DID: '/create-web-did',
+		VERIFY_WEB_DID: '/verify-web-did',
 		GET_TRUST_INDEX: '/get/trust-index'
 	}
 }

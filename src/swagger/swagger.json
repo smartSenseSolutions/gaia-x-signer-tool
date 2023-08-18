@@ -183,6 +183,54 @@
 				}
 			}
 		},
+		"/v1/verify-web-did": {
+			"post": {
+				"summary": "Verify Web DID",
+				"description": "Required did:web, verification method and private key",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/VerifyDIDSchemaBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/v1/get/trust-index": {
 			"post": {
 				"summary": "Calculation of Trust index, Veracity & Transperency",
@@ -1024,6 +1072,23 @@
 					"x5u": {
 						"type": "string",
 						"example": "https://dev.smartproof.in/.well-known/x509CertificateChain.pem"
+					}
+				}
+			},
+			"VerifyDIDSchemaBody": {
+				"required": ["did"],
+				"properties": {
+					"did": {
+						"type": "string",
+						"example": "did:web:casio34.smart-x.smartsenselabs.com"
+					},
+					"verificationMethod": {
+						"type": "string",
+						"example": "did:web:casio34.smart-x.smartsenselabs.com"
+					},
+					"privateKey": {
+						"type": "string",
+						"example": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
 					}
 				}
 			},

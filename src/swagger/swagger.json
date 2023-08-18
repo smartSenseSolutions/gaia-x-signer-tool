@@ -750,7 +750,7 @@
 													"gx:description": "Test Resource 2 description",
 													"gx:aggregationOf": [
 														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-1.json"
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json"
 														}
 													],
 													"gx:copyrightOwnedBy": [
@@ -793,7 +793,7 @@
 													"gx:description": "Test Resource 2 description",
 													"gx:aggregationOf": [
 														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-1.json"
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json"
 														}
 													],
 													"gx:maintainedBy": [
@@ -855,7 +855,7 @@
 													"gx:description": "Test Resource 2 description",
 													"gx:aggregationOf": [
 														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-1.json"
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json"
 														}
 													],
 													"gx:copyrightOwnedBy": [

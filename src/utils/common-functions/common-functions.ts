@@ -1,11 +1,10 @@
+import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
+import { AppConst, AppMessages } from '../constants'
+import { logger } from '../logger'
 import axios from 'axios'
 import crypto, { X509Certificate } from 'crypto'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
-
-import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
-import { AppConst, AppMessages } from '../constants'
-import { logger } from '../logger'
 
 class Utils {
 	generateDID(didId: string, publicKeyJwk: any, services: Service[]): any {
@@ -667,7 +666,7 @@ class Utils {
 		}
 	}
 
-	getInnerLpVCs = async (vc: any, key: string, vcsMap: any) => {
+	getInnerVCs = async (vc: any, key: string, vcsMap: any) => {
 		for (let i = 0; i < vc.credentialSubject[key].length; i++) {
 			const lp = (await axios.get(vc.credentialSubject[key][i].id)).data
 			const {

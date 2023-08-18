@@ -657,12 +657,14 @@ class Utils {
 	 * @dev - common function to fetch ParticipantJson from url
 	 */
 	callServiceOfferingCompliance = async (reqData: any) => {
+		logger.debug(__filename, 'callServiceOfferingCompliance', `📈 Calling ServiceOffering Compliance`, JSON.stringify(reqData))
 		// eslint-disable-next-line no-useless-catch
 		try {
 			const endpoint = process.env.COMPLIANCE_SERVICE as string
 			const { data } = await axios.post(endpoint, reqData)
 			return data
 		} catch (error) {
+			logger.error(__filename, 'callServiceOfferingCompliance', 'error while calling service compliance', '', (error as Error).message)
 			throw error
 		}
 	}

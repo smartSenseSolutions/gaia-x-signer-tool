@@ -34,7 +34,7 @@ class SignerToolController {
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
 			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
-
+			// privateKey = process.env.PRIVATE_KEY
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
 			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
 
@@ -97,7 +97,7 @@ class SignerToolController {
 			}
 
 			res.status(STATUS_CODES.OK).json({
-				data: completeSD,
+				data: { completeSD },
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e: any) {
@@ -139,39 +139,43 @@ class SignerToolController {
 				return
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
-			// privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
-			privateKey = process.env.PRIVATE_KEY
+			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			// privateKey = process.env.PRIVATE_KEY
 
 			const vcsMap = new Map()
 			switch (resource?.credentialSubject.type) {
 				case 'gx:VirtualDataResource': {
 					if (resource.credentialSubject['gx:copyrightOwnedBy']) {
-						await Utils.getInnerLpVCs(resource, 'gx:copyrightOwnedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', vcsMap)
 					}
 
 					if (resource.credentialSubject['gx:producedBy']) {
-						await Utils.getInnerLpVCs(resource, 'gx:producedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:producedBy', vcsMap)
 					}
 					break
 				}
 				case 'gx:PhysicalResource': {
 					if (resource.credentialSubject['gx:maintainedBy']) {
-						await Utils.getInnerLpVCs(resource, 'gx:maintainedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:maintainedBy', vcsMap)
 					}
 					if (resource.credentialSubject['gx:ownedBy']) {
-						await Utils.getInnerLpVCs(resource, 'gx:ownedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:ownedBy', vcsMap)
 					}
 					if (resource.credentialSubject['gx:manufacturedBy']) {
-						await Utils.getInnerLpVCs(resource, 'gx:manufacturedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:manufacturedBy', vcsMap)
 					}
 					break
 				}
 				case 'gx:VirtualSoftwareResource': {
 					if (resource.credentialSubject['gx:copyrightOwnedBy']) {
-						await Utils.getInnerLpVCs(resource, 'gx:copyrightOwnedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', vcsMap)
 					}
 					break
 				}
+			}
+
+			if (resource.credentialSubject['gx:aggregationOf']) {
+				await Utils.getInnerVCs(resource, 'gx:aggregationOf', vcsMap)
 			}
 			const vcs = [resource]
 
@@ -202,7 +206,7 @@ class SignerToolController {
 			}
 
 			res.status(STATUS_CODES.OK).json({
-				data: completeSD,
+				data: { completeSD },
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e: any) {
@@ -346,14 +350,14 @@ class SignerToolController {
 			}
 
 			// check if complianceCred not null
-			if (!participantJson?.complianceCredential || !participantJson?.complianceCredential?.proof) {
-				logger.error(__filename, 'Verify', `❌ Compliance Credential Not Found`, req.custom.uuid)
-				res.status(STATUS_CODES.BAD_REQUEST).json({
-					error: `Compliance Credential not found`,
-					message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
-				})
-				return
-			}
+			// if (!participantJson?.complianceCredential || !participantJson?.complianceCredential?.proof) {
+			// 	logger.error(__filename, 'Verify', `❌ Compliance Credential Not Found`, req.custom.uuid)
+			// 	res.status(STATUS_CODES.BAD_REQUEST).json({
+			// 		error: `Compliance Credential not found`,
+			// 		message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
+			// 	})
+			// 	return
+			// }
 
 			// check VC are of valid type
 			const { verifiableCredential, type } = participantJson.selfDescriptionCredential

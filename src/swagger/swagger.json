@@ -715,10 +715,193 @@
 				}
 			}
 		},
+		"/v1/gaia-x/resource": {
+			"post": {
+				"summary": "Resources On GaiaX",
+				"description": "Resources On GaiaX",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/OnBoardGaiaXSchemaBody"
+							},
+							"examples": {
+								"VirtualDataResource": {
+									"value": {
+										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+										"vcs": {
+											"resource": {
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
+												"type": ["VerifiableCredential"],
+												"id": "did:web:casio34.smart-x.smartsenselabs.com",
+												"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+												"issuanceDate": "2023-08-07T16:04:30.307219451Z",
+												"credentialSubject": {
+													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+													"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json",
+													"type": "gx:VirtualDataResource",
+													"gx:name": "Test Resource 2",
+													"gx:description": "Test Resource 2 description",
+													"gx:aggregationOf": [
+														{
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-1.json"
+														}
+													],
+													"gx:copyrightOwnedBy": [
+														{
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+														}
+													],
+													"gx:license": ["http://smartproof.in/.well-known/license"],
+													"gx:policy": ["https://example.com"],
+													"gx:producedBy": {
+														"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+													},
+													"gx:exposedThrough": ["https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2"],
+													"gx:containsPII": true
+												}
+											}
+										}
+									}
+								},
+								"PhysicalResource": {
+									"value": {
+										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+										"vcs": {
+											"resource": {
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
+												"type": ["VerifiableCredential"],
+												"id": "did:web:casio50.smart-x.smartsenselabs.com",
+												"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+												"issuanceDate": "2023-08-07T16:04:30.307219451Z",
+												"credentialSubject": {
+													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+													"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json",
+													"type": "gx:PhysicalResource",
+													"gx:name": "Test Resource 2",
+													"gx:description": "Test Resource 2 description",
+													"gx:aggregationOf": [
+														{
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-1.json"
+														}
+													],
+													"gx:maintainedBy": [
+														{
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+														}
+													],
+													"gx:ownedBy": [
+														{
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+														}
+													],
+													"gx:manufacturedBy": [
+														{
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+														}
+													],
+													"gx:locationAddress": [
+														{
+															"gx:countryCode": "FR-DE"
+														},
+														{
+															"gx:countryCode": "AA-DE"
+														}
+													],
+													"gx:location": [
+														{
+															"gx:gps": "35.89421911 139.94637467"
+														},
+														{
+															"gx:gps": "31.89421911 133.94637467"
+														}
+													]
+												}
+											}
+										}
+									}
+								},
+								"VirtualSoftwareResource": {
+									"value": {
+										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+										"vcs": {
+											"resource": {
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
+												"type": ["VerifiableCredential"],
+												"id": "did:web:casio50.smart-x.smartsenselabs.com",
+												"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+												"issuanceDate": "2023-08-07T16:04:30.307219451Z",
+												"credentialSubject": {
+													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+													"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json",
+													"type": "gx:VirtualSoftwareResource",
+													"gx:name": "Test Resource 2",
+													"gx:description": "Test Resource 2 description",
+													"gx:aggregationOf": [
+														{
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-1.json"
+														}
+													],
+													"gx:copyrightOwnedBy": [
+														{
+															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+														}
+													],
+													"gx:license": ["https://wizard-api.smart-x.smartsenselabs.com/license"],
+													"gx:policy": ["https://example.com"]
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
 		"/v1/gaia-x/verify": {
 			"post": {
-				"summary": "Verify Participant",
-				"description": "Validate signature of Issuer , Holder for Participant Url",
+				"summary": "Verify Gaia-x VC",
+				"description": "Validate Gaia-x VC(gx:LegalParticipant,gx:ServiceOffering,gx:VirtualDataResource,gx:PhysicalResource,gx:VirtualSoftwareResource) with allowed polices (integrityCheck,holderSignature,complianceSignature,complianceCheck",
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -739,7 +922,7 @@
 								},
 								"examples": {
 									"verifyLP": {
-										"summary": "Verify Legal Participant",
+										"summary": "Verify",
 										"value": {
 											"message": "Success",
 											"data": {

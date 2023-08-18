@@ -1,5 +1,5 @@
 {
-	"name": "smart-x-signer",
+	"name": "gaia-x-signer-tool",
 	"version": "1.0.0",
 	"description": "",
 	"main": "build/server.js",

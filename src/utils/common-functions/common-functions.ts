@@ -666,6 +666,21 @@ class Utils {
 			throw error
 		}
 	}
+
+	getInnerLpVCs = async (vc: any, key: string, vcsMap: any) => {
+		for (let i = 0; i < vc.credentialSubject[key].length; i++) {
+			const lp = (await axios.get(vc.credentialSubject[key][i].id)).data
+			const {
+				selfDescriptionCredential: { verifiableCredential }
+			} = lp
+			for (const vc of verifiableCredential) {
+				const lpId = vc.credentialSubject.id
+				if (!vcsMap.has(lpId)) {
+					vcsMap.set(lpId, vc)
+				}
+			}
+		}
+	}
 }
 
 export default new Utils()

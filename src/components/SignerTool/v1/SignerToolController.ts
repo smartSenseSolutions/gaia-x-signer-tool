@@ -6,6 +6,7 @@ import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
+
 import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
@@ -72,7 +73,7 @@ class SignerToolController {
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
 				// eslint-disable-next-line no-prototype-builtins
-				if (!vc.hasOwnProperty('proof')) {
+				if (!('proof' in vc)) {
 					const proof = await Utils.addProof(jsonld, axios, jose, crypto, vc, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 					vcs[index].proof = proof
 				}
@@ -181,7 +182,7 @@ class SignerToolController {
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
 				// eslint-disable-next-line no-prototype-builtins
-				if (!vc.hasOwnProperty('proof')) {
+				if (!('proof' in vc)) {
 					const proof = await Utils.addProof(jsonld, axios, jose, crypto, vc, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 					vcs[index].proof = proof
 				}
@@ -257,19 +258,21 @@ class SignerToolController {
 
 			const { credentialSubject: serviceOfferingCS } = serviceOffering
 			// Extract VC of dependant Services & Resources
-			// const resolvableLinks = [...serviceOfferingCS['gx:dependsOn'], ...serviceOfferingCS['gx:aggregationOf']]
-			const resolvableLinks = [...serviceOfferingCS['gx:dependsOn']]
-			const vcIDs: string[] = []
-			for (const { id: vpLink } of resolvableLinks) {
-				if (!vcIDs.includes(vpLink)) {
-					vcIDs.push(vpLink)
-					const {
-						selfDescriptionCredential: { verifiableCredential: childVC }
-					} = (await axios.get(vpLink)).data
-					verifiableCredential = [...verifiableCredential, ...childVC]
+			if ('gx:dependsOn' in serviceOfferingCS) {
+				// const resolvableLinks = [...serviceOfferingCS['gx:dependsOn'], ...serviceOfferingCS['gx:aggregationOf']]
+				const resolvableLinks = [...serviceOfferingCS['gx:dependsOn']]
+				const vcIDs: string[] = []
+				for (const { id: vpLink } of resolvableLinks) {
+					if (!vcIDs.includes(vpLink)) {
+						vcIDs.push(vpLink)
+						const {
+							selfDescriptionCredential: { verifiableCredential: childVC }
+						} = (await axios.get(vpLink)).data
+						verifiableCredential = [...verifiableCredential, ...childVC]
+					}
 				}
+				verifiableCredential = Utils.removeDuplicates(verifiableCredential, 'id')
 			}
-			verifiableCredential = Utils.removeDuplicates(verifiableCredential, 'id')
 
 			// Create VP for service offering
 			const selfDescriptionCredentialVP = Utils.createVP(verifiableCredential)

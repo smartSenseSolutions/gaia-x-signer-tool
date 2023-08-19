@@ -1,10 +1,11 @@
-import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
-import { AppConst, AppMessages } from '../constants'
-import { logger } from '../logger'
 import axios from 'axios'
 import crypto, { X509Certificate } from 'crypto'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
+
+import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
+import { AppConst, AppMessages } from '../constants'
+import { logger } from '../logger'
 
 class Utils {
 	generateDID(didId: string, publicKeyJwk: any, services: Service[]): any {
@@ -514,7 +515,7 @@ class Utils {
 		try {
 			for (const optionalProp of optionalProps) {
 				// eslint-disable-next-line no-prototype-builtins
-				if (credentialSubject.hasOwnProperty(optionalProp) && credentialSubject[optionalProp]) {
+				if (optionalProp in credentialSubject && credentialSubject[optionalProp]) {
 					availOptProps++
 				}
 			}

@@ -73,7 +73,7 @@ class SignerToolController {
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
 				// eslint-disable-next-line no-prototype-builtins
-				if (!('proof' in vc)) {
+				if (!vc.hasOwnProperty('proof')) {
 					const proof = await Utils.addProof(jsonld, axios, jose, crypto, vc, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 					vcs[index].proof = proof
 				}
@@ -182,7 +182,7 @@ class SignerToolController {
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
 				// eslint-disable-next-line no-prototype-builtins
-				if (!('proof' in vc)) {
+				if (!vc.hasOwnProperty('proof')) {
 					const proof = await Utils.addProof(jsonld, axios, jose, crypto, vc, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 					vcs[index].proof = proof
 				}
@@ -258,7 +258,8 @@ class SignerToolController {
 
 			const { credentialSubject: serviceOfferingCS } = serviceOffering
 			// Extract VC of dependant Services & Resources
-			if ('gx:dependsOn' in serviceOfferingCS) {
+			// eslint-disable-next-line no-prototype-builtins
+			if (serviceOfferingCS.hasOwnProperty('gx:dependsOn')) {
 				// const resolvableLinks = [...serviceOfferingCS['gx:dependsOn'], ...serviceOfferingCS['gx:aggregationOf']]
 				const resolvableLinks = [...serviceOfferingCS['gx:dependsOn']]
 				const vcIDs: string[] = []

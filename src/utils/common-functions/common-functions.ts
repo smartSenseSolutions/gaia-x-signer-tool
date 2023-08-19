@@ -657,7 +657,7 @@ class Utils {
 	 * @dev - common function to fetch ParticipantJson from url
 	 */
 	callServiceOfferingCompliance = async (reqData: any) => {
-		logger.debug(__filename, 'callServiceOfferingCompliance', `📈 Calling ServiceOffering Compliance`, JSON.stringify(reqData))
+		logger.debug(__filename, 'callServiceOfferingCompliance', `📈 Calling ServiceOffering Compliance`, '')
 		// eslint-disable-next-line no-useless-catch
 		try {
 			const endpoint = process.env.COMPLIANCE_SERVICE as string

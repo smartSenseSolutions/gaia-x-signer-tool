@@ -138,8 +138,8 @@ class SignerToolController {
 				return
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
-			// privateKey = process.env.PRIVATE_KEY
+			// privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			privateKey = process.env.PRIVATE_KEY
 
 			const vcsMap = new Map()
 			switch (resource?.credentialSubject.type) {
@@ -517,7 +517,16 @@ class SignerToolController {
 			if (!x5uURL) {
 				x5uURL = tenant ? `https://${domain}/${tenant}/x509CertificateChain.pem` : `https://${domain}/.well-known/x509CertificateChain.pem`
 			}
-			const certificate = (await axios.get(x5uURL)).data as string
+			let certificate = null
+			try {
+				certificate = (await axios.get(x5uURL)).data as string
+			} catch (e) {
+				res.status(STATUS_CODES.UNPROCESSABLE_ENTITY).json({
+					error: `x5u URL not resolved: ${x5uURL}`,
+					message: AppMessages.DID_FAILED
+				})
+				return
+			}
 			const publicKeyJwk = await Utils.generatePublicJWK(jose, AppConst.RSA_ALGO, certificate, x5uURL)
 			if (!publicKeyJwk) {
 				logger.error(__filename, 'CreateWebDID', '❌ fail to create publicKeyJWK', req.custom.uuid)

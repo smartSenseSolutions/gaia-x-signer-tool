@@ -255,16 +255,17 @@ class SignerToolController {
 			serviceOffering.proof = proof
 			verifiableCredential.push(serviceOffering)
 
-			// Extract VC of dependant services
 			const { credentialSubject: serviceOfferingCS } = serviceOffering
-			const dependsOn = serviceOfferingCS['gx:dependsOn']
-			const vcId: string[] = []
-			for (const { id: serviceURL } of dependsOn) {
-				if (!vcId.includes(serviceURL)) {
-					vcId.push(serviceURL)
+			// Extract VC of dependant Services & Resources
+			// const resolvableLinks = [...serviceOfferingCS['gx:dependsOn'], ...serviceOfferingCS['gx:aggregationOf']]
+			const resolvableLinks = [...serviceOfferingCS['gx:dependsOn']]
+			const vcIDs: string[] = []
+			for (const { id: vpLink } of resolvableLinks) {
+				if (!vcIDs.includes(vpLink)) {
+					vcIDs.push(vpLink)
 					const {
 						selfDescriptionCredential: { verifiableCredential: childVC }
-					} = (await axios.get(serviceURL)).data
+					} = (await axios.get(vpLink)).data
 					verifiableCredential = [...verifiableCredential, ...childVC]
 				}
 			}

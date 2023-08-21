@@ -436,13 +436,14 @@ export const serviceOfferingTestJSON = {
 				type: 'VerifiableCredential',
 				id: 'did:web:casio50.smart-x.smartsenselabs.com',
 				issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
-				issuanceDate: '2023-08-09T07:02:26.961Z',
+				issuanceDate: '2023-08-19T17:04:08.725045024Z',
 				credentialSubject: {
 					'gx:termsAndConditions': {
 						'gx:URL': 'https://aws.amazon.com/service-terms/',
-						'gx:hash': '689be3192f5686526bdddb450463f6c2f752c23b2820a2aae35e6779889e817a'
+						'gx:hash': 'bc9f9f66fa34a52a8da4d0d14f4594cbb7cc6d929c5de1e161dbbd6f0b1985b9'
 					},
-					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_iD3f_policy.json'],
+					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_NKsA_policy.json'],
+					'gx:location': ['BE-BRU'],
 					'gx:dataAccountExport': {
 						'gx:requestType': 'API',
 						'gx:accessType': 'physical',
@@ -450,15 +451,7 @@ export const serviceOfferingTestJSON = {
 					},
 					'gx:aggregationOf': [
 						{
-							id: 'https://aws.amazon.com/compliance/?hp=tile&tile=security'
-						}
-					],
-					'gx:dependsOn': [
-						{
-							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_xSoK.json'
-						},
-						{
-							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_Mxt9.json'
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_86e8a7a9-c341-4049-abc7-dcf20e1736fe.json'
 						}
 					],
 					'gx:dataProtectionRegime': 'GDPR2016',
@@ -466,7 +459,9 @@ export const serviceOfferingTestJSON = {
 					'gx:providedBy': {
 						id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
 					},
-					id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_iD3f.json'
+					id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_NKsA.json',
+					'gx:name': 'Service_soft_res_1',
+					'gx:description': 'test service data'
 				},
 				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1']
 			}

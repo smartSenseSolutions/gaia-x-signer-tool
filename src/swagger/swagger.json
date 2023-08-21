@@ -787,6 +787,654 @@
 					}
 				}
 			}
+		},
+		"/v1/gaia-x/label-level": {
+			"post": {
+				"summary": "Label level calculation",
+				"description": "Calculate label level value",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ComplineLLSchemaBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								},
+								"examples": {
+									"serviceOffering": {
+										"summary": "Sign Service offering SD from compliance service",
+										"value": {
+											"data": {
+												"selfDescriptionCredential": {
+													"@context": [
+														"https://www.w3.org/2018/credentials/v1",
+														"https://w3id.org/security/suites/jws-2020/v1",
+														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													],
+													"type": ["VerifiableCredential"],
+													"id": "https://wizard.lab.gaia-x.eu/api/credentials/2d37wbGvQzbAQ84yRouh2m2vBKkN8s5AfH9Q75HZRCUQmJW7yAVSNKzjJj6gcjE2mDNDUHCichXWdMH3S2c8AaDLm3kXmf5R8DFPWTYo5iRYkn8kvgU3AjMXc2qTbhuMHCpucKGgT1ZMkcHUygZkt11iD3T8VJNKYwsdk4MGoZwdqoFUuTKVcsXVTBA4ofD1Dtqzjavyng5WUpvJf4gRyfGkMvYYuHCgay8TK8Dayt6Rhcs3r2d1gRCg2UV419S9CpWZGwKQNEXdYbaB2eTiNbQ83KMd4mj1oSJgF7LLDZLJtKJbhwLzR3x35QUqEGevRxnRDKoPdHrEZN7r9TVAmvr9rt7Xq8eB4zGMTza59hisEAUaHsmWQNaVDorqFyZgN5bXswMK1irVQ5SVR9osCCRrKUKkntxfakjmSqapPfveMP39vkgTXfEhsfLUZXGwFcpgLpWxWRn1QLnJY11BVymS7DyaSvbSKotNFQxyV6vghfM2Jetw1mLxU5qsQqDYnDYJjPZQSmkwxjX3yenPVCz6N2ox83tj9AuuQrzg5p2iukNdunDd2QCsHaMEtTq9JVLzXtWs2eZbPkxCBEQwoKTGGVhKu5yxZjCtQGc?vcid=tsandcsVC",
+													"issuer": "did:web:wizard.lab.gaia-x.eu:api:credentials:2d37wbGvQzbAQ84yRouh2m2vBKkN8s5AfH9Q75HZRCUQmJW7yAVSNKzjJj6gcjE2mDNDUHCichXWdMH3S2c8AaDLm3kXmf5R8DFPWTYo5iRYkn8kvgU3AjMXc2qTbhuMHCpucKGgT1ZMkcHUygZkt11iD3T8VJNKYwsdk4MGoZwdqoFUuTKVcsXVTBA4ofD1Dtqzjavyng5WUpvJf4gRyfGkMvYYuHCgay8TK8Dayt6Rhcs3r2d1gRCg2UV419S9CpWZGwKQNEXdYbaB2eTiNbQ83KMd4mj1oSJgF7LLDZLJtKJbhwLzR3x35QUqEGevRxnRDKoPdHrEZN7r9TVAmvr9rt7Xq8eB4zGMTza59hisEAUaHsmWQNaVDorqFyZgN5bXswMK1irVQ5SVR9osCCRrKUKkntxfakjmSqapPfveMP39vkgTXfEhsfLUZXGwFcpgLpWxWRn1QLnJY11BVymS7DyaSvbSKotNFQxyV6vghfM2Jetw1mLxU5qsQqDYnDYJjPZQSmkwxjX3yenPVCz6N2ox83tj9AuuQrzg5p2iukNdunDd2QCsHaMEtTq9JVLzXtWs2eZbPkxCBEQwoKTGGVhKu5yxZjCtQGc",
+													"issuanceDate": "2023-07-12T09:11:30.604Z",
+													"credentialSubject": {
+														"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+														"type": "gx:ServiceOfferingLabel",
+														"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service-offering-label-level.json",
+														"gx:assignedTo": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_hYfy.json",
+														"gx:criteria": {
+															"1.1.1": {
+																"evidence": {
+																	"pdf": "https://s3-path-of-evidence.pdf",
+																	"vc": "https://s3-path-of-evidence-vc.json",
+																	"website": "https://jsonblob.com/1134052383935815680"
+																},
+																"response": " Deny ",
+																"reason": "1.1.1 Reasoning"
+															},
+															"1.1.2": {
+																"evidence": {
+																	"pdf": {
+																		"buffer": {},
+																		"Modified": "2023-08-19T10:56:37.801Z",
+																		"name": "default_image_5.png",
+																		"type": "image/png",
+																		"size": 1649,
+																		"fileExtension": "png"
+																	},
+																	"vc": {
+																		"buffer": {},
+																		"Modified": "2023-08-19T12:32:38.169Z",
+																		"name": "eslintrc.json",
+																		"type": "application/json",
+																		"size": 156,
+																		"fileExtension": "json"
+																	},
+																	"website": ""
+																},
+																"response": " Not applicable",
+																"reason": "1.1.2 Reasoning"
+															},
+															"1.1.3": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": " Deny ",
+																"reason": ""
+															},
+															"1.1.4": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.2": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.3": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.4": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.5": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.6": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.7": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.8": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.9": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.2.10": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.3.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.3.2": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.3.3": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.3.4": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"1.3.5": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.1.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.1.2": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.1.3": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.2.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.2.2": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.2.3": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.2.4": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.2.5": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.2.6": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.2.7": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.3.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.3.2": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"2.3.3": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.2": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.3": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.4": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.5": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.6": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.7": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.8": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.9": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.10": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.11": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.12": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.13": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.14": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.15": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.16": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.17": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.18": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.19": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"3.1.20": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"4.1.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"4.1.2": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"5.1.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"5.1.2": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"5.1.3": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"5.1.4": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"5.1.5": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"5.1.6": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {},
+																	"website": ""
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"5.1.7": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															},
+															"5.2.1": {
+																"evidence": {
+																	"pdf": {},
+																	"vc": {}
+																},
+																"response": "Confirm ",
+																"reason": ""
+															}
+														},
+														"gx:labelLevel": 1
+													},
+													"proof": {
+														"type": "JsonWebSignature2020",
+														"created": "2023-08-21T12:03:29.744Z",
+														"proofPurpose": "assertionMethod",
+														"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..GTjbMHPjwRS4HA2sXncGqdxKEEH85z_aDlQdz7lSBeAQ3EIck9tcornqJIbM94TsCdoOL39gPWOnXOpg4qTSBgkLqowy3P0LB40VBlROCz5-isooeEmdCAmVevOearDQY3TaiV2e18QJIGTi52gtuvPlnBTJSHdffq2Kl2q-lka27nBXrN5Tc1L1zWfiN8Pi5pQbD38M2g78FRJxKYi2OoPCnuyYLQdzaU5GHfNqYH8vLAoeWyHBBdfdHe6Ryjl-UPX2epzzteczXixCfkGLtSrGxE9KLy4mDYv7K1BD3tj2WEFVI0W3hCjhQXrcoVuxehj5IckcHgSqsArTXtsLcg"
+													}
+												},
+												"completeSD": {}
+											},
+											"message": "Service offering SD signed successfully"
+										}
+									}
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {
@@ -962,6 +1610,609 @@
 				"properties": {
 					"logLevel": {
 						"type": "string"
+					}
+				}
+			},
+			"ComplineLLSchemaBody": {
+				"required": ["privateKey", "issuer", "verificationMethod", "vcs"],
+				"properties": {
+					"privateKey": {
+						"type": "string",
+						"example": "Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+					},
+					"issuer": {
+						"type": "string",
+						"example": "did:web:casio50.smart-x.smartsenselabs.com"
+					},
+					"verificationMethod": {
+						"type": "string",
+						"example": "did:web:casio50.smart-x.smartsenselabs.com"
+					},
+					"vcs": {
+						"type": "object",
+						"example": {
+							"labelLevel": {
+								"@context": [
+									"https://www.w3.org/2018/credentials/v1",
+									"https://w3id.org/security/suites/jws-2020/v1",
+									"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+								],
+								"type": ["VerifiableCredential"],
+								"id": "https://wizard.lab.gaia-x.eu/api/credentials/2d37wbGvQzbAQ84yRouh2m2vBKkN8s5AfH9Q75HZRCUQmJW7yAVSNKzjJj6gcjE2mDNDUHCichXWdMH3S2c8AaDLm3kXmf5R8DFPWTYo5iRYkn8kvgU3AjMXc2qTbhuMHCpucKGgT1ZMkcHUygZkt11iD3T8VJNKYwsdk4MGoZwdqoFUuTKVcsXVTBA4ofD1Dtqzjavyng5WUpvJf4gRyfGkMvYYuHCgay8TK8Dayt6Rhcs3r2d1gRCg2UV419S9CpWZGwKQNEXdYbaB2eTiNbQ83KMd4mj1oSJgF7LLDZLJtKJbhwLzR3x35QUqEGevRxnRDKoPdHrEZN7r9TVAmvr9rt7Xq8eB4zGMTza59hisEAUaHsmWQNaVDorqFyZgN5bXswMK1irVQ5SVR9osCCRrKUKkntxfakjmSqapPfveMP39vkgTXfEhsfLUZXGwFcpgLpWxWRn1QLnJY11BVymS7DyaSvbSKotNFQxyV6vghfM2Jetw1mLxU5qsQqDYnDYJjPZQSmkwxjX3yenPVCz6N2ox83tj9AuuQrzg5p2iukNdunDd2QCsHaMEtTq9JVLzXtWs2eZbPkxCBEQwoKTGGVhKu5yxZjCtQGc?vcid=tsandcsVC",
+								"issuer": "did:web:wizard.lab.gaia-x.eu:api:credentials:2d37wbGvQzbAQ84yRouh2m2vBKkN8s5AfH9Q75HZRCUQmJW7yAVSNKzjJj6gcjE2mDNDUHCichXWdMH3S2c8AaDLm3kXmf5R8DFPWTYo5iRYkn8kvgU3AjMXc2qTbhuMHCpucKGgT1ZMkcHUygZkt11iD3T8VJNKYwsdk4MGoZwdqoFUuTKVcsXVTBA4ofD1Dtqzjavyng5WUpvJf4gRyfGkMvYYuHCgay8TK8Dayt6Rhcs3r2d1gRCg2UV419S9CpWZGwKQNEXdYbaB2eTiNbQ83KMd4mj1oSJgF7LLDZLJtKJbhwLzR3x35QUqEGevRxnRDKoPdHrEZN7r9TVAmvr9rt7Xq8eB4zGMTza59hisEAUaHsmWQNaVDorqFyZgN5bXswMK1irVQ5SVR9osCCRrKUKkntxfakjmSqapPfveMP39vkgTXfEhsfLUZXGwFcpgLpWxWRn1QLnJY11BVymS7DyaSvbSKotNFQxyV6vghfM2Jetw1mLxU5qsQqDYnDYJjPZQSmkwxjX3yenPVCz6N2ox83tj9AuuQrzg5p2iukNdunDd2QCsHaMEtTq9JVLzXtWs2eZbPkxCBEQwoKTGGVhKu5yxZjCtQGc",
+								"issuanceDate": "2023-07-12T09:11:30.604Z",
+								"credentialSubject": {
+									"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+									"type": "gx:ServiceOfferingLabel",
+									"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service-offering-label-level.json",
+									"gx:assignedTo": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_hYfy.json",
+									"gx:criteria": {
+										"1.1.1": {
+											"evidence": {
+												"pdf": "https://s3-path-of-evidence.pdf",
+												"vc": "https://s3-path-of-evidence-vc.json",
+												"website": "https://jsonblob.com/1134052383935815680"
+											},
+											"response": " Deny ",
+											"reason": "1.1.1 Reasoning"
+										},
+										"1.1.2": {
+											"evidence": {
+												"pdf": {
+													"buffer": {},
+													"Modified": "2023-08-19T10:56:37.801Z",
+													"name": "default_image_5.png",
+													"type": "image/png",
+													"size": 1649,
+													"fileExtension": "png"
+												},
+												"vc": {
+													"buffer": {},
+													"Modified": "2023-08-19T12:32:38.169Z",
+													"name": "eslintrc.json",
+													"type": "application/json",
+													"size": 156,
+													"fileExtension": "json"
+												},
+												"website": ""
+											},
+											"response": " Not applicable",
+											"reason": "1.1.2 Reasoning"
+										},
+										"1.1.3": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": " Deny ",
+											"reason": ""
+										},
+										"1.1.4": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.2": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.3": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.4": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.5": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.6": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.7": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.8": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.9": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.2.10": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.3.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.3.2": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.3.3": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.3.4": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"1.3.5": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.1.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.1.2": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.1.3": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.2.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.2.2": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.2.3": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.2.4": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.2.5": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.2.6": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.2.7": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.3.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.3.2": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"2.3.3": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.2": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.3": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.4": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.5": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.6": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.7": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.8": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.9": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.10": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.11": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.12": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.13": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.14": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.15": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.16": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.17": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.18": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.19": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"3.1.20": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"4.1.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"4.1.2": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"5.1.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"5.1.2": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"5.1.3": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"5.1.4": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"5.1.5": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"5.1.6": {
+											"evidence": {
+												"pdf": {},
+												"vc": {},
+												"website": ""
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"5.1.7": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										},
+										"5.2.1": {
+											"evidence": {
+												"pdf": {},
+												"vc": {}
+											},
+											"response": "Confirm ",
+											"reason": ""
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}

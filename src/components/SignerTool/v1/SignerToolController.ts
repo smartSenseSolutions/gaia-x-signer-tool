@@ -431,6 +431,58 @@ class SignerToolController {
 			})
 		}
 	}
+
+	LabelLevel = async (req: Request, res: Response): Promise<void> => {
+		try {
+			let { privateKey } = req.body
+			const {
+				verificationMethod,
+				issuer: issuerDID,
+				vcs: { labelLevel }
+			} = req.body
+
+			// Get DID document of issuer from issuer DID
+			const ddo = await Utils.getDDOfromDID(issuerDID, resolver)
+			if (!ddo) {
+				logger.error(__filename, 'ServiceOffering', `❌ DDO not found for given did: '${issuerDID}' in proof`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `DDO not found for given did: '${issuerDID}' in proof`
+				})
+				return
+			}
+
+			const { credentialSubject: labelLevelCS } = labelLevel
+
+			// Calculate LabelLevel
+			labelLevelCS['gx:labelLevel'] = await Utils.calcLabelLevel(labelLevelCS)
+			logger.debug(__filename, 'LabelLevel', '🔒 labelLevel calculated', req.custom.uuid)
+
+			// Extract certificate url from did document
+			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
+
+			// Decrypt private key(received in request) from base64 to raw string
+			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+
+			// Sign service offering self description with private key(received in request)
+			const proof = await Utils.addProof(jsonld, axios, jose, crypto, labelLevel, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
+			labelLevel.proof = proof
+
+			const completeSD = {
+				selfDescriptionCredential: labelLevel,
+				complianceCredential: {}
+			}
+			res.status(STATUS_CODES.OK).json({
+				data: completeSD,
+				message: AppMessages.LL_SIGN_SUCCESS
+			})
+		} catch (error) {
+			logger.error(__filename, 'LabelLevel', `❌ ${AppMessages.LL_SIGN_FAILED}`, req.custom.uuid, error)
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+				error: (error as Error).message,
+				message: AppMessages.LL_SIGN_FAILED
+			})
+		}
+	}
 }
 
 export default new SignerToolController()

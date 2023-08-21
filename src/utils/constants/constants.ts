@@ -34,7 +34,9 @@ export class AppMessages {
 	static readonly BAD_DATA = 'Bad data'
 	static readonly TRUST_INDEX_CALC_FAILED = 'Trust index calculation failed'
 	static readonly SD_SIGN_SUCCESS = 'Service offering SD signed successfully'
+	static readonly LL_SIGN_SUCCESS = 'Label Level SD signed successfully'
 	static readonly SD_SIGN_FAILED = 'Service offering SD signing failed'
+	static readonly LL_SIGN_FAILED = 'Label Level SD signing failed'
 	static readonly SD_SIGN_VALIDATION_FAILED = 'Service offering SD validation failed'
 	static readonly COMPLIANCE_CRED_FOUND_FAILED = 'Compliance Credential not found'
 	static readonly PARTICIPANT_VC_INVALID = 'Verifiable Credential not valid'
@@ -48,6 +50,7 @@ export const ROUTES = {
 	V1_APIS: {
 		LEGAL_PARTICIPANT: '/gaia-x/legal-participant',
 		SERVICE_OFFERING: '/gaia-x/service-offering',
+		LABEL_LEVEL: '/gaia-x/label-level',
 		VERIFY: '/gaia-x/verify',
 		CREATE_WEB_DID: '/create-web-did',
 		GET_TRUST_INDEX: '/get/trust-index'

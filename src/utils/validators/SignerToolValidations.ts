@@ -23,6 +23,12 @@ class SignerToolValidation {
 		body('verificationMethod').not().isEmpty().trim().escape(),
 		body('vcs.resource').isObject()
 	]
+	LabelLevel = [
+		body('privateKey').not().isEmpty().trim().escape(),
+		body('issuer').not().isEmpty().trim().escape(),
+		body('verificationMethod').not().isEmpty().trim().escape(),
+		body('vcs.labelLevel').isObject()
+	]
 	Verify = [
 		body('policies')
 			.exists()

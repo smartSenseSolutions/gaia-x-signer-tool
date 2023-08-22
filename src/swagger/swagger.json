@@ -398,8 +398,8 @@
 		},
 		"/v1/get/trust-index": {
 			"post": {
-				"summary": "Calculation of Trust index, Veracity & Transperency",
-				"description": "Calculates Trust index, Veracity & Transperency using holder VC and self description of service offering",
+				"summary": "Calculation of Trust index, Veracity & Transparency",
+				"description": "Calculates Trust index, Veracity & Transparency using holder VC and self description of service offering",
 				"requestBody": {
 					"required": true,
 					"content": {

@@ -525,6 +525,7 @@ class SignerToolController {
 			try {
 				certificate = (await axios.get(x5uURL)).data as string
 			} catch (e) {
+				console.error(e)
 				res.status(STATUS_CODES.UNPROCESSABLE_ENTITY).json({
 					error: `x5u URL not resolved: ${x5uURL}`,
 					message: AppMessages.DID_FAILED
@@ -546,6 +547,7 @@ class SignerToolController {
 				message: AppMessages.DID_SUCCESS
 			})
 		} catch (e) {
+			console.error(e)
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.DID_FAILED

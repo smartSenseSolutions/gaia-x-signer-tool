@@ -683,6 +683,21 @@ class Utils {
 			}
 		}
 	}
+	/**
+	 * @formula trust_index = mean(veracity, transparency)
+	 * @dev takes the veracity and transparency as input and calculates trust index
+	 * @param veracity Veracity value
+	 * @param transparency Transparency value
+	 * @returns number - Trust index value
+	 */
+	calcLabelLevel = (credentialSubject: any): number => {
+		for (const labelLevelKey in credentialSubject) {
+			if (Object.prototype.hasOwnProperty.call(credentialSubject, labelLevelKey)) {
+				/* empty */
+			}
+		}
+		return 1
+	}
 }
 
 export default new Utils()

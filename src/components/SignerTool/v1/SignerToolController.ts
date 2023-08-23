@@ -26,14 +26,32 @@ class SignerToolController {
 
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
-				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
+				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}'`, req.custom.uuid)
 				res.status(STATUS_CODES.BAD_REQUEST).json({
-					error: `DDO not found for given did: '${issuer}' in proof`
+					error: `DDO not found for given did: '${issuer}'`,
+					message: AppMessages.VP_FAILED
 				})
 				return
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
+			if (!x5u) {
+				logger.error(__filename, 'GXLegalParticipant', AppMessages.X5U_NOT_FOUND, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.X5U_NOT_FOUND,
+					message: AppMessages.VP_FAILED
+				})
+				return
+			}
 			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			if (!privateKey) {
+				logger.error(__filename, 'GXLegalParticipant', AppMessages.PK_DECRYPT_FAIL, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.PK_DECRYPT_FAIL,
+					message: AppMessages.VP_FAILED
+				})
+				return
+			}
+
 			// privateKey = process.env.PRIVATE_KEY
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
 			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)

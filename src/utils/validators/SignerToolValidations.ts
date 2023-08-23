@@ -4,9 +4,9 @@ import { AppConst } from '../constants'
 
 class SignerToolValidation {
 	GXLegalParticipant = [
+		body('privateKey').not().isEmpty().trim().escape(),
 		body('issuer').not().isEmpty().trim().escape(),
 		body('verificationMethod').not().isEmpty().trim().escape(),
-		body('privateKey').not().isEmpty().trim().escape(),
 		body('vcs.legalParticipant').isObject(),
 		body('vcs.legalRegistrationNumber').isObject(),
 		body('vcs.gaiaXTermsAndConditions').isObject()

@@ -121,6 +121,31 @@ describe('commonFunction Testing', () => {
 
 			jest.resetAllMocks()
 		})
+
+		it('error in axios while fetching certificate', async () => {
+			const mockHolderDDO = JSON.parse(JSON.stringify(holderDdoJson))
+
+			jest.spyOn(Utils, 'getDDOfromDID').mockResolvedValue({ ...mockHolderDDO })
+			jest.spyOn(axios, 'get').mockImplementation(async () => {
+				throw new Error('Fail to fetch certificate')
+			})
+			const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
+			const holderCred = JSON.parse(JSON.stringify(mockParticipantJson.selfDescriptionCredential.verifiableCredential[0]))
+			const proof = JSON.parse(JSON.stringify(holderCred.proof))
+			let isError = false
+
+			try {
+				await Utils.verification(holderCred, proof, false, resolver)
+			} catch (error) {
+				isError = true
+
+				expect((error as Error).message).toBe(`fail to fetch x5u certificate`)
+			}
+			expect(isError).toBe(true)
+
+			jest.resetAllMocks()
+		})
+
 		it('certificate not found', async () => {
 			const mockHolderDDO = JSON.parse(JSON.stringify(holderDdoJson))
 

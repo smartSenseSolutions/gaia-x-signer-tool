@@ -247,9 +247,23 @@ class SignerToolController {
 
 			// Extract certificate url from did document
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
+			if (!x5u) {
+				logger.error(__filename, 'ServiceOffering', AppMessages.X5U_NOT_FOUND, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.X5U_NOT_FOUND
+				})
+				return
+			}
 
 			// Decrypt private key(received in request) from base64 to raw string
 			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			if (!privateKey) {
+				logger.error(__filename, 'ServiceOffering', AppMessages.PK_DECRYPT_FAIL, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.PK_DECRYPT_FAIL
+				})
+				return
+			}
 
 			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
@@ -617,7 +631,7 @@ class SignerToolController {
 			// Get DID document of issuer from issuer DID
 			const ddo = await Utils.getDDOfromDID(issuerDID, resolver)
 			if (!ddo) {
-				logger.error(__filename, 'ServiceOffering', `❌ DDO not found for given did: '${issuerDID}' in proof`, req.custom.uuid)
+				logger.error(__filename, 'LabelLevel', `❌ DDO not found for given did: '${issuerDID}' in proof`, req.custom.uuid)
 				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `DDO not found for given did: '${issuerDID}' in proof`
 				})
@@ -625,6 +639,13 @@ class SignerToolController {
 			}
 
 			const { credentialSubject: labelLevelCS } = labelLevel
+			if (!labelLevelCS) {
+				logger.error(__filename, 'LabelLevel', AppMessages.CS_EMPTY, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.CS_EMPTY
+				})
+				return
+			}
 
 			// Calculate LabelLevel
 			labelLevelCS['gx:labelLevel'] = await Utils.calcLabelLevel(labelLevelCS)
@@ -632,9 +653,23 @@ class SignerToolController {
 
 			// Extract certificate url from did document
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
+			if (!x5u) {
+				logger.error(__filename, 'LabelLevel', AppMessages.X5U_NOT_FOUND, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.X5U_NOT_FOUND
+				})
+				return
+			}
 
 			// Decrypt private key(received in request) from base64 to raw string
 			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			if (!privateKey) {
+				logger.error(__filename, 'LabelLevel', AppMessages.PK_DECRYPT_FAIL, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.PK_DECRYPT_FAIL
+				})
+				return
+			}
 
 			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, labelLevel, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)

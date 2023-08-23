@@ -39,6 +39,9 @@ export class AppMessages {
 	static readonly LL_SIGN_SUCCESS = 'Label Level SD signed successfully'
 	static readonly SD_SIGN_FAILED = 'Service offering SD signing failed'
 	static readonly LL_SIGN_FAILED = 'Label Level SD signing failed'
+	static readonly X5U_NOT_FOUND = 'X5U not found from the holder DID'
+	static readonly CS_EMPTY = 'Credential subject not found'
+	static readonly PK_DECRYPT_FAIL = 'Fail to decrypt primary key'
 	static readonly SD_SIGN_VALIDATION_FAILED = 'Service offering SD validation failed'
 	static readonly COMPLIANCE_CRED_FOUND_FAILED = 'Compliance Credential not found'
 	static readonly PARTICIPANT_VC_INVALID = 'Verifiable Credential not valid'
@@ -58,5 +61,77 @@ export const ROUTES = {
 		CREATE_WEB_DID: '/create-web-did',
 		VERIFY_WEB_DID: '/verify-web-did',
 		GET_TRUST_INDEX: '/get/trust-index'
+	}
+}
+
+export const LABEL_LEVEL_RULE = {
+	1: {
+		'P1.1.1': 'Confirm',
+		'P1.1.2': 'Confirm',
+		'P1.1.3': 'Confirm',
+		'P1.1.4': 'Confirm',
+		'P1.1.5': 'Confirm',
+		'P1.2.1': 'Confirm',
+		'P1.2.2': 'Confirm',
+		'P1.2.3': 'Confirm',
+		'P1.2.4': 'Confirm',
+		'P1.2.5': 'Confirm',
+		'P1.2.6': 'Confirm',
+		'P1.2.7': 'Confirm',
+		'P1.2.8': 'Confirm',
+		'P1.2.9': 'Confirm',
+		'P1.2.10': 'Confirm',
+		'P1.3.1': 'Confirm',
+		'P1.3.2': 'Confirm',
+		'P1.3.3': 'Confirm',
+		'P1.3.4': 'Confirm',
+		'P1.3.5': 'Confirm',
+		'P2.1.1': 'Confirm',
+		'P2.1.2': 'Confirm',
+		'P2.1.3': 'Confirm',
+		'P2.2.1': 'Confirm',
+		'P2.2.2': 'Confirm',
+		'P2.2.3': 'Confirm',
+		'P2.2.4': 'Confirm',
+		'P2.2.5': 'Confirm',
+		'P2.2.6': 'Confirm',
+		'P2.2.7': 'Confirm',
+		'P2.3.1': 'Confirm',
+		'P2.3.2': 'Confirm',
+		'P2.3.3': 'Confirm',
+		'P3.1.1': 'Confirm',
+		'P3.1.2': 'Confirm',
+		'P3.1.3': 'Confirm',
+		'P3.1.4': 'Confirm',
+		'P3.1.5': 'Confirm',
+		'P3.1.6': 'Confirm',
+		'P3.1.7': 'Confirm',
+		'P3.1.8': 'Confirm',
+		'P3.1.9': 'Confirm',
+		'P3.1.10': 'Confirm',
+		'P3.1.11': 'Confirm',
+		'P3.1.12': 'Confirm',
+		'P3.1.13': 'Confirm',
+		'P3.1.14': 'Confirm',
+		'P3.1.15': 'Confirm',
+		'P3.1.16': 'Confirm',
+		'P3.1.17': 'Confirm',
+		'P3.1.18': 'Confirm',
+		'P3.1.19': 'Confirm'
+	},
+	2: {
+		'P3.1.20': 'Confirm',
+		'P4.1.1': 'Confirm',
+		'P4.1.2': 'Confirm',
+		'P5.1.1': 'Confirm'
+	},
+	3: {
+		'P5.1.2': 'Confirm',
+		'P5.1.3': 'Confirm',
+		'P5.1.4': 'Confirm',
+		'P5.1.5': 'Confirm',
+		'P5.1.6': 'Confirm',
+		'P5.1.7': 'Confirm',
+		'P5.2.1': 'Confirm'
 	}
 }

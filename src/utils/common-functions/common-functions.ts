@@ -588,10 +588,18 @@ class Utils {
 				throw new Error('x5u not found in ddo')
 			}
 			// get the SSL certificates from x5u url
-			const certificates = (await axios.get(x5u))?.data as string
+			let certificates
+			try {
+				certificates = (await axios.get(x5u))?.data as string
+			} catch (error) {
+				logger.error(__filename, 'verification', 'error in fetching certificate', '', { error: error })
+				throw new Error('fail to fetch x5u certificate')
+			}
+
 			if (!certificates) {
 				throw new Error('ssl certificate not found')
 			}
+
 			if (checkSSLwithRegistry) {
 				// signature check against Gaia-x registry
 				const registryRes = await this.validateSslFromRegistryWithUri(x5u, axios)

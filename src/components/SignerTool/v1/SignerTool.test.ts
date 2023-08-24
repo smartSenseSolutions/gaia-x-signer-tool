@@ -1092,24 +1092,19 @@ describe('/gaia-x/legal-participant', () => {
 					})
 				jest.resetAllMocks()
 			})
-			// it('fail to get getPublicKeys', async () => {
-			// 	jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
-			// 		return { didDocument: holderDdoJson }
-			// 	})
-			// 	const { validReqJSON: validJSON } = legalParticipantTestJSON
-			// 	const error = {
-			// 		error: AppMessages.PK_DECRYPT_FAIL,
-			// 		message: AppMessages.VP_FAILED
-			// 	}
-			// 	await supertest(app)
-			// 		.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
-			// 		.send(validJSON)
-			// 		.expect((response) => {
-			// 			expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
-			// 			expect(response.body).toEqual(error)
-			// 		})
-			// 	jest.resetAllMocks()
-			// })
+			it('internal server error', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				const { validReqJSON: validJSON } = legalParticipantTestJSON
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
+					.send({ ...validJSON })
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+					})
+				jest.resetAllMocks()
+			})
 		})
 	})
 	describe('Positive scenarios', () => {

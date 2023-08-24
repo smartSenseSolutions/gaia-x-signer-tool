@@ -42,17 +42,10 @@ class SignerToolController {
 				})
 				return
 			}
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
-			if (!privateKey) {
-				logger.error(__filename, 'GXLegalParticipant', AppMessages.PK_DECRYPT_FAIL, req.custom.uuid)
-				res.status(STATUS_CODES.BAD_REQUEST).json({
-					error: AppMessages.PK_DECRYPT_FAIL,
-					message: AppMessages.VP_FAILED
-				})
-				return
-			}
 
+			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
 			// privateKey = process.env.PRIVATE_KEY
+
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
 			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
 
@@ -102,11 +95,13 @@ class SignerToolController {
 			const selfDescription = Utils.createVP(vcs)
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
 			// const complianceCredential = vcs
-			if (complianceCredential) {
-				logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
-			} else {
-				logger.error(__filename, 'GXLegalParticipant', '❌ SD signing failed (compliance service)', req.custom.uuid)
-			}
+
+			logger.info(
+				__filename,
+				'GXLegalParticipant',
+				complianceCredential ? '🔒 SD signed successfully (compliance service)' : '❌ SD signing failed (compliance service)',
+				req.custom.uuid
+			)
 
 			// // await publisherService.publishVP(complianceCredential);
 			const completeSD = {

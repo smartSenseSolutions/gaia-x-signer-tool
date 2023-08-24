@@ -4,7 +4,7 @@ import * as jose from 'jose'
 import jsonld from 'jsonld'
 
 import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
-import { AppConst, AppMessages } from '../constants'
+import { AppConst, AppMessages, LABEL_LEVEL_RULE } from '../constants'
 import { logger } from '../logger'
 
 class Utils {
@@ -354,7 +354,7 @@ class Utils {
 		logger.info(__filename, 'addProof', `📈 Hashed canonized SD ${hash}`, '')
 
 		const proof = await this.createProof(jose, verificationMethod, rsaAlso, hash, privateKey)
-		logger.info(__filename, 'addProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', '')
+		logger.info(__filename, 'addProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', x5uURL)
 
 		const certificate = (await axios.get(x5uURL)).data as string
 		const publicKeyJwk = await this.generatePublicJWK(jose, rsaAlso, certificate, x5uURL)
@@ -698,13 +698,28 @@ class Utils {
 	 * @param transparency Transparency value
 	 * @returns number - Trust index value
 	 */
-	calcLabelLevel = (credentialSubject: any): number => {
-		for (const labelLevelKey in credentialSubject) {
-			if (Object.prototype.hasOwnProperty.call(credentialSubject, labelLevelKey)) {
-				/* empty */
+	calcLabelLevel = (credentialSubject: any): string => {
+		let resultLabelLevel = ''
+
+		// Label level response by user
+		const criteria = credentialSubject['gx:criteria']
+
+		// Constant Rules
+		for (const labelLevel in LABEL_LEVEL_RULE) {
+			// Rule of Specific label level
+			const levelRules = LABEL_LEVEL_RULE[labelLevel]
+			// Iterate level rules
+			for (const rulePoint of levelRules) {
+				const { response } = criteria[rulePoint]
+				// Loop will break if any single response found not confirmed and will return last label level
+				if (response !== 'Confirm') {
+					return resultLabelLevel
+				}
 			}
+			resultLabelLevel = labelLevel
 		}
-		return 1
+
+		return resultLabelLevel
 	}
 }
 

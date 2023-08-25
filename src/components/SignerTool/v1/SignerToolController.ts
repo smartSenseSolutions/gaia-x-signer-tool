@@ -643,9 +643,6 @@ class SignerToolController {
 				issuer: issuerDID,
 				vcs: { labelLevel }
 			} = req.body
-
-			console.log(JSON.stringify(req.body))
-
 			// Get DID document of issuer from issuer DID
 			const ddo = await Utils.getDDOfromDID(issuerDID, resolver)
 			if (!ddo) {

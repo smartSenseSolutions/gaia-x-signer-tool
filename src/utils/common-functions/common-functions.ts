@@ -196,14 +196,16 @@ class Utils {
 
 	async normalize(jsonld: any, payload: object) {
 		try {
+			console.log('===========>', jsonld, payload)
 			const canonized = await jsonld.canonize(payload, {
 				algorithm: 'URDNA2015',
 				format: 'application/n-quads'
 			})
+			console.log('===========>', canonized)
 			if (canonized === '') throw new Error('Canonized SD is empty')
 			return canonized
 		} catch (error) {
-			logger.error(__filename, 'normalize', `❌ Canonizing failed | Error: ${error}`, '')
+			logger.error(__filename, 'normalize', `❌ Canonizing failed | Error: ${error}`, '', error)
 			return undefined
 		}
 	}
@@ -345,7 +347,6 @@ class Utils {
 		rsaAlso: string,
 		x5uURL: string
 	) {
-		console.log(jsonld, verifiableCredential)
 		const canonizedSD = await this.normalize(
 			jsonld,
 			// eslint-disable-next-line

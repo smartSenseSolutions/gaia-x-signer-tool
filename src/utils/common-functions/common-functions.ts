@@ -196,12 +196,10 @@ class Utils {
 
 	async normalize(jsonld: any, payload: object) {
 		try {
-			console.log('===========>', jsonld, payload)
 			const canonized = await jsonld.canonize(payload, {
 				algorithm: 'URDNA2015',
 				format: 'application/n-quads'
 			})
-			console.log('===========>', canonized)
 			if (canonized === '') throw new Error('Canonized SD is empty')
 			return canonized
 		} catch (error) {

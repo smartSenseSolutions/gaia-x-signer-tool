@@ -1,7 +1,3 @@
-import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
-import Utils from '../../../utils/common-functions'
-import { AppConst, AppMessages } from '../../../utils/constants'
-import { logger } from '../../../utils/logger'
 import axios from 'axios'
 import crypto, { createHash } from 'crypto'
 import { Resolver } from 'did-resolver'
@@ -10,6 +6,11 @@ import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
+
+import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
+import Utils from '../../../utils/common-functions'
+import { AppConst, AppMessages } from '../../../utils/constants'
+import { logger } from '../../../utils/logger'
 
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
@@ -118,7 +119,6 @@ class SignerToolController {
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e: any) {
-			console.log(JSON.stringify(e))
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED
@@ -227,7 +227,6 @@ class SignerToolController {
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e: any) {
-			console.log(JSON.stringify(e))
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED
@@ -644,6 +643,8 @@ class SignerToolController {
 				issuer: issuerDID,
 				vcs: { labelLevel }
 			} = req.body
+
+			console.log(JSON.stringify(req.body))
 
 			// Get DID document of issuer from issuer DID
 			const ddo = await Utils.getDDOfromDID(issuerDID, resolver)

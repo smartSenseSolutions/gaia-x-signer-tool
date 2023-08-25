@@ -41,6 +41,8 @@ export class AppMessages {
 	static readonly LL_SIGN_FAILED = 'Label Level SD signing failed'
 	static readonly X5U_NOT_FOUND = 'X5U not found from the holder DID'
 	static readonly CS_EMPTY = 'Credential subject not found'
+	static readonly LABEL_LEVEL_CALC_FAILED = 'Failed to calculate label level'
+	static readonly LABEL_LEVEL_CALC_FAILED_INVALID_KEY = 'Rule point key not found in criteria json - '
 	static readonly PK_DECRYPT_FAIL = 'Fail to decrypt primary key'
 	static readonly SD_SIGN_VALIDATION_FAILED = 'Service offering SD validation failed'
 	static readonly COMPLIANCE_CRED_FOUND_FAILED = 'Compliance Credential not found'
@@ -68,7 +70,6 @@ export const LABEL_LEVEL_RULE: any = {
 		'P1.1.1',
 		'P1.1.3',
 		'P1.1.4',
-		'P1.1.5',
 		'P1.2.1',
 		'P1.2.2',
 		'P1.2.3',

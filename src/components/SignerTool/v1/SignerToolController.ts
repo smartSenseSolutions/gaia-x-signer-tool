@@ -1,3 +1,7 @@
+import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
+import Utils from '../../../utils/common-functions'
+import { AppConst, AppMessages } from '../../../utils/constants'
+import { logger } from '../../../utils/logger'
 import axios from 'axios'
 import crypto, { createHash } from 'crypto'
 import { Resolver } from 'did-resolver'
@@ -6,11 +10,6 @@ import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
-
-import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
-import Utils from '../../../utils/common-functions'
-import { AppConst, AppMessages } from '../../../utils/constants'
-import { logger } from '../../../utils/logger'
 
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
@@ -666,7 +665,15 @@ class SignerToolController {
 			}
 
 			// Calculate LabelLevel
-			labelLevelCS['gx:labelLevel'] = await Utils.calcLabelLevel(labelLevelCS)
+			const labelLevelResult = await Utils.calcLabelLevel(labelLevelCS)
+			if (labelLevelResult === '') {
+				logger.error(__filename, 'LabelLevel', AppMessages.LABEL_LEVEL_CALC_FAILED, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.LABEL_LEVEL_CALC_FAILED
+				})
+				return
+			}
+			labelLevelCS['gx:labelLevel'] = labelLevelResult
 			logger.debug(__filename, 'LabelLevel', '🔒 labelLevel calculated', req.custom.uuid)
 
 			// Extract certificate url from did document

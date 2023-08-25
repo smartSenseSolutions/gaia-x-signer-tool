@@ -345,6 +345,7 @@ class Utils {
 		rsaAlso: string,
 		x5uURL: string
 	) {
+		console.log(jsonld, verifiableCredential)
 		const canonizedSD = await this.normalize(
 			jsonld,
 			// eslint-disable-next-line
@@ -711,7 +712,6 @@ class Utils {
 			const levelRules = LABEL_LEVEL_RULE[labelLevel]
 			// Iterate level rules
 			for (const rulePoint of levelRules) {
-				console.log(rulePoint)
 				// eslint-disable-next-line no-prototype-builtins
 				if (criteria.hasOwnProperty(rulePoint)) {
 					const { response } = criteria[rulePoint]

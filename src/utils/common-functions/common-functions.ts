@@ -671,9 +671,10 @@ class Utils {
 			const endpoint = process.env.COMPLIANCE_SERVICE as string
 			const { data } = await axios.post(endpoint, reqData)
 			return data
-		} catch (error) {
-			logger.error(__filename, 'callServiceOfferingCompliance', 'error while calling service compliance', '', (error as Error).message)
-			throw error
+		} catch (error: any) {
+			const { data } = error['response']
+			logger.error(__filename, 'callServiceOfferingCompliance', 'error while calling service compliance', '')
+			throw data
 		}
 	}
 
@@ -710,10 +711,17 @@ class Utils {
 			const levelRules = LABEL_LEVEL_RULE[labelLevel]
 			// Iterate level rules
 			for (const rulePoint of levelRules) {
-				const { response } = criteria[rulePoint]
-				// Loop will break if any single response found not confirmed and will return last label level
-				if (response !== 'Confirm') {
-					return resultLabelLevel
+				console.log(rulePoint)
+				// eslint-disable-next-line no-prototype-builtins
+				if (criteria.hasOwnProperty(rulePoint)) {
+					const { response } = criteria[rulePoint]
+					// Loop will break if any single response found not confirmed and will return last label level
+					if (response !== 'Confirm') {
+						return resultLabelLevel
+					}
+				} else {
+					logger.error(__filename, 'LabelLevel', AppMessages.LABEL_LEVEL_CALC_FAILED_INVALID_KEY + rulePoint, '')
+					throw new Error(AppMessages.LABEL_LEVEL_CALC_FAILED_INVALID_KEY + rulePoint)
 				}
 			}
 			resultLabelLevel = labelLevel

@@ -699,7 +699,7 @@ class Utils {
 	 * @param transparency Transparency value
 	 * @returns number - Trust index value
 	 */
-	calcLabelLevel = (credentialSubject: any): string => {
+	calcLabelLevel = (credentialSubject: any) => {
 		let resultLabelLevel = ''
 
 		// Label level response by user

@@ -707,7 +707,7 @@ class SignerToolController {
 				message: AppMessages.LL_SIGN_SUCCESS
 			})
 		} catch (error) {
-			logger.error(__filename, 'LabelLevel', `❌ ${AppMessages.LL_SIGN_FAILED}`, req.custom.uuid, error)
+			logger.error(__filename, 'LabelLevel', `❌ ${AppMessages.LL_SIGN_FAILED}`, req.custom.uuid, '')
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.LL_SIGN_FAILED

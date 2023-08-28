@@ -7,7 +7,15 @@ import app from '../../../app'
 import Utils from '../../../utils/common-functions'
 import { AppMessages, ROUTES } from '../../../utils/constants'
 
-import { participantJson, holderDdoJson, ServiceOfferingParticipantJson, serviceOfferingTestJSON, legalParticipantTestJSON, legalRegistrationNumberJson } from '../../../assets'
+import {
+	participantJson,
+	holderDdoJson,
+	ServiceOfferingParticipantJson,
+	serviceOfferingTestJSON,
+	legalParticipantTestJSON,
+	legalRegistrationNumberJson,
+	labelLevelTestJSON
+} from '../../../assets'
 import axios from 'axios'
 const exampleCertificate = process.env.SSL_CERTIFICATE as string
 
@@ -32,7 +40,12 @@ jest.mock('../../../utils/common-functions', () => {
 		},
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		getDDOfromDID: (did: string, resolver: any) => {
-			if (did == 'did:web:greenworld.proofsense.in') return { didDocument: holderDdoJson }
+			if (did == 'did:web:ferrari.smart-x.smartsenselabs.com') {
+				const { holderDid } = labelLevelTestJSON
+				return { didDocument: holderDid }
+			} else if (did == 'did:web:greenworld.proofsense.in') {
+				return { didDocument: holderDdoJson }
+			}
 		},
 		generatePublicJWK: () => {
 			return {}
@@ -59,16 +72,19 @@ jest.mock('../../../utils/common-functions', () => {
 			return veracityResponse
 		},
 		calcTransparency: () => {
-			return 1
+			return 1.6
 		},
 		calcTrustIndex: () => {
-			return 0.625
+			return 0.925
 		},
 		generateDID: () => {
 			return {}
 		},
 		issueRegistrationNumberVC: () => {
 			return legalRegistrationNumberJson
+		},
+		calcLabelLevel: () => {
+			return 'L1'
 		}
 	}
 })
@@ -219,44 +235,44 @@ describe('/v1/gaia-x/verify', () => {
 
 				jest.resetAllMocks()
 			})
-			/* it('compliance credential invalid', async () => {
-				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
-					const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
-					delete mockParticipantJson.complianceCredential
-					return { ...mockParticipantJson }
-				})
-				const body = validBody
-				const error = {
-					error: `Compliance Credential not found`,
-					message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
-				}
-				await supertest(app)
-					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
-					.send(body)
-					.expect((response) => {
-						console.log(response.body,)
-						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
-						expect(response.body).toEqual(error)
-					})
+			// it('compliance credential invalid', async () => {
+			// 	jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
+			// 		const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
+			// 		delete mockParticipantJson.complianceCredential
+			// 		return { ...mockParticipantJson }
+			// 	})
+			// 	const body = validBody
+			// 	const error = {
+			// 		error: `Compliance Credential not found`,
+			// 		message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
+			// 	}
+			// 	await supertest(app)
+			// 		.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
+			// 		.send(body)
+			// 		.expect((response) => {
+			// 			console.log(response.body,)
+			// 			expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+			// 			expect(response.body).toEqual(error)
+			// 		})
 
-				jest.resetAllMocks()
+			// 	jest.resetAllMocks()
 
-				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
-					const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
-					delete mockParticipantJson.complianceCredential.proof
+			// 	jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
+			// 		const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
+			// 		delete mockParticipantJson.complianceCredential.proof
 
-					return { ...mockParticipantJson }
-				})
+			// 		return { ...mockParticipantJson }
+			// 	})
 
-				await supertest(app)
-					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
-					.send(body)
-					.expect((response) => {
-						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
-						expect(response.body).toEqual(error)
-					})
-				jest.resetAllMocks()
-			}) */
+			// 	await supertest(app)
+			// 		.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
+			// 		.send(body)
+			// 		.expect((response) => {
+			// 			expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+			// 			expect(response.body).toEqual(error)
+			// 		})
+			// 	jest.resetAllMocks()
+			// })
 			it('type invalid in selfDescription', async () => {
 				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
 					const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
@@ -945,7 +961,7 @@ describe('/gaia-x/service-offering', () => {
 		})
 	})
 	describe('Positive scenarios', () => {
-		it('fail to calculate transparency', async () => {
+		it('Service offering compliance success', async () => {
 			jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
 				const { validSOComplianceResponse } = serviceOfferingTestJSON
 				return validSOComplianceResponse
@@ -1128,6 +1144,102 @@ describe('/gaia-x/legal-participant', () => {
 			await supertest(app)
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
 				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+	})
+})
+
+describe('/gaia-x/label-level', () => {
+	describe('Negative scenarios', () => {
+		describe('Validation checks', () => {
+			it('Empty request body', async () => {
+				const error = {
+					error: "Invalid value of param 'privateKey'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid issuer value', async () => {
+				const { invalidIssuerJSON } = labelLevelTestJSON
+				const error = {
+					error: "Invalid value of param 'issuer'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(invalidIssuerJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid verification method value', async () => {
+				const { invalidVerificationMethodJSON } = labelLevelTestJSON
+				const error = {
+					error: "Invalid value of param 'verificationMethod'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(invalidVerificationMethodJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid labelLevel object', async () => {
+				const { invalidLabelLevel } = labelLevelTestJSON
+				const error = {
+					error: "Invalid value of param 'vcs.labelLevel'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(invalidLabelLevel)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+		})
+		describe('', () => {
+			it('fail to calculate labelLevel', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				jest.spyOn(Utils, 'calcLabelLevel').mockImplementation(() => {
+					throw new Error('Error while calculating labelLevel')
+				})
+				const { validReqJSON: validJSON } = labelLevelTestJSON
+				const error = {
+					error: 'Error while calculating labelLevel',
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+		})
+	})
+	describe('Positive scenarios', () => {
+		it('Label Level success', async () => {
+			const { validReqJSON } = labelLevelTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+				.send(validReqJSON)
 				.expect((response) => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
 				})

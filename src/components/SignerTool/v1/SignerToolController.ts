@@ -427,7 +427,9 @@ class SignerToolController {
 
 						for (const vc of participantJson.selfDescriptionCredential.verifiableCredential) {
 							const integrityHash = `sha256-${createHash('sha256').update(JSON.stringify(vc)).digest('hex')}`
-							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vc.credentialSubject.id)?.integrity
+							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vc.credentialSubject.id)[
+								'gx:integrity'
+							]
 							const integrityCheck = integrityHash === credIntegrityHash
 
 							if (!integrityCheck) {

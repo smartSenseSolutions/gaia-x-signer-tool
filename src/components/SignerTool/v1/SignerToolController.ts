@@ -119,7 +119,6 @@ class SignerToolController {
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e: any) {
-			console.log(JSON.stringify(e))
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED
@@ -228,7 +227,6 @@ class SignerToolController {
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e: any) {
-			console.log(JSON.stringify(e))
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED
@@ -647,7 +645,6 @@ class SignerToolController {
 				issuer: issuerDID,
 				vcs: { labelLevel }
 			} = req.body
-
 			// Get DID document of issuer from issuer DID
 			const ddo = await Utils.getDDOfromDID(issuerDID, resolver)
 			if (!ddo) {
@@ -668,7 +665,15 @@ class SignerToolController {
 			}
 
 			// Calculate LabelLevel
-			labelLevelCS['gx:labelLevel'] = await Utils.calcLabelLevel(labelLevelCS)
+			const labelLevelResult = await Utils.calcLabelLevel(labelLevelCS)
+			if (labelLevelResult === '') {
+				logger.error(__filename, 'LabelLevel', AppMessages.LABEL_LEVEL_CALC_FAILED, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.LABEL_LEVEL_CALC_FAILED
+				})
+				return
+			}
+			labelLevelCS['gx:labelLevel'] = labelLevelResult
 			logger.debug(__filename, 'LabelLevel', '🔒 labelLevel calculated', req.custom.uuid)
 
 			// Extract certificate url from did document
@@ -704,7 +709,7 @@ class SignerToolController {
 				message: AppMessages.LL_SIGN_SUCCESS
 			})
 		} catch (error) {
-			logger.error(__filename, 'LabelLevel', `❌ ${AppMessages.LL_SIGN_FAILED}`, req.custom.uuid, error)
+			logger.error(__filename, 'LabelLevel', `❌ ${AppMessages.LL_SIGN_FAILED}`, req.custom.uuid, '')
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.LL_SIGN_FAILED

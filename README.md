@@ -1,19 +1,20 @@
-# Smart-X-Signer by smartSense
+# Gaia-X-Signer-Tool by smartSense
 
-This tool is to showcase the capability of smartSense in context with the Gaia-X ecosystem.
-This MVP covers below use cases:
+This tool is useful to onboard into the Gaia-X ecosystem.
 
-1. Create Web Decentralized Identifiers(did)
-2. On-boarding in Gaia-x
-   1. Create a legal participant
-   2. Create a service offer
-3. Create a Verifiable credential
-4. Create a Verifiable presentation
-5. Verify a Verifiable credentials and Verifiable presentations
+This App covers below use cases:
+
+1. Create Web Decentralized Identifiers(DID)
+2. Verify Web Decentralized Identifiers(DID)
+3. Create a legal participant
+4. Create a service offer
+5. Create a resource
+6. Create a label-level
+7. Verify a Self-Description
 
 ## Run application
 
-change node version 16.13.1
+change node version 18.17.0
 
 ```bash
 mv env-example .env
@@ -31,33 +32,37 @@ npm run dev
 
 ### Create a Web DID
 
-- First you will need a domain setup for whihc you want to create a did.
-- You will also need a ssl certificate setup for the same domain.
-- You certificate chain should be accessible at "https://${your-domain}/.well-known/x509CertificateChain.pem"
+- First User will need a domain setup for which you want to create a did.
+- User will also need a ssl certificate setup for the same domain.
+- User certificate chain should be accessible at your provided url else system will fetch from "https://your-domain/.well-known/x509CertificateChain.pem" or "https://domain/tenant/x509CertificateChain.pem"
 - The create did api will make a did.json for the provided domain name.
-- You will have to host this did.json on "https://${your-domain}/.well-known/did.json"
+- User will have to host this did.json on "https://your-domain/.well-known/did.json" or "https://domain/tenant/did.json"
 
 ![Create Web DID Flow](docs/create-did.png?raw=true)
 
-### onBoardToGaiax
+### Verify a Web DID
+- User need to provide web did, verification method and private key for verify
+- System will resolve did.json from provided did
+- System will find provided verification method in did.json
+- System will sign sample text with private key
+- After that system will verify sample text hash with verification method
+- System will share result of verification
 
-- We have two templateId supported to make Gaia-x compliant credentials (LegalParticipant & ServiceOffering)
-- You can request for either of this credentials
-- The tool will make these credentials and also fetch Gaia-x compliance credentials for the same.
+![Verify Web DID Flow](docs/verify-web-did.png?raw=true)
+### Sign VC and Compliance to Gaia-X
+- User will share vcs with issuer, verification method and private key
+- System will fetch all depended vcs 
+- System will sign vcs
+- System will also verify signature with verification method
+- System will req for compliance credentials with all vcs
+- Compliance service will response with compliance credential
+- System will return self-description vcs and compliance credential to user
+-  User will have to host this self-description vcs and compliance credential at credential subject id url which is mentioned in requested vc.
 
-![onBoardToGaiax](docs/onBoardToGaiax.png?raw=true)
 
-### Create a Verifiable presentation
+![onBoardToGaiax](docs/issue-creds.png?raw=true)
 
-- An array of claims (VCs) along with private key URL and holder DID are taken as request parameters.
-
-- The claims are individually verified using the process described below for verification of verifiable credential and verifiable presentation.
-
-- If the claims are valid, a signed Verifiable Presentaion object is returned using the provided private key. The verified claims are signed and the proof is attached in the presentation.
-
-![createVP](docs/create-vp.png?raw=true)
-
-### Verify a Verifiable credentials and Verifiable presentations
+### Verify a Self Description with Compliance Credential
 
 - A verifiable credential or a verifiable presentation is passed as a request parameter for verification.
 
@@ -73,4 +78,5 @@ npm run dev
 
 ## Known issue or improvement
 
-1. Only allowed templates are available for VC and VP.
+1. Resource Compliance support pending
+2. Label-level Compliance support pending 

@@ -108,7 +108,6 @@ class SignerToolController {
 				logger.error(__filename, 'GXLegalParticipant', '❌ SD signing failed (compliance service)', req.custom.uuid)
 			}
 
-			// // await publisherService.publishVP(complianceCredential);
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
 				complianceCredential: complianceCredential
@@ -216,7 +215,6 @@ class SignerToolController {
 				logger.error(__filename, 'GXLegalParticipant', '❌ SD signing failed (compliance service)', req.custom.uuid)
 			}
 
-			// // await publisherService.publishVP(complianceCredential);
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
 				complianceCredential: complianceCredential

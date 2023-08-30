@@ -1,4 +1,4 @@
-# CreateDID FLow
+# Create Web DID FLow
 
 ```
 @startuml
@@ -8,17 +8,29 @@
 "User" <-- "Signer tool": generated web did
 @enduml
 ```
-
-# onBoardToGaiaX FLow
+# Verify Web DID FLow
 
 ```
 @startuml
-"User" -> "Signer tool": request for creds
-"Signer tool" -> "Signer tool": Generate Credential json according to the templateId
+"User" -> "Signer tool": verify web DID request
+"Signer tool" -> "DID Domain": Get did.json
+"Signer tool" <-- "DID Domain": did.json
+"Signer tool" -> "Signer tool": Sign sample text with private key
+"Signer tool" -> "Signer tool": Verify sample text hash with verification method
+"User" <-- "Signer tool": result verify web DID
+@enduml
+```
+
+# Sign VC and Compliance to Gaia-X
+
+```
+@startuml
+"User" -> "Signer tool": request creds with issuer, verification method and private key
+"Signer tool" -> "Signer tool": Fetch depended credentials and combined all vcs
 group "Self-sign the credential and attach a proof"
 "Signer tool" -> "Signer tool": Normalize the credential
 "Signer tool" -> "Signer tool": Hash the credential
-"Signer tool" -> "Signer tool": Sign the credential with Private Key from pre-signed url
+"Signer tool" -> "Signer tool": Sign the credential with Private Key
 end
 group "Verify the proof"
 "Signer tool" -> "Signer tool": Fetch certificate chain from x5u URL
@@ -27,30 +39,7 @@ group "Verify the proof"
 end
 "Signer tool" -> "Gaia-x Compliance": req for compliance credential
 "Signer tool" <-- "Gaia-x Compliance": complianceCredential issued
-"User" <-- "Signer tool": the whole Self-description with proof and complianceCredential
-@enduml
-```
-
-# create-VP FLow
-
-```
-@startuml
-"User" -> "Signer tool": create VP request
-group "verify all the incomming claims"
-loop
-"Signer tool" -> "Signer tool": Fetch the DDO from did in proof
-"Signer tool" -> "Signer tool": Fetch the certificates from x5u from DDO(Public key)
-"Signer tool" -> "Gaia-x Registry": Validate the certificates against registry
-"Signer tool" <-- "Gaia-x Registry": Validation status
-"Signer tool" -> "Signer tool": match public key from DDO and certificates of x5u
-"Signer tool" -> "Signer tool": Normalize,Hash & verify signature
-end
-end
-group "create VP"
-"Signer tool" -> "Signer tool": Create VP obj
-"Signer tool" -> "Signer tool": Normalize, Hash and Sign the VP
-end
-"User" <-- "Signer tool": generated VP
+"User" <-- "Signer tool": Send Self-description with proof and Compliance Credential
 @enduml
 ```
 

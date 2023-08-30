@@ -6,22 +6,26 @@ This App covers below use cases:
 
 1. Create Web Decentralized Identifiers(DID)
 2. Verify Web Decentralized Identifiers(DID)
-3. Create a legal participant
-4. Create a service offer
-5. Create a resource
-6. Create a label-level
-7. Verify a Self-Description
+3. Create a legal participant on Gaia-X
+4. Create a service offer on Gaia-X
+5. Create a resource on Gaia-X
+6. Create a label-level on Gaia-X
+7. Verify a Self-Description and Gaia-X Compliance Credential
 
 ## Run application
 
-change node version 18.17.0
+change node version to 18.17.0
 
 ```bash
-mv env-example .env
+cp env-example .env
 npm ci
 npm run dev
 ```
 
+## Open Swagger Doc
+```bash
+http://localhost:8000/docs/
+```
 ## Tools and Technologies
 
 1. NodeJS
@@ -50,7 +54,7 @@ npm run dev
 
 ![Verify Web DID Flow](docs/verify-web-did.png?raw=true)
 ### Sign VC and Compliance to Gaia-X
-- User will share vcs with issuer, verification method and private key
+- User will request vcs with issuer, verification method and private key
 - System will fetch all depended vcs 
 - System will sign vcs
 - System will also verify signature with verification method
@@ -62,19 +66,13 @@ npm run dev
 
 ![onBoardToGaiax](docs/issue-creds.png?raw=true)
 
-### Verify a Self Description with Compliance Credential
-
-- A verifiable credential or a verifiable presentation is passed as a request parameter for verification.
-
-- The passed object is verified by initially checking the proof type is valid. The DDO is resolved from the verification method and the public key is retreived from the DDO.
-
-- The certificate chain which is retreived from x5u in the public key is checked to ensure that the issuer is GaiaX Trust anchor. Also, the public key of the certificate and DDO are ensured to be the same.
-
-- Afterward the verification of credential is performed by canonizing the credential followed by hashing using the public key of the issuer. The hash is added in place of `..` in the proof, verified and decoded using the public key of the issuer. If the decoded result is the same as the proof, the passed credential/ presentation is valid.
-
-- If a verifiable presentation is passed, the claims in the presentation are also verified similarly.
-
-![verify-signature](docs/verify-sig.png?raw=true)
+### Verify a Self Description and Compliance Credential
+- User will request with vc url and policies
+- System will validate vc type with allowed types (gx:LegalParticipant,gx:ServiceOffering,gx:VirtualDataResource,gx:PhysicalResource,gx:VirtualSoftwareResource) 
+- System will validate policy with allowed policies (integrityCheck,issuerSignature,complianceSignature,complianceCheck,complianceExpired)
+- After that system will check each policy individually
+- System will share result of verification
+![verify-signature](docs/verify-vc.png?raw=true)
 
 ## Known issue or improvement
 

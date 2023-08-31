@@ -1,28 +1,46 @@
 # Gaia-X-Signer-Tool by smartSense
 
-This tool is useful to onboard into the Gaia-X ecosystem.
+The Gaia-X-Signer-Tool by smartSense is a powerful application designed to facilitate seamless onboarding into the Gaia-X ecosystem. This tool empowers users to interact with the Gaia-X framework through a variety of essential use cases.
 
-This App covers below use cases:
+## Use Cases
 
-1. Create Web Decentralized Identifiers(DID)
-2. Verify Web Decentralized Identifiers(DID)
-3. Create a legal participant on Gaia-X
-4. Create a service offer on Gaia-X
-5. Create a resource on Gaia-X
-6. Create a label-level on Gaia-X
-7. Verify a Self-Description and Gaia-X Compliance Credential
+The Gaia-X-Signer-Tool covers the following vital use cases:
 
-## Run application
+1. **Create Web Decentralized Identifiers (DID):** Generate decentralized identifiers for web domains, enabling easy integration with the Gaia-X ecosystem.
 
-change node version to 18.17.0
+2. **Verify Web Decentralized Identifiers (DID):** Verify the authenticity of web-based decentralized identifiers, ensuring robust data security.
 
+3. **Create Legal Participants on Gaia-X:** Streamline the process of registering legal participants within the Gaia-X network.
+
+4. **Create Service Offers on Gaia-X:** Effortlessly create and manage service offerings as integral components of the Gaia-X ecosystem.
+
+5. **Create Resources on Gaia-X:** Simplify the creation and management of resources within the dynamic Gaia-X environment.
+
+6. **Create Label Levels on Gaia-X:** Generate label levels to enhance categorization and organization within the Gaia-X ecosystem.
+
+7. **Verify Self-Description and Gaia-X Compliance:** Verify the credibility of self-descriptions within Gaia-X and assess Gaia-X Compliance Credentials.
+
+## Getting Started
+
+To run the Gaia-X-Signer-Tool application, follow these steps:
+
+1. Make sure you have Node.js version 18.17.0 installed.
+
+2. Copy the example environment file and configure your environment settings:
+   
 ```bash
 cp env-example .env
-npm ci
-npm run dev
 ```
 
-## Open Swagger Doc
+3. Install the required dependencies:
+```bash
+npm ci
+```
+4. Launch the development server:
+```bash
+npm run dev
+```
+5. Access Swagger Documentation
 ```bash
 http://localhost:8000/docs/
 ```
@@ -30,7 +48,7 @@ http://localhost:8000/docs/
 
 1. NodeJS
 2. ExpressJS
-3. Swagger API Doc
+3. Swagger Doc
 
 ## Flow
 

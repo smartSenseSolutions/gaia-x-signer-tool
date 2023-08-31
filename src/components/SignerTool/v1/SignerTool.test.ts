@@ -862,6 +862,39 @@ describe('/gaia-x/service-offering', () => {
 					})
 				jest.resetAllMocks()
 			})
+			it('DDO not found for given did', async () => {
+				const { invalidReqJSON } = serviceOfferingTestJSON
+				const error = {
+					error: "DDO not found for given did: 'did:web:suzuki.smart-x.smartsenselabs.com' in proof",
+					message: AppMessages.SD_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(invalidReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('X5U not found from the holder DID', async () => {
+				jest.spyOn(Utils, 'getPublicKeys').mockImplementation(async () => {
+					return { x5u: '', publicKeyJwk: '' }
+				})
+				const { validReqJSON } = serviceOfferingTestJSON
+				const error = {
+					error: AppMessages.X5U_NOT_FOUND,
+					message: AppMessages.SD_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(validReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
 			it('fail to call service offering compliance service', async () => {
 				jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
 					throw new Error('error while calling compliance service')
@@ -1211,6 +1244,72 @@ describe('/gaia-x/label-level', () => {
 			})
 		})
 		describe('', () => {
+			it('DDO not found for given did', async () => {
+				const { invalidReqJSON } = labelLevelTestJSON
+				const error = {
+					error: "DDO not found for given did: 'did:web:suzuki.smart-x.smartsenselabs.com' in proof",
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(invalidReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('Credential subject not found', async () => {
+				const { emptyCSReqJSON } = labelLevelTestJSON
+				const error = {
+					error: AppMessages.CS_EMPTY,
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(emptyCSReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('Label level value can not be empty', async () => {
+				jest.spyOn(Utils, 'calcLabelLevel').mockImplementation(() => {
+					return ''
+				})
+				const { validReqJSON } = labelLevelTestJSON
+				const error = {
+					error: AppMessages.LABEL_LEVEL_CALC_FAILED,
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(validReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('X5U not found from the holder DID', async () => {
+				jest.spyOn(Utils, 'getPublicKeys').mockImplementation(async () => {
+					return { x5u: '', publicKeyJwk: '' }
+				})
+				const { validReqJSON } = labelLevelTestJSON
+				const error = {
+					error: AppMessages.X5U_NOT_FOUND,
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(validReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
 			it('fail to calculate labelLevel', async () => {
 				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
 					return { didDocument: holderDdoJson }

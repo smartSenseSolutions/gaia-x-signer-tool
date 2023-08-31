@@ -8,7 +8,7 @@ dotenv.config()
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
 
-const exampleCertificate = process.env.SSL_CERTIFICATE as string
+const exampleCertificate = 'Sample Certificate'
 
 describe('commonFunction Testing', () => {
 	describe('verification', () => {

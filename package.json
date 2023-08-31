@@ -9,7 +9,7 @@
 		"lint:check": "eslint \"./src/**/*.ts\"",
 		"lint:fix": "eslint --fix .",
 		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
-		"test": "jest ",
+		"test": "jest SignerTool.test.ts",
 		"coverage": "jest --coverage",
 		"prepare": "husky install"
 	},

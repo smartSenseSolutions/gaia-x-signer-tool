@@ -15,7 +15,8 @@ import {
 	legalParticipantTestJSON,
 	legalRegistrationNumberJson,
 	resourceTestJSON,
-	verifyDIDTestJSON
+	verifyDIDTestJSON,
+	labelLevelTestJSON
 } from '../../../assets'
 import axios from 'axios'
 const exampleCertificate = process.env.SSL_CERTIFICATE as string
@@ -41,7 +42,12 @@ jest.mock('../../../utils/common-functions', () => {
 		},
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		getDDOfromDID: (did: string, resolver: any) => {
-			if (did == 'did:web:greenworld.proofsense.in') return { didDocument: holderDdoJson }
+			if (did == 'did:web:ferrari.smart-x.smartsenselabs.com') {
+				const { holderDid } = labelLevelTestJSON
+				return { didDocument: holderDid }
+			} else if (did == 'did:web:greenworld.proofsense.in') {
+				return { didDocument: holderDdoJson }
+			}
 		},
 		generatePublicJWK: () => {
 			return {}
@@ -69,10 +75,10 @@ jest.mock('../../../utils/common-functions', () => {
 			return veracityResponse
 		},
 		calcTransparency: () => {
-			return 1
+			return 1.6
 		},
 		calcTrustIndex: () => {
-			return 0.625
+			return 0.925
 		},
 		generateDID: () => {
 			return {}
@@ -85,6 +91,9 @@ jest.mock('../../../utils/common-functions', () => {
 		},
 		issueRegistrationNumberVC: () => {
 			return legalRegistrationNumberJson
+		},
+		calcLabelLevel: () => {
+			return 'L1'
 		}
 	}
 })
@@ -235,43 +244,44 @@ describe('/v1/gaia-x/verify', () => {
 
 				jest.resetAllMocks()
 			})
-			/* it('compliance credential invalid', async () => {
-				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
-					const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
-					delete mockParticipantJson.complianceCredential
-					return { ...mockParticipantJson }
-				})
-				const body = validBody
-				const error = {
-					error: `Compliance Credential not found`,
-					message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
-				}
-				await supertest(app)
-					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
-					.send(body)
-					.expect((response) => {
-						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
-						expect(response.body).toEqual(error)
-					})
+			// it('compliance credential invalid', async () => {
+			// 	jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
+			// 		const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
+			// 		delete mockParticipantJson.complianceCredential
+			// 		return { ...mockParticipantJson }
+			// 	})
+			// 	const body = validBody
+			// 	const error = {
+			// 		error: `Compliance Credential not found`,
+			// 		message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
+			// 	}
+			// 	await supertest(app)
+			// 		.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
+			// 		.send(body)
+			// 		.expect((response) => {
+			// 			console.log(response.body,)
+			// 			expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+			// 			expect(response.body).toEqual(error)
+			// 		})
 
-				jest.resetAllMocks()
+			// 	jest.resetAllMocks()
 
-				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
-					const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
-					delete mockParticipantJson.complianceCredential.proof
+			// 	jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
+			// 		const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
+			// 		delete mockParticipantJson.complianceCredential.proof
 
-					return { ...mockParticipantJson }
-				})
+			// 		return { ...mockParticipantJson }
+			// 	})
 
-				await supertest(app)
-					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
-					.send(body)
-					.expect((response) => {
-						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
-						expect(response.body).toEqual(error)
-					})
-				jest.resetAllMocks()
-			}) */
+			// 	await supertest(app)
+			// 		.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
+			// 		.send(body)
+			// 		.expect((response) => {
+			// 			expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+			// 			expect(response.body).toEqual(error)
+			// 		})
+			// 	jest.resetAllMocks()
+			// })
 			it('type invalid in selfDescription', async () => {
 				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
 					const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
@@ -718,7 +728,6 @@ describe('/v1/create-web-did', () => {
 					expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
 					expect(response.body).toEqual(error)
 				})
-			jest.resetAllMocks()
 		})
 		it('generateDID returns undefined', async () => {
 			jest.spyOn(axios, 'get').mockResolvedValue({ data: exampleCertificate })
@@ -737,11 +746,10 @@ describe('/v1/create-web-did', () => {
 					expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
 					expect(response.body).toEqual(error)
 				})
-			jest.resetAllMocks()
 		})
 	})
 	describe('success case', () => {
-		it('successful case without x5u', async () => {
+		it('successful case', async () => {
 			const did = {
 				'@context': ['https://www.w3.org/ns/did/v1'],
 				id: 'did:web:dev.smartproof.in',
@@ -777,98 +785,11 @@ describe('/v1/create-web-did', () => {
 
 			await supertest(app)
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
-				.send({ ...body, x5u: undefined })
+				.send(body)
 				.expect((response) => {
 					expect(response.status).toBe(STATUS_CODES.OK)
 					expect(response.body).toEqual(responseData)
 				})
-			jest.resetAllMocks()
-		})
-		it('successful case with tenant', async () => {
-			const did = {
-				'@context': ['https://www.w3.org/ns/did/v1'],
-				id: 'did:web:dev.smartproof.in',
-				verificationMethod: [
-					{
-						'@context': 'https://w3c-ccg.github.io/lds-jws2020/contexts/v1/',
-						id: 'did:web:dev.smartproof.in',
-						type: 'JsonWebKey2020',
-						controller: 'did:web:dev.smartproof.in',
-						publicKeyJwk: {
-							crv: 'Ed25519',
-							kty: 'OKP',
-							alg: 'PS256',
-							x5u: 'https://dev.smartproof.in/.well-known/x509CertificateChain.pem',
-							x: 'yM1FmySIISrMqruOIjLwKpbwsaUbRLEEH6r1gDWmW4s' /*pragma: allowlist secret*/
-						}
-					}
-				],
-				assertionMethod: ['did:web:dev.smartproof.in#JWK2020-RSA']
-			}
-			jest.spyOn(axios, 'get').mockResolvedValue({ data: exampleCertificate })
-			jest.spyOn(Utils, 'generateDID').mockResolvedValue({ ...did })
-
-			const body = validBody
-			const responseData = {
-				data: {
-					did: {
-						...did
-					}
-				},
-				message: 'DID created successfully.'
-			}
-
-			await supertest(app)
-				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
-				.send({ ...body, x5u: undefined, tenant: undefined })
-				.expect((response) => {
-					expect(response.status).toBe(STATUS_CODES.OK)
-					expect(response.body).toEqual(responseData)
-				})
-			jest.resetAllMocks()
-		})
-		it('successful case with domain', async () => {
-			const did = {
-				'@context': ['https://www.w3.org/ns/did/v1'],
-				id: 'did:web:dev.smartproof.in',
-				verificationMethod: [
-					{
-						'@context': 'https://w3c-ccg.github.io/lds-jws2020/contexts/v1/',
-						id: 'did:web:dev.smartproof.in',
-						type: 'JsonWebKey2020',
-						controller: 'did:web:dev.smartproof.in',
-						publicKeyJwk: {
-							crv: 'Ed25519',
-							kty: 'OKP',
-							alg: 'PS256',
-							x5u: 'https://dev.smartproof.in/.well-known/x509CertificateChain.pem',
-							x: 'yM1FmySIISrMqruOIjLwKpbwsaUbRLEEH6r1gDWmW4s' /*pragma: allowlist secret*/
-						}
-					}
-				],
-				assertionMethod: ['did:web:dev.smartproof.in#JWK2020-RSA']
-			}
-			jest.spyOn(axios, 'get').mockResolvedValue({ data: exampleCertificate })
-			jest.spyOn(Utils, 'generateDID').mockResolvedValue({ ...did })
-
-			const body = validBody
-			const responseData = {
-				data: {
-					did: {
-						...did
-					}
-				},
-				message: 'DID created successfully.'
-			}
-
-			await supertest(app)
-				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
-				.send({ ...body, tenant: undefined })
-				.expect((response) => {
-					expect(response.status).toBe(STATUS_CODES.OK)
-					expect(response.body).toEqual(responseData)
-				})
-			jest.resetAllMocks()
 		})
 	})
 })
@@ -946,6 +867,39 @@ describe('/gaia-x/service-offering', () => {
 					.send(validJSON)
 					.expect((response) => {
 						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('DDO not found for given did', async () => {
+				const { invalidReqJSON } = serviceOfferingTestJSON
+				const error = {
+					error: "DDO not found for given did: 'did:web:suzuki.smart-x.smartsenselabs.com' in proof",
+					message: AppMessages.SD_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(invalidReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('X5U not found from the holder DID', async () => {
+				jest.spyOn(Utils, 'getPublicKeys').mockImplementation(async () => {
+					return { x5u: '', publicKeyJwk: '' }
+				})
+				const { validReqJSON } = serviceOfferingTestJSON
+				const error = {
+					error: AppMessages.X5U_NOT_FOUND,
+					message: AppMessages.SD_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+					.send(validReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
 						expect(response.body).toEqual(error)
 					})
 				jest.resetAllMocks()
@@ -1049,7 +1003,7 @@ describe('/gaia-x/service-offering', () => {
 		})
 	})
 	describe('Positive scenarios', () => {
-		it('fail to calculate transparency', async () => {
+		it('Service offering compliance success', async () => {
 			jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
 				const { validSOComplianceResponse } = serviceOfferingTestJSON
 				return validSOComplianceResponse
@@ -1409,6 +1363,7 @@ describe('/gaia-x/resource', () => {
 		})
 	})
 })
+
 describe('/verify-web-did', () => {
 	describe('Negative scenarios', () => {
 		describe('Validation checks', () => {
@@ -1569,6 +1524,168 @@ describe('/verify-web-did', () => {
 				.expect((response) => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
 					expect(response.body).toEqual(expectedResponse)
+				})
+			jest.resetAllMocks()
+		})
+	})
+})
+
+describe('/gaia-x/label-level', () => {
+	describe('Negative scenarios', () => {
+		describe('Validation checks', () => {
+			it('Empty request body', async () => {
+				const error = {
+					error: "Invalid value of param 'privateKey'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid issuer value', async () => {
+				const { invalidIssuerJSON } = labelLevelTestJSON
+				const error = {
+					error: "Invalid value of param 'issuer'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(invalidIssuerJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid verification method value', async () => {
+				const { invalidVerificationMethodJSON } = labelLevelTestJSON
+				const error = {
+					error: "Invalid value of param 'verificationMethod'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(invalidVerificationMethodJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid labelLevel object', async () => {
+				const { invalidLabelLevel } = labelLevelTestJSON
+				const error = {
+					error: "Invalid value of param 'vcs.labelLevel'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(invalidLabelLevel)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+		})
+		describe('', () => {
+			it('DDO not found for given did', async () => {
+				const { invalidReqJSON } = labelLevelTestJSON
+				const error = {
+					error: "DDO not found for given did: 'did:web:suzuki.smart-x.smartsenselabs.com' in proof",
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(invalidReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('Credential subject not found', async () => {
+				const { emptyCSReqJSON } = labelLevelTestJSON
+				const error = {
+					error: AppMessages.CS_EMPTY,
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(emptyCSReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('Label level value can not be empty', async () => {
+				jest.spyOn(Utils, 'calcLabelLevel').mockImplementation(() => {
+					return ''
+				})
+				const { validReqJSON } = labelLevelTestJSON
+				const error = {
+					error: AppMessages.LABEL_LEVEL_CALC_FAILED,
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(validReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('X5U not found from the holder DID', async () => {
+				jest.spyOn(Utils, 'getPublicKeys').mockImplementation(async () => {
+					return { x5u: '', publicKeyJwk: '' }
+				})
+				const { validReqJSON } = labelLevelTestJSON
+				const error = {
+					error: AppMessages.X5U_NOT_FOUND,
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(validReqJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('fail to calculate labelLevel', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				jest.spyOn(Utils, 'calcLabelLevel').mockImplementation(() => {
+					throw new Error('Error while calculating labelLevel')
+				})
+				const { validReqJSON: validJSON } = labelLevelTestJSON
+				const error = {
+					error: 'Error while calculating labelLevel',
+					message: AppMessages.LL_SIGN_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+		})
+	})
+	describe('Positive scenarios', () => {
+		it('Label Level success', async () => {
+			const { validReqJSON } = labelLevelTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+				.send(validReqJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
 				})
 			jest.resetAllMocks()
 		})

@@ -1747,6 +1747,31 @@ describe('/get/trust-index', () => {
 						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
 						expect(response.body).toEqual(error)
 					})
+				jest.resetAllMocks()
+			})
+			it('Invalid service offering self description url format', async () => {
+				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+					return true
+				})
+				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+					return false
+				})
+				const error = {
+					error: 'Invalid service offering self description url format',
+					message: 'Trust index calculation failed'
+				}
+				const request = {
+					participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
+					serviceOfferingSD: 'hps://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.send(request)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
 			})
 		})
 	})
@@ -1766,6 +1791,7 @@ describe('/get/trust-index', () => {
 					console.log(response.body)
 					expect(response.status).toBe(STATUS_CODES.OK)
 				})
+			jest.resetAllMocks()
 		})
 	})
 })

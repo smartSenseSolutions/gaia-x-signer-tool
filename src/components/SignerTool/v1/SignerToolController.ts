@@ -474,12 +474,18 @@ class SignerToolController {
 		try {
 			const { participantSD, serviceOfferingSD } = req.body
 			if (!Utils.IsValidURL(participantSD)) {
-				logger.error(__filename, 'GetTrustIndex', `❌ Invalid participant self description url format`, req.custom.uuid)
-				throw new Error('Invalid participant self description url format')
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: 'Invalid participant self description url format',
+					message: AppMessages.TRUST_INDEX_CALC_FAILED
+				})
+				return
 			}
 			if (!Utils.IsValidURL(serviceOfferingSD)) {
-				logger.error(__filename, 'GetTrustIndex', `❌ Invalid service offering self description url format`, req.custom.uuid)
-				throw new Error('Invalid service offering self description url format')
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: 'Invalid service offering self description url format',
+					message: AppMessages.TRUST_INDEX_CALC_FAILED
+				})
+				return
 			}
 
 			// get the json document of participant self description

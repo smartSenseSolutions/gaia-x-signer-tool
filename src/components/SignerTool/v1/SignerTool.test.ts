@@ -94,6 +94,9 @@ jest.mock('../../../utils/common-functions', () => {
 		},
 		calcLabelLevel: () => {
 			return 'L1'
+		},
+		IsValidURL: () => {
+			return true
 		}
 	}
 })
@@ -1688,6 +1691,81 @@ describe('/gaia-x/label-level', () => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
 				})
 			jest.resetAllMocks()
+		})
+	})
+})
+
+describe('/get/trust-index', () => {
+	describe('Negative scenarios', () => {
+		describe('Validation checks', () => {
+			it('Empty request body', async () => {
+				const error = {
+					error: "Invalid value of param 'participantSD'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+
+			it('serviceOfferingSD not found', async () => {
+				const request = {
+					participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json'
+				}
+				const error = {
+					error: "Invalid value of param 'serviceOfferingSD'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.send(request)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+
+			it('Invalid participant self description url format', async () => {
+				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+					return false
+				})
+				const error = {
+					error: 'Invalid participant self description url format',
+					message: 'Trust index calculation failed'
+				}
+				const request = {
+					participantSD: 'hpa://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
+					serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.send(request)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+			})
+		})
+	})
+	describe('Positive scenarios', () => {
+		it('Trust index calculated', async () => {
+			jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+				return true
+			})
+			const request = {
+				participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
+				serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+			}
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+				.send(request)
+				.expect((response) => {
+					console.log(response.body)
+					expect(response.status).toBe(STATUS_CODES.OK)
+				})
 		})
 	})
 })

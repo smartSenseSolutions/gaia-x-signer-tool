@@ -512,19 +512,14 @@ class Utils {
 		const optionalProps: string[] = ['gx:name', 'gx:dependsOn', 'gx:dataProtectionRegime']
 		const totalMandatoryProps = 5
 		let availOptProps = 0
-		try {
-			for (const optionalProp of optionalProps) {
-				// eslint-disable-next-line no-prototype-builtins
-				if (optionalProp in credentialSubject && credentialSubject[optionalProp]) {
-					availOptProps++
-				}
+		for (const optionalProp of optionalProps) {
+			// eslint-disable-next-line no-prototype-builtins
+			if (optionalProp in credentialSubject && credentialSubject[optionalProp]) {
+				availOptProps++
 			}
-			const transparency: number = (totalMandatoryProps + availOptProps) / totalMandatoryProps
-			return transparency
-		} catch (error) {
-			logger.error(__filename, 'calcTransparency', `❌ Error while calculating transparency :- error \n ${error}`, '')
-			throw error
 		}
+		const transparency: number = (totalMandatoryProps + availOptProps) / totalMandatoryProps
+		return transparency
 	}
 
 	/**
@@ -693,8 +688,7 @@ class Utils {
 		}
 	}
 	/**
-	 * @formula trust_index = mean(veracity, transparency)
-	 * @dev takes the veracity and transparency as input and calculates trust index
+	 * @dev This function will calculate label level using credencial
 	 * @param veracity Veracity value
 	 * @param transparency Transparency value
 	 * @returns number - Trust index value

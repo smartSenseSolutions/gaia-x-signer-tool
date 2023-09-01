@@ -1710,7 +1710,6 @@ describe('/get/trust-index', () => {
 						expect(response.body).toEqual(error)
 					})
 			})
-
 			it('serviceOfferingSD not found', async () => {
 				const request = {
 					participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json'
@@ -1727,7 +1726,6 @@ describe('/get/trust-index', () => {
 						expect(response.body).toEqual(error)
 					})
 			})
-
 			it('Invalid participant self description url format', async () => {
 				jest.spyOn(Utils, 'IsValidURL').mockImplementationOnce(() => {
 					return false
@@ -1770,6 +1768,78 @@ describe('/get/trust-index', () => {
 					})
 				jest.resetAllMocks()
 			})
+			it('DDO not found for given did: did:web:ferrari.smart-x.smartsenselabs.com in proof', async () => {
+				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+					return true
+				})
+				jest.spyOn(Utils, 'calcVeracity').mockImplementation(() => {
+					throw new Error(`DDO not found for given did: did:web:ferrari.smart-x.smartsenselabs.com in proof`)
+				})
+				const error = {
+					error: 'DDO not found for given did: did:web:ferrari.smart-x.smartsenselabs.com in proof',
+					message: 'Trust index calculation failed'
+				}
+				const request = {
+					participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
+					serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.send(request)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('Participant proof verification method and did verification method id not matched', async () => {
+				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+					return true
+				})
+				jest.spyOn(Utils, 'calcVeracity').mockImplementation(() => {
+					throw new Error('Participant proof verification method and did verification method id not matched')
+				})
+				const error = {
+					error: 'Participant proof verification method and did verification method id not matched',
+					message: 'Trust index calculation failed'
+				}
+				const request = {
+					participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
+					serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.send(request)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('Verifiable credential array not found in participant self description', async () => {
+				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+					return true
+				})
+				jest.spyOn(Utils, 'calcVeracity').mockImplementation(() => {
+					throw new Error('Verifiable credential array not found in participant self description')
+				})
+				const error = {
+					error: 'Verifiable credential array not found in participant self description',
+					message: 'Trust index calculation failed'
+				}
+				const request = {
+					participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
+					serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.send(request)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
 		})
 	})
 	describe('Positive scenarios', () => {
@@ -1785,7 +1855,6 @@ describe('/get/trust-index', () => {
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
 				.send(request)
 				.expect((response) => {
-					console.log(response.body)
 					expect(response.status).toBe(STATUS_CODES.OK)
 				})
 			jest.resetAllMocks()

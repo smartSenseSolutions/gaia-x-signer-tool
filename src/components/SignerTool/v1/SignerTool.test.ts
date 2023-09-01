@@ -96,7 +96,7 @@ jest.mock('../../../utils/common-functions', () => {
 			return 'L1'
 		},
 		IsValidURL: () => {
-			return true
+			return false
 		}
 	}
 })
@@ -1729,7 +1729,7 @@ describe('/get/trust-index', () => {
 			})
 
 			it('Invalid participant self description url format', async () => {
-				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+				jest.spyOn(Utils, 'IsValidURL').mockImplementationOnce(() => {
 					return false
 				})
 				const error = {
@@ -1750,11 +1750,8 @@ describe('/get/trust-index', () => {
 				jest.resetAllMocks()
 			})
 			it('Invalid service offering self description url format', async () => {
-				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+				jest.spyOn(Utils, 'IsValidURL').mockImplementationOnce(() => {
 					return true
-				})
-				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
-					return false
 				})
 				const error = {
 					error: 'Invalid service offering self description url format',

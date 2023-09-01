@@ -19,30 +19,30 @@ class Logging {
 		this.logger.error(`${uuid} - ${msg}`, data ? data : '', '')
 	}
 
-	public warn(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
-		this.setLabel(fileName, method)
-		this.logger.warn(`${uuid} - ${msg}`, data ? data : '', '')
-	}
+	// public warn(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
+	// 	this.setLabel(fileName, method)
+	// 	this.logger.warn(`${uuid} - ${msg}`, data ? data : '', '')
+	// }
 
 	public info(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
 		this.setLabel(fileName, method)
 		this.logger.info(`${uuid} - ${msg}`, data ? data : '', '')
 	}
 
-	public verbose(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
-		this.setLabel(fileName, method)
-		this.logger.verbose(`${uuid} - ${msg}`, data ? data : '', '')
-	}
+	// public verbose(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
+	// 	this.setLabel(fileName, method)
+	// 	this.logger.verbose(`${uuid} - ${msg}`, data ? data : '', '')
+	// }
 
 	public debug(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
 		this.setLabel(fileName, method)
 		this.logger.debug(`${uuid} - ${msg}`, data ? data : '', '')
 	}
 
-	public silly(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
-		this.setLabel(fileName, method)
-		this.logger.silly(`${uuid} - ${msg}`, data ? data : '', '')
-	}
+	// public silly(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
+	// 	this.setLabel(fileName, method)
+	// 	this.logger.silly(`${uuid} - ${msg}`, data ? data : '', '')
+	// }
 
 	public setFileLevel(level: string) {
 		this.logger.transports.file.level = level

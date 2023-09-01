@@ -21,7 +21,8 @@ class SignerToolValidation {
 		body('privateKey').not().isEmpty().trim().escape(),
 		body('issuer').not().isEmpty().trim().escape(),
 		body('verificationMethod').not().isEmpty().trim().escape(),
-		body('vcs.resource').isObject()
+		body('vcs.resource').isObject(),
+		body('vcs.resource.credentialSubject').isObject()
 	]
 	LabelLevel = [
 		body('privateKey').not().isEmpty().trim().escape(),
@@ -54,7 +55,7 @@ class SignerToolValidation {
 		body('services.*.serviceEndpoint').isURL().optional(),
 		body('services.*.type').not().isEmpty().trim().escape().optional()
 	]
-	VerifyWebDID = [body('did').not().isEmpty().trim().escape(), body('verificationMethod').not().isEmpty().trim().escape(), body('privateKey').not().isEmpty().trim().escape()]
+	VerifyWebDID = [body('privateKey').not().isEmpty().trim().escape(), body('did').not().isEmpty().trim().escape(), body('verificationMethod').not().isEmpty().trim().escape()]
 	TrustIndex = [body('participantSD').not().isEmpty().trim(), body('serviceOfferingSD').not().isEmpty().trim()]
 }
 export default new SignerToolValidation()

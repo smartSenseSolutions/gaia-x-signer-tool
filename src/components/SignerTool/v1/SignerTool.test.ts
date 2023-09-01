@@ -14,6 +14,8 @@ import {
 	serviceOfferingTestJSON,
 	legalParticipantTestJSON,
 	legalRegistrationNumberJson,
+	resourceTestJSON,
+	verifyDIDTestJSON,
 	labelLevelTestJSON
 } from '../../../assets'
 import axios from 'axios'
@@ -50,6 +52,7 @@ jest.mock('../../../utils/common-functions', () => {
 		generatePublicJWK: () => {
 			return {}
 		},
+		getInnerVCs: () => {},
 		getPublicKeys: () => {
 			const { verificationMethod } = holderDdoJson
 			const { publicKeyJwk } = verificationMethod[0]
@@ -80,11 +83,20 @@ jest.mock('../../../utils/common-functions', () => {
 		generateDID: () => {
 			return {}
 		},
+		sign: () => {
+			return { replace: function () {} }
+		},
+		verify: () => {
+			return true
+		},
 		issueRegistrationNumberVC: () => {
 			return legalRegistrationNumberJson
 		},
 		calcLabelLevel: () => {
 			return 'L1'
+		},
+		IsValidURL: () => {
+			return true
 		}
 	}
 })
@@ -1141,24 +1153,19 @@ describe('/gaia-x/legal-participant', () => {
 					})
 				jest.resetAllMocks()
 			})
-			// it('fail to get getPublicKeys', async () => {
-			// 	jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
-			// 		return { didDocument: holderDdoJson }
-			// 	})
-			// 	const { validReqJSON: validJSON } = legalParticipantTestJSON
-			// 	const error = {
-			// 		error: AppMessages.PK_DECRYPT_FAIL,
-			// 		message: AppMessages.VP_FAILED
-			// 	}
-			// 	await supertest(app)
-			// 		.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
-			// 		.send(validJSON)
-			// 		.expect((response) => {
-			// 			expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
-			// 			expect(response.body).toEqual(error)
-			// 		})
-			// 	jest.resetAllMocks()
-			// })
+			it('internal server error', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				const { validReqJSON: validJSON } = legalParticipantTestJSON
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
+					.send({ ...validJSON })
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+					})
+				jest.resetAllMocks()
+			})
 		})
 	})
 	describe('Positive scenarios', () => {
@@ -1179,6 +1186,347 @@ describe('/gaia-x/legal-participant', () => {
 				.send(validJSON)
 				.expect((response) => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+	})
+})
+
+describe('/gaia-x/resource', () => {
+	describe('Negative scenarios', () => {
+		describe('Validation checks', () => {
+			it('Empty request body', async () => {
+				const error = {
+					error: "Invalid value of param 'privateKey'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid issuer value', async () => {
+				const { invalidIssuerJSON } = resourceTestJSON
+				const error = {
+					error: "Invalid value of param 'issuer'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.send(invalidIssuerJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid verificationMethod value', async () => {
+				const { invalidVerificationMethodJSON } = resourceTestJSON
+				const error = {
+					error: "Invalid value of param 'verificationMethod'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.send(invalidVerificationMethodJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid resource object', async () => {
+				const { invalidResource } = resourceTestJSON
+				const error = {
+					error: "Invalid value of param 'vcs.resource'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.send(invalidResource)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid resource credential subject object', async () => {
+				const { invalidCredentialSubjectResource } = resourceTestJSON
+				const error = {
+					error: "Invalid value of param 'vcs.resource.credentialSubject'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.send(invalidCredentialSubjectResource)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid resource type', async () => {
+				const { invalidResourceType } = resourceTestJSON
+				const error = {
+					error: `VC with type 'gx:VirtualDataResource' or 'gx:PhysicalResource' or 'gx:VirtualSoftwareResource' not found!!`,
+					message: AppMessages.VP_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.send(invalidResourceType)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+		})
+		describe('Unresolvable links/data', () => {
+			it('fail to resolve issuer DDO', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return undefined
+				})
+				const { validVirtualDataResourceReqJSON: validJSON } = resourceTestJSON
+				const error = {
+					error: `DDO not found for given did: '${validJSON.issuer}'`,
+					message: AppMessages.VP_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('internal server error', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					throw Error('')
+				})
+				const { validVirtualDataResourceReqJSON: validJSON } = resourceTestJSON
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.send({ ...validJSON })
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+					})
+				jest.resetAllMocks()
+			})
+		})
+	})
+	describe('Positive scenarios', () => {
+		it('compliance validPhysicalResource', async () => {
+			// jest.spyOn(axios, 'post').mockImplementation(async () => {
+			// 	const { validComplianceResponse } = resourceTestJSON
+			// 	return validComplianceResponse
+			// })
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			const { validPhysicalResourceReqJSON: validJSON } = resourceTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+		it('compliance validVirtualDataResource', async () => {
+			// jest.spyOn(axios, 'post').mockImplementation(async () => {
+			// 	const { validComplianceResponse } = resourceTestJSON
+			// 	return validComplianceResponse
+			// })
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			const { validVirtualDataResourceReqJSON: validJSON } = resourceTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+		it('compliance validVirtualSoftwareResource', async () => {
+			// jest.spyOn(axios, 'post').mockImplementation(async () => {
+			// 	const { validComplianceResponse } = resourceTestJSON
+			// 	return validComplianceResponse
+			// })
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			const { validVirtualSoftwareResourceReqJSON: validJSON } = resourceTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+	})
+})
+
+describe('/verify-web-did', () => {
+	describe('Negative scenarios', () => {
+		describe('Validation checks', () => {
+			it('Empty request body', async () => {
+				const error = {
+					error: "Invalid value of param 'privateKey'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid did value', async () => {
+				const { invalidDidJSON } = verifyDIDTestJSON
+				const error = {
+					error: "Invalid value of param 'did'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+					.send(invalidDidJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+			it('Invalid verificationMethod value', async () => {
+				const { invalidVerificationMethodJSON } = verifyDIDTestJSON
+				const error = {
+					error: "Invalid value of param 'verificationMethod'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+					.send(invalidVerificationMethodJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+		})
+		describe('Unresolvable links/data', () => {
+			it('fail to resolve issuer DDO', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return undefined
+				})
+				const { validReq: validJSON } = verifyDIDTestJSON
+				const error = {
+					error: `DDO not found for given did: '${validJSON.did}'`,
+					message: AppMessages.DID_VERIFY_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('fail to find verification method', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				const { invalidReq: validJSON } = verifyDIDTestJSON
+				const error = {
+					error: `Verification Method not found in DDO: '${validJSON.verificationMethod}'`,
+					message: AppMessages.DID_VERIFY_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('internal server error', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					throw Error('')
+				})
+				const { validReq: validJSON } = verifyDIDTestJSON
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+					.send({ ...validJSON })
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.INTERNAL_SERVER_ERROR)
+					})
+				jest.resetAllMocks()
+			})
+		})
+	})
+	describe('Positive scenarios', () => {
+		it('validate did web with valid false', async () => {
+			const isValid = false
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			jest.spyOn(Utils, 'verify').mockImplementation(async () => {
+				return isValid
+			})
+			const expectedResponse = {
+				data: { isValid },
+				message: isValid ? AppMessages.DID_VERIFY : AppMessages.DID_VERIFY_FAILED
+			}
+			const { validReq: validJSON } = verifyDIDTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+					expect(response.body).toEqual(expectedResponse)
+				})
+			jest.resetAllMocks()
+		})
+		it('validate did web with valid with error', async () => {
+			const isValid = false
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			jest.spyOn(Utils, 'verify').mockImplementation(async () => {
+				throw Error()
+			})
+			const expectedResponse = {
+				data: { isValid },
+				message: isValid ? AppMessages.DID_VERIFY : AppMessages.DID_VERIFY_FAILED
+			}
+			const { validReq: validJSON } = verifyDIDTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+					expect(response.body).toEqual(expectedResponse)
+				})
+			jest.resetAllMocks()
+		})
+		it('validate did web with valid true', async () => {
+			const isValid = true
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			jest.spyOn(Utils, 'verify').mockImplementation(async () => {
+				return isValid
+			})
+			const expectedResponse = {
+				data: { isValid },
+				message: isValid ? AppMessages.DID_VERIFY : AppMessages.DID_VERIFY_FAILED
+			}
+			const { validReq: validJSON } = verifyDIDTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+					expect(response.body).toEqual(expectedResponse)
 				})
 			jest.resetAllMocks()
 		})
@@ -1343,6 +1691,81 @@ describe('/gaia-x/label-level', () => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
 				})
 			jest.resetAllMocks()
+		})
+	})
+})
+
+describe('/get/trust-index', () => {
+	describe('Negative scenarios', () => {
+		describe('Validation checks', () => {
+			it('Empty request body', async () => {
+				const error = {
+					error: "Invalid value of param 'participantSD'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+
+			it('serviceOfferingSD not found', async () => {
+				const request = {
+					participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json'
+				}
+				const error = {
+					error: "Invalid value of param 'serviceOfferingSD'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.send(request)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+
+			it('Invalid participant self description url format', async () => {
+				jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+					return false
+				})
+				const error = {
+					error: 'Invalid participant self description url format',
+					message: 'Trust index calculation failed'
+				}
+				const request = {
+					participantSD: 'hpa://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
+					serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+					.send(request)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+			})
+		})
+	})
+	describe('Positive scenarios', () => {
+		it('Trust index calculated', async () => {
+			jest.spyOn(Utils, 'IsValidURL').mockImplementation(() => {
+				return true
+			})
+			const request = {
+				participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
+				serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+			}
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)
+				.send(request)
+				.expect((response) => {
+					console.log(response.body)
+					expect(response.status).toBe(STATUS_CODES.OK)
+				})
 		})
 	})
 })

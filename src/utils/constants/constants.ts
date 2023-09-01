@@ -62,8 +62,10 @@ export const ROUTES = {
 		VERIFY: '/gaia-x/verify',
 		CREATE_WEB_DID: '/create-web-did',
 		VERIFY_WEB_DID: '/verify-web-did',
-		GET_TRUST_INDEX: '/get/trust-index'
-	}
+		GET_TRUST_INDEX: '/get/trust-index',
+		UPDATE_LOG: '/update-log'
+	},
+	HEALTH: '/health'
 }
 export const LABEL_LEVEL_RULE: any = {
 	BC: [

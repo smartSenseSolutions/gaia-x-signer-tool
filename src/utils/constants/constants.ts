@@ -14,7 +14,9 @@ export class AppMessages {
 	static readonly CLAIM_SIG_VERIFY_FAILED = 'Claim signature verification failed'
 	static readonly DID_SUCCESS = 'DID created successfully.'
 	static readonly DID_VERIFY = 'DID verified successfully.'
+	static readonly RN_VERIFY = 'Registration number verified successfully.'
 	static readonly DID_VERIFY_FAILED = 'DID verification failed.'
+	static readonly RN_VERIFY_FAILED = 'Registration number verification failed.'
 	static readonly DID_FAILED = 'DID creation failed.'
 	static readonly DID_VALIDATION = 'DID validation failed.'
 	static readonly KEYPAIR_VALIDATION = 'Key pair validation failed'
@@ -63,6 +65,7 @@ export const ROUTES = {
 		CREATE_WEB_DID: '/create-web-did',
 		VERIFY_WEB_DID: '/verify-web-did',
 		GET_TRUST_INDEX: '/get/trust-index',
+		REGISTRATION_NUMBER: '/gaia-x/validate-registration-number',
 		UPDATE_LOG: '/update-log'
 	},
 	HEALTH: '/health'

@@ -627,6 +627,31 @@ class SignerToolController {
 		}
 	}
 
+	ValidateRegistrationNumber = async (req: Request, res: Response): Promise<void> => {
+		try {
+			const { legalRegistrationNumber } = req.body
+			try {
+				const isValid = (await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)) ? true : false
+				res.status(STATUS_CODES.OK).json({
+					data: { isValid },
+					message: isValid ? AppMessages.RN_VERIFY : AppMessages.RN_VERIFY_FAILED
+				})
+			} catch (e: any) {
+				logger.error(__filename, 'ValidateRegistrationNumber', e.message, req.custom.uuid)
+				res.status(STATUS_CODES.OK).json({
+					data: { isValid: false },
+					message: AppMessages.RN_VERIFY_FAILED
+				})
+			}
+		} catch (e: any) {
+			logger.error(__filename, 'ValidateRegistrationNumber', e.message, req.custom.uuid)
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+				error: (e as Error).message,
+				message: AppMessages.RN_VERIFY_FAILED
+			})
+		}
+	}
+
 	LabelLevel = async (req: Request, res: Response): Promise<void> => {
 		try {
 			let { privateKey } = req.body

@@ -442,7 +442,10 @@ class SignerToolController {
 						break
 					}
 					case AppConst.VERIFY_LP_POLICIES[3]: {
-						verificationStatus.complianceCheck = true
+						const complianceCred = JSON.parse(JSON.stringify(participantJson.complianceCredential))
+						const expirationDate = new Date(complianceCred.expirationDate).getTime()
+						const now = new Date().getTime()
+						verificationStatus.complianceCheck = expirationDate > now
 						break
 					}
 				}

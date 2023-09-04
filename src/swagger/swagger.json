@@ -575,389 +575,362 @@
 										"summary": "LP created successfully",
 										"value": {
 											"data": {
-											  "completeSD": {
-												"selfDescriptionCredential": {
-												  "@context": "https://www.w3.org/2018/credentials/v1",
-												  "type": [
-													"VerifiablePresentation"
-												  ],
-												  "verifiableCredential": [
-													{
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1",
-														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-													  ],
-													  "type": [
-														"VerifiableCredential"
-													  ],
-													  "id": "did:web:casio34.smart-x.smartsenselabs.com",
-													  "issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-													  "issuanceDate": "2023-07-28T11:13:53.734Z",
-													  "credentialSubject": {
-														"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#0",
-														"type": "gx:LegalParticipant",
-														"gx:legalName": "Green World",
-														"gx:legalRegistrationNumber": {
-														  "id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1"
-														},
-														"gx:headquarterAddress": {
-														  "gx:countrySubdivisionCode": "BE-BRU"
-														},
-														"gx:legalAddress": {
-														  "gx:countrySubdivisionCode": "BE-BRU"
-														},
-														"gx:parentOrganization": [
-														  {
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0"
-														  }
-														],
-														"gx:subOrganization": [
-														  {
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
-														  }
+												"completeSD": {
+													"selfDescriptionCredential": {
+														"@context": "https://www.w3.org/2018/credentials/v1",
+														"type": ["VerifiablePresentation"],
+														"verifiableCredential": [
+															{
+																"@context": [
+																	"https://www.w3.org/2018/credentials/v1",
+																	"https://w3id.org/security/suites/jws-2020/v1",
+																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+																],
+																"type": ["VerifiableCredential"],
+																"id": "did:web:casio34.smart-x.smartsenselabs.com",
+																"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+																"issuanceDate": "2023-07-28T11:13:53.734Z",
+																"credentialSubject": {
+																	"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#0",
+																	"type": "gx:LegalParticipant",
+																	"gx:legalName": "Green World",
+																	"gx:legalRegistrationNumber": {
+																		"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1"
+																	},
+																	"gx:headquarterAddress": {
+																		"gx:countrySubdivisionCode": "BE-BRU"
+																	},
+																	"gx:legalAddress": {
+																		"gx:countrySubdivisionCode": "BE-BRU"
+																	},
+																	"gx:parentOrganization": [
+																		{
+																			"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0"
+																		}
+																	],
+																	"gx:subOrganization": [
+																		{
+																			"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+																		}
+																	]
+																},
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-19T11:07:31.275Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..DPmHzvvn0UbRmGzvmfI404yAMtqlZA-Ieiag9J3OUr6dJtGU2OyYRr37hMjTJf4Q7ersIaNfaGaD71mFInJPIPhj1pMsUNSRNOSOYt6oszZFBB-MjCRqsFPZXMhYQWO05V_WFT9SULDcKDuekykMn-zHxHHpClNokqUeLzxskJsAGo01sT6Sm_8nuSWIiskUdVFKTuqN6SuE-62N4npZoAuFIugt-PKC4-Q1stHTK5UJbVR4NlsllqRGjYhJfr7piEd5hW2iuq9q_X24x3L-9qaBJcISAau-qE1yNs8LOEw3tAp6XyKSIl3LxVoEpnj3RVWhak2qUlA86ot86y46kA"
+																}
+															},
+															{
+																"@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1"],
+																"type": ["VerifiableCredential"],
+																"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1",
+																"issuer": "did:web:registration.lab.gaia-x.eu:development",
+																"issuanceDate": "2023-08-19T11:07:25.122Z",
+																"credentialSubject": {
+																	"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+																	"type": "gx:legalRegistrationNumber",
+																	"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1",
+																	"gx:leiCode": "9695007586GCAKPYJ703",
+																	"gx:leiCode-countryCode": "FR"
+																},
+																"evidence": [
+																	{
+																		"gx:evidenceURL": "https://api.gleif.org/api/v1/lei-records/",
+																		"gx:executionDate": "2023-08-19T11:07:25.122Z",
+																		"gx:evidenceOf": "gx:leiCode"
+																	}
+																],
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-19T11:07:26.197Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:registration.lab.gaia-x.eu:development#X509-JWK2020",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Gjgu5gkx1A1jRZ2Em3azMuJV0L15jNDHLo_dIWtiihsLbr2JvpLvS28CmfSC3ZABl2m3tCOoIlU4eAXeWWqcxX8gNxtI90rWTPI7W_-VzsZQg82FS8kmuTnhnmelbmdrl8HmpLudHDM23SJLgCuc7Ozd6g9rbxjbfhzdwNJA98JQtPKzGBZRPyo0uGQz32JaEtoe4tCfjlRMJngCuSLtuJ9V8j7PXDlPTjNhwDMzbDctI_TVxcH7L35KwHhyIBNPANvruaOatgDN7qeSe94UYCBQR3Q7-MCGft9uhZDtrQ9W89PJixJyVwQhLGUO8fJxZIdqiVPrWvhqyoDHTmT_nA"
+																}
+															},
+															{
+																"@context": [
+																	"https://www.w3.org/2018/credentials/v1",
+																	"https://w3id.org/security/suites/jws-2020/v1",
+																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+																],
+																"type": ["VerifiableCredential"],
+																"issuanceDate": "2023-07-28T11:13:56.533Z",
+																"credentialSubject": {
+																	"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+																	"type": "gx:GaiaXTermsAndConditions",
+																	"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
+																	"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#2"
+																},
+																"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+																"id": "did:web:casio34.smart-x.smartsenselabs.com",
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-19T11:07:33.146Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..M4DLA5IBQgKOsbX91NDyEMtCMyBvxx6uf5nWCFgnkA1bIQvYTaECACHsi5Ns0q11jplfYPj4p8_IoR1jPpoyKQsvy_XXL6j31XiiKGBTKjTNnKT4kbcwO14Az_02pig3qDjJoeXTiu5ZlR5CEZKQgRFiDO58OSEMaLDs1VfJTlQaZ6RaUoMqhezjkl7ydbfZlVk5Vtat2EbLm-OX7E4nKuDWMn_FQ-6K2kY7kWy59aw1m77WLE55q6f9NUabPJ9HqhW2_xhSP_ZAT7bDFp5wTeC1aaIywVuNzBZfcZ4qcuVjNgcXMPYGKvq9Mh-KGOd2CtuXA9MZ7GIS53suopPDuw"
+																}
+															},
+															{
+																"credentialSubject": {
+																	"gx:legalName": "Green World",
+																	"gx:headquarterAddress": {
+																		"gx:countrySubdivisionCode": "BE-BRU"
+																	},
+																	"gx:legalAddress": {
+																		"gx:countrySubdivisionCode": "BE-BRU"
+																	},
+																	"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0",
+																	"type": "gx:LegalParticipant",
+																	"gx:legalRegistrationNumber": {
+																		"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1"
+																	}
+																},
+																"@context": [
+																	"https://www.w3.org/2018/credentials/v1",
+																	"https://w3id.org/security/suites/jws-2020/v1",
+																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+																],
+																"type": ["VerifiableCredential"],
+																"id": "did:web:casio51.smart-x.smartsenselabs.com",
+																"issuer": "did:web:casio51.smart-x.smartsenselabs.com",
+																"issuanceDate": "2023-08-07T16:09:24.431973044Z",
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-07T10:39:28.197Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:casio51.smart-x.smartsenselabs.com",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SgAKINBYbRig3_b21Sy74RdXUNEUSHEMLjmasmqxLe3bKEqHti-zE121QlzNV_LX_VQSfI87hXO-fYeis583t8F7y3zoXVVHsxx9fM4DCChJ8UDgUt8npC0gAtTCeQ-RMQId6I4ZXzef3XrJeiLgfCD7eD2oEYTlwjcREmBr4c8nPjLFmGuZIF1y0jTh_wX9f7DcOu-f5ZJIlceAnFL8We0GV6QZDfLJXnQyqZE9eSE3WD76GZP9HVIrVNgeDT1u7u1SN3uws1glKjw7LPqfxcYXvI1Zjhiu_GfSsODgmELru0bW9gqEsSNgk-ZY24TetMOCGFvAFu-WxqIR7l8r9g"
+																}
+															},
+															{
+																"@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1"],
+																"type": "VerifiableCredential",
+																"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1",
+																"issuer": "did:web:registration.lab.gaia-x.eu:development",
+																"issuanceDate": "2023-08-07T10:39:26.495Z",
+																"credentialSubject": {
+																	"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+																	"type": "gx:legalRegistrationNumber",
+																	"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1",
+																	"gx:leiCode": "9695007586GCAKPYJ703",
+																	"gx:leiCode-countryCode": "FR"
+																},
+																"evidence": [
+																	{
+																		"gx:evidenceURL": "https://api.gleif.org/api/v1/lei-records/",
+																		"gx:executionDate": "2023-08-07T10:39:26.495Z",
+																		"gx:evidenceOf": "gx:leiCode"
+																	}
+																],
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-07T10:39:27.593Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:registration.lab.gaia-x.eu:development#X509-JWK2020",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..GGeJmDFQL70pQKsoEynT3NRH33QL6REI9zeQFymmX2aaaRhF5zbc4UfCZywGEBtv8SBGnwlHbcOW1hutsuIndh-mUFmz4dK-krRlEzhbs6WPvzvdlLPTMPMrfI4M3BJBzDRUnoB9pS6UBT7-u9G-g5Z1Vygj3ALHkhkV_RkMYg44vTN2cwQCVavJnlKyUa6AAMczu_3vM1UaiNG7zuT4npxP4mTRrCx0qYya9R7bAnNkd14GjA5I_Gf5YQ07G0S-BUUIadKMW0smdDzjCtlrFb4c2YilOiOinuRqoXTUv4naQV7UuXLV5aI4H0MsFhxX378As3PLlHxBId7lXzgAnA"
+																}
+															},
+															{
+																"@context": [
+																	"https://www.w3.org/2018/credentials/v1",
+																	"https://w3id.org/security/suites/jws-2020/v1",
+																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+																],
+																"credentialSubject": {
+																	"@Context": [
+																		"https://www.w3.org/2018/credentials/v1",
+																		"https://w3id.org/security/suites/jws-2020/v1",
+																		"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+																	],
+																	"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
+																	"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#2",
+																	"type": "gx:GaiaXTermsAndConditions"
+																},
+																"id": "did:web:casio51.smart-x.smartsenselabs.com",
+																"issuanceDate": "2023-08-07T16:09:24.431973044Z",
+																"issuer": "did:web:casio51.smart-x.smartsenselabs.com",
+																"type": ["VerifiableCredential"],
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-07T10:39:28.779Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:casio51.smart-x.smartsenselabs.com",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..fPAeAdt53gs0d386R-jOX96IdK9DOrZQWl4QwCFliEgCg3Ih7WCl4U0eAlGU9M8vjpXfT9JutUjqpvVJpZ1WyeVYcrEqEzz6Gi58jGuMnQ76u-QV9Fkmh7L1bB4_1otbXODkIUcpchq1A0jCiBX50dQpyYeOGB5A6DuogZOhmdHeZN5lVkFt-fy1KSmJabTUPM_9IcqBvGVCMFFI1UwqVMY-ubk_NqagXh45KFe0HmqPJghU0R4iX0ZntTHX3UU540Vq4A_dfcAJ6cWmHADpSX7D-etnVCWuu_WrpGcusgvyn1TmOgo0QNkuJkcldnaiuTHvREXqnoGvISYcMYqmZQ"
+																}
+															},
+															{
+																"credentialSubject": {
+																	"gx:legalName": "Green World",
+																	"gx:headquarterAddress": {
+																		"gx:countrySubdivisionCode": "BE-BRU"
+																	},
+																	"gx:legalAddress": {
+																		"gx:countrySubdivisionCode": "BE-BRU"
+																	},
+																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
+																	"type": "gx:LegalParticipant",
+																	"gx:legalRegistrationNumber": {
+																		"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1"
+																	}
+																},
+																"@context": [
+																	"https://www.w3.org/2018/credentials/v1",
+																	"https://w3id.org/security/suites/jws-2020/v1",
+																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+																],
+																"type": ["VerifiableCredential"],
+																"id": "did:web:casio50.smart-x.smartsenselabs.com",
+																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-07T10:34:33.838Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..btTzZ3J0O-DcSe8rumxVLBF1jIrHFmonLQ8FWgvrl0ueQGt9VOnRZF5RFN6fHm7Sgx2N4O9EdTFwvV5II-l4nLKK6qHd_f97zNsonL7BRxQ0RB4GpbE6m0pR_XljCzKIQG6RZVyZTAeOdsyWBzGm1M_2hnmTLkBMB33GAJW8fI1d_ou4KbxUfkPiFCfnTUPM3uP5WXGuqC2XqUInL5NJKFZGD6Ld1l6PzPqEGYn-m1UCGQyh6w7l-2NVRT-FHpo3_HHY-xU7RX2F7tDZffCOTbOeiV15xktZWj233BFrcvhBHZ0a14IfifTVFUH0GYmwUPMF1BSS7LCNldFetkcCWQ"
+																}
+															},
+															{
+																"@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1"],
+																"type": "VerifiableCredential",
+																"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1",
+																"issuer": "did:web:registration.lab.gaia-x.eu:development",
+																"issuanceDate": "2023-08-07T10:34:32.101Z",
+																"credentialSubject": {
+																	"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+																	"type": "gx:legalRegistrationNumber",
+																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1",
+																	"gx:leiCode": "9695007586GCAKPYJ703",
+																	"gx:leiCode-countryCode": "FR"
+																},
+																"evidence": [
+																	{
+																		"gx:evidenceURL": "https://api.gleif.org/api/v1/lei-records/",
+																		"gx:executionDate": "2023-08-07T10:34:32.101Z",
+																		"gx:evidenceOf": "gx:leiCode"
+																	}
+																],
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-07T10:34:33.102Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:registration.lab.gaia-x.eu:development#X509-JWK2020",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Jdx7tQNdCdFc5Gnp1gx8SJ5rqKYAqGXzqEhOJgMnXpmn4MFZvwG97UdnGwgmcqYHsjdqFxEysZDoDnkrmBV-_B1zy2oEcZ9P2I95LS6_H8EfgB6wWdlxyAjg5Hnp-QFoR0N8p6n-hKwEkF1R3e1pVHE2txcTfiGQOfqQGd4EwZAu9Ph6YBdAuYrgBmr4zSEEYNQ5LQRSMvljHSG-h_KHhR4-Fcc-YI_ZUtdPuXbH7IiAo9gAdtPFAW6KDzVKsN1klEzJxp5rVkHYwjsLFCn7wNrYw6u7pbLsSXWRKKypw4gTcdVP6jft4orbLOOWE4gadfkv7AXh8Egk9yIlx_VLBQ"
+																}
+															},
+															{
+																"@context": [
+																	"https://www.w3.org/2018/credentials/v1",
+																	"https://w3id.org/security/suites/jws-2020/v1",
+																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+																],
+																"credentialSubject": {
+																	"@Context": [
+																		"https://www.w3.org/2018/credentials/v1",
+																		"https://w3id.org/security/suites/jws-2020/v1",
+																		"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+																	],
+																	"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
+																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2",
+																	"type": "gx:GaiaXTermsAndConditions"
+																},
+																"id": "did:web:casio50.smart-x.smartsenselabs.com",
+																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
+																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"type": ["VerifiableCredential"],
+																"proof": {
+																	"type": "JsonWebSignature2020",
+																	"created": "2023-08-07T10:34:34.513Z",
+																	"proofPurpose": "assertionMethod",
+																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SWXsvdPCdnLCnVIkO1cYRca1JMGk0qLVvyW8-cqeHBHn7PbAL0grpW3X0ZyMekncWgJ0-vXBaSdre1OfLSbBXZgpxgqha8OKaCMGqqbSC4IYMmuUeUOvZ_pIAyabFy6OHc45Sm3YT3os7xezF6rl5Kbwn-_nPSZE0izAv269at9Gs_aYUE79UTLyX-_Its4gadRuDdcAhznsrHx4rbNpX9kNh_389zB_lu1lTlt2VqjXBYnbMbknW9-k3lVZZm6giVFxa3fNEAh-1x30-ZdmOs8KNS8mWNl_8SFSE0bmN4BB-3J91bG2aZ8G9GWzu4x3lI-1WmlnEDj5WhaE69Dq0A"
+																}
+															}
 														]
-													  },
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-19T11:07:31.275Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..DPmHzvvn0UbRmGzvmfI404yAMtqlZA-Ieiag9J3OUr6dJtGU2OyYRr37hMjTJf4Q7ersIaNfaGaD71mFInJPIPhj1pMsUNSRNOSOYt6oszZFBB-MjCRqsFPZXMhYQWO05V_WFT9SULDcKDuekykMn-zHxHHpClNokqUeLzxskJsAGo01sT6Sm_8nuSWIiskUdVFKTuqN6SuE-62N4npZoAuFIugt-PKC4-Q1stHTK5UJbVR4NlsllqRGjYhJfr7piEd5hW2iuq9q_X24x3L-9qaBJcISAau-qE1yNs8LOEw3tAp6XyKSIl3LxVoEpnj3RVWhak2qUlA86ot86y46kA"
-													  }
 													},
-													{
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1"
-													  ],
-													  "type": [
-														"VerifiableCredential"
-													  ],
-													  "id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1",
-													  "issuer": "did:web:registration.lab.gaia-x.eu:development",
-													  "issuanceDate": "2023-08-19T11:07:25.122Z",
-													  "credentialSubject": {
-														"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
-														"type": "gx:legalRegistrationNumber",
-														"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1",
-														"gx:leiCode": "9695007586GCAKPYJ703",
-														"gx:leiCode-countryCode": "FR"
-													  },
-													  "evidence": [
-														{
-														  "gx:evidenceURL": "https://api.gleif.org/api/v1/lei-records/",
-														  "gx:executionDate": "2023-08-19T11:07:25.122Z",
-														  "gx:evidenceOf": "gx:leiCode"
-														}
-													  ],
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-19T11:07:26.197Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:registration.lab.gaia-x.eu:development#X509-JWK2020",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Gjgu5gkx1A1jRZ2Em3azMuJV0L15jNDHLo_dIWtiihsLbr2JvpLvS28CmfSC3ZABl2m3tCOoIlU4eAXeWWqcxX8gNxtI90rWTPI7W_-VzsZQg82FS8kmuTnhnmelbmdrl8HmpLudHDM23SJLgCuc7Ozd6g9rbxjbfhzdwNJA98JQtPKzGBZRPyo0uGQz32JaEtoe4tCfjlRMJngCuSLtuJ9V8j7PXDlPTjNhwDMzbDctI_TVxcH7L35KwHhyIBNPANvruaOatgDN7qeSe94UYCBQR3Q7-MCGft9uhZDtrQ9W89PJixJyVwQhLGUO8fJxZIdqiVPrWvhqyoDHTmT_nA"
-													  }
-													},
-													{
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1",
-														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-													  ],
-													  "type": [
-														"VerifiableCredential"
-													  ],
-													  "issuanceDate": "2023-07-28T11:13:56.533Z",
-													  "credentialSubject": {
-														"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
-														"type": "gx:GaiaXTermsAndConditions",
-														"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
-														"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#2"
-													  },
-													  "issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-													  "id": "did:web:casio34.smart-x.smartsenselabs.com",
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-19T11:07:33.146Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..M4DLA5IBQgKOsbX91NDyEMtCMyBvxx6uf5nWCFgnkA1bIQvYTaECACHsi5Ns0q11jplfYPj4p8_IoR1jPpoyKQsvy_XXL6j31XiiKGBTKjTNnKT4kbcwO14Az_02pig3qDjJoeXTiu5ZlR5CEZKQgRFiDO58OSEMaLDs1VfJTlQaZ6RaUoMqhezjkl7ydbfZlVk5Vtat2EbLm-OX7E4nKuDWMn_FQ-6K2kY7kWy59aw1m77WLE55q6f9NUabPJ9HqhW2_xhSP_ZAT7bDFp5wTeC1aaIywVuNzBZfcZ4qcuVjNgcXMPYGKvq9Mh-KGOd2CtuXA9MZ7GIS53suopPDuw"
-													  }
-													},
-													{
-													  "credentialSubject": {
-														"gx:legalName": "Green World",
-														"gx:headquarterAddress": {
-														  "gx:countrySubdivisionCode": "BE-BRU"
-														},
-														"gx:legalAddress": {
-														  "gx:countrySubdivisionCode": "BE-BRU"
-														},
-														"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0",
-														"type": "gx:LegalParticipant",
-														"gx:legalRegistrationNumber": {
-														  "id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1"
-														}
-													  },
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1",
-														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-													  ],
-													  "type": [
-														"VerifiableCredential"
-													  ],
-													  "id": "did:web:casio51.smart-x.smartsenselabs.com",
-													  "issuer": "did:web:casio51.smart-x.smartsenselabs.com",
-													  "issuanceDate": "2023-08-07T16:09:24.431973044Z",
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-07T10:39:28.197Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:casio51.smart-x.smartsenselabs.com",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SgAKINBYbRig3_b21Sy74RdXUNEUSHEMLjmasmqxLe3bKEqHti-zE121QlzNV_LX_VQSfI87hXO-fYeis583t8F7y3zoXVVHsxx9fM4DCChJ8UDgUt8npC0gAtTCeQ-RMQId6I4ZXzef3XrJeiLgfCD7eD2oEYTlwjcREmBr4c8nPjLFmGuZIF1y0jTh_wX9f7DcOu-f5ZJIlceAnFL8We0GV6QZDfLJXnQyqZE9eSE3WD76GZP9HVIrVNgeDT1u7u1SN3uws1glKjw7LPqfxcYXvI1Zjhiu_GfSsODgmELru0bW9gqEsSNgk-ZY24TetMOCGFvAFu-WxqIR7l8r9g"
-													  }
-													},
-													{
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1"
-													  ],
-													  "type": "VerifiableCredential",
-													  "id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1",
-													  "issuer": "did:web:registration.lab.gaia-x.eu:development",
-													  "issuanceDate": "2023-08-07T10:39:26.495Z",
-													  "credentialSubject": {
-														"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
-														"type": "gx:legalRegistrationNumber",
-														"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1",
-														"gx:leiCode": "9695007586GCAKPYJ703",
-														"gx:leiCode-countryCode": "FR"
-													  },
-													  "evidence": [
-														{
-														  "gx:evidenceURL": "https://api.gleif.org/api/v1/lei-records/",
-														  "gx:executionDate": "2023-08-07T10:39:26.495Z",
-														  "gx:evidenceOf": "gx:leiCode"
-														}
-													  ],
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-07T10:39:27.593Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:registration.lab.gaia-x.eu:development#X509-JWK2020",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..GGeJmDFQL70pQKsoEynT3NRH33QL6REI9zeQFymmX2aaaRhF5zbc4UfCZywGEBtv8SBGnwlHbcOW1hutsuIndh-mUFmz4dK-krRlEzhbs6WPvzvdlLPTMPMrfI4M3BJBzDRUnoB9pS6UBT7-u9G-g5Z1Vygj3ALHkhkV_RkMYg44vTN2cwQCVavJnlKyUa6AAMczu_3vM1UaiNG7zuT4npxP4mTRrCx0qYya9R7bAnNkd14GjA5I_Gf5YQ07G0S-BUUIadKMW0smdDzjCtlrFb4c2YilOiOinuRqoXTUv4naQV7UuXLV5aI4H0MsFhxX378As3PLlHxBId7lXzgAnA"
-													  }
-													},
-													{
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1",
-														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-													  ],
-													  "credentialSubject": {
-														"@Context": [
-														  "https://www.w3.org/2018/credentials/v1",
-														  "https://w3id.org/security/suites/jws-2020/v1",
-														  "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													"complianceCredential": {
+														"@context": [
+															"https://www.w3.org/2018/credentials/v1",
+															"https://w3id.org/security/suites/jws-2020/v1",
+															"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 														],
-														"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
-														"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#2",
-														"type": "gx:GaiaXTermsAndConditions"
-													  },
-													  "id": "did:web:casio51.smart-x.smartsenselabs.com",
-													  "issuanceDate": "2023-08-07T16:09:24.431973044Z",
-													  "issuer": "did:web:casio51.smart-x.smartsenselabs.com",
-													  "type": [
-														"VerifiableCredential"
-													  ],
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-07T10:39:28.779Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:casio51.smart-x.smartsenselabs.com",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..fPAeAdt53gs0d386R-jOX96IdK9DOrZQWl4QwCFliEgCg3Ih7WCl4U0eAlGU9M8vjpXfT9JutUjqpvVJpZ1WyeVYcrEqEzz6Gi58jGuMnQ76u-QV9Fkmh7L1bB4_1otbXODkIUcpchq1A0jCiBX50dQpyYeOGB5A6DuogZOhmdHeZN5lVkFt-fy1KSmJabTUPM_9IcqBvGVCMFFI1UwqVMY-ubk_NqagXh45KFe0HmqPJghU0R4iX0ZntTHX3UU540Vq4A_dfcAJ6cWmHADpSX7D-etnVCWuu_WrpGcusgvyn1TmOgo0QNkuJkcldnaiuTHvREXqnoGvISYcMYqmZQ"
-													  }
-													},
-													{
-													  "credentialSubject": {
-														"gx:legalName": "Green World",
-														"gx:headquarterAddress": {
-														  "gx:countrySubdivisionCode": "BE-BRU"
-														},
-														"gx:legalAddress": {
-														  "gx:countrySubdivisionCode": "BE-BRU"
-														},
-														"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
-														"type": "gx:LegalParticipant",
-														"gx:legalRegistrationNumber": {
-														  "id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1"
-														}
-													  },
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1",
-														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-													  ],
-													  "type": [
-														"VerifiableCredential"
-													  ],
-													  "id": "did:web:casio50.smart-x.smartsenselabs.com",
-													  "issuer": "did:web:casio50.smart-x.smartsenselabs.com",
-													  "issuanceDate": "2023-08-07T16:04:30.307219451Z",
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-07T10:34:33.838Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..btTzZ3J0O-DcSe8rumxVLBF1jIrHFmonLQ8FWgvrl0ueQGt9VOnRZF5RFN6fHm7Sgx2N4O9EdTFwvV5II-l4nLKK6qHd_f97zNsonL7BRxQ0RB4GpbE6m0pR_XljCzKIQG6RZVyZTAeOdsyWBzGm1M_2hnmTLkBMB33GAJW8fI1d_ou4KbxUfkPiFCfnTUPM3uP5WXGuqC2XqUInL5NJKFZGD6Ld1l6PzPqEGYn-m1UCGQyh6w7l-2NVRT-FHpo3_HHY-xU7RX2F7tDZffCOTbOeiV15xktZWj233BFrcvhBHZ0a14IfifTVFUH0GYmwUPMF1BSS7LCNldFetkcCWQ"
-													  }
-													},
-													{
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1"
-													  ],
-													  "type": "VerifiableCredential",
-													  "id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1",
-													  "issuer": "did:web:registration.lab.gaia-x.eu:development",
-													  "issuanceDate": "2023-08-07T10:34:32.101Z",
-													  "credentialSubject": {
-														"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
-														"type": "gx:legalRegistrationNumber",
-														"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1",
-														"gx:leiCode": "9695007586GCAKPYJ703",
-														"gx:leiCode-countryCode": "FR"
-													  },
-													  "evidence": [
-														{
-														  "gx:evidenceURL": "https://api.gleif.org/api/v1/lei-records/",
-														  "gx:executionDate": "2023-08-07T10:34:32.101Z",
-														  "gx:evidenceOf": "gx:leiCode"
-														}
-													  ],
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-07T10:34:33.102Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:registration.lab.gaia-x.eu:development#X509-JWK2020",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Jdx7tQNdCdFc5Gnp1gx8SJ5rqKYAqGXzqEhOJgMnXpmn4MFZvwG97UdnGwgmcqYHsjdqFxEysZDoDnkrmBV-_B1zy2oEcZ9P2I95LS6_H8EfgB6wWdlxyAjg5Hnp-QFoR0N8p6n-hKwEkF1R3e1pVHE2txcTfiGQOfqQGd4EwZAu9Ph6YBdAuYrgBmr4zSEEYNQ5LQRSMvljHSG-h_KHhR4-Fcc-YI_ZUtdPuXbH7IiAo9gAdtPFAW6KDzVKsN1klEzJxp5rVkHYwjsLFCn7wNrYw6u7pbLsSXWRKKypw4gTcdVP6jft4orbLOOWE4gadfkv7AXh8Egk9yIlx_VLBQ"
-													  }
-													},
-													{
-													  "@context": [
-														"https://www.w3.org/2018/credentials/v1",
-														"https://w3id.org/security/suites/jws-2020/v1",
-														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-													  ],
-													  "credentialSubject": {
-														"@Context": [
-														  "https://www.w3.org/2018/credentials/v1",
-														  "https://w3id.org/security/suites/jws-2020/v1",
-														  "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+														"type": ["VerifiableCredential"],
+														"id": "https://compliance.lab.gaia-x.eu/development/credential-offers/20d616a0-c183-453f-9791-c1ef0a867ac2",
+														"issuer": "did:web:compliance.lab.gaia-x.eu:development",
+														"issuanceDate": "2023-08-19T11:07:50.481Z",
+														"expirationDate": "2023-11-17T11:07:50.481Z",
+														"credentialSubject": [
+															{
+																"type": "gx:compliance",
+																"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#0",
+																"integrity": "sha256-fe58e48d11e9b139279e4ec5dc857ad77a058d7ec6161cad778ee550d76a32e4",
+																"version": "22.10"
+															},
+															{
+																"type": "gx:compliance",
+																"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1",
+																"integrity": "sha256-2d98944c67ca015ccde5b7a2e7d6b4455fda5861c825a15a4a6ed5751ed6eac8",
+																"version": "22.10"
+															},
+															{
+																"type": "gx:compliance",
+																"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#2",
+																"integrity": "sha256-cebaffa21ad2f6be9678205f3bba48c04a9ac6f499abd8d465954a38e3504aae",
+																"version": "22.10"
+															},
+															{
+																"type": "gx:compliance",
+																"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0",
+																"integrity": "sha256-be934a813e7c02883d5f7b33fccc9329c97a907bca2af6917d09623122f9736b",
+																"version": "22.10"
+															},
+															{
+																"type": "gx:compliance",
+																"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1",
+																"integrity": "sha256-16542149ded3da8068ea927bf786fe88d9d0ed7521d90504410994b7495f6993",
+																"version": "22.10"
+															},
+															{
+																"type": "gx:compliance",
+																"id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#2",
+																"integrity": "sha256-7c5dff5936f583077f2a2aa2723103ad6cbbbd045adbf701da5c13828ce9de91",
+																"version": "22.10"
+															},
+															{
+																"type": "gx:compliance",
+																"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
+																"integrity": "sha256-372994ed4b18b7f4252626a48c510aa170cb3a04717d2501ccf1982ed85a9b12",
+																"version": "22.10"
+															},
+															{
+																"type": "gx:compliance",
+																"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1",
+																"integrity": "sha256-20059a7a182d8a840ee25f8773446aa2f0564c0ff82d359b8a1b194bf1f98045",
+																"version": "22.10"
+															},
+															{
+																"type": "gx:compliance",
+																"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2",
+																"integrity": "sha256-f897639cb8a0236874ec395a3b0443986fcf5e3b1ac4ac1f3978e72e685dea2f",
+																"version": "22.10"
+															}
 														],
-														"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
-														"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2",
-														"type": "gx:GaiaXTermsAndConditions"
-													  },
-													  "id": "did:web:casio50.smart-x.smartsenselabs.com",
-													  "issuanceDate": "2023-08-07T16:04:30.307219451Z",
-													  "issuer": "did:web:casio50.smart-x.smartsenselabs.com",
-													  "type": [
-														"VerifiableCredential"
-													  ],
-													  "proof": {
-														"type": "JsonWebSignature2020",
-														"created": "2023-08-07T10:34:34.513Z",
-														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
-														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SWXsvdPCdnLCnVIkO1cYRca1JMGk0qLVvyW8-cqeHBHn7PbAL0grpW3X0ZyMekncWgJ0-vXBaSdre1OfLSbBXZgpxgqha8OKaCMGqqbSC4IYMmuUeUOvZ_pIAyabFy6OHc45Sm3YT3os7xezF6rl5Kbwn-_nPSZE0izAv269at9Gs_aYUE79UTLyX-_Its4gadRuDdcAhznsrHx4rbNpX9kNh_389zB_lu1lTlt2VqjXBYnbMbknW9-k3lVZZm6giVFxa3fNEAh-1x30-ZdmOs8KNS8mWNl_8SFSE0bmN4BB-3J91bG2aZ8G9GWzu4x3lI-1WmlnEDj5WhaE69Dq0A"
-													  }
+														"proof": {
+															"type": "JsonWebSignature2020",
+															"created": "2023-08-19T11:07:51.250Z",
+															"proofPurpose": "assertionMethod",
+															"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MUYt66-dF-G-3cWvkdsCo052Pfsq16QTR0mDCVmuzixziA74iM80phUsUO5xU2uxStZMpk-2QeCFdFBK5VTqeM8Rw312C851BJMD0szq5iMm14CtoJqAX9f5jp5RR7SxKUbJn4Qa67VnSJ5_SeSNYJBkkSBKGOwmxeDTSbXd6kml4yS6jOhler8NGz3i154DtFhr8C25FeMdX7NgTfbyQfEw0gHieBt1M9dHGCCzHHKz16Sn_rUzPWdy_tPgG_VvycqrtA8mITq5lsjSPiU_E-6fezEmKoQW_uYy-6gZN_BCqJX-BGwhMwqMB-RwdRDlZmCBm_PfknhWtAc_vNH0lA",
+															"verificationMethod": "did:web:compliance.lab.gaia-x.eu:development#X509-JWK2020"
+														}
 													}
-												  ]
-												},
-												"complianceCredential": {
-												  "@context": [
-													"https://www.w3.org/2018/credentials/v1",
-													"https://w3id.org/security/suites/jws-2020/v1",
-													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-												  ],
-												  "type": [
-													"VerifiableCredential"
-												  ],
-												  "id": "https://compliance.lab.gaia-x.eu/development/credential-offers/20d616a0-c183-453f-9791-c1ef0a867ac2",
-												  "issuer": "did:web:compliance.lab.gaia-x.eu:development",
-												  "issuanceDate": "2023-08-19T11:07:50.481Z",
-												  "expirationDate": "2023-11-17T11:07:50.481Z",
-												  "credentialSubject": [
-													{
-													  "type": "gx:compliance",
-													  "id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#0",
-													  "integrity": "sha256-fe58e48d11e9b139279e4ec5dc857ad77a058d7ec6161cad778ee550d76a32e4",
-													  "version": "22.10"
-													},
-													{
-													  "type": "gx:compliance",
-													  "id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1",
-													  "integrity": "sha256-2d98944c67ca015ccde5b7a2e7d6b4455fda5861c825a15a4a6ed5751ed6eac8",
-													  "version": "22.10"
-													},
-													{
-													  "type": "gx:compliance",
-													  "id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#2",
-													  "integrity": "sha256-cebaffa21ad2f6be9678205f3bba48c04a9ac6f499abd8d465954a38e3504aae",
-													  "version": "22.10"
-													},
-													{
-													  "type": "gx:compliance",
-													  "id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0",
-													  "integrity": "sha256-be934a813e7c02883d5f7b33fccc9329c97a907bca2af6917d09623122f9736b",
-													  "version": "22.10"
-													},
-													{
-													  "type": "gx:compliance",
-													  "id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1",
-													  "integrity": "sha256-16542149ded3da8068ea927bf786fe88d9d0ed7521d90504410994b7495f6993",
-													  "version": "22.10"
-													},
-													{
-													  "type": "gx:compliance",
-													  "id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#2",
-													  "integrity": "sha256-7c5dff5936f583077f2a2aa2723103ad6cbbbd045adbf701da5c13828ce9de91",
-													  "version": "22.10"
-													},
-													{
-													  "type": "gx:compliance",
-													  "id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
-													  "integrity": "sha256-372994ed4b18b7f4252626a48c510aa170cb3a04717d2501ccf1982ed85a9b12",
-													  "version": "22.10"
-													},
-													{
-													  "type": "gx:compliance",
-													  "id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1",
-													  "integrity": "sha256-20059a7a182d8a840ee25f8773446aa2f0564c0ff82d359b8a1b194bf1f98045",
-													  "version": "22.10"
-													},
-													{
-													  "type": "gx:compliance",
-													  "id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2",
-													  "integrity": "sha256-f897639cb8a0236874ec395a3b0443986fcf5e3b1ac4ac1f3978e72e685dea2f",
-													  "version": "22.10"
-													}
-												  ],
-												  "proof": {
-													"type": "JsonWebSignature2020",
-													"created": "2023-08-19T11:07:51.250Z",
-													"proofPurpose": "assertionMethod",
-													"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..MUYt66-dF-G-3cWvkdsCo052Pfsq16QTR0mDCVmuzixziA74iM80phUsUO5xU2uxStZMpk-2QeCFdFBK5VTqeM8Rw312C851BJMD0szq5iMm14CtoJqAX9f5jp5RR7SxKUbJn4Qa67VnSJ5_SeSNYJBkkSBKGOwmxeDTSbXd6kml4yS6jOhler8NGz3i154DtFhr8C25FeMdX7NgTfbyQfEw0gHieBt1M9dHGCCzHHKz16Sn_rUzPWdy_tPgG_VvycqrtA8mITq5lsjSPiU_E-6fezEmKoQW_uYy-6gZN_BCqJX-BGwhMwqMB-RwdRDlZmCBm_PfknhWtAc_vNH0lA",
-													"verificationMethod": "did:web:compliance.lab.gaia-x.eu:development#X509-JWK2020"
-												  }
 												}
-											  }
 											},
 											"message": "VP created successfully."
-										  }
+										}
 									}
 								}
 							}
@@ -1494,8 +1467,8 @@
 								"schema": {
 									"$ref": "#/components/schemas/SuccessSchemaResponse"
 								},
-								"examples":{
-									"VirtualDataResource":{
+								"examples": {
+									"VirtualDataResource": {
 										"summary": "Resource created successfully",
 										"value": {
 											"data": {
@@ -2414,6 +2387,75 @@
 					}
 				}
 			}
+		},
+		"/v1/gaia-x/validate-registration-number": {
+			"post": {
+				"summary": "Validate registration number",
+				"description": "Validate registration number",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ValidateRegistrationNumber"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SuccessSchemaResponse"
+								},
+								"examples": {
+									"validate": {
+										"summary": "Validate",
+										"value": {
+											"message": "Success",
+											"data": {
+												"valid": true
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorSchemaResponse"
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {
@@ -2598,6 +2640,20 @@
 					"policies": {
 						"type": "array",
 						"example": ["integrityCheck", "holderSignature", "complianceSignature", "complianceCheck"]
+					}
+				}
+			},
+			"ValidateRegistrationNumber": {
+				"required": ["legalRegistrationNumber"],
+				"properties": {
+					"legalRegistrationNumber": {
+						"type": "object",
+						"example": {
+							"@context": ["https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/participant"],
+							"type": "gx:legalRegistrationNumber",
+							"id": "did:web:gaia-x.eu:legalRegistrationNumber.json",
+							"gx:vatID": "FR79537407926"
+						}
 					}
 				}
 			},

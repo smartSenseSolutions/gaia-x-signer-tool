@@ -57,5 +57,6 @@ class SignerToolValidation {
 	]
 	VerifyWebDID = [body('privateKey').not().isEmpty().trim().escape(), body('did').not().isEmpty().trim().escape(), body('verificationMethod').not().isEmpty().trim().escape()]
 	TrustIndex = [body('participantSD').not().isEmpty().trim(), body('serviceOfferingSD').not().isEmpty().trim()]
+	RegistrationNumber = [body('legalRegistrationNumber').isObject()]
 }
 export default new SignerToolValidation()

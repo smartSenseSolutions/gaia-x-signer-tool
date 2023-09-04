@@ -51,32 +51,25 @@ class SignerToolController {
 
 			const vcsMap = new Map()
 			if (legalParticipant.credentialSubject['gx:parentOrganization']) {
-				for (let i = 0; i < legalParticipant.credentialSubject['gx:parentOrganization'].length; i++) {
-					const lp = (await axios.get(legalParticipant.credentialSubject['gx:parentOrganization'][i].id)).data
-					const {
-						selfDescriptionCredential: { verifiableCredential }
-					} = lp
-					for (const vc of verifiableCredential) {
-						const lpId = vc.credentialSubject.id
-						if (!vcsMap.has(lpId)) {
-							vcsMap.set(lpId, vc)
-						}
-					}
+				try {
+					await Utils.getInnerVCs(legalParticipant, 'gx:parentOrganization', vcsMap)
+				} catch (e) {
+					res.status(STATUS_CODES.BAD_REQUEST).json({
+						error: (e as Error).message,
+						message: AppMessages.VP_FAILED
+					})
+					return
 				}
 			}
-
 			if (legalParticipant.credentialSubject['gx:subOrganization']) {
-				for (let i = 0; i < legalParticipant.credentialSubject['gx:subOrganization'].length; i++) {
-					const lp = (await axios.get(legalParticipant.credentialSubject['gx:subOrganization'][i].id)).data
-					const {
-						selfDescriptionCredential: { verifiableCredential }
-					} = lp
-					for (const vc of verifiableCredential) {
-						const lpId = vc.credentialSubject.id
-						if (!vcsMap.has(lpId)) {
-							vcsMap.set(lpId, vc)
-						}
-					}
+				try {
+					await Utils.getInnerVCs(legalParticipant, 'gx:subOrganization', vcsMap)
+				} catch (e) {
+					res.status(STATUS_CODES.BAD_REQUEST).json({
+						error: (e as Error).message,
+						message: AppMessages.VP_FAILED
+					})
+					return
 				}
 			}
 			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]

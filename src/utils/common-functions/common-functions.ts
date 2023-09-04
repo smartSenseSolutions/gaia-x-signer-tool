@@ -684,6 +684,10 @@ class Utils {
 			const {
 				selfDescriptionCredential: { verifiableCredential }
 			} = lp
+			const isExist = await this.existVcId(verifiableCredential, vc.credentialSubject[key][i].id)
+			if (!isExist) {
+				throw new Error(`${key} VC ID not found`)
+			}
 			for (const vc of verifiableCredential) {
 				const lpId = vc.credentialSubject.id
 				if (!vcsMap.has(lpId)) {
@@ -691,6 +695,13 @@ class Utils {
 				}
 			}
 		}
+	}
+
+	existVcId = async (verifiableCredential: any, vcId: string): Promise<boolean> => {
+		const vcIds = verifiableCredential.map((e: any) => {
+			return e.credentialSubject.id
+		})
+		return vcIds.includes(vcId)
 	}
 	/**
 	 * @formula trust_index = mean(veracity, transparency)

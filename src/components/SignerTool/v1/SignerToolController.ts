@@ -391,6 +391,15 @@ class SignerToolController {
 				})
 				return
 			}
+
+			const isExist = await Utils.existVcId(verifiableCredential, url)
+			if (!isExist) {
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `${url} VC ID not found`,
+					message: `${url} VC ID not found`
+				})
+				return
+			}
 			for (const policy of policies) {
 				logger.debug(__filename, 'Verify', `Executing ${policy} check ...`, req.custom.uuid)
 				switch (policy) {

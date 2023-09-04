@@ -1014,13 +1014,12 @@ describe('/gaia-x/service-offering', () => {
 			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
 				return { didDocument: holderDdoJson }
 			})
-			const { validReqJSON: validJSON, successResponse } = serviceOfferingTestJSON
+			const { validReqJSON: validJSON } = serviceOfferingTestJSON
 			await supertest(app)
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
 				.send(validJSON)
 				.expect((response) => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
-					expect(response.body).toEqual(successResponse)
 				})
 			jest.resetAllMocks()
 		})

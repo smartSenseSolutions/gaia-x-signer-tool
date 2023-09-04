@@ -792,8 +792,8 @@ export const serviceOfferingTestJSON = {
 		type: ['VerifiableCredential'],
 		id: 'https://compliance.lab.gaia-x.eu/development/credential-offers/a8ad7ca1-6cd8-4f65-aece-495cec34bc4b',
 		issuer: 'did:web:compliance.lab.gaia-x.eu:development',
-		issuanceDate: '2023-08-25T12:47:09.776Z',
-		expirationDate: '2023-11-23T12:47:09.776Z',
+		issuanceDate: '2023-09-04T11:04:03.179Z',
+		expirationDate: '2023-12-03T11:04:03.179Z',
 		credentialSubject: [
 			{
 				type: 'gx:compliance',

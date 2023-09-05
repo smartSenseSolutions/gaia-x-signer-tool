@@ -2635,7 +2635,7 @@
 				"properties": {
 					"url": {
 						"type": "string",
-						"example": "https://greenworld.proofsense.in/.well-known/participant.json"
+						"example": "https://leicodetest.smart-x.smartsenselabs.com/44b8ed70-988c-4d37-8a95-d92c97a0c0a5/participant.json#0"
 					},
 					"policies": {
 						"type": "array",

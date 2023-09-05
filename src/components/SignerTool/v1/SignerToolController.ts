@@ -274,6 +274,20 @@ class SignerToolController {
 						const {
 							selfDescriptionCredential: { verifiableCredential: childVC }
 						} = (await axios.get(vpLink)).data
+						const soIndex = childVC.findIndex((childVCObj: any) => {
+							const {
+								credentialSubject: { id: vcID, type: vcType }
+							} = childVCObj
+							return vcType === 'gx:ServiceOffering' && vcID === vpLink
+						})
+						if (soIndex === -1) {
+							logger.error(__filename, 'ServiceOffering', AppMessages.INVALID_DEPENDS_ON, req.custom.uuid)
+							res.status(STATUS_CODES.BAD_REQUEST).json({
+								error: AppMessages.INVALID_DEPENDS_ON,
+								message: AppMessages.SD_SIGN_FAILED
+							})
+							return
+						}
 						verifiableCredential = [...verifiableCredential, ...childVC]
 					}
 				}

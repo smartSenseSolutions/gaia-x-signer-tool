@@ -678,15 +678,13 @@ class Utils {
 		}
 	}
 
-	getInnerVCs = async (vc: any, key: string, vcsMap: any) => {
+	getInnerVCs = async (vc: any, key: string, types: string[], vcsMap: any) => {
 		for (let i = 0; i < vc.credentialSubject[key].length; i++) {
-			const lp = (await axios.get(vc.credentialSubject[key][i].id)).data
-			const {
-				selfDescriptionCredential: { verifiableCredential }
-			} = lp
-			const isExist = await this.existVcId(verifiableCredential, vc.credentialSubject[key][i].id)
-			if (!isExist) {
-				throw new Error(`${key} VC ID not found`)
+			const response = (await axios.get(vc.credentialSubject[key][i].id)).data
+			const verifiableCredential = response?.selfDescriptionCredential?.verifiableCredential
+			const type = verifiableCredential && (await this.getVcType(verifiableCredential, vc.credentialSubject[key][i].id))
+			if (!types.includes(type)) {
+				throw new Error(`${key} VC ID not found or required vc type not found`)
 			}
 			for (const vc of verifiableCredential) {
 				const lpId = vc.credentialSubject.id
@@ -697,11 +695,11 @@ class Utils {
 		}
 	}
 
-	existVcId = async (verifiableCredential: any, vcId: string): Promise<boolean> => {
-		const vcIds = verifiableCredential.map((e: any) => {
-			return e.credentialSubject.id
+	getVcType = async (verifiableCredential: any, vcId: string): Promise<string> => {
+		const vc = verifiableCredential.find((e: any) => {
+			return e.credentialSubject.id === vcId
 		})
-		return vcIds.includes(vcId)
+		return vc ? vc.credentialSubject.type : ''
 	}
 	/**
 	 * @formula trust_index = mean(veracity, transparency)

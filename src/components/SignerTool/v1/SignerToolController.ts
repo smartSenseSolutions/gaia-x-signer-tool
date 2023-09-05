@@ -7,7 +7,7 @@ import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
 
-import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
+import { ComplianceCredential, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
 import { logger } from '../../../utils/logger'
@@ -43,16 +43,10 @@ class SignerToolController {
 				return
 			}
 
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
-			// privateKey = process.env.PRIVATE_KEY
-
-			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
-			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
-
 			const vcsMap = new Map()
 			if (legalParticipant.credentialSubject['gx:parentOrganization']) {
 				try {
-					await Utils.getInnerVCs(legalParticipant, 'gx:parentOrganization', vcsMap)
+					await Utils.getInnerVCs(legalParticipant, 'gx:parentOrganization', ['gx:LegalParticipant'], vcsMap)
 				} catch (e) {
 					res.status(STATUS_CODES.BAD_REQUEST).json({
 						error: (e as Error).message,
@@ -63,7 +57,7 @@ class SignerToolController {
 			}
 			if (legalParticipant.credentialSubject['gx:subOrganization']) {
 				try {
-					await Utils.getInnerVCs(legalParticipant, 'gx:subOrganization', vcsMap)
+					await Utils.getInnerVCs(legalParticipant, 'gx:subOrganization', ['gx:LegalParticipant'], vcsMap)
 				} catch (e) {
 					res.status(STATUS_CODES.BAD_REQUEST).json({
 						error: (e as Error).message,
@@ -72,7 +66,12 @@ class SignerToolController {
 					return
 				}
 			}
+
+			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
+			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
+
 			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]
+			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
 
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
@@ -147,36 +146,36 @@ class SignerToolController {
 			switch (resource.credentialSubject.type) {
 				case 'gx:VirtualDataResource': {
 					if (resource.credentialSubject['gx:copyrightOwnedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
 					}
 
 					if (resource.credentialSubject['gx:producedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:producedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:producedBy', ['gx:LegalParticipant'], vcsMap)
 					}
 					break
 				}
 				case 'gx:PhysicalResource': {
 					if (resource.credentialSubject['gx:maintainedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:maintainedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:maintainedBy', ['gx:LegalParticipant'], vcsMap)
 					}
 					if (resource.credentialSubject['gx:ownedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:ownedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:ownedBy', ['gx:LegalParticipant'], vcsMap)
 					}
 					if (resource.credentialSubject['gx:manufacturedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:manufacturedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:manufacturedBy', ['gx:LegalParticipant'], vcsMap)
 					}
 					break
 				}
 				case 'gx:VirtualSoftwareResource': {
 					if (resource.credentialSubject['gx:copyrightOwnedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', vcsMap)
+						await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
 					}
 					break
 				}
 			}
 
 			if (resource.credentialSubject['gx:aggregationOf']) {
-				await Utils.getInnerVCs(resource, 'gx:aggregationOf', vcsMap)
+				await Utils.getInnerVCs(resource, 'gx:aggregationOf', ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'], vcsMap)
 			}
 			const vcs = [resource]
 
@@ -346,14 +345,14 @@ class SignerToolController {
 				logger.error(__filename, 'Verify', `❌ No Verifiable Credential Found`, req.custom.uuid)
 				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `VC not found`,
-					message: AppMessages.PARTICIPANT_VC_FOUND_FAILED
+					message: AppMessages.SIG_VERIFY_FAILED
 				})
 				return
 			} else if (!Array.isArray(participantJson.selfDescriptionCredential.verifiableCredential)) {
 				logger.error(__filename, 'Verify', `❌ Verifiable Credential isn't array`, req.custom.uuid)
 				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `VC not valid`,
-					message: AppMessages.PARTICIPANT_VC_INVALID
+					message: AppMessages.SIG_VERIFY_FAILED
 				})
 				return
 			}
@@ -379,24 +378,26 @@ class SignerToolController {
 				return
 			}
 			//fetching VC with subject type gx:LegalParticipant
-			const VC = verifiableCredential?.find((vc: VerifiableCredentialDto) =>
-				['gx:ServiceOffering', 'gx:LegalParticipant', 'gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(vc?.credentialSubject.type)
-			)
+			// const VC = verifiableCredential
+			// 	?.find((vc: VerifiableCredentialDto) => vc.credentialSubject.id === url)
+			// 	.find((vc: VerifiableCredentialDto) =>
+			// 		['gx:ServiceOffering', 'gx:LegalParticipant', 'gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(vc?.credentialSubject.type)
+			// 	)
 
-			if (!VC) {
-				logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have type 'gx:LegalParticipant' or  'gx:ServiceOffering'`, req.custom.uuid)
-				res.status(STATUS_CODES.BAD_REQUEST).json({
-					error: `VC with type 'gx:LegalParticipant' or  'gx:ServiceOffering' not found!!`,
-					message: "VC with type 'gx:LegalParticipant'  or 'gx:ServiceOffering' not found!!"
-				})
-				return
-			}
+			// if (!VC) {
+			// 	logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have supported type`, req.custom.uuid)
+			// 	res.status(STATUS_CODES.BAD_REQUEST).json({
+			// 		error: `Verifiable Credential doesn't have supported type`,
+			// 		message: "Verifiable Credential doesn't have supported type"
+			// 	})
+			// 	return
+			// }
 
-			const isExist = await Utils.existVcId(verifiableCredential, url)
-			if (!isExist) {
+			const typeName = await Utils.getVcType(verifiableCredential, url)
+			if (!['gx:ServiceOffering', 'gx:LegalParticipant', 'gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(typeName)) {
 				res.status(STATUS_CODES.BAD_REQUEST).json({
-					error: `${url} VC ID not found`,
-					message: `${url} VC ID not found`
+					error: `${url} VC ID not found or VC doesn't have supported type`,
+					message: `${url} VC ID not found or VC doesn't have supported type`
 				})
 				return
 			}

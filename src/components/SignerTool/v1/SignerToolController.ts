@@ -107,12 +107,23 @@ class SignerToolController {
 				data: { completeSD },
 				message: AppMessages.VP_SUCCESS
 			})
-		} catch (e: any) {
-			logger.error(__filename, 'GXLegalParticipant', e.message, req.custom.uuid, e)
-			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
-				error: (e as Error).message,
-				message: AppMessages.VP_FAILED
-			})
+		} catch (error: any) {
+			logger.error(__filename, 'GXLegalParticipant', error.message, req.custom.uuid)
+			if (error.response) {
+				// If server responded with a status code for a request
+				// console.log('Data', error.response.data)
+				// console.log('Status', error.response.status)
+				// console.log('Headers', error.response.headers)
+				res.status(error.response.status).json({
+					error: error.response.data,
+					message: AppMessages.VP_FAILED
+				})
+			} else {
+				res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+					error: (error as Error).message,
+					message: AppMessages.VP_FAILED
+				})
+			}
 		}
 	}
 

@@ -11,15 +11,16 @@ import { ComplianceCredential, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
 import { logger } from '../../../utils/logger'
+import { VaultService } from '../../../utils/service/vault.service'
 
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
 export const privateRoute = express.Router()
-
+const vaultService = new VaultService()
 class SignerToolController {
 	GXLegalParticipant = async (req: Request, res: Response): Promise<void> => {
 		try {
-			const { issuer, verificationMethod } = req.body
+			const { issuer, verificationMethod, isVault } = req.body
 			const vc = req.body.vcs
 			let { privateKey } = req.body
 			const { legalParticipant, legalRegistrationNumber, gaiaXTermsAndConditions } = vc
@@ -71,7 +72,7 @@ class SignerToolController {
 			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
 
 			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
 
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
@@ -121,7 +122,7 @@ class SignerToolController {
 
 	Resource = async (req: Request, res: Response): Promise<void> => {
 		try {
-			const { issuer, verificationMethod } = req.body
+			const { issuer, verificationMethod, isVault } = req.body
 			const { resource } = req.body.vcs
 			let { privateKey } = req.body
 
@@ -150,7 +151,7 @@ class SignerToolController {
 				return
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
 			// privateKey = process.env.PRIVATE_KEY
 
 			const vcsMap = new Map()
@@ -228,6 +229,7 @@ class SignerToolController {
 		try {
 			let { privateKey } = req.body
 			const {
+				isVault,
 				verificationMethod,
 				issuer: issuerDID,
 				vcs: { serviceOffering }
@@ -264,7 +266,7 @@ class SignerToolController {
 			}
 
 			// Decrypt private key(received in request) from base64 to raw string
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
 
 			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
@@ -594,7 +596,7 @@ class SignerToolController {
 
 	VerifyWebDID = async (req: Request, res: Response): Promise<void> => {
 		try {
-			const { did, verificationMethod, privateKey } = req.body
+			const { did, verificationMethod, privateKey, isVault } = req.body
 			const ddo = await Utils.getDDOfromDID(did, resolver)
 			if (!ddo) {
 				logger.error(__filename, 'VerifyWebDID', `❌ DDO not found for given did: '${did}'`, req.custom.uuid)
@@ -616,7 +618,7 @@ class SignerToolController {
 				})
 				return
 			}
-			const decodedPrivateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			const decodedPrivateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
 			// const decodedPrivateKey = process.env.PRIVATE_KEY as string
 			const hash = 'sampleText'
 			const jws = await Utils.sign(jose, AppConst.RSA_ALGO, hash, decodedPrivateKey)
@@ -674,6 +676,7 @@ class SignerToolController {
 			let { privateKey } = req.body
 			const {
 				verificationMethod,
+				isVault,
 				issuer: issuerDID,
 				vcs: { labelLevel }
 			} = req.body
@@ -723,7 +726,7 @@ class SignerToolController {
 			}
 
 			// Decrypt private key(received in request) from base64 to raw string
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
 
 			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, labelLevel, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)

@@ -407,7 +407,17 @@ class SignerToolController {
 			// }
 
 			const typeName = await Utils.getVcType(verifiableCredential, url)
-			if (!['gx:ServiceOffering', 'gx:LegalParticipant', 'gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(typeName)) {
+			if (
+				![
+					'gx:ServiceOffering',
+					'gx:LegalParticipant',
+					'gx:VirtualDataResource',
+					'gx:PhysicalResource',
+					'gx:VirtualSoftwareResource',
+					'gx:legalRegistrationNumber',
+					'gx:GaiaXTermsAndConditions'
+				].includes(typeName)
+			) {
 				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `${url} VC ID not found or VC doesn't have supported type`,
 					message: `${url} VC ID not found or VC doesn't have supported type`

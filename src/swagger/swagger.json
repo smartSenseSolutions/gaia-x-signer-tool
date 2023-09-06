@@ -501,7 +501,8 @@
 							"examples": {
 								"LegalParticipant": {
 									"value": {
-										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"isVault": false,
 										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
 										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
 										"vcs": {
@@ -1314,7 +1315,8 @@
 							"examples": {
 								"VirtualDataResource": {
 									"value": {
-										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"isVault": false,
 										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
 										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
 										"vcs": {
@@ -1357,7 +1359,8 @@
 								},
 								"PhysicalResource": {
 									"value": {
-										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"isVault": false,
 										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
 										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
 										"vcs": {
@@ -1419,7 +1422,8 @@
 								},
 								"VirtualSoftwareResource": {
 									"value": {
-										"privateKey": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+										"isVault": false,
 										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
 										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
 										"vcs": {
@@ -2526,8 +2530,9 @@
 					},
 					"privateKey": {
 						"type": "string",
-						"example": "Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
-					}
+						"example": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+					},
+					"isVault": { "type": "boolean", "example": "false" }
 				}
 			},
 			"OnBoardGaiaXSchemaBody": {
@@ -2549,6 +2554,7 @@
 						"type": "string",
 						"example": "https://example.com"
 					},
+					"isVault": { "type": "boolean", "example": "false" },
 					"data": {
 						"type": "object"
 					}
@@ -2572,8 +2578,9 @@
 				"properties": {
 					"privateKey": {
 						"type": "string",
-						"example": "Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+						"example": "Vault Key || Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
 					},
+					"isVault": { "type": "boolean", "example": "false" },
 					"issuer": {
 						"type": "string",
 						"example": "did:web:casio50.smart-x.smartsenselabs.com"
@@ -2670,8 +2677,9 @@
 				"properties": {
 					"privateKey": {
 						"type": "string",
-						"example": "Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+						"example": "Vault Key || Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
 					},
+					"isVault": { "type": "boolean", "example": "false" },
 					"issuer": {
 						"type": "string",
 						"example": "did:web:casio50.smart-x.smartsenselabs.com"

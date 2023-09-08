@@ -92,6 +92,19 @@ http://localhost:8000/docs/
 - System will share result of verification
 ![verify-signature](docs/verify-vc.png?raw=true)
 
+
+### Label Level VC and Compliance
+- Users will request the API service for creating service offering in wizard along with label level data.
+- API service will create unsigned VC JSON for label level by adding required data and requests Signer Tool Service for,
+        <ol>
+            <li> Label level calculation</li> 
+            <li> Self Sign VC (unsigned → signed)</li> 
+        </ol>
+- Once the VC is signed, Signer Tool Service  will request Compliance service for compliance.
+- Once the compliance is done, Signer tool service will respond to API Service with Signed VC & Compliance Data.
+- API Service will create a resolvable link using this label level data and store it in the DB.
+
+![create-label-level](docs/create-label-level.png?raw=true)
 ## Known issue or improvement
 
 1. Resource Compliance support pending

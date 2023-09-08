@@ -5,6 +5,7 @@ import { AppConst } from '../constants'
 class SignerToolValidation {
 	GXLegalParticipant = [
 		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
 		body('issuer').not().isEmpty().trim().escape(),
 		body('verificationMethod').not().isEmpty().trim().escape(),
 		body('vcs.legalParticipant').isObject(),
@@ -13,12 +14,14 @@ class SignerToolValidation {
 	]
 	ServiceOffering = [
 		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
 		body('issuer').not().isEmpty().trim().escape(),
 		body('verificationMethod').not().isEmpty().trim().escape(),
 		body('vcs.serviceOffering').isObject()
 	]
 	Resource = [
 		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
 		body('issuer').not().isEmpty().trim().escape(),
 		body('verificationMethod').not().isEmpty().trim().escape(),
 		body('vcs.resource').isObject(),
@@ -26,6 +29,7 @@ class SignerToolValidation {
 	]
 	LabelLevel = [
 		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
 		body('issuer').not().isEmpty().trim().escape(),
 		body('verificationMethod').not().isEmpty().trim().escape(),
 		body('vcs.labelLevel').isObject()
@@ -55,7 +59,12 @@ class SignerToolValidation {
 		body('services.*.serviceEndpoint').isURL().optional(),
 		body('services.*.type').not().isEmpty().trim().escape().optional()
 	]
-	VerifyWebDID = [body('privateKey').not().isEmpty().trim().escape(), body('did').not().isEmpty().trim().escape(), body('verificationMethod').not().isEmpty().trim().escape()]
+	VerifyWebDID = [
+		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
+		body('did').not().isEmpty().trim().escape(),
+		body('verificationMethod').not().isEmpty().trim().escape()
+	]
 	TrustIndex = [body('participantSD').not().isEmpty().trim(), body('serviceOfferingSD').not().isEmpty().trim()]
 	RegistrationNumber = [body('legalRegistrationNumber').isObject()]
 }

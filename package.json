@@ -9,7 +9,7 @@
 		"lint:check": "eslint \"./src/**/*.ts\"",
 		"lint:fix": "eslint --fix .",
 		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
-		"test": "jest SignerTool.test.ts",
+		"test": "jest",
 		"coverage": "jest --coverage",
 		"prepare": "husky install"
 	},
@@ -69,7 +69,7 @@
 	"jest": {
 		"preset": "ts-jest",
 		"testEnvironment": "node",
-		"testTimeout": 10000,
+		"testTimeout": 100000,
 		"testMatch": [
 			"**/?(*.)+(test).ts"
 		]

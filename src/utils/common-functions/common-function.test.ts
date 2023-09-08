@@ -1,9 +1,12 @@
-import { Resolver } from 'did-resolver'
-import Utils from './common-functions'
-import web from 'web-did-resolver'
 import axios from 'axios'
+import { X509Certificate } from 'crypto'
+import { Resolver } from 'did-resolver'
 import dotenv from 'dotenv'
-import { participantJson, holderDdoJson2 as holderDdoJson } from '../../assets'
+import web from 'web-did-resolver'
+
+import { holderDdoJson2 as holderDdoJson, labelLevelTestJSON, participantJson, serviceOfferingTestJSON } from '../../assets'
+import Utils from './common-functions'
+
 dotenv.config()
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
@@ -279,6 +282,144 @@ describe('commonFunction Testing', () => {
 			try {
 				const response = await Utils.verification(holderCred, proof, false, resolver)
 				expect(response).toBe(true)
+			} catch (error) {
+				isError = true
+			}
+			expect(isError).toBe(false)
+			jest.resetAllMocks()
+		})
+		it('Veracity calculated successfully', async () => {
+			let isError = false
+			try {
+				const {
+					validLPJSON: {
+						selfDescriptionCredential: { verifiableCredential }
+					},
+					veracityResponse
+				} = serviceOfferingTestJSON
+				const resolver = new Resolver(webResolver)
+				const response = await Utils.calcVeracity(verifiableCredential, resolver)
+				expect(response).toEqual(veracityResponse)
+			} catch (error) {
+				isError = true
+			}
+			expect(isError).toBe(false)
+			jest.resetAllMocks()
+		})
+		it('Certificate parsed successfully', async () => {
+			let isError = false
+			try {
+				// get the SSL certificates from x5u url
+				const x5u = 'https://ferrari.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem'
+				const x5uResp = {
+					validFrom: 'Aug 22 13:39:54 2023 GMT',
+					validTo: 'Nov 20 13:39:53 2023 GMT',
+					subject: {
+						jurisdictionCountry: null,
+						jurisdictionSate: null,
+						jurisdictionLocality: null,
+						businessCategory: null,
+						serialNumber: null,
+						country: null,
+						state: null,
+						locality: null,
+						organization: null,
+						commonName: 'ferrari.smart-x.smartsenselabs.com'
+					},
+					issuer: { commonName: 'R3', organization: "Let's Encrypt", country: 'US' }
+				}
+				const certificates = (await axios.get(x5u)).data as string
+				// getting object of a PEM encoded X509 Certificate.
+				const certificate = new X509Certificate(certificates)
+				const response = await Utils.parseCertificate(certificate)
+				expect(response).toEqual(x5uResp)
+			} catch (error) {
+				isError = true
+			}
+			expect(isError).toBe(false)
+			jest.resetAllMocks()
+		})
+		it('Duplicates removed', async () => {
+			let isError = false
+			try {
+				const { uniqueVC } = serviceOfferingTestJSON
+				const uniqueVC1: [] = JSON.parse(JSON.stringify(uniqueVC))
+				const response = await Utils.removeDuplicates(uniqueVC1, 'id')
+				expect(response).toEqual(uniqueVC)
+			} catch (error) {
+				isError = true
+			}
+			expect(isError).toBe(false)
+			jest.resetAllMocks()
+		})
+		it('ServiceOffering Compliance API called successfully', async () => {
+			let isError = false
+			try {
+				let { validSOComplianceReq } = serviceOfferingTestJSON
+				validSOComplianceReq = JSON.parse(JSON.stringify(validSOComplianceReq))
+				await Utils.callServiceOfferingCompliance(validSOComplianceReq)
+			} catch (error) {
+				isError = true
+			}
+			expect(isError).toBe(false)
+			jest.resetAllMocks()
+		})
+		it('Transparency calculation successful', async () => {
+			let isError = false
+			try {
+				let { transparencyCS } = serviceOfferingTestJSON
+				transparencyCS = JSON.parse(JSON.stringify(transparencyCS))
+				const response = await Utils.calcTransparency(transparencyCS)
+				expect(response).toBe(1.6)
+			} catch (error) {
+				isError = true
+			}
+			expect(isError).toBe(false)
+			jest.resetAllMocks()
+		})
+		it('Trust index calculation successful', async () => {
+			let isError = false
+			try {
+				const response = await Utils.calcTrustIndex(1, 1)
+				expect(response).toBe(1)
+			} catch (error) {
+				isError = true
+			}
+			expect(isError).toBe(false)
+			jest.resetAllMocks()
+		})
+		it('Label Level calculation successful', async () => {
+			let isError = false
+			try {
+				let { labelLevelCS } = labelLevelTestJSON
+				labelLevelCS = JSON.parse(JSON.stringify(labelLevelCS))
+				const response = await Utils.calcLabelLevel(labelLevelCS)
+				expect(response).toBe('L1')
+			} catch (error) {
+				isError = true
+			}
+			expect(isError).toBe(false)
+			jest.resetAllMocks()
+		})
+		it('Rule point key not found in criteria json - P5.2.1', async () => {
+			let errorMsg = ''
+			try {
+				let { invalidLabelLevelCS } = labelLevelTestJSON
+				invalidLabelLevelCS = JSON.parse(JSON.stringify(invalidLabelLevelCS))
+				await Utils.calcLabelLevel(invalidLabelLevelCS)
+			} catch (error) {
+				errorMsg = (error as Error).message
+			}
+			expect(errorMsg).toBe('Rule point key not found in criteria json - P5.2.1')
+			jest.resetAllMocks()
+		})
+		it('LabelLevel Calculated BC', async () => {
+			let isError = false
+			try {
+				let { labelLevelBC } = labelLevelTestJSON
+				labelLevelBC = JSON.parse(JSON.stringify(labelLevelBC))
+				const response = await Utils.calcLabelLevel(labelLevelBC)
+				expect(response).toBe('BC')
 			} catch (error) {
 				isError = true
 			}

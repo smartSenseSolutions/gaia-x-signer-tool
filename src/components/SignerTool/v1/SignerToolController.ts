@@ -274,23 +274,37 @@ class SignerToolController {
 			verifiableCredential.push(serviceOffering)
 
 			const { credentialSubject: serviceOfferingCS } = serviceOffering
-			// Extract VC of dependant Services & Resources
+			const vcsMap = new Map()
+
+			// Extract VC of dependant Services
 			// eslint-disable-next-line no-prototype-builtins
 			if (serviceOfferingCS.hasOwnProperty('gx:dependsOn')) {
-				// const resolvableLinks = [...serviceOfferingCS['gx:dependsOn'], ...serviceOfferingCS['gx:aggregationOf']]
-				const resolvableLinks = [...serviceOfferingCS['gx:dependsOn']]
-				const vcIDs: string[] = []
-				for (const { id: vpLink } of resolvableLinks) {
-					if (!vcIDs.includes(vpLink)) {
-						vcIDs.push(vpLink)
-						const {
-							selfDescriptionCredential: { verifiableCredential: childVC }
-						} = (await axios.get(vpLink)).data
-						verifiableCredential = [...verifiableCredential, ...childVC]
-					}
+				try {
+					await Utils.getInnerVCs(serviceOffering, 'gx:dependsOn', ['gx:ServiceOffering'], vcsMap)
+				} catch (error) {
+					res.status(STATUS_CODES.BAD_REQUEST).json({
+						error: (error as Error).message,
+						message: AppMessages.SD_SIGN_FAILED
+					})
+					return
 				}
-				verifiableCredential = Utils.removeDuplicates(verifiableCredential, 'id')
 			}
+			/* Extract VC of aggregated Resources
+			// eslint-disable-next-line no-prototype-builtins
+			if (serviceOfferingCS.hasOwnProperty('gx:aggregationOf')) {
+				try {
+					await Utils.getInnerVCs(serviceOffering, 'gx:aggregationOf', ['gx:Resource'], vcsMap)
+				} catch (error) {
+					res.status(STATUS_CODES.BAD_REQUEST).json({
+						error: (error as Error).message,
+						message: AppMessages.SD_SIGN_FAILED
+					})
+					return
+				}
+			}*/
+
+			verifiableCredential.push(...Array.from(vcsMap.values()))
+			verifiableCredential = Utils.removeDuplicates(verifiableCredential, 'id')
 
 			// Create VP for service offering
 			const selfDescriptionCredentialVP = Utils.createVP(verifiableCredential)

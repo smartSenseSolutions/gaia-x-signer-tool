@@ -90,7 +90,6 @@ class SignerToolController {
 			// const complianceCredential = vcs
 			logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
 
-			// // await publisherService.publishVP(complianceCredential);
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
 				complianceCredential: complianceCredential
@@ -206,7 +205,6 @@ class SignerToolController {
 			// const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
 			// logger.info(__filename, 'GXLegalParticipant', complianceCredential? '🔒 SD signed successfully (compliance service)':'❌ SD signing failed (compliance service)', req.custom.uuid)
 
-			// // await publisherService.publishVP(complianceCredential);
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
 				complianceCredential: {}

@@ -1,76 +1,139 @@
-# Smart-X-Signer by smartSense
+# Gaia-X-Signer-Tool by smartSense
 
-This tool is to showcase the capability of smartSense in context with the Gaia-X ecosystem.
-This MVP covers below use cases:
+The Gaia-X-Signer-Tool by smartSense is a powerful application designed to facilitate seamless onboarding into the Gaia-X ecosystem. This tool empowers users to interact with the Gaia-X framework through a variety of essential use cases.
 
-1. Create Web Decentralized Identifiers(did)
-2. On-boarding in Gaia-x
-   1. Create a legal participant
-   2. Create a service offer
-3. Create a Verifiable credential
-4. Create a Verifiable presentation
-5. Verify a Verifiable credentials and Verifiable presentations
+## Use Cases
 
-## Run application
+The Gaia-X-Signer-Tool covers the following vital use cases:
 
-change node version 16.13.1
+1. **Create Web Decentralized Identifiers (DID):** Generate decentralized identifiers for web domains, enabling easy integration with the Gaia-X ecosystem.
 
+2. **Verify Web Decentralized Identifiers (DID):** Verify the authenticity of web-based decentralized identifiers, ensuring robust data security.
+
+3. **Create Legal Participants on Gaia-X:** Streamline the process of registering legal participants within the Gaia-X network.
+
+4. **Create Service Offers on Gaia-X:** Effortlessly create and manage service offerings as integral components of the Gaia-X ecosystem.
+
+5. **Create Resources on Gaia-X:** Simplify the creation and management of resources within the dynamic Gaia-X environment.
+
+6. **Create Label Levels on Gaia-X:** Generate label levels to enhance categorization and organization within the Gaia-X ecosystem.
+
+7. **Verify Self-Description and Gaia-X Compliance:** Verify the credibility of self-descriptions within Gaia-X and assess Gaia-X Compliance Credentials.
+
+## Getting Started
+
+To run the Gaia-X-Signer-Tool application, follow these steps:
+
+1. Make sure you have Node.js version 18.17.0 installed.
+
+2. Copy the example environment file and configure your environment settings:
+   
 ```bash
-mv env-example .env
-npm ci
-npm run dev
+cp env-example .env
 ```
 
+3. Install the required dependencies:
+```bash
+npm ci
+```
+4. Launch the development server:
+```bash
+npm run dev
+```
+5. Access Swagger Documentation
+```bash
+http://localhost:8000/docs/
+```
 ## Tools and Technologies
 
 1. NodeJS
 2. ExpressJS
-3. Swagger API Doc
+3. Swagger Doc
 
 ## Flow
 
 ### Create a Web DID
 
-- First you will need a domain setup for whihc you want to create a did.
-- You will also need a ssl certificate setup for the same domain.
-- You certificate chain should be accessible at "https://${your-domain}/.well-known/x509CertificateChain.pem"
+- First User will need a domain setup for which you want to create a did.
+- User will also need a ssl certificate setup for the same domain.
+- User certificate chain should be accessible at your provided url else system will fetch from "https://your-domain/.well-known/x509CertificateChain.pem" or "https://domain/tenant/x509CertificateChain.pem"
 - The create did api will make a did.json for the provided domain name.
-- You will have to host this did.json on "https://${your-domain}/.well-known/did.json"
+- User will have to host this did.json on "https://your-domain/.well-known/did.json" or "https://domain/tenant/did.json"
 
 ![Create Web DID Flow](docs/create-did.png?raw=true)
 
-### onBoardToGaiax
+### Verify a Web DID
+- User need to provide web did, verification method and private key for verify
+- System will resolve did.json from provided did
+- System will find provided verification method in did.json
+- System will sign sample text with private key
+- After that system will verify sample text hash with verification method
+- System will share result of verification
 
-- We have two templateId supported to make Gaia-x compliant credentials (LegalParticipant & ServiceOffering)
-- You can request for either of this credentials
-- The tool will make these credentials and also fetch Gaia-x compliance credentials for the same.
+![Verify Web DID Flow](docs/verify-web-did.png?raw=true)
+### Sign VC and Compliance to Gaia-X
+- User will request vcs with issuer, verification method and private key
+- System will fetch all depended vcs 
+- System will sign vcs
+- System will also verify signature with verification method
+- System will req for compliance credentials with all vcs
+- Compliance service will response with compliance credential
+- System will return self-description vcs and compliance credential to user
+-  User will have to host this self-description vcs and compliance credential at credential subject id url which is mentioned in requested vc.
 
-![onBoardToGaiax](docs/onBoardToGaiax.png?raw=true)
 
-### Create a Verifiable presentation
+![onBoardToGaiax](docs/issue-creds.png?raw=true)
 
-- An array of claims (VCs) along with private key URL and holder DID are taken as request parameters.
+### Verify a Self Description and Compliance Credential
+- User will request with vc url and policies
+- System will validate vc type with allowed types (gx:LegalParticipant,gx:ServiceOffering,gx:VirtualDataResource,gx:PhysicalResource,gx:VirtualSoftwareResource) 
+- System will validate policy with allowed policies (integrityCheck,issuerSignature,complianceSignature,complianceCheck,complianceExpired)
+- After that system will check each policy individually
+- System will share result of verification
+![verify-signature](docs/verify-vc.png?raw=true)
 
-- The claims are individually verified using the process described below for verification of verifiable credential and verifiable presentation.
+### Service Offering VC and Compliance
+- Users will request the API service for creating service offering in wizard.
+- API service will create unsigned VC JSON for service offering by adding required data and requests Signer Tool Service for, Self Sign the VC.
+- Once the VC is signed, Signer Tool Service  will prepare VP(verifiable presentation) of service offering and send Compliance service for compliance.
+- Once the compliance is done, Signer tool service will respond to API Service with Self Signed Service offering VP & Compliance Data for that service offering.
+- API Service will create a resolvable link for this service offering data and stores the link in the DB.
 
-- If the claims are valid, a signed Verifiable Presentaion object is returned using the provided private key. The verified claims are signed and the proof is attached in the presentation.
+![create-label-level](docs/create-service-offering.png?raw=true)
 
-![createVP](docs/create-vp.png?raw=true)
+### Label Level VC and Compliance
+- Users will request the API service for creating service offering in wizard along with label level data.
+- API service will create unsigned VC JSON for label level by adding required data and requests Signer Tool Service for,
+        <ol>
+            <li> Label level calculation</li> 
+            <li> Self Sign VC (unsigned → signed)</li> 
+        </ol>
+- Once the VC is signed, Signer Tool Service  will request Compliance service for compliance.
+- Once the compliance is done, Signer tool service will respond to API Service with Signed VC & Compliance Data.
+- API Service will create a resolvable link for this label level data  stores the link in the DB.
 
-### Verify a Verifiable credentials and Verifiable presentations
+![create-label-level](docs/create-label-level.png?raw=true)
 
-- A verifiable credential or a verifiable presentation is passed as a request parameter for verification.
+### Get Trust Index
 
-- The passed object is verified by initially checking the proof type is valid. The DDO is resolved from the verification method and the public key is retreived from the DDO.
-
-- The certificate chain which is retreived from x5u in the public key is checked to ensure that the issuer is GaiaX Trust anchor. Also, the public key of the certificate and DDO are ensured to be the same.
-
-- Afterward the verification of credential is performed by canonizing the credential followed by hashing using the public key of the issuer. The hash is added in place of `..` in the proof, verified and decoded using the public key of the issuer. If the decoded result is the same as the proof, the passed credential/ presentation is valid.
-
-- If a verifiable presentation is passed, the claims in the presentation are also verified similarly.
-
-![verify-signature](docs/verify-sig.png?raw=true)
+- Signer tool will calculate Trust Index Using *Veracity* and *Transparency*.
+- The formula for calculating trust index is
+```
+   trust_index = mean(veracity, transparency)
+```
+- Veracity will be calculated by the sum of length of keychain of holder,
+- The formula for calculating veracity is,
+```
+    veracity = sum(len(keychain)
+```
+- Transparency will be calculated using the number of optional and mandatory fields present in the service offering credential subject,
+- The formula for calculating transparency is,
+```
+    transparency = count(properties) / count(mandatoryproperties)
+```
+- Using the value of veracity and transparency, we'll calculate trust index.
 
 ## Known issue or improvement
 
-1. Only allowed templates are available for VC and VP.
+1. Resource Compliance support pending
+2. Label-level Compliance support pending 

@@ -25,19 +25,11 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 routes(app)
 // order : error , warn , info,  verbose, debug, silly
 app.post('/v1/update-log', AppValidation.Log, checkResults, async (req: Request, res: Response) => {
-	try {
-		logger.setConsoleLevel(req.body.logLevel)
-		logger.setFileLevel(req.body.logLevel)
-		return res.status(STATUS_CODES.OK).json({
-			message: 'Log Updated'
-		})
-	} catch (error) {
-		logger.error(__filename, 'updateLog', `Fail to update Log Level to ${req.body.logLevel}`, req.custom.uuid)
-		return res.status(STATUS_CODES.BAD_REQUEST).json({
-			error: error,
-			message: 'Log Updated failed'
-		})
-	}
+	logger.setConsoleLevel(req.body.logLevel)
+	logger.setFileLevel(req.body.logLevel)
+	return res.status(STATUS_CODES.OK).json({
+		message: 'Log Updated'
+	})
 })
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 

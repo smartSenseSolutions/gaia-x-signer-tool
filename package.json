@@ -9,7 +9,7 @@
 		"lint:check": "eslint \"./src/**/*.ts\"",
 		"lint:fix": "eslint --fix .",
 		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
-		"test": "jest SignerTool.test.ts",
+		"test": "jest",
 		"coverage": "jest --coverage",
 		"prepare": "husky install"
 	},
@@ -33,6 +33,7 @@
 		"kafkajs": "^2.2.4",
 		"lint-staged": "^13.2.3",
 		"media-typer": "^1.1.0",
+		"node-vault": "^0.10.2",
 		"swagger-ui-express": "^5.0.0",
 		"uuid": "^9.0.0",
 		"web-did-resolver": "^2.0.23",
@@ -68,6 +69,7 @@
 	"jest": {
 		"preset": "ts-jest",
 		"testEnvironment": "node",
+		"testTimeout": 100000,
 		"testMatch": [
 			"**/?(*.)+(test).ts"
 		]

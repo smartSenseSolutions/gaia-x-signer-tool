@@ -15,5 +15,6 @@ router.post(ROUTES.V1_APIS.VERIFY, SignerToolValidations.Verify, checkResults, S
 router.post(ROUTES.V1_APIS.CREATE_WEB_DID, SignerToolValidations.CreateWebDID, checkResults, STController.CreateWebDID)
 router.post(ROUTES.V1_APIS.VERIFY_WEB_DID, SignerToolValidations.VerifyWebDID, checkResults, STController.VerifyWebDID)
 router.post(ROUTES.V1_APIS.GET_TRUST_INDEX, SignerToolValidations.TrustIndex, checkResults, STController.GetTrustIndex)
+router.post(ROUTES.V1_APIS.REGISTRATION_NUMBER, SignerToolValidations.RegistrationNumber, checkResults, STController.ValidateRegistrationNumber)
 
 export default router

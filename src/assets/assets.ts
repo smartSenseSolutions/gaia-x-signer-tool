@@ -393,13 +393,57 @@ export const serviceOfferingTestJSON = {
 	validReqJSON: {
 		issuer: 'did:web:ferrari.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:ferrari.smart-x.smartsenselabs.com',
-		privateKey:
-			'LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRQ2ZzYy9rVUNBblZnL2QKOStMRHdCVFZyUnptcW5MaFJBUFlTeExFTjd3UlZlWjFyZHVkZFFkc3FxbnVEUVdyOThqbmF4WjNFZldIcE1kSwpGbkJWQ1F2dzM2NjZQeWJhVUg0UE5NUmNuMURabllZUlEzN2U2ZnM3WktQcUtrS3lpdElZVURCZlN1VHhEWjV1ClYvbHZvN1BrMXp3Y3YyN0V0Wmo2N2tub2JBRmxUWEZTbWVnRmQzelZZVHExRktZZ2VXRVBmL2FKS0I4NEhLc20KTUN4YWd3RXNuS0txOVUyam1SeUhYUmxEVGdWSEVydU5qZ0hDQlNPY2dkT244dzdQTFlNMDN5TEgxQUFpQXBObwpQTmRJa2xtS2NSODJkMmcyYWVNNmFzUThuQ2RWZ0RLUGpDQnpOMUhlUzBWK0hlNHRpdi8reG0vYlByelVETzFsCitWWUo0MXAvQWdNQkFBRUNnZ0VBQVA3MDlLQ1ViWW10d1lYL1pESTRuN3owd1I3b0x2dXVxKzg5SkMzcHdxeEQKdGQ5QjVaQ3Yvc0RIaS9VT3MrNitoRCttaHVQaEVLcGpid0ZEcFZjL2VPR3VySS9hT0Q1Smh5V3BtU1RNeHdyVQpwZTZ5WHc0QU5GZm5BZzZRNzUyTkJPQnpVckQ5amlLd3JFWm8xVEtsQW9zeHN0ZndGOWd1V0xDMlp2c2d3bjNiClFoT3hhdldHcW9qa29xUnJJV1R2VVNNSzVpQkIyenNGWENHbmY0SmFPZjFjY3VJd0gwQ3lFREtDSHJKaUJjU08KeGxFUk5PQUFicWlGc1I0QU5ldjdZWjFqRk1JU2hJNXRyc0xnSC9LSkE4T21pSWVvWjVPcHV2L3kvaUtyRU9QQgpIdzA0bVNJQ1BXUW5SelRycDVneDRTdUJ5VGVsRTh0aFFNVXUwV0p5cVFLQmdRREtmOWVYYWtpeGJYdFdSQ0FHCmJzR1B1elNVK1FuMUp6WVpRdkE1NnEyWnhKT3lUTXI0aEpsN081UEZNdmtpT2tRWnpGdXZXL3VlaFNjbFRkUi8Kc0RnbTNoMDB0KzFPOHRYUU0xVHdibks1MWhRaEZ3RlVLb2xkc1lmNlJ6dk9MRy9DYmZiZld0Rkd4NFR0aFJLagp0T2ZUMTFKZ3phTS9VeGxUamszaE41NXlpUUtCZ1FESjR0ZmZiWFFlVGYxc2VSNXVtaWxzSFlJKzk2QmNXOUFMCjNNSnlOLzNSdWRyVTlHclExY2FBbmE4N1F6cEFrVk05MlZDVGpFT00rOW0vTkJCTlBVR3h4bWdQN2lWRFlqQWMKdVZRckVscWJMR0g3QUN4KytsMXZpYWlPZ3Q4VnpoL2l1WkpRaThWR0ZUd2tIVDk1UXRNaHRxRzI4QS8vVVpSOQpGZ3VacW1sQ3h3S0JnUURJK3F0cVAzV1lpNVhQSDl3OUppMzhUb3c0a3hlNzlrZnVPSTZlblBuaDFNWFdQL3R2ClBvUHFXRTRvZVpma3pibUxkVlZHTFdBRmpCZzNJUkVZRGprYzhuUkFQNUJMUEI3VC9pNStWdENNK3htTllmelMKb1VrbThhMkl6S3hoeTU2OGRWR0JpdXlNZURmSldic1BPZHloVjJNT2F1cHNUamlqd21ndmNIbFZLUUtCZ0NRYQpkUkIzdW5SUTdpa2YzOWxYcUdDMVJqMk1leGtKTWtOc3p6a3QyaTVQVmxzTytxc3VEN21nZVYzWHYrc2NFZzdWCmRodHMwZ2U4WWt4WE96TVU2VktwY0tLb3EvRkk5ZUd0SXVndytCTVg5TTIyVWo3QzkwS2pFNG1vemN4UWVGTkwKYkdjTEY5UllwOUN0aWxSZEp2UzRmR01DdTFtbGRUQ0phTG1xUi9peEFvR0FaeGhlcXR0UHVrWUU4ditJcjRCWQp4VjRIVFF1NnpHOEdoeFplVWJnOW00aWdBR09HbXBITE5uWml4aUZaZ0pDbFpzVmtnd3Avd3h5bWJlQStnNW9lCk5zWm02T2I1R2FaRmFPNlZuVHlSdlVrWS9xVmNjRlBzUSt0ZEVIUG5OVVhGNHF3cjJWVERCUGk0czRjTDJ1bUEKS1h2YnV3ZVVzRmE4YjlSTTVUVm16Rjg9Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
 		vcs: {
 			serviceOffering: {
 				type: 'VerifiableCredential',
 				id: 'did:web:ferrari.smart-x.smartsenselabs.com',
 				issuer: 'did:web:ferrari.smart-x.smartsenselabs.com',
+				issuanceDate: '2023-08-23T16:30:57.209178226Z',
+				credentialSubject: {
+					'gx:termsAndConditions': {
+						'gx:URL': 'https://aws.amazon.com/service-terms/',
+						'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c'
+					},
+					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi_policy.json'],
+					'gx:dataAccountExport': {
+						'gx:requestType': 'API',
+						'gx:accessType': 'physical',
+						'gx:formatType': 'pdf'
+					},
+					'gx:aggregationOf': [
+						{
+							id: 'https://wizard-api1.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_86e8a7a9-c341-4049-abc7-dcf20e1736fe.json'
+						}
+					],
+					'gx:dependsOn': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_S7GZ.json'
+						}
+					],
+					'gx:dataProtectionRegime': 'GDPR2016',
+					type: 'gx:ServiceOffering',
+					'gx:labelLevel': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_52faca44-8ee4-4954-ad99-1043542f9bf1.json'],
+					'gx:providedBy': {
+						id: 'https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/participant.json#0'
+					},
+					id: 'https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi.json',
+					'gx:name': 'Service_soft_level',
+					'gx:description': 'test service data'
+				},
+				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1']
+			}
+		}
+	},
+	invalidReqJSON: {
+		issuer: 'did:web:suzuki.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:suzuki.smart-x.smartsenselabs.com',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		vcs: {
+			serviceOffering: {
+				type: 'VerifiableCredential',
+				id: 'did:web:suzuki.smart-x.smartsenselabs.com',
+				issuer: 'did:web:suzuki.smart-x.smartsenselabs.com',
 				issuanceDate: '2023-08-23T16:30:57.209178226Z',
 				credentialSubject: {
 					'gx:termsAndConditions': {
@@ -748,8 +792,8 @@ export const serviceOfferingTestJSON = {
 		type: ['VerifiableCredential'],
 		id: 'https://compliance.lab.gaia-x.eu/development/credential-offers/a8ad7ca1-6cd8-4f65-aece-495cec34bc4b',
 		issuer: 'did:web:compliance.lab.gaia-x.eu:development',
-		issuanceDate: '2023-08-25T12:47:09.776Z',
-		expirationDate: '2023-11-23T12:47:09.776Z',
+		issuanceDate: '2023-09-04T11:04:03.179Z',
+		expirationDate: '2023-12-03T11:04:03.179Z',
 		credentialSubject: [
 			{
 				type: 'gx:compliance',
@@ -1437,6 +1481,49 @@ export const serviceOfferingTestJSON = {
 			}
 		},
 		message: 'Service offering SD signed successfully'
+	},
+	transparencyCS: {
+		'gx:termsAndConditions': {
+			'gx:URL': 'https://aws.amazon.com/service-terms/',
+			'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c'
+		},
+		'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi_policy.json'],
+		'gx:dataAccountExport': {
+			'gx:requestType': 'API',
+			'gx:accessType': 'physical',
+			'gx:formatType': 'pdf'
+		},
+		'gx:aggregationOf': [
+			{
+				id: 'https://wizard-api1.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_86e8a7a9-c341-4049-abc7-dcf20e1736fe.json'
+			}
+		],
+		'gx:dependsOn': [
+			{
+				id: 'https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_Z5RS.json'
+			}
+		],
+		'gx:dataProtectionRegime': 'GDPR2016',
+		type: 'gx:ServiceOffering',
+		'gx:labelLevel': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_52faca44-8ee4-4954-ad99-1043542f9bf1.json'],
+		'gx:providedBy': {
+			id: 'https://ferrari.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/participant.json'
+		},
+		id: 'https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi.json',
+		'gx:name': 'Service_soft_level',
+		'gx:description': 'test service data'
+	},
+	x5u: {
+		subject: 'CN=ferrari.smart-x.smartsenselabs.com',
+		subjectAltName: 'DNS:ferrari.smart-x.smartsenselabs.com',
+		issuer: "C=US\nO=Let's Encrypt\nCN=R3",
+		infoAccess: 'OCSP - URI:http://r3.o.lencr.org\nCA Issuers - URI:http://r3.i.lencr.org/\n',
+		validFrom: 'Aug 22 13:39:54 2023 GMT',
+		validTo: 'Nov 20 13:39:53 2023 GMT',
+		fingerprint: 'B9:06:F9:81:01:87:B7:AB:9C:E2:2C:DB:66:D1:3D:00:38:87:1A:2A',
+		fingerprint256: '9C:70:44:CE:74:C7:B0:13:2A:06:FB:C0:BC:4C:0A:DF:FE:3F:4F:EC:61:07:AA:92:F7:B5:D0:EC:46:55:88:7B',
+		keyUsage: ['1.3.6.1.5.5.7.3.1', '1.3.6.1.5.5.7.3.2'],
+		serialNumber: '036DF9E324D9C4BC85836AF4E8F33C676CA5'
 	}
 }
 
@@ -1473,8 +1560,7 @@ export const legalParticipantTestJSON = {
 	validReqJSON: {
 		issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio50.smart-x.smartsenselabs.com',
-		privateKey:
-			'LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRQ3I4aFpRSGM4emZaN3MKTTlJRWt6eld2SFlLY0hsQUwraFhISXlINEtSL1BVTzJrUlg5RFlGL0J4RnhreUViWUJaR3NObTY5NXc0bXJ5RQpFUUtiVytldGhKRDE4bjhrNVpnbERIV29zZmpLMDVVTGxSK3dWYzEwWXB6eUdlSmlsWHBCWkhuc0tnQ3JpUlcvClJMQXMzVU1EVWpMQkJmUVBrOTlWSlhJRTlTeEJpb2FVYTRDL0d6YXhVdzQyM3hiMHF4Q1VIWHJ4VktQS2sra0QKdFFESmNFK3k5T3dFZjQ2ZjNuRFVYdk84VTZKTUp6dUNJTWxsWDdHVkRLNWdGdlE4TU9Pa3hPdnBpUXV1ZlB1ZwpOSXMzSnJNQmF6cDVvWkVYK3BESFRDOTZ6RHVCVko4MVU0OE9KWVl4aWQzN05lTXJKTk9jMjZlUWlpbm44SjZNCmZLOENNU3hWQWdNQkFBRUNnZ0VBSWR0VzBtcTBPRzdWWXF3bmYvZ2dCQ1p5MWNaazBhTTlUQjNXZkJEYlF5U2sKbHlmRlhTRVNMUm1Pc1Q3bngzU3BuanpIZXAyeitKOWJYR1BmRUFsT09xZitSVGQ5R3A1TTBZcTlCajBaQUpNZAo1M3h6RTIwcHVlK0srTTdvK1VGMm83YXRuVGQrRDBpOGEvK1I4eHVVVE95Y0NzN3B5a0Z6T2RoWU5hcXpEcXB1CkJ4WWFiSnRDMEpSN21OMHk2ZWltNitDeEtleUloc2FRS05Cd21jMklHclZMN0o3TFgwbVFINXF4MWJBYjY0T0gKU3gxb2VxOVdnL1dRN3ZVTG0vaTEwc1REMmxMWmNqVGdYK1JsVjkrWm1JTXErNElwSjZsUUlTaU1jeDIxZkVSawpzdzdCeC9WZ0pKbnlwUlB2S0wwWDhIMER0aG94WXRqSGZUQXZCYmZDc1FLQmdRRE44NXRlSU1QRm1VZ01Qd1M0Cm54dzcvMnA5cHF1Z09vczl6TlR4elhIV012MkVRMVRXRmExVHk5SDJuZnAydFNzaUNPSVNBcnU1Sm9Va3ZCNXEKbVFhVFIrWlpDSWdUNE5iVTZmZUNEZTRMUWZ5eUtxQm5KdU5BUmVlMExuSGx4UHEzTU5DMEU3ZE5BWU5xbE04agpDWXBCTy8zUHhVU014SlhMNWc3K1orMzRDUUtCZ1FEVnV2Sng1YWZZejNNZnh5S0RrVzJHazd3YXEyTDNmcmFtClU2TnZadjl3UjhSb3N0SFRwWmx4aFRKZXFoNU1lcFBrNDluQ09aYmRDaGtGcGN2ZStHbTEzOXUyOCtBcm0vZmEKUXJuZk5VaXg1eEtuRlhZaXR0MzNnemJOYWlCcWJXTm1SSlEzaExmcmNWbWQ3QjQ4M3BOeVIyQW5zd2dnUkVybAphdVFlYUhrczdRS0JnR296bThPL081VHl4UDlqbzhpY2E4L1lsdzV5V3dCR0VEVnZJY1FMQUEvSHZZbHR1eHFtCmxQbW9HZjZGV25uS1ZKSzVaL0tIckV2K3ZCdkVVaDhBQ0M3OG5hRDkwRVlINUdCb3dmUXp3TFBYZERwZjF0VTYKYldkZ1pPbzZKUXVxTnVzdVpnRG1SZGlVMWpLb3grTzJjSy9SQXNJWVpJLytjNHh3ZHZ6amxRZ1pBb0dCQUxDZwpubHVoL3VRZURIWG1pNDlQVDhRM3N1d1hWdUpSeFlBTy9ySEIzTGRkbCtNdVpGa1VNWXF2R01GQ3RXZGVwWG96CkVuS0FSVHpHYTRkUFRQd25MclV2R3RSSEZxcnphaERsczlYU294RGlkWGUvTkxIYmpmUk9hNnUyV0xPYlV0bmgKTXR2dXdrL0FqTjhGa3JlYStSOG4vVDdScFpXRTJxQmRoY2ZiYnNqQkFvR0FESys0NmJtdHVJd0FrRytqNWJsYQpxSXBPRFB2QldiQzk5VnJUVU5DRGNRbDZSRVQ3NjJzdlkya2cyNlFtNUZkdTFSMDA3SHE0aXdHSmNraHUvWDlaCm81NVk4STkwVE1PU2Nvb0FLaEIrc1ZxYmlXUGhwQTlaOXRSUlRXRzQ2WGg2RWtxaGRMSTB0dWJ6eS96aUFLT1QKK052UVdxNE83Q05aTDdBZ2xMR2ZHd0U9Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
 		vcs: {
 			legalParticipant: {
 				'@context': [
@@ -1755,6 +1841,363 @@ export const legalParticipantTestJSON = {
 	}
 }
 
+export const resourceTestJSON = {
+	invalidIssuerJSON: {
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	},
+	invalidVerificationMethodJSON: {
+		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	},
+	invalidResource: {
+		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	},
+	invalidCredentialSubjectResource: {
+		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		vcs: {
+			resource: {}
+		}
+	},
+	invalidResourceType: {
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+		vcs: {
+			resource: {
+				credentialSubject: {
+					type: 'gx:invalid'
+				}
+			}
+		}
+	},
+	validVirtualDataResourceReqJSON: {
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+		vcs: {
+			resource: {
+				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'],
+				type: ['VerifiableCredential'],
+				id: 'did:web:casio34.smart-x.smartsenselabs.com',
+				issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+				issuanceDate: '2023-08-07T16:04:30.307219451Z',
+				credentialSubject: {
+					'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+					id: 'https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json',
+					type: 'gx:VirtualDataResource',
+					'gx:name': 'Test Resource 2',
+					'gx:description': 'Test Resource 2 description',
+					'gx:aggregationOf': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json'
+						}
+					],
+					'gx:copyrightOwnedBy': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+						}
+					],
+					'gx:license': ['http://smartproof.in/.well-known/license'],
+					'gx:policy': ['https://example.com'],
+					'gx:producedBy': {
+						id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+					},
+					'gx:exposedThrough': ['https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2'],
+					'gx:containsPII': true
+				}
+			}
+		}
+	},
+	validPhysicalResourceReqJSON: {
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+		vcs: {
+			resource: {
+				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'],
+				type: ['VerifiableCredential'],
+				id: 'did:web:casio50.smart-x.smartsenselabs.com',
+				issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
+				issuanceDate: '2023-08-07T16:04:30.307219451Z',
+				credentialSubject: {
+					'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+					id: 'https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json',
+					type: 'gx:PhysicalResource',
+					'gx:name': 'Test Resource 2',
+					'gx:description': 'Test Resource 2 description',
+					'gx:aggregationOf': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json'
+						}
+					],
+					'gx:maintainedBy': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+						}
+					],
+					'gx:ownedBy': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+						}
+					],
+					'gx:manufacturedBy': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+						}
+					],
+					'gx:locationAddress': [
+						{
+							'gx:countryCode': 'FR-DE'
+						},
+						{
+							'gx:countryCode': 'AA-DE'
+						}
+					],
+					'gx:location': [
+						{
+							'gx:gps': '35.89421911 139.94637467'
+						},
+						{
+							'gx:gps': '31.89421911 133.94637467'
+						}
+					]
+				}
+			}
+		}
+	},
+	validVirtualSoftwareResourceReqJSON: {
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+		vcs: {
+			resource: {
+				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'],
+				type: ['VerifiableCredential'],
+				id: 'did:web:casio50.smart-x.smartsenselabs.com',
+				issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
+				issuanceDate: '2023-08-07T16:04:30.307219451Z',
+				credentialSubject: {
+					'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+					id: 'https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json',
+					type: 'gx:VirtualSoftwareResource',
+					'gx:name': 'Test Resource 2',
+					'gx:description': 'Test Resource 2 description',
+					'gx:aggregationOf': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json'
+						}
+					],
+					'gx:copyrightOwnedBy': [
+						{
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+						}
+					],
+					'gx:license': ['https://wizard-api.smart-x.smartsenselabs.com/license'],
+					'gx:policy': ['https://example.com']
+				}
+			}
+		}
+	},
+	successResponse: {
+		data: {
+			completeSD: {
+				selfDescriptionCredential: {
+					'@context': 'https://www.w3.org/2018/credentials/v1',
+					type: ['VerifiablePresentation'],
+					verifiableCredential: [
+						{
+							'@context': ['https://www.w3.org/2018/credentials/v1', 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'],
+							type: ['VerifiableCredential'],
+							id: 'did:web:casio34.smart-x.smartsenselabs.com',
+							issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+							issuanceDate: '2023-08-07T16:04:30.307219451Z',
+							credentialSubject: {
+								'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+								id: 'https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json',
+								type: 'gx:VirtualDataResource',
+								'gx:name': 'Test Resource 2',
+								'gx:description': 'Test Resource 2 description',
+								'gx:aggregationOf': [
+									{
+										id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json'
+									}
+								],
+								'gx:copyrightOwnedBy': [
+									{
+										id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+									}
+								],
+								'gx:license': ['http://smartproof.in/.well-known/license'],
+								'gx:policy': ['https://example.com'],
+								'gx:producedBy': {
+									id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+								},
+								'gx:exposedThrough': ['https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2'],
+								'gx:containsPII': true
+							},
+							proof: {
+								type: 'JsonWebSignature2020',
+								created: '2023-08-19T11:12:58.984Z',
+								proofPurpose: 'assertionMethod',
+								verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+								jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..ZrXhSmUDGhAIBfSYQdpOe2lfkKue_U_d2cORJtKH-q_yE8v5DC8-_zsP-YS0hSz2Etl4MM1zMZJkZqBA4NOx6HNQEsJYPz_sh_ghy1uy1iHQEo78potnZOqea1cuGKLxmfA5xukHYvlAzQmXIGZrb5XlREdtn0Jv50Vb_XUPvCxk2-e4BlvfmFtDuRmkZE3dLo4Dx6fzW15aXoS328gw25pR2A0NzaMBrUJu1VL3sapcvB2gjwX-irDHHh423KVuzgPIBpru1eA1rPJxLd6nCs2Y9HrlXf_656DM00cM1bv7WkG_3IxjOUvJmfGPbxRXOyYCXPOjIzkSMFoFm2JB7g'
+							}
+						},
+						{
+							credentialSubject: {
+								'gx:legalName': 'Green World',
+								'gx:headquarterAddress': {
+									'gx:countrySubdivisionCode': 'BE-BRU'
+								},
+								'gx:legalAddress': {
+									'gx:countrySubdivisionCode': 'BE-BRU'
+								},
+								id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0',
+								type: 'gx:LegalParticipant',
+								'gx:legalRegistrationNumber': {
+									id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1'
+								}
+							},
+							'@context': [
+								'https://www.w3.org/2018/credentials/v1',
+								'https://w3id.org/security/suites/jws-2020/v1',
+								'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+							],
+							type: ['VerifiableCredential'],
+							id: 'did:web:casio50.smart-x.smartsenselabs.com',
+							issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
+							issuanceDate: '2023-08-07T16:04:30.307219451Z',
+							proof: {
+								type: 'JsonWebSignature2020',
+								created: '2023-08-07T10:34:33.838Z',
+								proofPurpose: 'assertionMethod',
+								verificationMethod: 'did:web:casio50.smart-x.smartsenselabs.com',
+								jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..btTzZ3J0O-DcSe8rumxVLBF1jIrHFmonLQ8FWgvrl0ueQGt9VOnRZF5RFN6fHm7Sgx2N4O9EdTFwvV5II-l4nLKK6qHd_f97zNsonL7BRxQ0RB4GpbE6m0pR_XljCzKIQG6RZVyZTAeOdsyWBzGm1M_2hnmTLkBMB33GAJW8fI1d_ou4KbxUfkPiFCfnTUPM3uP5WXGuqC2XqUInL5NJKFZGD6Ld1l6PzPqEGYn-m1UCGQyh6w7l-2NVRT-FHpo3_HHY-xU7RX2F7tDZffCOTbOeiV15xktZWj233BFrcvhBHZ0a14IfifTVFUH0GYmwUPMF1BSS7LCNldFetkcCWQ'
+							}
+						},
+						{
+							'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
+							type: 'VerifiableCredential',
+							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1',
+							issuer: 'did:web:registration.lab.gaia-x.eu:development',
+							issuanceDate: '2023-08-07T10:34:32.101Z',
+							credentialSubject: {
+								'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+								type: 'gx:legalRegistrationNumber',
+								id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1',
+								'gx:leiCode': '9695007586GCAKPYJ703',
+								'gx:leiCode-countryCode': 'FR'
+							},
+							evidence: [
+								{
+									'gx:evidenceURL': 'https://api.gleif.org/api/v1/lei-records/',
+									'gx:executionDate': '2023-08-07T10:34:32.101Z',
+									'gx:evidenceOf': 'gx:leiCode'
+								}
+							],
+							proof: {
+								type: 'JsonWebSignature2020',
+								created: '2023-08-07T10:34:33.102Z',
+								proofPurpose: 'assertionMethod',
+								verificationMethod: 'did:web:registration.lab.gaia-x.eu:development#X509-JWK2020',
+								jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Jdx7tQNdCdFc5Gnp1gx8SJ5rqKYAqGXzqEhOJgMnXpmn4MFZvwG97UdnGwgmcqYHsjdqFxEysZDoDnkrmBV-_B1zy2oEcZ9P2I95LS6_H8EfgB6wWdlxyAjg5Hnp-QFoR0N8p6n-hKwEkF1R3e1pVHE2txcTfiGQOfqQGd4EwZAu9Ph6YBdAuYrgBmr4zSEEYNQ5LQRSMvljHSG-h_KHhR4-Fcc-YI_ZUtdPuXbH7IiAo9gAdtPFAW6KDzVKsN1klEzJxp5rVkHYwjsLFCn7wNrYw6u7pbLsSXWRKKypw4gTcdVP6jft4orbLOOWE4gadfkv7AXh8Egk9yIlx_VLBQ'
+							}
+						},
+						{
+							'@context': [
+								'https://www.w3.org/2018/credentials/v1',
+								'https://w3id.org/security/suites/jws-2020/v1',
+								'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+							],
+							credentialSubject: {
+								'@Context': [
+									'https://www.w3.org/2018/credentials/v1',
+									'https://w3id.org/security/suites/jws-2020/v1',
+									'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+								],
+								'gx:termsAndConditions':
+									'The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).',
+								id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2',
+								type: 'gx:GaiaXTermsAndConditions'
+							},
+							id: 'did:web:casio50.smart-x.smartsenselabs.com',
+							issuanceDate: '2023-08-07T16:04:30.307219451Z',
+							issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
+							type: ['VerifiableCredential'],
+							proof: {
+								type: 'JsonWebSignature2020',
+								created: '2023-08-07T10:34:34.513Z',
+								proofPurpose: 'assertionMethod',
+								verificationMethod: 'did:web:casio50.smart-x.smartsenselabs.com',
+								jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SWXsvdPCdnLCnVIkO1cYRca1JMGk0qLVvyW8-cqeHBHn7PbAL0grpW3X0ZyMekncWgJ0-vXBaSdre1OfLSbBXZgpxgqha8OKaCMGqqbSC4IYMmuUeUOvZ_pIAyabFy6OHc45Sm3YT3os7xezF6rl5Kbwn-_nPSZE0izAv269at9Gs_aYUE79UTLyX-_Its4gadRuDdcAhznsrHx4rbNpX9kNh_389zB_lu1lTlt2VqjXBYnbMbknW9-k3lVZZm6giVFxa3fNEAh-1x30-ZdmOs8KNS8mWNl_8SFSE0bmN4BB-3J91bG2aZ8G9GWzu4x3lI-1WmlnEDj5WhaE69Dq0A'
+							}
+						},
+						{
+							'@context': ['https://www.w3.org/2018/credentials/v1', 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'],
+							type: ['VerifiableCredential'],
+							id: 'did:web:casio34.smart-x.smartsenselabs.com',
+							issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
+							issuanceDate: '2023-08-07T16:04:30.307219451Z',
+							credentialSubject: {
+								'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+								id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json',
+								type: 'gx:VirtualDataResource',
+								'gx:name': 'Test Resource 2',
+								'gx:description': 'Test Resource 2 description',
+								'gx:copyrightOwnedBy': [
+									{
+										id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+									}
+								],
+								'gx:license': ['http://smartproof.in/.well-known/license'],
+								'gx:policy': ['https://example.com'],
+								'gx:producedBy': {
+									id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
+								},
+								'gx:exposedThrough': ['https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2'],
+								'gx:containsPII': true
+							},
+							proof: {
+								type: 'JsonWebSignature2020',
+								created: '2023-08-18T06:32:44.671Z',
+								proofPurpose: 'assertionMethod',
+								verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+								jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..pHopKLDdKeTFLwPDAHk9S54JJyl-4EaUWJL1BtEVCIbmLbTAX33UbYYiBAVwJIteZrDKPLeh4t3Rx2V2EWtlchBiMDT_8so24EBoo-iUiDehBgLeA6ugGFizBF5ZvCleL2EDmRqW7VqKWHwsjA3z33DCb5TSChi9WLO6iOrZU_lntJr-d_fn_ATUy1Ij4DddhZSMGvnoc-OEhWk9PmDEFhiL8pm0RYMIX46BEYfbW_CWbgHOTDsXJk67G6Rgj-xv7rcQpZ56WBbX96Y6fZYGeFIK6NMeaOFB6S13v42FLV0qQUTToWb3GyhRfe4AelUD8Semiiix0QrWeeLmBIX0qA'
+							}
+						}
+					]
+				},
+				complianceCredential: {}
+			}
+		},
+		message: 'VP created successfully.'
+	}
+}
+
+export const verifyDIDTestJSON = {
+	invalidDidJSON: {
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	},
+	invalidVerificationMethodJSON: {
+		did: 'did:web:casio34.smart-x.smartsenselabs.com',
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	},
+	invalidReq: {
+		did: 'did:web:greenworld.proofsense.in',
+		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	},
+	validReq: {
+		did: 'did:web:greenworld.proofsense.in',
+		verificationMethod: 'did:web:greenworld.proofsense.in',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+	}
+}
+
 export const labelLevelTestJSON = {
 	invalidIssuerJSON: {
 		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
@@ -1789,8 +2232,7 @@ export const labelLevelTestJSON = {
 		'@context': ['https://www.w3.org/ns/did/v1']
 	},
 	validReqJSON: {
-		privateKey:
-			'LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRQ2ZzYy9rVUNBblZnL2QKOStMRHdCVFZyUnptcW5MaFJBUFlTeExFTjd3UlZlWjFyZHVkZFFkc3FxbnVEUVdyOThqbmF4WjNFZldIcE1kSwpGbkJWQ1F2dzM2NjZQeWJhVUg0UE5NUmNuMURabllZUlEzN2U2ZnM3WktQcUtrS3lpdElZVURCZlN1VHhEWjV1ClYvbHZvN1BrMXp3Y3YyN0V0Wmo2N2tub2JBRmxUWEZTbWVnRmQzelZZVHExRktZZ2VXRVBmL2FKS0I4NEhLc20KTUN4YWd3RXNuS0txOVUyam1SeUhYUmxEVGdWSEVydU5qZ0hDQlNPY2dkT244dzdQTFlNMDN5TEgxQUFpQXBObwpQTmRJa2xtS2NSODJkMmcyYWVNNmFzUThuQ2RWZ0RLUGpDQnpOMUhlUzBWK0hlNHRpdi8reG0vYlByelVETzFsCitWWUo0MXAvQWdNQkFBRUNnZ0VBQVA3MDlLQ1ViWW10d1lYL1pESTRuN3owd1I3b0x2dXVxKzg5SkMzcHdxeEQKdGQ5QjVaQ3Yvc0RIaS9VT3MrNitoRCttaHVQaEVLcGpid0ZEcFZjL2VPR3VySS9hT0Q1Smh5V3BtU1RNeHdyVQpwZTZ5WHc0QU5GZm5BZzZRNzUyTkJPQnpVckQ5amlLd3JFWm8xVEtsQW9zeHN0ZndGOWd1V0xDMlp2c2d3bjNiClFoT3hhdldHcW9qa29xUnJJV1R2VVNNSzVpQkIyenNGWENHbmY0SmFPZjFjY3VJd0gwQ3lFREtDSHJKaUJjU08KeGxFUk5PQUFicWlGc1I0QU5ldjdZWjFqRk1JU2hJNXRyc0xnSC9LSkE4T21pSWVvWjVPcHV2L3kvaUtyRU9QQgpIdzA0bVNJQ1BXUW5SelRycDVneDRTdUJ5VGVsRTh0aFFNVXUwV0p5cVFLQmdRREtmOWVYYWtpeGJYdFdSQ0FHCmJzR1B1elNVK1FuMUp6WVpRdkE1NnEyWnhKT3lUTXI0aEpsN081UEZNdmtpT2tRWnpGdXZXL3VlaFNjbFRkUi8Kc0RnbTNoMDB0KzFPOHRYUU0xVHdibks1MWhRaEZ3RlVLb2xkc1lmNlJ6dk9MRy9DYmZiZld0Rkd4NFR0aFJLagp0T2ZUMTFKZ3phTS9VeGxUamszaE41NXlpUUtCZ1FESjR0ZmZiWFFlVGYxc2VSNXVtaWxzSFlJKzk2QmNXOUFMCjNNSnlOLzNSdWRyVTlHclExY2FBbmE4N1F6cEFrVk05MlZDVGpFT00rOW0vTkJCTlBVR3h4bWdQN2lWRFlqQWMKdVZRckVscWJMR0g3QUN4KytsMXZpYWlPZ3Q4VnpoL2l1WkpRaThWR0ZUd2tIVDk1UXRNaHRxRzI4QS8vVVpSOQpGZ3VacW1sQ3h3S0JnUURJK3F0cVAzV1lpNVhQSDl3OUppMzhUb3c0a3hlNzlrZnVPSTZlblBuaDFNWFdQL3R2ClBvUHFXRTRvZVpma3pibUxkVlZHTFdBRmpCZzNJUkVZRGprYzhuUkFQNUJMUEI3VC9pNStWdENNK3htTllmelMKb1VrbThhMkl6S3hoeTU2OGRWR0JpdXlNZURmSldic1BPZHloVjJNT2F1cHNUamlqd21ndmNIbFZLUUtCZ0NRYQpkUkIzdW5SUTdpa2YzOWxYcUdDMVJqMk1leGtKTWtOc3p6a3QyaTVQVmxzTytxc3VEN21nZVYzWHYrc2NFZzdWCmRodHMwZ2U4WWt4WE96TVU2VktwY0tLb3EvRkk5ZUd0SXVndytCTVg5TTIyVWo3QzkwS2pFNG1vemN4UWVGTkwKYkdjTEY5UllwOUN0aWxSZEp2UzRmR01DdTFtbGRUQ0phTG1xUi9peEFvR0FaeGhlcXR0UHVrWUU4ditJcjRCWQp4VjRIVFF1NnpHOEdoeFplVWJnOW00aWdBR09HbXBITE5uWml4aUZaZ0pDbFpzVmtnd3Avd3h5bWJlQStnNW9lCk5zWm02T2I1R2FaRmFPNlZuVHlSdlVrWS9xVmNjRlBzUSt0ZEVIUG5OVVhGNHF3cjJWVERCUGk0czRjTDJ1bUEKS1h2YnV3ZVVzRmE4YjlSTTVUVm16Rjg9Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
 		vcs: {
 			labelLevel: {
 				'@context': [
@@ -2364,6 +2806,607 @@ export const labelLevelTestJSON = {
 					id: 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_185087b6-eb3c-4464-9cd0-c2fcef716c28.json',
 					type: 'gx:ServiceOfferingLabel'
 				},
+				id: 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_185087b6-eb3c-4464-9cd0-c2fcef716c28.json',
+				type: ['VerifiableCredential'],
+				issuer: 'did:web:ferrari.smart-x.smartsenselabs.com'
+			}
+		},
+		verificationMethod: 'did:web:ferrari.smart-x.smartsenselabs.com',
+		issuer: 'did:web:ferrari.smart-x.smartsenselabs.com'
+	},
+	invalidReqJSON: {
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		vcs: {
+			labelLevel: {
+				'@context': [
+					'https://www.w3.org/2018/credentials/v1',
+					'https://w3id.org/security/suites/jws-2020/v1',
+					'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+				],
+				issuanceDate: '2023-08-25T09:12:08.974938894Z',
+				credentialSubject: {
+					'gx:criteria': {
+						'P1.1.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.1.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.1.3': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.1.4': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.3': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.4': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.5': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.6': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.7': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.8': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.9': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.2.10': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.3.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.3.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.3.3': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.3.4': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P1.3.5': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.1.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.1.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.1.3': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.2.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.2.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.2.3': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.2.4': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.2.5': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.2.6': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.2.7': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.3.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.3.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P2.3.3': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.3': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.4': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.5': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.6': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.7': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.8': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.9': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.10': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.11': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.12': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.13': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.14': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.15': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.16': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.17': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.18': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.19': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P3.1.20': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P4.1.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P4.1.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P5.1.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P5.1.2': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P5.1.3': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P5.1.4': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P5.1.5': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P5.1.6': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P5.1.7': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						},
+						'P5.2.1': {
+							evidence: {
+								website: '',
+								pdf: {},
+								vc: {}
+							},
+							response: 'Confirm',
+							reason: ''
+						}
+					},
+					'gx:assignedTo': 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/service_FTh1.json',
+					id: 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_185087b6-eb3c-4464-9cd0-c2fcef716c28.json',
+					type: 'gx:ServiceOfferingLabel'
+				},
+				id: 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_185087b6-eb3c-4464-9cd0-c2fcef716c28.json',
+				type: ['VerifiableCredential'],
+				issuer: 'did:web:ferrari.smart-x.smartsenselabs.com'
+			}
+		},
+		verificationMethod: 'did:web:suzuki.smart-x.smartsenselabs.com',
+		issuer: 'did:web:suzuki.smart-x.smartsenselabs.com'
+	},
+	emptyCSReqJSON: {
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		vcs: {
+			labelLevel: {
+				'@context': [
+					'https://www.w3.org/2018/credentials/v1',
+					'https://w3id.org/security/suites/jws-2020/v1',
+					'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+				],
+				issuanceDate: '2023-08-25T09:12:08.974938894Z',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_185087b6-eb3c-4464-9cd0-c2fcef716c28.json',
 				type: ['VerifiableCredential'],
 				issuer: 'did:web:ferrari.smart-x.smartsenselabs.com'
@@ -2961,5 +4004,1700 @@ export const labelLevelTestJSON = {
 			complianceCredential: {}
 		},
 		message: 'Label Level SD signed successfully'
+	},
+	labelLevelCS: {
+		'gx:criteria': {
+			'P1.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.8': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.9': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.10': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.8': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.9': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.10': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.11': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.12': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.13': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.14': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.15': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.16': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.17': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.18': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.19': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.20': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P4.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P4.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			}
+		},
+		'gx:assignedTo': 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/service_FTh1.json',
+		id: 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_185087b6-eb3c-4464-9cd0-c2fcef716c28.json',
+		type: 'gx:ServiceOfferingLabel'
+	},
+	invalidLabelLevelCS: {
+		'gx:criteria': {
+			'P1.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.8': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.9': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.10': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.8': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.9': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.10': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.11': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.12': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.13': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.14': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.15': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.16': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.17': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.18': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.19': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.20': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P4.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P4.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'5.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			}
+		},
+		'gx:assignedTo': 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/service_FTh1.json',
+		id: 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_185087b6-eb3c-4464-9cd0-c2fcef716c28.json',
+		type: 'gx:ServiceOfferingLabel'
+	},
+	labelLevelBC: {
+		'gx:criteria': {
+			'P1.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Deny',
+				reason: ''
+			},
+			'P1.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.8': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.9': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.2.10': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P1.3.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.2.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P2.3.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.8': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.9': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.10': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.11': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.12': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.13': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.14': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.15': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.16': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.17': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.18': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.19': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P3.1.20': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P4.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P4.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.2': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.3': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.4': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.5': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.6': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.1.7': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			},
+			'P5.2.1': {
+				evidence: {
+					website: '',
+					pdf: {},
+					vc: {}
+				},
+				response: 'Confirm',
+				reason: ''
+			}
+		},
+		'gx:assignedTo': 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/service_FTh1.json',
+		id: 'https://wizard-api.smart-x.smartsenselabs.com182af7e9-b10b-42da-95f4-7f8289ec330e/labelLevel_185087b6-eb3c-4464-9cd0-c2fcef716c28.json',
+		type: 'gx:ServiceOfferingLabel'
 	}
 }

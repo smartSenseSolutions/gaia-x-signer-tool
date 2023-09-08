@@ -512,19 +512,14 @@ class Utils {
 		const optionalProps: string[] = ['gx:name', 'gx:dependsOn', 'gx:dataProtectionRegime']
 		const totalMandatoryProps = 5
 		let availOptProps = 0
-		try {
-			for (const optionalProp of optionalProps) {
-				// eslint-disable-next-line no-prototype-builtins
-				if (optionalProp in credentialSubject && credentialSubject[optionalProp]) {
-					availOptProps++
-				}
+		for (const optionalProp of optionalProps) {
+			// eslint-disable-next-line no-prototype-builtins
+			if (optionalProp in credentialSubject && credentialSubject[optionalProp]) {
+				availOptProps++
 			}
-			const transparency: number = (totalMandatoryProps + availOptProps) / totalMandatoryProps
-			return transparency
-		} catch (error) {
-			logger.error(__filename, 'calcTransparency', `❌ Error while calculating transparency :- error \n ${error}`, '')
-			throw error
 		}
+		const transparency: number = (totalMandatoryProps + availOptProps) / totalMandatoryProps
+		return transparency
 	}
 
 	/**
@@ -678,12 +673,14 @@ class Utils {
 		}
 	}
 
-	getInnerVCs = async (vc: any, key: string, vcsMap: any) => {
+	getInnerVCs = async (vc: any, key: string, types: string[], vcsMap: any) => {
 		for (let i = 0; i < vc.credentialSubject[key].length; i++) {
-			const lp = (await axios.get(vc.credentialSubject[key][i].id)).data
-			const {
-				selfDescriptionCredential: { verifiableCredential }
-			} = lp
+			const response = (await axios.get(vc.credentialSubject[key][i].id)).data
+			const verifiableCredential = response?.selfDescriptionCredential?.verifiableCredential
+			const type = verifiableCredential && (await this.getVcType(verifiableCredential, vc.credentialSubject[key][i].id))
+			if (!types.includes(type)) {
+				throw new Error(`${key} VC ID not found or required vc type not found`)
+			}
 			for (const vc of verifiableCredential) {
 				const lpId = vc.credentialSubject.id
 				if (!vcsMap.has(lpId)) {
@@ -692,9 +689,15 @@ class Utils {
 			}
 		}
 	}
+
+	getVcType = async (verifiableCredential: any, vcId: string): Promise<string> => {
+		const vc = verifiableCredential.find((e: any) => {
+			return e.credentialSubject.id === vcId
+		})
+		return vc ? vc.credentialSubject.type : ''
+	}
 	/**
-	 * @formula trust_index = mean(veracity, transparency)
-	 * @dev takes the veracity and transparency as input and calculates trust index
+	 * @dev This function will calculate label level using credencial
 	 * @param veracity Veracity value
 	 * @param transparency Transparency value
 	 * @returns number - Trust index value

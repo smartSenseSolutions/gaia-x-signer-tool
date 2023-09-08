@@ -113,6 +113,26 @@ http://localhost:8000/docs/
 - API Service will create a resolvable link for this label level data  stores the link in the DB.
 
 ![create-label-level](docs/create-label-level.png?raw=true)
+
+### Get Trust Index
+
+- Signer tool will calculate Trust Index Using *Veracity* and *Transparency*.
+- The formula for calculating trust index is
+```
+   trust_index = mean(veracity, transparency)
+```
+- Veracity will be calculated by the sum of length of keychain of holder,
+- The formula for calculating veracity is,
+```
+    veracity = sum(len(keychain)
+```
+- Transparency will be calculated using the number of optional and mandatory fields present in the service offering credential subject,
+- The formula for calculating transparency is,
+```
+    transparency = count(properties) / count(mandatoryproperties)
+```
+- Using the value of veracity and transparency, we'll calculate trust index.
+
 ## Known issue or improvement
 
 1. Resource Compliance support pending

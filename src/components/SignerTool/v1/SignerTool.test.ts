@@ -35,6 +35,12 @@ jest.mock('../../../utils/common-functions', () => {
 			return { ...mockPJ }
 		},
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		fetchServiceOfferingJson: async () => {
+			const { validSOJSON } = serviceOfferingTestJSON
+			const mockSOJ = JSON.parse(JSON.stringify(validSOJSON))
+			return { ...mockSOJ }
+		},
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		callServiceOfferingCompliance: async () => {
 			const { validSOComplianceResponse } = serviceOfferingTestJSON
 			const mockPJ = JSON.parse(JSON.stringify(validSOComplianceResponse))
@@ -1847,8 +1853,8 @@ describe('/get/trust-index', () => {
 				return true
 			})
 			const request = {
-				participantSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/participant.json',
-				serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/cdfd35ca-3302-4948-95fb-afd36b34e09e/service_YlA1.json'
+				participantSD: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#0',
+				serviceOfferingSD: 'https://wizard-api.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/service_aTRg.json'
 			}
 			await supertest(app)
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.GET_TRUST_INDEX}`)

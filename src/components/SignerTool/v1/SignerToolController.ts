@@ -532,14 +532,14 @@ class SignerToolController {
 			// get the json document of participant self description
 			const {
 				selfDescriptionCredential: { verifiableCredential }
-			} = (await axios.get(participantSD)).data
+			} = await Utils.fetchParticipantJson(participantSD)
 			const { veracity, certificateDetails } = await Utils.calcVeracity(verifiableCredential, resolver)
 			logger.debug(__filename, 'GetTrustIndex', `veracity :- ${veracity}`, req.custom.uuid)
 
 			// get the json document of service offering
 			const {
 				selfDescriptionCredential: { verifiableCredential: verifiableCredentialVCS }
-			} = (await axios.get(serviceOfferingSD)).data
+			} = await Utils.fetchServiceOfferingJson(serviceOfferingSD)
 
 			const serviceOfferingVC = verifiableCredentialVCS.find((credential: any) => {
 				const {

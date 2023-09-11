@@ -604,6 +604,328 @@ export const serviceOfferingTestJSON = {
 			}
 		}
 	},
+	validSOJSON: {
+		selfDescriptionCredential: {
+			'@context': 'https://www.w3.org/2018/credentials/v1',
+			type: ['VerifiablePresentation'],
+			verifiableCredential: [
+				{
+					credentialSubject: {
+						'gx:legalName': 'Pinank',
+						'gx:headquarterAddress': { 'gx:countrySubdivisionCode': 'BE-BRU' },
+						'gx:legalAddress': { 'gx:countrySubdivisionCode': 'BE-BRU' },
+						id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#0',
+						type: 'gx:LegalParticipant',
+						'gx:legalRegistrationNumber': { id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#1' }
+					},
+					'@context': [
+						'https://www.w3.org/2018/credentials/v1',
+						'https://w3id.org/security/suites/jws-2020/v1',
+						'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+					],
+					type: ['VerifiableCredential'],
+					id: 'did:web:lakhani.smart-x.smartsenselabs.com',
+					issuer: 'did:web:lakhani.smart-x.smartsenselabs.com',
+					issuanceDate: '2023-09-11T10:13:42.375138125Z',
+					proof: {
+						type: 'JsonWebSignature2020',
+						created: '2023-09-11T10:13:44.680Z',
+						proofPurpose: 'assertionMethod',
+						verificationMethod: 'did:web:lakhani.smart-x.smartsenselabs.com',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Z5dAge_qUmzLE5yUaJWf7LbEdHHyAGZOdEAN_boNQ6PFiuFysFav2EkXJEW2LfmRX_e2mkJBHvisFtHpMCpm8_i9cXCS2sJ8KS2d0ehOr2hiKjXn4vDZqYcJWugU_uhWlCj4ebiUy-DGjmK2hBHSKrDaUWQ_lOt-5-fBKIM4etxK818vaVOjQ3hNhVYPYMeceiWfp5L0rqWFcE1-2jb9Ue46qwxvdPdQglup9__k2Q5YweLm_N9S7v9lkd7X-JMyoCHyGCH57kGY5mUmFAJVVA-Mn0UIku8_ZQdYnd7FqXqjoUlEZkv7tPneerX4vQ0uoalufxJiMHjZG8C6rwTWaQ'
+					}
+				},
+				{
+					'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
+					type: ['VerifiableCredential'],
+					id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#1',
+					issuer: 'did:web:registration.lab.gaia-x.eu:development',
+					issuanceDate: '2023-09-11T10:13:43.001Z',
+					credentialSubject: {
+						'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+						type: 'gx:legalRegistrationNumber',
+						id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#1',
+						'gx:leiCode': '9695007586GCAKPYJ703',
+						'gx:leiCode-countryCode': 'FR'
+					},
+					evidence: [{ 'gx:evidenceURL': 'https://api.gleif.org/api/v1/lei-records/', 'gx:executionDate': '2023-09-11T10:13:43.001Z', 'gx:evidenceOf': 'gx:leiCode' }],
+					proof: {
+						type: 'JsonWebSignature2020',
+						created: '2023-09-11T10:13:43.823Z',
+						proofPurpose: 'assertionMethod',
+						verificationMethod: 'did:web:registration.lab.gaia-x.eu:development#X509-JWK2020',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..pkPC8wu6cGrW3oeNYIixcjKgT_sRmrEREjinEgezYqI4u46OOqoAwtitr-Xr6IDIyzgZrPmR5PBign0uF-HjT_Pav86lcs0qsZEm1Wwq9VMfeMi4Bivpq1AK2Ty4vH8ZZdiVDhV4wFHneGZhcxHfY-pW5abDZ6WX2ceq5Sxex9pCkuk9EesBZco_HM3gMWIKN1Lm0o5rinYMuUh46pKJacLxuOgdkJiOE-KNarnNaVCxaU8sotNjsRRarIeq06y0ulkuMLwuBfyypiND2n28q-GjZ_wfpFeADlqvPLk_nYSJE8LlsjlWEBSnhC4y96je_8Wm-AUybD7KxoBrCPjI1A'
+					}
+				},
+				{
+					'@context': [
+						'https://www.w3.org/2018/credentials/v1',
+						'https://w3id.org/security/suites/jws-2020/v1',
+						'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+					],
+					credentialSubject: {
+						'@Context': [
+							'https://www.w3.org/2018/credentials/v1',
+							'https://w3id.org/security/suites/jws-2020/v1',
+							'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+						],
+						'gx:termsAndConditions':
+							'The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).',
+						id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#2',
+						type: 'gx:GaiaXTermsAndConditions'
+					},
+					id: 'did:web:lakhani.smart-x.smartsenselabs.com',
+					issuanceDate: '2023-09-11T10:13:42.375138125Z',
+					issuer: 'did:web:lakhani.smart-x.smartsenselabs.com',
+					type: ['VerifiableCredential'],
+					proof: {
+						type: 'JsonWebSignature2020',
+						created: '2023-09-11T10:13:45.073Z',
+						proofPurpose: 'assertionMethod',
+						verificationMethod: 'did:web:lakhani.smart-x.smartsenselabs.com',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..xkXfxFhKRx45N86j9e-1bOAxbfiQmF4jHWcYKl3tZdoNKbY4MIt7CnHD1tnWNd80_ceNlminbhFFq1CyNWJtecY-yWLW4UpdloeM4mkcWikGJHM7iy2Im_VYYwmBkbHl3wKnXUw1T6qnwYLV67SRBlK2B13UkyEamVVUTt6asJQU5jVHquOqG7rH8-Okx5WIvv5kpvALFdXCQmUuRwxkRAI1KZLiDeM6oOe_RjuFkTqEzcBA5DOOKU_rhJjLcrpLFplNKavW3Zik3jsRHWCMKtySy4vaiOa3upcjnAVCJQHnUfF0Y0dTXOrG-7O-cTF4rOrjYWAV5XOD7uUrSfLJZw'
+					}
+				},
+				{
+					type: 'VerifiableCredential',
+					id: 'did:web:lakhani.smart-x.smartsenselabs.com',
+					issuer: 'did:web:lakhani.smart-x.smartsenselabs.com',
+					issuanceDate: '2023-09-11T11:29:49.617289325Z',
+					credentialSubject: {
+						'gx:termsAndConditions': { 'gx:URL': 'https://gaia-x.eu/privacy-policy/', 'gx:hash': '58b01f2e99b346d6b46b01fb1028e0cdc8f1a4e3dfeaabf25a5e4065c9597e37' },
+						'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/service_aTRg_policy.json'],
+						'gx:dataAccountExport': { 'gx:requestType': 'API', 'gx:accessType': 'Physical', 'gx:formatType': ['application/ace+cbor'] },
+						'gx:aggregationOf': [
+							{ id: 'https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/resource_02b75e13-8108-4a96-a5af-594e1d0707e0.json' },
+							{ id: 'https://wizard-api.smart-x.smartsenselabs.com/1fe8ea20-135c-403d-908c-2dbf9dbfac31/resource_0c2aa2e9-ca10-487b-94ea-da6a1563e99e.json' },
+							{ id: 'https://wizard-api.smart-x.smartsenselabs.com/1190fc07-7490-48ab-a26c-5c00461d2561/resource_b14ad4d8-a76d-4608-a28b-cc525e4d717b.json' },
+							{ id: 'https://wizard-api.smart-x.smartsenselabs.com/5be199c2-58e8-4a95-a7fb-2744f19910a2/resource_7f9575ef-8673-4063-bb92-b6b08bd012a8.json' }
+						],
+						'gx:dependsOn': [{ id: 'https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/service_gF20.json' }],
+						'gx:dataProtectionRegime': ['GDPR2016'],
+						type: 'gx:ServiceOffering',
+						'gx:labelLevel': 'https://wizard-api.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/labelLevel_b8d419e7-1734-4e30-8285-c16eb160a8d0.json',
+						'gx:providedBy': { id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#0' },
+						id: 'https://wizard-api.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/service_aTRg.json',
+						'gx:name': 'Cloud Services'
+					},
+					'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
+					proof: {
+						type: 'JsonWebSignature2020',
+						created: '2023-09-11T11:29:49.887Z',
+						proofPurpose: 'assertionMethod',
+						verificationMethod: 'did:web:lakhani.smart-x.smartsenselabs.com',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..h4VC70gqYszLAEys_m5-UEV-zstozvhRWVrx5MO2DfpXd_j_t5RgfmMW7Fsi4pPuWOjUMwlp9DPTJDHhawrx7ijKsYj8vdsxAdOk-SWe4cCqVW4Be8yj2ZR4CRLUx0E6iaIeQnkD-wy2QbxloXJtD-ZzkhcgtNdsOXxkNHl9-C8Bq0UVcCyA9kigZuUbT58YmHy7KMRyUwm0jM3v2ld7cBI46SEAxp06c1PvfMTU9q95n7Kqb42CY6vpoLcqjnSgF4AJgjWmnweLgfF32FoIA5B7p4hXC0vHa3PnTPfiVd04ib1-unz6z5VaU0GEDrd51AebIwICKjoxwTUmULcl3Q'
+					}
+				},
+				{
+					credentialSubject: {
+						'gx:legalName': 'Audi',
+						'gx:headquarterAddress': { 'gx:countrySubdivisionCode': 'BE-BRU' },
+						'gx:legalAddress': { 'gx:countrySubdivisionCode': 'BE-BRU' },
+						id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#0',
+						type: 'gx:LegalParticipant',
+						'gx:legalRegistrationNumber': { id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#1' }
+					},
+					'@context': [
+						'https://www.w3.org/2018/credentials/v1',
+						'https://w3id.org/security/suites/jws-2020/v1',
+						'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+					],
+					type: ['VerifiableCredential'],
+					id: 'did:web:audi.smart-x.smartsenselabs.com',
+					issuer: 'did:web:audi.smart-x.smartsenselabs.com',
+					issuanceDate: '2023-09-11T06:15:34.64150289Z',
+					proof: {
+						type: 'JsonWebSignature2020',
+						created: '2023-09-11T06:15:37.040Z',
+						proofPurpose: 'assertionMethod',
+						verificationMethod: 'did:web:audi.smart-x.smartsenselabs.com',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..hT3ELMn_8zlIKIB4nym3GiIcpkHHFxQsK-gDJUr2fdYwC-eIRlN38yS66IDPEZvfi_AsW6-5lbNMVRWKnG_vfbEatoPSzBWZrBDds2bDjZsOjtJTvqWGe7Zyoyr_3gTJnGwmDR5ZioQ2bbaKkCVF9w6VVPuT3yLciSfymuK2YUbTBJ7I4v5VRw1pAB0viy7PdOKgO0HgNLOjJ35Um-F0IKkmoEmDeZji_YuZC6c-XoCuIbnbsMTocJHMNTyN-WCE8tq-dDsFhIjmXq5NLFXozBI0vKROKB8CSqf9bEtz14dw2A9ZbRvBDoc9tPpdCOWhnq7h68eKdHzxqu66OCpPUw'
+					}
+				},
+				{
+					'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
+					type: ['VerifiableCredential'],
+					id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#1',
+					issuer: 'did:web:registration.lab.gaia-x.eu:development',
+					issuanceDate: '2023-09-11T06:15:35.274Z',
+					credentialSubject: {
+						'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+						type: 'gx:legalRegistrationNumber',
+						id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#1',
+						'gx:vatID': 'FR79537407926',
+						'gx:vatID-countryCode': 'FR'
+					},
+					evidence: [
+						{ 'gx:evidenceURL': 'http://ec.europa.eu/taxation_customs/vies/services/checkVatService', 'gx:executionDate': '2023-09-11T06:15:35.274Z', 'gx:evidenceOf': 'gx:vatID' }
+					],
+					proof: {
+						type: 'JsonWebSignature2020',
+						created: '2023-09-11T06:15:36.185Z',
+						proofPurpose: 'assertionMethod',
+						verificationMethod: 'did:web:registration.lab.gaia-x.eu:development#X509-JWK2020',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..rORQKOC_dwetaKCkffSm7WsfiBpNfjiZKizLN8S0WdM-Rl5PBGDYwkpFZpy_FnXX58euBRJJzufgwywbKfvOvUNlO4mbP0ByGZZVTyPdaQ52-diDuiUDPWupsxpsTdVvfsD6dVqPgGXMsiMWfdSvlSWrhZWRoWXMpFqGAXPHuWFrQNwW6gdta-o54HFBkccTUAcVwOOL7dNNsrwWsteUftwv7swS-ZCGkNKvsbjbNLPeq0w-AqjcW0qKtp0oJlKrvmWQCqZVIFl-syvVaWZkQlcTs-UlHTlYL3bmwVDheeaLHLOiuT2IFoYQjWBTfSQCRj7pHEW8CF8EmCv6TGLKUQ'
+					}
+				},
+				{
+					'@context': [
+						'https://www.w3.org/2018/credentials/v1',
+						'https://w3id.org/security/suites/jws-2020/v1',
+						'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+					],
+					credentialSubject: {
+						'@Context': [
+							'https://www.w3.org/2018/credentials/v1',
+							'https://w3id.org/security/suites/jws-2020/v1',
+							'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+						],
+						'gx:termsAndConditions':
+							'The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).',
+						id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#2',
+						type: 'gx:GaiaXTermsAndConditions'
+					},
+					id: 'did:web:audi.smart-x.smartsenselabs.com',
+					issuanceDate: '2023-09-11T06:15:34.64150289Z',
+					issuer: 'did:web:audi.smart-x.smartsenselabs.com',
+					type: ['VerifiableCredential'],
+					proof: {
+						type: 'JsonWebSignature2020',
+						created: '2023-09-11T06:15:37.445Z',
+						proofPurpose: 'assertionMethod',
+						verificationMethod: 'did:web:audi.smart-x.smartsenselabs.com',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..VEvozxUPb7ffkTIdOq61BlL_dl_wqsIt7QOJNaKnXWCTgzjJW4UQolv6AOEPd1M4lt4l-qXh2S_CF5pjXJiq7NNNSzekotEej_AQ2gHzTJBLKm--VC9EDv1ugxHy7ZqzgOzBzMCz6QLaHrRnh1j6_Vj40LsjoJiW4nYmq7HjiDb-X9mTFA8nUHg1IDYu11kt_XUH8TpOCdO9_yGOiMceTbuQVK_CJb98SMS_h-3KQ1XSPWSmEnKRTnt7D5ZTTSY-omhQBAsiNrOrfavwZq1W9pGNxFzsv33tbwQBm7bWSdtKTcWaIUjeTYv0vp3bbErzlxNaf6v6qTj5sfLwjP4RLQ'
+					}
+				},
+				{
+					type: 'VerifiableCredential',
+					id: 'did:web:audi.smart-x.smartsenselabs.com',
+					issuer: 'did:web:audi.smart-x.smartsenselabs.com',
+					issuanceDate: '2023-09-11T06:27:04.783509072Z',
+					credentialSubject: {
+						'gx:termsAndConditions': {
+							'gx:URL': 'https://www.audi.in/in/web/en/models/a4/a4-sedan-2021/engines.html',
+							'gx:hash': 'b5217e4f41bd84580668324f37058e889b7f3cdfc3eb0fc815feb346078ddf61'
+						},
+						'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/service_gF20_policy.json'],
+						'gx:dataAccountExport': {
+							'gx:requestType': 'API',
+							'gx:accessType': 'Physical',
+							'gx:formatType': [
+								'application/alto-error+json',
+								'application/3gppHal+json',
+								'application/vnd.3gpp.mcvideo-affiliation-command+xml',
+								'application/3gpdash-qoe-report+xml',
+								'application/3gppHalForms+json',
+								'application/alto-networkmapfilter+json'
+							]
+						},
+						'gx:aggregationOf': [{ id: 'https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/resource_02b75e13-8108-4a96-a5af-594e1d0707e0.json' }],
+						'gx:dataProtectionRegime': ['GDPR2016', 'LGPD2019', 'PDPA2012', 'CCPA2018', 'VCDPA2021'],
+						type: 'gx:ServiceOffering',
+						'gx:labelLevel': 'https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/labelLevel_1a88d772-ee7e-4db7-ac99-9d5a41f66e6e.json',
+						'gx:providedBy': { id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#0' },
+						id: 'https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/service_gF20.json',
+						'gx:name': 'Audi A4',
+						'gx:description': 'Audi A4 Price 2023, Images, Colours & Reviews\nThe price of Audi A4 starts at Rs. 43.85 Lakh and goes upto Rs. 51.85 Lakh.'
+					},
+					'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
+					proof: {
+						type: 'JsonWebSignature2020',
+						created: '2023-09-11T06:27:05.070Z',
+						proofPurpose: 'assertionMethod',
+						verificationMethod: 'did:web:audi.smart-x.smartsenselabs.com',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..RG0K7fTXo_n__UsrjxP6dLMWchJb0xu3TTD6gKUgCxZNvTvsQXcW2kc5p6QUNEXFbLFXex_6RwBo0b9zeuhh_14YOKOJ6KGi8XspXyhn0eL_hptC0Pw4HI8eJCcblQjmYg7UxW3tn0LvD_-vR3upf0y_dXEvZfp5-5IiMkO_niOmF-slKdUVDblfzgu-fKKLrBsjblb6J9jz41iLfhFJTLXcpMoQXw8IRwSnmYS6cEXJrZxYx18pf52KBiepkMTNN0gROHhxT5OpLdAC0tdphhCfRT5-BhoOLeM4ip79XfU9jxGBprEDoKXnal3z3dl3z-kOwaucowxl-8x16k9g8w'
+					}
+				}
+			]
+		},
+		complianceCredential: {
+			'@context': [
+				'https://www.w3.org/2018/credentials/v1',
+				'https://w3id.org/security/suites/jws-2020/v1',
+				'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+			],
+			type: ['VerifiableCredential'],
+			id: 'https://compliance.lab.gaia-x.eu/development/credential-offers/a948c8f9-8441-42dd-886f-429709aa18c8',
+			issuer: 'did:web:compliance.lab.gaia-x.eu:development',
+			issuanceDate: '2023-09-11T11:30:05.120Z',
+			expirationDate: '2023-12-10T11:30:05.120Z',
+			credentialSubject: [
+				{
+					type: 'gx:compliance',
+					id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#0',
+					'gx:integrity': 'sha256-0663f1d2d85dc79f01c40e8202737d32512a0c9130e9b9929e7960fd59088447',
+					'gx:integrityNormalization': 'RFC8785:JCS',
+					'gx:version': '22.10',
+					'gx:type': 'gx:LegalParticipant'
+				},
+				{
+					type: 'gx:compliance',
+					id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#1',
+					'gx:integrity': 'sha256-377ced5831cad1973861a36bbb5f90e4d6388fa8701ca116502e20f2ce14b488',
+					'gx:integrityNormalization': 'RFC8785:JCS',
+					'gx:version': '22.10',
+					'gx:type': 'gx:legalRegistrationNumber'
+				},
+				{
+					type: 'gx:compliance',
+					id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#2',
+					'gx:integrity': 'sha256-6981524102992518de7bae99a8a8851d7b8202341688d84ddff0ddaadac6e4ff',
+					'gx:integrityNormalization': 'RFC8785:JCS',
+					'gx:version': '22.10',
+					'gx:type': 'gx:GaiaXTermsAndConditions'
+				},
+				{
+					type: 'gx:compliance',
+					id: 'https://wizard-api.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/service_aTRg.json',
+					'gx:integrity': 'sha256-d84fff65f755016cc82f7e880913512ecbd193f483a3fc43919ba7a4902444c2',
+					'gx:integrityNormalization': 'RFC8785:JCS',
+					'gx:version': '22.10',
+					'gx:type': 'gx:ServiceOffering'
+				},
+				{
+					type: 'gx:compliance',
+					id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#0',
+					'gx:integrity': 'sha256-600df8fdd566a51c3fe243c813860cbe386b2a49ac5a903afce1f9b7c6e602e5',
+					'gx:integrityNormalization': 'RFC8785:JCS',
+					'gx:version': '22.10',
+					'gx:type': 'gx:LegalParticipant'
+				},
+				{
+					type: 'gx:compliance',
+					id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#1',
+					'gx:integrity': 'sha256-c7315806dc7b88a9e66c91f312c3273de7be5efd6a1c0d4625855551fa64a0c7',
+					'gx:integrityNormalization': 'RFC8785:JCS',
+					'gx:version': '22.10',
+					'gx:type': 'gx:legalRegistrationNumber'
+				},
+				{
+					type: 'gx:compliance',
+					id: 'https://audi.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/participant.json#2',
+					'gx:integrity': 'sha256-0570ddd6eb1058aec77d6ae0720a68cc0ac56acb4d8d73b9f5559fc4244882d2',
+					'gx:integrityNormalization': 'RFC8785:JCS',
+					'gx:version': '22.10',
+					'gx:type': 'gx:GaiaXTermsAndConditions'
+				},
+				{
+					type: 'gx:compliance',
+					id: 'https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/service_gF20.json',
+					'gx:integrity': 'sha256-f606a73fbc66e641049c1d63526c7bb5289e5d6e9a8fe5f00acbbe41b98911dc',
+					'gx:integrityNormalization': 'RFC8785:JCS',
+					'gx:version': '22.10',
+					'gx:type': 'gx:ServiceOffering'
+				}
+			],
+			proof: {
+				type: 'JsonWebSignature2020',
+				created: '2023-09-11T11:30:05.133Z',
+				proofPurpose: 'assertionMethod',
+				jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..JMTr7kbaDQHFEaEbNrAE117sPRwR1oa0N9siN8nuKAQSqwhQwD8r0w12tg0GPB91p-UGekEGEOw_uxO9kusvAvjevVRC37zIW4TdXEalk1zKcu91aZNBLXwe5JS_3ARBhgiSHsv9pzJKwjiNRHXiXEF-8bQgWGoeOrJrxSJhoS0BibI4l2FcJULlxWYj2XkXBEf-DomtPxITFP-EtPiOWtW2N9dyZEOYUhb11VwmNEcujgkSbwASEPyT6GOh4pKpvKvE3RE59KxhyhcqzG7k-nTADvMw8xnoZcrmyWZ4kgg9CwBbiWmuz0lfy806JwO84R5YuR1tW77QV-sB6KC7Pw',
+				verificationMethod: 'did:web:compliance.lab.gaia-x.eu:development#X509-JWK2020'
+			}
+		}
+	},
 	validSOComplianceReq: {
 		'@context': 'https://www.w3.org/2018/credentials/v1',
 		type: ['VerifiablePresentation'],

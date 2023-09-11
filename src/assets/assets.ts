@@ -107,19 +107,19 @@ export const participantJson = {
 			{
 				type: 'gx:compliance',
 				id: 'https://greenworld.proofsense.in/.well-known/participant.json#0',
-				integrity: 'sha256-e90774858dc28e973b67d4a9f556e74b34304f748e6c31b6ea6eaa65b02bf4d4',
+				'gx:integrity': 'sha256-e90774858dc28e973b67d4a9f556e74b34304f748e6c31b6ea6eaa65b02bf4d4',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://greenworld.proofsense.in/.well-known/participant.json#1',
-				integrity: 'sha256-18f7c8532b1f1dcb3ed55447ff3a52e967cb37c7ccc3b108e033804954fc25f1',
+				'gx:integrity': 'sha256-18f7c8532b1f1dcb3ed55447ff3a52e967cb37c7ccc3b108e033804954fc25f1',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://greenworld.proofsense.in/.well-known/participant.json#2',
-				integrity: 'sha256-76abc0e83542bda3d76f5306f5635a22a5c21df440b62bbafa2eb3453599dfe4',
+				'gx:integrity': 'sha256-76abc0e83542bda3d76f5306f5635a22a5c21df440b62bbafa2eb3453599dfe4',
 				version: '22.10'
 			}
 		],
@@ -323,25 +323,25 @@ export const ServiceOfferingParticipantJson = {
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0',
-				integrity: 'sha256-1df89fcce569d60f0d9a60b714c14c75d6155cbba69c237bc0b6ee354a1c6e27',
+				'gx:integrity': 'sha256-1df89fcce569d60f0d9a60b714c14c75d6155cbba69c237bc0b6ee354a1c6e27',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1',
-				integrity: 'sha256-0ce342223262043292d2aa59352746f60272bff848f28f0e449617c310acd8bf',
+				'gx:integrity': 'sha256-0ce342223262043292d2aa59352746f60272bff848f28f0e449617c310acd8bf',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2',
-				integrity: 'sha256-688b3f169025c45adbf8cec8f25fe9d67b38407d41a7189cc917c4cfbb7dec93',
+				'gx:integrity': 'sha256-688b3f169025c45adbf8cec8f25fe9d67b38407d41a7189cc917c4cfbb7dec93',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/Database_service.json',
-				integrity: 'sha256-9b7d7940005e5be2ccbaf817e0a2d7dcbf23ad653e37dd957a8aa75cc67cea29',
+				'gx:integrity': 'sha256-9b7d7940005e5be2ccbaf817e0a2d7dcbf23ad653e37dd957a8aa75cc67cea29',
 				version: '22.10'
 			}
 		],
@@ -579,19 +579,19 @@ export const serviceOfferingTestJSON = {
 				{
 					type: 'gx:compliance',
 					id: 'https://ferrari.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/participant.json#0',
-					integrity: 'sha256-67d8a0b190e5c300b3ac7c4f57e1f5ca9180aa33198ee06345b1c99d54592bcf',
+					'gx:integrity': 'sha256-67d8a0b190e5c300b3ac7c4f57e1f5ca9180aa33198ee06345b1c99d54592bcf',
 					version: '22.10'
 				},
 				{
 					type: 'gx:compliance',
 					id: 'https://ferrari.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/participant.json#1',
-					integrity: 'sha256-4e093c4979652cd0a6e0ff83e441f05b6e0e8d3c879c5443b2bb61ab4bb1f032',
+					'gx:integrity': 'sha256-4e093c4979652cd0a6e0ff83e441f05b6e0e8d3c879c5443b2bb61ab4bb1f032',
 					version: '22.10'
 				},
 				{
 					type: 'gx:compliance',
 					id: 'https://ferrari.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/participant.json#2',
-					integrity: 'sha256-6f18993ad25984393c2c1a8395f028d8bbf91db492b1c103f496a5a01089a634',
+					'gx:integrity': 'sha256-6f18993ad25984393c2c1a8395f028d8bbf91db492b1c103f496a5a01089a634',
 					version: '22.10'
 				}
 			],
@@ -1638,55 +1638,55 @@ export const legalParticipantTestJSON = {
 			{
 				type: 'gx:compliance',
 				id: 'https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#0',
-				integrity: 'sha256-fe58e48d11e9b139279e4ec5dc857ad77a058d7ec6161cad778ee550d76a32e4',
+				'gx:integrity': 'sha256-fe58e48d11e9b139279e4ec5dc857ad77a058d7ec6161cad778ee550d76a32e4',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1',
-				integrity: 'sha256-2d98944c67ca015ccde5b7a2e7d6b4455fda5861c825a15a4a6ed5751ed6eac8',
+				'gx:integrity': 'sha256-2d98944c67ca015ccde5b7a2e7d6b4455fda5861c825a15a4a6ed5751ed6eac8',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#2',
-				integrity: 'sha256-cebaffa21ad2f6be9678205f3bba48c04a9ac6f499abd8d465954a38e3504aae',
+				'gx:integrity': 'sha256-cebaffa21ad2f6be9678205f3bba48c04a9ac6f499abd8d465954a38e3504aae',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0',
-				integrity: 'sha256-be934a813e7c02883d5f7b33fccc9329c97a907bca2af6917d09623122f9736b',
+				'gx:integrity': 'sha256-be934a813e7c02883d5f7b33fccc9329c97a907bca2af6917d09623122f9736b',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#1',
-				integrity: 'sha256-16542149ded3da8068ea927bf786fe88d9d0ed7521d90504410994b7495f6993',
+				'gx:integrity': 'sha256-16542149ded3da8068ea927bf786fe88d9d0ed7521d90504410994b7495f6993',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#2',
-				integrity: 'sha256-7c5dff5936f583077f2a2aa2723103ad6cbbbd045adbf701da5c13828ce9de91',
+				'gx:integrity': 'sha256-7c5dff5936f583077f2a2aa2723103ad6cbbbd045adbf701da5c13828ce9de91',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0',
-				integrity: 'sha256-372994ed4b18b7f4252626a48c510aa170cb3a04717d2501ccf1982ed85a9b12',
+				'gx:integrity': 'sha256-372994ed4b18b7f4252626a48c510aa170cb3a04717d2501ccf1982ed85a9b12',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1',
-				integrity: 'sha256-20059a7a182d8a840ee25f8773446aa2f0564c0ff82d359b8a1b194bf1f98045',
+				'gx:integrity': 'sha256-20059a7a182d8a840ee25f8773446aa2f0564c0ff82d359b8a1b194bf1f98045',
 				version: '22.10'
 			},
 			{
 				type: 'gx:compliance',
 				id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2',
-				integrity: 'sha256-f897639cb8a0236874ec395a3b0443986fcf5e3b1ac4ac1f3978e72e685dea2f',
+				'gx:integrity': 'sha256-f897639cb8a0236874ec395a3b0443986fcf5e3b1ac4ac1f3978e72e685dea2f',
 				version: '22.10'
 			}
 		],
@@ -1811,19 +1811,19 @@ export const legalParticipantTestJSON = {
 						{
 							type: 'gx:compliance',
 							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0',
-							integrity: 'sha256-372994ed4b18b7f4252626a48c510aa170cb3a04717d2501ccf1982ed85a9b12',
+							'gx:integrity': 'sha256-372994ed4b18b7f4252626a48c510aa170cb3a04717d2501ccf1982ed85a9b12',
 							version: '22.10'
 						},
 						{
 							type: 'gx:compliance',
 							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1',
-							integrity: 'sha256-20059a7a182d8a840ee25f8773446aa2f0564c0ff82d359b8a1b194bf1f98045',
+							'gx:integrity': 'sha256-20059a7a182d8a840ee25f8773446aa2f0564c0ff82d359b8a1b194bf1f98045',
 							version: '22.10'
 						},
 						{
 							type: 'gx:compliance',
 							id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2',
-							integrity: 'sha256-f897639cb8a0236874ec395a3b0443986fcf5e3b1ac4ac1f3978e72e685dea2f',
+							'gx:integrity': 'sha256-f897639cb8a0236874ec395a3b0443986fcf5e3b1ac4ac1f3978e72e685dea2f',
 							version: '22.10'
 						}
 					],

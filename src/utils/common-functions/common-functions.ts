@@ -549,6 +549,20 @@ class Utils {
 	}
 
 	/**
+	 * @dev - common function to fetch Service Offering JSON from url
+	 *
+	 */
+	fetchServiceOfferingJson = async (url: string) => {
+		// eslint-disable-next-line no-useless-catch
+		try {
+			const serviceOfferingJson = (await axios.get(url)).data
+			return serviceOfferingJson
+		} catch (error) {
+			throw error
+		}
+	}
+
+	/**
 	 * @dev takes the credential and proof, and verifies the signature is valid or not
 	 * @param credentialContent the credential part which will be hashed for proof
 	 * @param proof the proof obj

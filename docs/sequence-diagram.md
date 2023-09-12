@@ -2,15 +2,13 @@
 
 ```
 @startuml
-User -> APIService: Service offering Data
-APIService -> SignerTool: Prepare Service offering json and send
-SignerTool -> Compliance: Self sign service offeringVC, prepares VP for service offering and request
+APIService -> SignerTool: Request with Private Key, Legal Participant Link & Service offering data 
+SignerTool --> SignerTool: Create service offering JSON, Self sign it and, prepares VP for service offering
+SignerTool -> Compliance: Request for service offering compliance
 
 Compliance --> SignerTool: Compliance Response
 SignerTool --> SignerTool: Calculates Trust Index using Veracity & Transparency
 SignerTool --> APIService: Responds with Service offering VP + compliance response + Trust Index data
-APIService --> APIService: Creates resolvable link of service offering and store in DB
-APIService --> User: Success
 @enduml
 ```
 
@@ -18,13 +16,11 @@ APIService --> User: Success
 
 ```
 @startuml
-User -> APIService: Label Level Data (Service offering creation)
-APIService -> SignerTool: Prepare label level json and send
-SignerTool -> Compliance: Calculate Label Level, Self sign VC and request
+APIService -> SignerTool: Prepares label level json and send
+SignerTool --> SignerTool: Calculate Label Level, prepares Label level JSON and Self Sign it
+SignerTool -> Compliance: Request for compliance
 
-Compliance --> SignerTool: Label level VC with compliance Response
+Compliance --> SignerTool: Compliance Response
 SignerTool --> APIService: Label level VC with compliance
-APIService --> APIService: Creates resolvable link of label level VC and set in service offering json
-APIService --> User: Success
 @enduml
 ```

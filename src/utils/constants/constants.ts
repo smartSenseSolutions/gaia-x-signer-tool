@@ -44,7 +44,7 @@ export class AppMessages {
 	static readonly X5U_NOT_FOUND = 'X5U not found from the holder DID'
 	static readonly INVALID_DEPENDS_ON = 'Service offering vc not found in depends on'
 	static readonly CS_EMPTY = 'Credential subject not found'
-	static readonly LABEL_LEVEL_CALC_FAILED = 'Failed to calculate label level'
+	static readonly LABEL_LEVEL_CALC_FAILED = `Basic conformity criteria's can not be marked as deny`
 	static readonly LABEL_LEVEL_CALC_FAILED_INVALID_KEY = 'Rule point key not found in criteria json - '
 	static readonly PK_DECRYPT_FAIL = 'Fail to decrypt primary key'
 	static readonly SD_SIGN_VALIDATION_FAILED = 'Service offering SD validation failed'

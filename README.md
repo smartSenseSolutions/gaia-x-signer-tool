@@ -93,20 +93,31 @@ http://localhost:8000/docs/
 ![verify-signature](docs/verify-vc.png?raw=true)
 
 ### Service Offering VC and Compliance
-- Signer Tool will receive unsigned VC JSON for service offering from API Service
-- Once the VC is signed, Signer Tool Service  will prepare VP(verifiable presentation) of service offering and send Compliance service for compliance.
-- Once the compliance is done, Signer tool service will respond to API Service with Self Signed Service offering VP & Compliance Data for that service offering.
+- User will request Signer Tool Private Key, and service offering data to create service offering.
+- Signer tool will,
+        <ol>
+            <li> Validate the request</li> 
+            <li> Resolve LP link and fetch data</li> 
+            <li> Fetch Did document and Extract X5U URL</li> 
+            <li> Decode PrivateKey and Self sign service offering unsigned json</li>
+            <li> Validates dependsOn & aggregationOf vc type with allowed types(gx:ServiceOffering,gx:VirtualDataResource,gx:PhysicalResource) and prepares Service offering VP</li>
+        </ol>
+- Request compliance service for compliance with VP(verifiable presentation) of service offering
+- Once the compliance is done, Signer tool  will respond User with Self Signed Service offering VP & Compliance Data for the service offering.
 
 ![create-label-level](docs/create-service-offering.png?raw=true)
 
 ### Label Level VC and Compliance
-- Signer Tool will receive unsigned VC JSON for label level from API Service for,
+- User will request SignerTool with Private Key and Label Level data
+- Signer Tool will,
         <ol>
-            <li> Label level calculation</li> 
-            <li> Self Sign VC (unsigned → signed)</li> 
+            <li> Validate the request</li> 
+            <li> Fetch Did document and Extract X5U URL</li> 
+            <li> Calculate Label Level and prepares Label level unsigned JSON</li> 
+            <li> Decode PrivateKey and Self sign Label level unsigned JSON (unsigned → signed)</li> 
         </ol>
-- Once the VC is signed, Signer Tool Service  will request Compliance service for compliance.
-- Once the compliance is done, Signer tool service will respond to API Service with Signed VC & Compliance Data.
+- Then signer tool will request Compliance service for compliance.
+- Once the compliance is done, SignerTool will respond User with Label Level VC & Compliance Data.
 
 ![create-label-level](docs/create-label-level.png?raw=true)
 

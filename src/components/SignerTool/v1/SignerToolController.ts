@@ -151,43 +151,50 @@ class SignerToolController {
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
-			// privateKey = process.env.PRIVATE_KEY
-
 			const vcsMap = new Map()
-			switch (resource.credentialSubject.type) {
-				case 'gx:VirtualDataResource': {
-					if (resource.credentialSubject['gx:copyrightOwnedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
-					}
+			try {
+				switch (resource.credentialSubject.type) {
+					case 'gx:VirtualDataResource': {
+						if (resource.credentialSubject['gx:copyrightOwnedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
+						}
 
-					if (resource.credentialSubject['gx:producedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:producedBy', ['gx:LegalParticipant'], vcsMap)
+						if (resource.credentialSubject['gx:producedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:producedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						break
 					}
-					break
+					case 'gx:PhysicalResource': {
+						if (resource.credentialSubject['gx:maintainedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:maintainedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						if (resource.credentialSubject['gx:ownedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:ownedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						if (resource.credentialSubject['gx:manufacturedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:manufacturedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						break
+					}
+					case 'gx:VirtualSoftwareResource': {
+						if (resource.credentialSubject['gx:copyrightOwnedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						break
+					}
 				}
-				case 'gx:PhysicalResource': {
-					if (resource.credentialSubject['gx:maintainedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:maintainedBy', ['gx:LegalParticipant'], vcsMap)
-					}
-					if (resource.credentialSubject['gx:ownedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:ownedBy', ['gx:LegalParticipant'], vcsMap)
-					}
-					if (resource.credentialSubject['gx:manufacturedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:manufacturedBy', ['gx:LegalParticipant'], vcsMap)
-					}
-					break
+
+				if (resource.credentialSubject['gx:aggregationOf']) {
+					await Utils.getInnerVCs(resource, 'gx:aggregationOf', ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'], vcsMap)
 				}
-				case 'gx:VirtualSoftwareResource': {
-					if (resource.credentialSubject['gx:copyrightOwnedBy']) {
-						await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
-					}
-					break
-				}
+			} catch (e) {
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: (e as Error).message,
+					message: AppMessages.VP_FAILED
+				})
+				return
 			}
 
-			if (resource.credentialSubject['gx:aggregationOf']) {
-				await Utils.getInnerVCs(resource, 'gx:aggregationOf', ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'], vcsMap)
-			}
 			const vcs = [resource]
 
 			for (let index = 0; index < vcs.length; index++) {

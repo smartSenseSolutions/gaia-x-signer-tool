@@ -405,25 +405,10 @@ class SignerToolController {
 				logger.error(__filename, 'Verify', `❌ Credential Type not supported`, req.custom.uuid)
 				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `Credential Type not supported`,
-					message: `Credential Type not supported`
+					message: AppMessages.SIG_VERIFY_FAILED
 				})
 				return
 			}
-			//fetching VC with subject type gx:LegalParticipant
-			// const VC = verifiableCredential
-			// 	?.find((vc: VerifiableCredentialDto) => vc.credentialSubject.id === url)
-			// 	.find((vc: VerifiableCredentialDto) =>
-			// 		['gx:ServiceOffering', 'gx:LegalParticipant', 'gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(vc?.credentialSubject.type)
-			// 	)
-
-			// if (!VC) {
-			// 	logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have supported type`, req.custom.uuid)
-			// 	res.status(STATUS_CODES.BAD_REQUEST).json({
-			// 		error: `Verifiable Credential doesn't have supported type`,
-			// 		message: "Verifiable Credential doesn't have supported type"
-			// 	})
-			// 	return
-			// }
 
 			const typeName = await Utils.getVcType(verifiableCredential, url)
 			if (
@@ -439,7 +424,7 @@ class SignerToolController {
 			) {
 				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `${url} VC ID not found or VC doesn't have supported type`,
-					message: `${url} VC ID not found or VC doesn't have supported type`
+					message: AppMessages.SIG_VERIFY_FAILED
 				})
 				return
 			}

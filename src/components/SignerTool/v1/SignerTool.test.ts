@@ -103,6 +103,9 @@ jest.mock('../../../utils/common-functions', () => {
 		},
 		IsValidURL: () => {
 			return false
+		},
+		getVcType: () => {
+			return ''
 		}
 	}
 })
@@ -110,7 +113,7 @@ jest.mock('../../../utils/common-functions', () => {
 describe('/v1/gaia-x/verify', () => {
 	const validBody = {
 		policies: ['integrityCheck', 'holderSignature', 'complianceSignature', 'complianceCheck'],
-		url: 'https://greenworld.proofsense.in/.well-known/participant.json'
+		url: 'https://greenworld.proofsense.in/.well-known/participant.json#0'
 	}
 	describe('Failing Cases', () => {
 		describe('validation error', () => {
@@ -207,7 +210,7 @@ describe('/v1/gaia-x/verify', () => {
 				const body = validBody
 				const error = {
 					error: `VC not found`,
-					message: AppMessages.PARTICIPANT_VC_FOUND_FAILED
+					message: AppMessages.SIG_VERIFY_FAILED
 				}
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
@@ -225,7 +228,7 @@ describe('/v1/gaia-x/verify', () => {
 				const body = validBody
 				const error = {
 					error: `VC not valid`,
-					message: AppMessages.PARTICIPANT_VC_INVALID
+					message: AppMessages.SIG_VERIFY_FAILED
 				}
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
@@ -242,7 +245,7 @@ describe('/v1/gaia-x/verify', () => {
 					return { ...mockParticipantJson }
 				})
 				error.error = 'VC not found'
-				error.message = AppMessages.PARTICIPANT_VC_FOUND_FAILED
+				error.message = AppMessages.SIG_VERIFY_FAILED
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 					.send(body)
@@ -300,7 +303,7 @@ describe('/v1/gaia-x/verify', () => {
 				const body = validBody
 				const error = {
 					error: `Credential Type not supported`,
-					message: `Credential Type not supported`
+					message: AppMessages.SIG_VERIFY_FAILED
 				}
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
@@ -358,8 +361,8 @@ describe('/v1/gaia-x/verify', () => {
 				})
 				const body = validBody
 				const error = {
-					error: `VC with type 'gx:LegalParticipant' or  'gx:ServiceOffering' not found!!`,
-					message: "VC with type 'gx:LegalParticipant'  or 'gx:ServiceOffering' not found!!"
+					error: `${validBody.url} VC ID not found or VC doesn't have supported type`,
+					message: AppMessages.SIG_VERIFY_FAILED
 				}
 				await supertest(app)
 					.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
@@ -376,6 +379,10 @@ describe('/v1/gaia-x/verify', () => {
 					const mockParticipantJson = JSON.parse(JSON.stringify(participantJson))
 					mockParticipantJson.selfDescriptionCredential.verifiableCredential[1].id = 'did:web:whiteworld.proofsense.in'
 					return { ...mockParticipantJson }
+				})
+
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
 				})
 
 				const body = validBody
@@ -404,6 +411,9 @@ describe('/v1/gaia-x/verify', () => {
 				jest.spyOn(Utils, 'verification').mockImplementation(async () => {
 					throw new Error('Verification failed due to xyz reason')
 				})
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
+				})
 				const body = validBody
 				body.policies = ['holderSignature']
 
@@ -423,6 +433,9 @@ describe('/v1/gaia-x/verify', () => {
 			it('verification returns false', async () => {
 				jest.spyOn(Utils, 'verification').mockImplementation(async () => {
 					return false
+				})
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
 				})
 				const body = validBody
 				body.policies = ['holderSignature']
@@ -449,6 +462,9 @@ describe('/v1/gaia-x/verify', () => {
 				jest.spyOn(Utils, 'verification').mockImplementation(async () => {
 					throw new Error('Verification failed due to xyz reason')
 				})
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
+				})
 				const body = validBody
 				body.policies = ['complianceSignature']
 
@@ -468,6 +484,9 @@ describe('/v1/gaia-x/verify', () => {
 			it('verification returns false', async () => {
 				jest.spyOn(Utils, 'verification').mockImplementation(async () => {
 					return false
+				})
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
 				})
 				const body = validBody
 				body.policies = ['complianceSignature']
@@ -494,6 +513,9 @@ describe('/v1/gaia-x/verify', () => {
 	describe('success case', () => {
 		describe('integrityCheck', () => {
 			it('integrity successful', async () => {
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
+				})
 				const body = validBody
 				body.policies = ['integrityCheck']
 
@@ -516,6 +538,9 @@ describe('/v1/gaia-x/verify', () => {
 		})
 		describe('holderSignature', () => {
 			it('holder sig validated', async () => {
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
+				})
 				const body = validBody
 				body.policies = ['holderSignature']
 
@@ -538,6 +563,9 @@ describe('/v1/gaia-x/verify', () => {
 		})
 		describe('complianceSignature', () => {
 			it('compliance signature verified', async () => {
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
+				})
 				const body = validBody
 				body.policies = ['complianceSignature']
 
@@ -561,6 +589,9 @@ describe('/v1/gaia-x/verify', () => {
 		})
 		describe('check all', () => {
 			it('compliance signature verified', async () => {
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
+				})
 				const body = validBody
 				body.policies = ['holderSignature', 'integrityCheck', 'complianceSignature']
 
@@ -589,6 +620,9 @@ describe('/v1/gaia-x/verify', () => {
 				jest.spyOn(Utils, 'fetchParticipantJson').mockImplementation(async () => {
 					const mockParticipantJson = JSON.parse(JSON.stringify(ServiceOfferingParticipantJson))
 					return { ...mockParticipantJson }
+				})
+				jest.spyOn(Utils, 'getVcType').mockImplementation(async () => {
+					return 'gx:LegalParticipant'
 				})
 				const body = validBody
 				body.policies = ['holderSignature', 'integrityCheck', 'complianceSignature', 'complianceCheck']

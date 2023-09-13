@@ -310,10 +310,10 @@ describe('commonFunction Testing', () => {
 			let isError = false
 			try {
 				// get the SSL certificates from x5u url
-				const x5u = 'https://ferrari.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem'
+				const x5u = 'https://lakhani.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem'
 				const x5uResp = {
-					validFrom: 'Aug 22 13:39:54 2023 GMT',
-					validTo: 'Nov 20 13:39:53 2023 GMT',
+					validFrom: 'Sep 11 09:12:50 2023 GMT',
+					validTo: 'Dec 10 09:12:49 2023 GMT',
 					subject: {
 						jurisdictionCountry: null,
 						jurisdictionSate: null,
@@ -324,7 +324,7 @@ describe('commonFunction Testing', () => {
 						state: null,
 						locality: null,
 						organization: null,
-						commonName: 'ferrari.smart-x.smartsenselabs.com'
+						commonName: 'lakhani.smart-x.smartsenselabs.com'
 					},
 					issuer: { commonName: 'R3', organization: "Let's Encrypt", country: 'US' }
 				}

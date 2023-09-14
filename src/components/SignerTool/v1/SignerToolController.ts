@@ -2,39 +2,78 @@ import axios from 'axios'
 import crypto, { createHash } from 'crypto'
 import { Resolver } from 'did-resolver'
 import express, { Request, Response } from 'express'
+import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
-import { ComplianceCredential, VerifiableCredentialDto, VerificationStatus } from '../../../interface'
+
+import { ComplianceCredential, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
 import { logger } from '../../../utils/logger'
+import { VaultService } from '../../../utils/service/vault.service'
+
 const webResolver = web.getResolver()
 const resolver = new Resolver(webResolver)
 export const privateRoute = express.Router()
-
+const vaultService = new VaultService()
 class SignerToolController {
 	GXLegalParticipant = async (req: Request, res: Response): Promise<void> => {
 		try {
-			const { issuer, verificationMethod } = req.body
+			const { issuer, verificationMethod, isVault } = req.body
 			const vc = req.body.vcs
 			let { privateKey } = req.body
 			const { legalParticipant, legalRegistrationNumber, gaiaXTermsAndConditions } = vc
 
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
-				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
-				res.status(400).json({
-					error: `DDO not found for given did: '${issuer}' in proof`
+				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}'`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `DDO not found for given did: '${issuer}'`,
+					message: AppMessages.VP_FAILED
 				})
 				return
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
-			// privateKey = process.env.PRIVATE_KEY as string
+			if (!x5u) {
+				logger.error(__filename, 'GXLegalParticipant', AppMessages.X5U_NOT_FOUND, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.X5U_NOT_FOUND,
+					message: AppMessages.VP_FAILED
+				})
+				return
+			}
+
+			const vcsMap = new Map()
+			if (legalParticipant.credentialSubject['gx:parentOrganization']) {
+				try {
+					await Utils.getInnerVCs(legalParticipant, 'gx:parentOrganization', ['gx:LegalParticipant'], vcsMap)
+				} catch (e) {
+					res.status(STATUS_CODES.BAD_REQUEST).json({
+						error: (e as Error).message,
+						message: AppMessages.VP_FAILED
+					})
+					return
+				}
+			}
+			if (legalParticipant.credentialSubject['gx:subOrganization']) {
+				try {
+					await Utils.getInnerVCs(legalParticipant, 'gx:subOrganization', ['gx:LegalParticipant'], vcsMap)
+				} catch (e) {
+					res.status(STATUS_CODES.BAD_REQUEST).json({
+						error: (e as Error).message,
+						message: AppMessages.VP_FAILED
+					})
+					return
+				}
+			}
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
+			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
+
 			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]
+			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
 				// eslint-disable-next-line no-prototype-builtins
@@ -43,27 +82,148 @@ class SignerToolController {
 					vcs[index].proof = proof
 				}
 			}
+
+			vcs.push(...Array.from(vcsMap.values()))
+
 			const selfDescription = Utils.createVP(vcs)
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
-			// // const complianceCredential = {}
-			if (complianceCredential) {
-				logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
-			} else {
-				logger.error(__filename, 'GXLegalParticipant', '❌ SD signing failed (compliance service)', req.custom.uuid)
-			}
+			// const complianceCredential = vcs
+			logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
 
-			// // await publisherService.publishVP(complianceCredential);
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
 				complianceCredential: complianceCredential
 			}
 
-			res.status(200).json({
-				data: completeSD,
+			res.status(STATUS_CODES.OK).json({
+				data: { completeSD },
 				message: AppMessages.VP_SUCCESS
 			})
-		} catch (e) {
-			res.status(500).json({
+		} catch (error: any) {
+			logger.error(__filename, 'GXLegalParticipant', error.message, req.custom.uuid)
+			if (error.response) {
+				// If server responded with a status code for a request
+				// console.log('Data', error.response.data)
+				// console.log('Status', error.response.status)
+				// console.log('Headers', error.response.headers)
+				res.status(error.response.status).json({
+					error: error.response.data,
+					message: AppMessages.VP_FAILED
+				})
+			} else {
+				res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+					error: (error as Error).message,
+					message: AppMessages.VP_FAILED
+				})
+			}
+		}
+	}
+
+	Resource = async (req: Request, res: Response): Promise<void> => {
+		try {
+			const { issuer, verificationMethod, isVault } = req.body
+			const { resource } = req.body.vcs
+			let { privateKey } = req.body
+
+			const VC = ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(resource.credentialSubject.type)
+			if (!VC) {
+				logger.error(
+					__filename,
+					'Verify',
+					`❌ Verifiable Credential doesn't have type 'gx:VirtualDataResource' or  'gx:PhysicalResource' or 'gx:VirtualSoftwareResource'`,
+					req.custom.uuid
+				)
+				res.status(STATUS_CODES.UNPROCESSABLE_ENTITY).json({
+					error: `VC with type 'gx:VirtualDataResource' or 'gx:PhysicalResource' or 'gx:VirtualSoftwareResource' not found!!`,
+					message: AppMessages.VP_FAILED
+				})
+				return
+			}
+
+			const ddo = await Utils.getDDOfromDID(issuer, resolver)
+			if (!ddo) {
+				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}'`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `DDO not found for given did: '${issuer}'`,
+					message: AppMessages.VP_FAILED
+				})
+				return
+			}
+			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
+			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+			const vcsMap = new Map()
+			try {
+				switch (resource.credentialSubject.type) {
+					case 'gx:VirtualDataResource': {
+						if (resource.credentialSubject['gx:copyrightOwnedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+
+						if (resource.credentialSubject['gx:producedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:producedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						break
+					}
+					case 'gx:PhysicalResource': {
+						if (resource.credentialSubject['gx:maintainedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:maintainedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						if (resource.credentialSubject['gx:ownedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:ownedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						if (resource.credentialSubject['gx:manufacturedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:manufacturedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						break
+					}
+					case 'gx:VirtualSoftwareResource': {
+						if (resource.credentialSubject['gx:copyrightOwnedBy']) {
+							await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
+						}
+						break
+					}
+				}
+
+				if (resource.credentialSubject['gx:aggregationOf']) {
+					await Utils.getInnerVCs(resource, 'gx:aggregationOf', ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'], vcsMap)
+				}
+			} catch (e) {
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: (e as Error).message,
+					message: AppMessages.VP_FAILED
+				})
+				return
+			}
+
+			const vcs = [resource]
+
+			for (let index = 0; index < vcs.length; index++) {
+				const vc = vcs[index]
+				// eslint-disable-next-line no-prototype-builtins
+				if (!vc.hasOwnProperty('proof')) {
+					const proof = await Utils.addProof(jsonld, axios, jose, crypto, vc, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
+					vcs[index].proof = proof
+				}
+			}
+
+			vcs.push(...Array.from(vcsMap.values()))
+
+			const selfDescription = Utils.createVP(vcs)
+			// const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
+			// logger.info(__filename, 'GXLegalParticipant', complianceCredential? '🔒 SD signed successfully (compliance service)':'❌ SD signing failed (compliance service)', req.custom.uuid)
+
+			const completeSD = {
+				selfDescriptionCredential: selfDescription,
+				complianceCredential: {}
+			}
+
+			res.status(STATUS_CODES.OK).json({
+				data: { completeSD },
+				message: AppMessages.VP_SUCCESS
+			})
+		} catch (e: any) {
+			logger.error(__filename, 'Resource', e.message, req.custom.uuid, e)
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED
 			})
@@ -74,47 +234,91 @@ class SignerToolController {
 		try {
 			let { privateKey } = req.body
 			const {
-				legalParticipantURL,
+				isVault,
 				verificationMethod,
-				issuer,
+				issuer: issuerDID,
 				vcs: { serviceOffering }
 			} = req.body
 
-			const legalParticipant = (await axios.get(legalParticipantURL)).data
-			// const legalParticipant = require('./../../legalParticipant.json')
-			const {
+			// Data received in provided by will be the LP URL.
+			// Extract it and fetch LP JSON from the URL
+			const legalParticipantURL = serviceOffering['credentialSubject']['gx:providedBy']['id']
+			const legalParticipant = await Utils.fetchParticipantJson(legalParticipantURL)
+			let {
 				selfDescriptionCredential: { verifiableCredential }
 			} = legalParticipant
 
-			const ddo = await Utils.getDDOfromDID(issuer, resolver)
+			// Get DID document of issuer from issuer DID
+			const ddo = await Utils.getDDOfromDID(issuerDID, resolver)
 			if (!ddo) {
-				logger.error(__filename, 'ServiceOffering', `❌ DDO not found for given did: '${issuer}' in proof`, req.custom.uuid)
-				res.status(400).json({
-					error: `DDO not found for given did: '${issuer}' in proof`
+				logger.error(__filename, 'ServiceOffering', `❌ DDO not found for given did: '${issuerDID}' in proof`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `DDO not found for given did: '${issuerDID}' in proof`,
+					message: AppMessages.SD_SIGN_FAILED
 				})
 				return
 			}
 
+			// Extract certificate url from did document
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
-			privateKey = Buffer.from(privateKey, 'base64').toString('ascii')
+			if (!x5u) {
+				logger.error(__filename, 'ServiceOffering', AppMessages.X5U_NOT_FOUND, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.X5U_NOT_FOUND,
+					message: AppMessages.SD_SIGN_FAILED
+				})
+				return
+			}
 
+			// Decrypt private key(received in request) from base64 to raw string
+			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+
+			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 			serviceOffering.proof = proof
 			verifiableCredential.push(serviceOffering)
 
+			const { credentialSubject: serviceOfferingCS } = serviceOffering
+			const vcsMap = new Map()
+
+			// Extract VC of dependant Services
+			// eslint-disable-next-line no-prototype-builtins
+			if (serviceOfferingCS.hasOwnProperty('gx:dependsOn')) {
+				try {
+					await Utils.getInnerVCs(serviceOffering, 'gx:dependsOn', ['gx:ServiceOffering'], vcsMap)
+				} catch (error) {
+					res.status(STATUS_CODES.BAD_REQUEST).json({
+						error: (error as Error).message,
+						message: AppMessages.SD_SIGN_FAILED
+					})
+					return
+				}
+			}
+			/* Extract VC of aggregated Resources
+			// eslint-disable-next-line no-prototype-builtins
+			if (serviceOfferingCS.hasOwnProperty('gx:aggregationOf')) {
+				try {
+					await Utils.getInnerVCs(serviceOffering, 'gx:aggregationOf', ['gx:Resource'], vcsMap)
+				} catch (error) {
+					res.status(STATUS_CODES.BAD_REQUEST).json({
+						error: (error as Error).message,
+						message: AppMessages.SD_SIGN_FAILED
+					})
+					return
+				}
+			}*/
+
+			verifiableCredential.push(...Array.from(vcsMap.values()))
+			verifiableCredential = Utils.removeDuplicates(verifiableCredential, 'id')
+
 			// Create VP for service offering
-			const selfDescriptionCredential = Utils.createVP(verifiableCredential)
+			const selfDescriptionCredentialVP = Utils.createVP(verifiableCredential)
 
 			// Call compliance service to sign in gaia-x
-			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescriptionCredential)).data
-			if (complianceCredential) {
-				logger.info(__filename, 'ServiceOffering', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
-			} else {
-				logger.error(__filename, 'ServiceOffering', '❌ SD signing failed (compliance service)', req.custom.uuid)
-			}
+			const complianceCredential = await Utils.callServiceOfferingCompliance(selfDescriptionCredentialVP)
 
 			const completeSD = {
-				selfDescriptionCredential: selfDescriptionCredential,
+				selfDescriptionCredential: selfDescriptionCredentialVP,
 				complianceCredential: complianceCredential
 			}
 
@@ -123,15 +327,14 @@ class SignerToolController {
 			logger.debug(__filename, 'ServiceOffering', '🔒 veracity calculated', req.custom.uuid)
 
 			// Calculate Transparency
-			const { credentialSubject } = serviceOffering
-			const transparency: number = await Utils.calcTransparency(credentialSubject)
+			const transparency: number = await Utils.calcTransparency(serviceOfferingCS)
 			logger.debug(__filename, 'ServiceOffering', '🔒 transparency calculated', req.custom.uuid)
 
 			// Calculate TrustIndex
 			const trustIndex: number = Utils.calcTrustIndex(veracity, transparency)
 			logger.debug(__filename, 'ServiceOffering', '🔒 trustIndex calculated', req.custom.uuid)
 
-			res.status(200).json({
+			res.status(STATUS_CODES.OK).json({
 				data: {
 					completeSD,
 					trustIndex: {
@@ -144,9 +347,8 @@ class SignerToolController {
 				message: AppMessages.SD_SIGN_SUCCESS
 			})
 		} catch (error) {
-			logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED} :- error \n ${error}`, req.custom.uuid)
-
-			res.status(500).json({
+			// logger.error(__filename, 'ServiceOffering', `❌ ${AppMessages.SD_SIGN_FAILED}`, req.custom.uuid, error)
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.SD_SIGN_FAILED
 			})
@@ -154,9 +356,12 @@ class SignerToolController {
 	}
 
 	Verify = async (req: Request, res: Response): Promise<void> => {
-		/* Request Body :
-		 * 1. Participant URL : EG . https://greenworld.proofsense.in/.well-known/participant.json
+		/**
+		 * Request Body :
+		  	1. url : EG . https://greenworld.proofsense.in/.well-known/participant.json
+		 	2. policies : policy we want to check
 		 */
+
 		//todo : compliance check is remaining
 		try {
 			const { url, policies } = req.body
@@ -170,48 +375,71 @@ class SignerToolController {
 			//check if VC not null or in other form
 			if (!participantJson?.selfDescriptionCredential?.verifiableCredential) {
 				logger.error(__filename, 'Verify', `❌ No Verifiable Credential Found`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `VC not found`,
-					message: AppMessages.PARTICIPANT_VC_FOUND_FAILED
+					message: AppMessages.SIG_VERIFY_FAILED
 				})
 				return
 			} else if (!Array.isArray(participantJson.selfDescriptionCredential.verifiableCredential)) {
 				logger.error(__filename, 'Verify', `❌ Verifiable Credential isn't array`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `VC not valid`,
-					message: AppMessages.PARTICIPANT_VC_INVALID
+					message: AppMessages.SIG_VERIFY_FAILED
 				})
 				return
 			}
 
 			// check if complianceCred not null
-			if (!participantJson?.complianceCredential || !participantJson?.complianceCredential?.proof) {
-				logger.error(__filename, 'Verify', `❌ Compliance Credential Not Found`, req.custom.uuid)
-				res.status(400).json({
-					error: `Compliance Credential not found`,
-					message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
-				})
-				return
-			}
+			// if (!participantJson?.complianceCredential || !participantJson?.complianceCredential?.proof) {
+			// 	logger.error(__filename, 'Verify', `❌ Compliance Credential Not Found`, req.custom.uuid)
+			// 	res.status(STATUS_CODES.BAD_REQUEST).json({
+			// 		error: `Compliance Credential not found`,
+			// 		message: AppMessages.COMPLIANCE_CRED_FOUND_FAILED
+			// 	})
+			// 	return
+			// }
 
 			// check VC are of valid type
 			const { verifiableCredential, type } = participantJson.selfDescriptionCredential
 			if (!Array.isArray(type) || !(type.includes('VerifiableCredential') || type.includes('VerifiablePresentation'))) {
 				logger.error(__filename, 'Verify', `❌ Credential Type not supported`, req.custom.uuid)
-				res.status(400).json({
+				res.status(STATUS_CODES.BAD_REQUEST).json({
 					error: `Credential Type not supported`,
 					message: `Credential Type not supported`
 				})
 				return
 			}
 			//fetching VC with subject type gx:LegalParticipant
-			const VC = verifiableCredential?.find((vc: VerifiableCredentialDto) => vc?.credentialSubject.type === 'gx:LegalParticipant')
+			// const VC = verifiableCredential
+			// 	?.find((vc: VerifiableCredentialDto) => vc.credentialSubject.id === url)
+			// 	.find((vc: VerifiableCredentialDto) =>
+			// 		['gx:ServiceOffering', 'gx:LegalParticipant', 'gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(vc?.credentialSubject.type)
+			// 	)
 
-			if (!VC) {
-				logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have type 'gx:LegalParticipant'`, req.custom.uuid)
-				res.status(400).json({
-					error: `VC with type 'gx:LegalParticipant' not found!!`,
-					message: "VC with type 'gx:LegalParticipant' not found!!"
+			// if (!VC) {
+			// 	logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have supported type`, req.custom.uuid)
+			// 	res.status(STATUS_CODES.BAD_REQUEST).json({
+			// 		error: `Verifiable Credential doesn't have supported type`,
+			// 		message: "Verifiable Credential doesn't have supported type"
+			// 	})
+			// 	return
+			// }
+
+			const typeName = await Utils.getVcType(verifiableCredential, url)
+			if (
+				![
+					'gx:ServiceOffering',
+					'gx:LegalParticipant',
+					'gx:VirtualDataResource',
+					'gx:PhysicalResource',
+					'gx:VirtualSoftwareResource',
+					'gx:legalRegistrationNumber',
+					'gx:GaiaXTermsAndConditions'
+				].includes(typeName)
+			) {
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `${url} VC ID not found or VC doesn't have supported type`,
+					message: `${url} VC ID not found or VC doesn't have supported type`
 				})
 				return
 			}
@@ -224,7 +452,9 @@ class SignerToolController {
 
 						for (const vc of participantJson.selfDescriptionCredential.verifiableCredential) {
 							const integrityHash = `sha256-${createHash('sha256').update(JSON.stringify(vc)).digest('hex')}`
-							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vc.credentialSubject.id)?.integrity
+							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vc.credentialSubject.id)[
+								'gx:integrity'
+							]
 							const integrityCheck = integrityHash === credIntegrityHash
 
 							if (!integrityCheck) {
@@ -239,14 +469,17 @@ class SignerToolController {
 
 					case AppConst.VERIFY_LP_POLICIES[1]: {
 						//holder sig verification
-						const vcProof = JSON.parse(JSON.stringify(VC.proof))
-						const vcCredentialContent = JSON.parse(JSON.stringify(VC))
-						delete vcCredentialContent.proof
-						verificationStatus.holderSignature = await Utils.verification(vcCredentialContent, vcProof, true, resolver)
+						for (const vc of verifiableCredential) {
+							const vcProof = JSON.parse(JSON.stringify(vc.proof))
+							const vcCredentialContent = JSON.parse(JSON.stringify(vc))
+							delete vcCredentialContent.proof
+							verificationStatus.holderSignature = await Utils.verification(vcCredentialContent, vcProof, true, resolver)
+						}
 						break
 					}
 					case AppConst.VERIFY_LP_POLICIES[2]: {
 						// compliance sig verification
+
 						const complianceCred = JSON.parse(JSON.stringify(participantJson.complianceCredential))
 						const complianceProof = JSON.parse(JSON.stringify(complianceCred.proof))
 						delete complianceCred.proof
@@ -254,7 +487,10 @@ class SignerToolController {
 						break
 					}
 					case AppConst.VERIFY_LP_POLICIES[3]: {
-						verificationStatus.complianceCheck = true
+						const complianceCred = JSON.parse(JSON.stringify(participantJson.complianceCredential))
+						const expirationDate = new Date(complianceCred.expirationDate).getTime()
+						const now = new Date().getTime()
+						verificationStatus.complianceCheck = expirationDate > now
 						break
 					}
 				}
@@ -270,12 +506,12 @@ class SignerToolController {
 			}
 
 			verificationStatus.valid = validity
-			res.status(200).json({
+			res.status(STATUS_CODES.OK).json({
 				data: { ...verificationStatus },
 				message: AppMessages.SIG_VERIFY_SUCCESS
 			})
 		} catch (error) {
-			res.status(500).json({
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.SIG_VERIFY_FAILED
 			})
@@ -286,32 +522,47 @@ class SignerToolController {
 		try {
 			const { participantSD, serviceOfferingSD } = req.body
 			if (!Utils.IsValidURL(participantSD)) {
-				logger.error(__filename, 'GetTrustIndex', `❌ Invalid participant self description url format`, req.custom.uuid)
-				throw new Error('Invalid participant self description url format')
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: 'Invalid participant self description url format',
+					message: AppMessages.TRUST_INDEX_CALC_FAILED
+				})
+				return
 			}
 			if (!Utils.IsValidURL(serviceOfferingSD)) {
-				logger.error(__filename, 'GetTrustIndex', `❌ Invalid service offering self description url format`, req.custom.uuid)
-				throw new Error('Invalid service offering self description url format')
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: 'Invalid service offering self description url format',
+					message: AppMessages.TRUST_INDEX_CALC_FAILED
+				})
+				return
 			}
 
 			// get the json document of participant self description
 			const {
 				selfDescriptionCredential: { verifiableCredential }
-			} = (await axios.get(participantSD)).data
+			} = await Utils.fetchParticipantJson(participantSD)
 			const { veracity, certificateDetails } = await Utils.calcVeracity(verifiableCredential, resolver)
 			logger.debug(__filename, 'GetTrustIndex', `veracity :- ${veracity}`, req.custom.uuid)
 
 			// get the json document of service offering
 			const {
-				selfDescriptionCredential: { credentialSubject }
-			} = (await axios.get(serviceOfferingSD)).data
+				selfDescriptionCredential: { verifiableCredential: verifiableCredentialVCS }
+			} = await Utils.fetchServiceOfferingJson(serviceOfferingSD)
+
+			const serviceOfferingVC = verifiableCredentialVCS.find((credential: any) => {
+				const {
+					credentialSubject: { type, id }
+				} = credential
+				return type === 'gx:ServiceOffering' && id === serviceOfferingSD
+			})
+
+			const { credentialSubject } = serviceOfferingVC
 			const transparency: number = await Utils.calcTransparency(credentialSubject)
 			logger.debug(__filename, 'GetTrustIndex', `transparency :-, ${transparency}`, req.custom.uuid)
 
 			const trustIndex: number = Utils.calcTrustIndex(veracity, transparency)
 			logger.debug(__filename, 'GetTrustIndex', `trustIndex :-, ${trustIndex}`, req.custom.uuid)
 
-			res.status(200).json({
+			res.status(STATUS_CODES.OK).json({
 				message: 'Success',
 				data: {
 					veracity,
@@ -322,7 +573,7 @@ class SignerToolController {
 			})
 		} catch (error) {
 			logger.error(__filename, 'GetTrustIndex', `❌ ${AppMessages.TRUST_INDEX_CALC_FAILED} : ${error}`, req.custom.uuid)
-			res.status(500).json({
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (error as Error).message,
 				message: AppMessages.TRUST_INDEX_CALC_FAILED
 			})
@@ -332,19 +583,197 @@ class SignerToolController {
 	CreateWebDID = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const { domain, tenant, services } = req.body
+			let x5uURL = req.body.x5u
 			const didId = tenant ? `did:web:${domain}:${tenant}` : `did:web:${domain}`
-			const x5uURL = tenant ? `https://${domain}/${tenant}/x509CertificateChain.pem` : `https://${domain}/.well-known/x509CertificateChain.pem`
-			const certificate = (await axios.get(x5uURL)).data as string
+
+			if (!x5uURL) {
+				x5uURL = tenant ? `https://${domain}/${tenant}/x509CertificateChain.pem` : `https://${domain}/.well-known/x509CertificateChain.pem`
+			}
+			let certificate = null
+			try {
+				certificate = (await axios.get(x5uURL)).data as string
+			} catch (e: any) {
+				logger.error(__filename, 'CreateWebDID', e.message, req.custom.uuid, e)
+				res.status(STATUS_CODES.UNPROCESSABLE_ENTITY).json({
+					error: `x5u URL not resolved: ${x5uURL}`,
+					message: AppMessages.DID_FAILED
+				})
+				return
+			}
 			const publicKeyJwk = await Utils.generatePublicJWK(jose, AppConst.RSA_ALGO, certificate, x5uURL)
-			const did = Utils.generateDID(didId, publicKeyJwk, services)
-			res.status(200).json({
+			if (!publicKeyJwk) {
+				logger.error(__filename, 'CreateWebDID', '❌ fail to create publicKeyJWK', req.custom.uuid)
+				throw new Error('fail to create publicKeyJWK')
+			}
+			const did = await Utils.generateDID(didId, publicKeyJwk, services)
+			if (!did) {
+				logger.error(__filename, 'CreateWebDID', '❌ fail to create did', req.custom.uuid)
+				throw new Error('fail to create did')
+			}
+			res.status(STATUS_CODES.OK).json({
 				data: { did },
 				message: AppMessages.DID_SUCCESS
 			})
-		} catch (e) {
-			res.status(500).json({
+		} catch (e: any) {
+			logger.error(__filename, 'CreateWebDID', e.message, req.custom.uuid, e)
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.DID_FAILED
+			})
+		}
+	}
+
+	VerifyWebDID = async (req: Request, res: Response): Promise<void> => {
+		try {
+			const { did, verificationMethod, privateKey, isVault } = req.body
+			const ddo = await Utils.getDDOfromDID(did, resolver)
+			if (!ddo) {
+				logger.error(__filename, 'VerifyWebDID', `❌ DDO not found for given did: '${did}'`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `DDO not found for given did: '${did}'`,
+					message: AppMessages.DID_VERIFY_FAILED
+				})
+				return
+			}
+			const {
+				didDocument: { verificationMethod: verificationMethodArray }
+			} = ddo
+			const foundVerificationMethod = verificationMethodArray.find((e: any) => e.id === verificationMethod)
+			if (!foundVerificationMethod) {
+				logger.error(__filename, 'VerifyWebDID', `❌ Verification Method not found in DDO: '${verificationMethod}'`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `Verification Method not found in DDO: '${verificationMethod}'`,
+					message: AppMessages.DID_VERIFY_FAILED
+				})
+				return
+			}
+			const decodedPrivateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+			// const decodedPrivateKey = process.env.PRIVATE_KEY as string
+			const hash = 'sampleText'
+			const jws = await Utils.sign(jose, AppConst.RSA_ALGO, hash, decodedPrivateKey)
+
+			try {
+				const isValid = await Utils.verify(jose, jws.replace('..', `.${hash}.`), AppConst.RSA_ALGO, foundVerificationMethod.publicKeyJwk, hash)
+				// const isValid = false
+				res.status(STATUS_CODES.OK).json({
+					data: { isValid },
+					message: isValid ? AppMessages.DID_VERIFY : AppMessages.DID_VERIFY_FAILED
+				})
+			} catch (e: any) {
+				logger.error(__filename, 'VerifyWebDID', e.message, req.custom.uuid)
+				res.status(STATUS_CODES.OK).json({
+					data: { isValid: false },
+					message: AppMessages.DID_VERIFY_FAILED
+				})
+			}
+		} catch (e: any) {
+			logger.error(__filename, 'VerifyWebDID', e.message, req.custom.uuid)
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+				error: (e as Error).message,
+				message: AppMessages.DID_VERIFY_FAILED
+			})
+		}
+	}
+
+	ValidateRegistrationNumber = async (req: Request, res: Response): Promise<void> => {
+		try {
+			const { legalRegistrationNumber } = req.body
+			try {
+				const isValid = (await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)) ? true : false
+				res.status(STATUS_CODES.OK).json({
+					data: { isValid },
+					message: isValid ? AppMessages.RN_VERIFY : AppMessages.RN_VERIFY_FAILED
+				})
+			} catch (e: any) {
+				logger.error(__filename, 'ValidateRegistrationNumber', e.message, req.custom.uuid)
+				res.status(STATUS_CODES.OK).json({
+					data: { isValid: false },
+					message: AppMessages.RN_VERIFY_FAILED
+				})
+			}
+		} catch (e: any) {
+			logger.error(__filename, 'ValidateRegistrationNumber', e.message, req.custom.uuid)
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+				error: (e as Error).message,
+				message: AppMessages.RN_VERIFY_FAILED
+			})
+		}
+	}
+
+	LabelLevel = async (req: Request, res: Response): Promise<void> => {
+		try {
+			let { privateKey } = req.body
+			const {
+				verificationMethod,
+				isVault,
+				issuer: issuerDID,
+				vcs: { labelLevel }
+			} = req.body
+			// Get DID document of issuer from issuer DID
+			const ddo = await Utils.getDDOfromDID(issuerDID, resolver)
+			if (!ddo) {
+				logger.error(__filename, 'LabelLevel', `❌ DDO not found for given did: '${issuerDID}' in proof`, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: `DDO not found for given did: '${issuerDID}' in proof`,
+					message: AppMessages.LL_SIGN_FAILED
+				})
+				return
+			}
+
+			const { credentialSubject: labelLevelCS } = labelLevel
+			if (!labelLevelCS) {
+				logger.error(__filename, 'LabelLevel', AppMessages.CS_EMPTY, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.CS_EMPTY,
+					message: AppMessages.LL_SIGN_FAILED
+				})
+				return
+			}
+
+			// Calculate LabelLevel
+			const labelLevelResult = await Utils.calcLabelLevel(labelLevelCS)
+			if (labelLevelResult === '') {
+				logger.error(__filename, 'LabelLevel', AppMessages.LABEL_LEVEL_CALC_FAILED, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.LABEL_LEVEL_CALC_FAILED,
+					message: AppMessages.LL_SIGN_FAILED
+				})
+				return
+			}
+			labelLevelCS['gx:labelLevel'] = labelLevelResult
+			logger.debug(__filename, 'LabelLevel', '🔒 labelLevel calculated', req.custom.uuid)
+
+			// Extract certificate url from did document
+			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
+			if (!x5u || x5u == '') {
+				logger.error(__filename, 'LabelLevel', AppMessages.X5U_NOT_FOUND, req.custom.uuid)
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: AppMessages.X5U_NOT_FOUND,
+					message: AppMessages.LL_SIGN_FAILED
+				})
+				return
+			}
+
+			// Decrypt private key(received in request) from base64 to raw string
+			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+
+			// Sign service offering self description with private key(received in request)
+			const proof = await Utils.addProof(jsonld, axios, jose, crypto, labelLevel, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
+			labelLevel.proof = proof
+
+			const completeSD = {
+				selfDescriptionCredential: labelLevel,
+				complianceCredential: {}
+			}
+			res.status(STATUS_CODES.OK).json({
+				data: completeSD,
+				message: AppMessages.LL_SIGN_SUCCESS
+			})
+		} catch (error) {
+			logger.error(__filename, 'LabelLevel', `❌ ${AppMessages.LL_SIGN_FAILED}`, req.custom.uuid, '')
+			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+				error: (error as Error).message,
+				message: AppMessages.LL_SIGN_FAILED
 			})
 		}
 	}

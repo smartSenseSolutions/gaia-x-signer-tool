@@ -1,32 +1,38 @@
 import { body } from 'express-validator'
-import Utils from '../common-functions'
+
 import { AppConst } from '../constants'
-import { logger } from '../logger'
 
 class SignerToolValidation {
 	GXLegalParticipant = [
+		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
 		body('issuer').not().isEmpty().trim().escape(),
 		body('verificationMethod').not().isEmpty().trim().escape(),
-		body('privateKey').not().isEmpty().trim().escape(),
 		body('vcs.legalParticipant').isObject(),
 		body('vcs.legalRegistrationNumber').isObject(),
 		body('vcs.gaiaXTermsAndConditions').isObject()
 	]
 	ServiceOffering = [
 		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
 		body('issuer').not().isEmpty().trim().escape(),
 		body('verificationMethod').not().isEmpty().trim().escape(),
-		body('legalParticipantURL')
-			.not()
-			.isEmpty()
-			.trim()
-			.custom(async (value, { req }) => {
-				if (!Utils.IsValidURL(value)) {
-					logger.error(__filename, 'ServiceOfferingValidation', `❌ Invalid legal participant self description url format`, req.custom.uuid)
-					throw new Error('Invalid legal participant self description url format')
-				}
-			}),
 		body('vcs.serviceOffering').isObject()
+	]
+	Resource = [
+		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
+		body('issuer').not().isEmpty().trim().escape(),
+		body('verificationMethod').not().isEmpty().trim().escape(),
+		body('vcs.resource').isObject(),
+		body('vcs.resource.credentialSubject').isObject()
+	]
+	LabelLevel = [
+		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
+		body('issuer').not().isEmpty().trim().escape(),
+		body('verificationMethod').not().isEmpty().trim().escape(),
+		body('vcs.labelLevel').isObject()
 	]
 	Verify = [
 		body('policies')
@@ -48,20 +54,18 @@ class SignerToolValidation {
 	]
 	CreateWebDID = [
 		body('domain').not().isEmpty().trim(),
-		body('services')
-			.isArray()
-			.custom(async (services) => {
-				if (services) {
-					for (let index = 0; index < services.length; index++) {
-						await body(`services[${index}].type`).not().isEmpty().trim().escape()
-						await body(`services[${index}].serviceEndpoint`).isURL()
-					}
-				} else {
-					return true
-				}
-			})
-			.optional()
+		body('x5u').not().isEmpty().isURL().optional(),
+		body('services').isArray().optional(),
+		body('services.*.serviceEndpoint').isURL().optional(),
+		body('services.*.type').not().isEmpty().trim().escape().optional()
+	]
+	VerifyWebDID = [
+		body('privateKey').not().isEmpty().trim().escape(),
+		body('isVault').isBoolean().optional(),
+		body('did').not().isEmpty().trim().escape(),
+		body('verificationMethod').not().isEmpty().trim().escape()
 	]
 	TrustIndex = [body('participantSD').not().isEmpty().trim(), body('serviceOfferingSD').not().isEmpty().trim()]
+	RegistrationNumber = [body('legalRegistrationNumber').isObject()]
 }
 export default new SignerToolValidation()

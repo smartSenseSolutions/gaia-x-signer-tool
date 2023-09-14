@@ -1,5 +1,4 @@
 import { existsSync, mkdirSync } from 'fs'
-import { utc } from 'moment'
 import { Logger, transports } from 'winston'
 
 class Logging {
@@ -20,30 +19,30 @@ class Logging {
 		this.logger.error(`${uuid} - ${msg}`, data ? data : '', '')
 	}
 
-	public warn(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
-		this.setLabel(fileName, method)
-		this.logger.warn(`${uuid} - ${msg}`, data ? data : '', '')
-	}
+	// public warn(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
+	// 	this.setLabel(fileName, method)
+	// 	this.logger.warn(`${uuid} - ${msg}`, data ? data : '', '')
+	// }
 
 	public info(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
 		this.setLabel(fileName, method)
 		this.logger.info(`${uuid} - ${msg}`, data ? data : '', '')
 	}
 
-	public verbose(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
-		this.setLabel(fileName, method)
-		this.logger.verbose(`${uuid} - ${msg}`, data ? data : '', '')
-	}
+	// public verbose(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
+	// 	this.setLabel(fileName, method)
+	// 	this.logger.verbose(`${uuid} - ${msg}`, data ? data : '', '')
+	// }
 
 	public debug(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
 		this.setLabel(fileName, method)
 		this.logger.debug(`${uuid} - ${msg}`, data ? data : '', '')
 	}
 
-	public silly(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
-		this.setLabel(fileName, method)
-		this.logger.silly(`${uuid} - ${msg}`, data ? data : '', '')
-	}
+	// public silly(fileName: string, method: string, msg: string, uuid: string, data: any = {}) {
+	// 	this.setLabel(fileName, method)
+	// 	this.logger.silly(`${uuid} - ${msg}`, data ? data : '', '')
+	// }
 
 	public setFileLevel(level: string) {
 		this.logger.transports.file.level = level
@@ -72,9 +71,9 @@ class Logging {
 		if (!existsSync(dir)) {
 			mkdirSync(dir)
 		}
-		return dir + `/logs_${utc().format('YYYY-MM-DD')}_.log`
+		const time = new Date()
+		return dir + `/logs_${time}_.log`
 	}
-
 	// set file transport object
 	private fileOption = () => {
 		return {

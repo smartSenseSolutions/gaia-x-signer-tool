@@ -1,13 +1,14 @@
 import axios from 'axios'
-import { DidDocument, LegalRegistrationNumberDto, Service, VerifiableCredentialDto, X509CertificateDetail, SignatureDto, VerificationMethod } from '../../interface'
+import crypto, { X509Certificate } from 'crypto'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
-import crypto, { X509Certificate } from 'crypto'
-import { AppConst, AppMessages } from '../constants'
+
+import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
+import { AppConst, AppMessages, LABEL_LEVEL_RULE } from '../constants'
 import { logger } from '../logger'
 
 class Utils {
-	generateDID(didId: string, publicKeyJwk: any, services: Service[]): unknown {
+	generateDID(didId: string, publicKeyJwk: any, services: Service[]): any {
 		const did: DidDocument = {
 			'@context': ['https://www.w3.org/ns/did/v1'],
 			id: didId,
@@ -202,7 +203,7 @@ class Utils {
 			if (canonized === '') throw new Error('Canonized SD is empty')
 			return canonized
 		} catch (error) {
-			logger.error(__filename, 'normalize', `❌ Canonizing failed | Error: ${error}`, '')
+			logger.error(__filename, 'normalize', `❌ Canonizing failed | Error: ${error}`, '', error)
 			return undefined
 		}
 	}
@@ -353,7 +354,7 @@ class Utils {
 		logger.info(__filename, 'addProof', `📈 Hashed canonized SD ${hash}`, '')
 
 		const proof = await this.createProof(jose, verificationMethod, rsaAlso, hash, privateKey)
-		logger.info(__filename, 'addProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', '')
+		logger.info(__filename, 'addProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', x5uURL)
 
 		const certificate = (await axios.get(x5uURL)).data as string
 		const publicKeyJwk = await this.generatePublicJWK(jose, rsaAlso, certificate, x5uURL)
@@ -395,10 +396,7 @@ class Utils {
 	 */
 	async calcVeracity(verifiableCredential: any, resolver: any) {
 		if (verifiableCredential.length) {
-			let keypairDepth = 1
-			let veracity = 1
-			let certificateDetails = null
-			const participantSD = verifiableCredential[0]
+			const participantSD = verifiableCredential.find((credential: any) => credential.credentialSubject.type === 'gx:LegalParticipant')
 			const {
 				id: holderDID,
 				proof: { verificationMethod: participantVM }
@@ -417,7 +415,8 @@ class Utils {
 			// There can be multiple verification methods in the did document but we have to find the one which has signed the holder vc
 			// So verificationMethod mentioned in the proof of holder SD should have to be equal to the id filed in the verification method
 			// participantSD.json >> proof >> verificationMethod === did.json >> verificationMethodArray >> verificationMethodObject >> id
-
+			let certificateDetails = null
+			let keypairDepth = 1
 			for (const verificationMethod of verificationMethodArray) {
 				if (verificationMethod.id === participantVM && verificationMethod.publicKeyJwk) {
 					const { x5u } = verificationMethod.publicKeyJwk
@@ -437,6 +436,7 @@ class Utils {
 					break
 				}
 			}
+			let veracity = 1
 			if (certificateDetails) {
 				// As per formula(1 / len(keychain)), veracity will be 1 divided by number of signing
 				// keypairs found in the certificate
@@ -512,19 +512,14 @@ class Utils {
 		const optionalProps: string[] = ['gx:name', 'gx:dependsOn', 'gx:dataProtectionRegime']
 		const totalMandatoryProps = 5
 		let availOptProps = 0
-		try {
-			for (const optionalProp in optionalProps) {
-				// eslint-disable-next-line no-prototype-builtins
-				if (credentialSubject.hasOwnProperty(optionalProp) && credentialSubject[optionalProp]) {
-					availOptProps++
-				}
+		for (const optionalProp of optionalProps) {
+			// eslint-disable-next-line no-prototype-builtins
+			if (optionalProp in credentialSubject && credentialSubject[optionalProp]) {
+				availOptProps++
 			}
-			const transparency: number = (totalMandatoryProps + availOptProps) / totalMandatoryProps
-			return transparency
-		} catch (error) {
-			logger.error(__filename, 'calcTransparency', `❌ Error while calculating transparency :- error \n ${error}`, '')
-			throw error
 		}
+		const transparency: number = (totalMandatoryProps + availOptProps) / totalMandatoryProps
+		return transparency
 	}
 
 	/**
@@ -548,6 +543,20 @@ class Utils {
 		try {
 			const participantJson = (await axios.get(url)).data
 			return participantJson
+		} catch (error) {
+			throw error
+		}
+	}
+
+	/**
+	 * @dev - common function to fetch Service Offering JSON from url
+	 *
+	 */
+	fetchServiceOfferingJson = async (url: string) => {
+		// eslint-disable-next-line no-useless-catch
+		try {
+			const serviceOfferingJson = (await axios.get(url)).data
+			return serviceOfferingJson
 		} catch (error) {
 			throw error
 		}
@@ -588,10 +597,18 @@ class Utils {
 				throw new Error('x5u not found in ddo')
 			}
 			// get the SSL certificates from x5u url
-			const certificates = (await axios.get(x5u))?.data as string
+			let certificates
+			try {
+				certificates = (await axios.get(x5u))?.data as string
+			} catch (error) {
+				logger.error(__filename, 'verification', 'error in fetching certificate', '', { error: error })
+				throw new Error('fail to fetch x5u certificate')
+			}
+
 			if (!certificates) {
 				throw new Error('ssl certificate not found')
 			}
+
 			if (checkSSLwithRegistry) {
 				// signature check against Gaia-x registry
 				const registryRes = await this.validateSslFromRegistryWithUri(x5u, axios)
@@ -631,6 +648,102 @@ class Utils {
 		} catch (error) {
 			throw error
 		}
+	}
+
+	/**
+	 *
+	 * @param array Array containing duplicate objects
+	 * @param key Identifier for comparing duplicate objects
+	 * @returns Array with unique objects
+	 */
+	removeDuplicates = (array: [], key: string) => {
+		const uniqueArray = array.filter((parentObj, index) => {
+			const { credentialSubject: parentCredentialSubject } = parentObj
+			return (
+				index ===
+				array.findIndex((childObj: any) => {
+					const { credentialSubject: childCredentialSubject } = childObj
+					return parentCredentialSubject[key] === childCredentialSubject[key]
+				})
+			)
+		})
+		return uniqueArray
+	}
+
+	/**
+	 * @dev - common function to fetch ParticipantJson from url
+	 */
+	callServiceOfferingCompliance = async (reqData: any) => {
+		logger.debug(__filename, 'callServiceOfferingCompliance', `📈 Calling ServiceOffering Compliance`, '')
+		// eslint-disable-next-line no-useless-catch
+		try {
+			const endpoint = process.env.COMPLIANCE_SERVICE as string
+			const { data } = await axios.post(endpoint, reqData)
+			return data
+		} catch (error: any) {
+			const { data } = error['response']
+			logger.error(__filename, 'callServiceOfferingCompliance', 'error while calling service compliance', '')
+			throw data
+		}
+	}
+
+	getInnerVCs = async (vc: any, key: string, types: string[], vcsMap: any) => {
+		for (let i = 0; i < vc.credentialSubject[key].length; i++) {
+			const response = (await axios.get(vc.credentialSubject[key][i].id)).data
+			const verifiableCredential = response?.selfDescriptionCredential?.verifiableCredential
+			const type = verifiableCredential && (await this.getVcType(verifiableCredential, vc.credentialSubject[key][i].id))
+			if (!types.includes(type)) {
+				throw new Error(`${key} VC ID not found or required vc type not found`)
+			}
+			for (const vc of verifiableCredential) {
+				const lpId = vc.credentialSubject.id
+				if (!vcsMap.has(lpId)) {
+					vcsMap.set(lpId, vc)
+				}
+			}
+		}
+	}
+
+	getVcType = async (verifiableCredential: any, vcId: string): Promise<string> => {
+		const vc = verifiableCredential.find((e: any) => {
+			return e.credentialSubject.id === vcId
+		})
+		return vc ? vc.credentialSubject.type : ''
+	}
+	/**
+	 * @dev This function will calculate label level using credencial
+	 * @param veracity Veracity value
+	 * @param transparency Transparency value
+	 * @returns number - Trust index value
+	 */
+	calcLabelLevel = (credentialSubject: any) => {
+		let resultLabelLevel = ''
+
+		// Label level response by user
+		const criteria = credentialSubject['gx:criteria']
+
+		// Constant Rules
+		for (const labelLevel in LABEL_LEVEL_RULE) {
+			// Rule of Specific label level
+			const levelRules = LABEL_LEVEL_RULE[labelLevel]
+			// Iterate level rules
+			for (const rulePoint of levelRules) {
+				// eslint-disable-next-line no-prototype-builtins
+				if (criteria.hasOwnProperty(rulePoint)) {
+					const { response } = criteria[rulePoint]
+					// Loop will break if any single response found not confirmed and will return last label level
+					if (response !== 'Confirm') {
+						return resultLabelLevel
+					}
+				} else {
+					logger.error(__filename, 'LabelLevel', AppMessages.LABEL_LEVEL_CALC_FAILED_INVALID_KEY + rulePoint, '')
+					throw new Error(AppMessages.LABEL_LEVEL_CALC_FAILED_INVALID_KEY + rulePoint)
+				}
+			}
+			resultLabelLevel = labelLevel
+		}
+
+		return resultLabelLevel
 	}
 }
 

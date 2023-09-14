@@ -5,6 +5,7 @@ import supertest from 'supertest'
 
 import app from '../../../app'
 import Utils from '../../../utils/common-functions'
+import { VaultService } from '../../../utils/service/vault.service'
 import { AppMessages, ROUTES } from '../../../utils/constants'
 
 import {
@@ -18,7 +19,7 @@ import {
 	verifyDIDTestJSON,
 	labelLevelTestJSON
 } from '../../../assets'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 const exampleCertificate = process.env.SSL_CERTIFICATE as string
 
 //mocking - Utils
@@ -110,6 +111,14 @@ jest.mock('../../../utils/common-functions', () => {
 	}
 })
 
+jest.mock('../../../utils/service/vault.service', () => {
+	return {
+		...jest.requireActual('../../../utils/service/vault.service'),
+		getSecrets: () => {
+			return ''
+		}
+	}
+})
 describe('/v1/gaia-x/verify', () => {
 	const validBody = {
 		policies: ['integrityCheck', 'holderSignature', 'complianceSignature', 'complianceCheck'],
@@ -792,7 +801,7 @@ describe('/v1/create-web-did', () => {
 		})
 	})
 	describe('success case', () => {
-		it('successful case', async () => {
+		it('successful case with tenant', async () => {
 			const did = {
 				'@context': ['https://www.w3.org/ns/did/v1'],
 				id: 'did:web:dev.smartproof.in',
@@ -816,7 +825,49 @@ describe('/v1/create-web-did', () => {
 			jest.spyOn(axios, 'get').mockResolvedValue({ data: exampleCertificate })
 			jest.spyOn(Utils, 'generateDID').mockResolvedValue({ ...did })
 
-			const body = validBody
+			const body = { ...validBody, x5u: undefined }
+			const responseData = {
+				data: {
+					did: {
+						...did
+					}
+				},
+				message: 'DID created successfully.'
+			}
+
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.CREATE_WEB_DID}`)
+				.send(body)
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.OK)
+					expect(response.body).toEqual(responseData)
+				})
+		})
+		it('successful case with domain', async () => {
+			const did = {
+				'@context': ['https://www.w3.org/ns/did/v1'],
+				id: 'did:web:dev.smartproof.in',
+				verificationMethod: [
+					{
+						'@context': 'https://w3c-ccg.github.io/lds-jws2020/contexts/v1/',
+						id: 'did:web:dev.smartproof.in',
+						type: 'JsonWebKey2020',
+						controller: 'did:web:dev.smartproof.in',
+						publicKeyJwk: {
+							crv: 'Ed25519',
+							kty: 'OKP',
+							alg: 'PS256',
+							x5u: 'https://dev.smartproof.in/.well-known/x509CertificateChain.pem',
+							x: 'yM1FmySIISrMqruOIjLwKpbwsaUbRLEEH6r1gDWmW4s' /*pragma: allowlist secret*/
+						}
+					}
+				],
+				assertionMethod: ['did:web:dev.smartproof.in#JWK2020-RSA']
+			}
+			jest.spyOn(axios, 'get').mockResolvedValue({ data: exampleCertificate })
+			jest.spyOn(Utils, 'generateDID').mockResolvedValue({ ...did })
+
+			const body = { ...validBody, x5u: undefined, tenant: undefined }
 			const responseData = {
 				data: {
 					did: {
@@ -1044,6 +1095,31 @@ describe('/gaia-x/service-offering', () => {
 				jest.resetAllMocks()
 			})
 		})
+		it('fail to get dependsOn', async () => {
+			jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
+				const { validSOComplianceResponse } = serviceOfferingTestJSON
+				return validSOComplianceResponse
+			})
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			jest.spyOn(Utils, 'getInnerVCs').mockImplementation(async () => {
+				throw new Error(`gx:dependsOn VC ID not found or required vc type not found`)
+			})
+			const error = {
+				error: `gx:dependsOn VC ID not found or required vc type not found`,
+				message: AppMessages.SD_SIGN_FAILED
+			}
+			const { validReqJSON: validJSON } = serviceOfferingTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.BAD_REQUEST)
+					expect(response.body).toEqual(error)
+				})
+			jest.resetAllMocks()
+		})
 	})
 	describe('Positive scenarios', () => {
 		it('Service offering compliance success', async () => {
@@ -1058,6 +1134,27 @@ describe('/gaia-x/service-offering', () => {
 			await supertest(app)
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
 				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+
+		it('Service offering compliance success with vault', async () => {
+			jest.spyOn(Utils, 'callServiceOfferingCompliance').mockImplementation(async () => {
+				const { validSOComplianceResponse } = serviceOfferingTestJSON
+				return validSOComplianceResponse
+			})
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			jest.spyOn(VaultService.prototype, 'getSecrets').mockImplementation(async () => {
+				return ''
+			})
+			const { validReqJSON: validJSON } = serviceOfferingTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.SERVICE_OFFERING}`)
+				.send({ ...validJSON, isVault: true })
 				.expect((response) => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
 				})
@@ -1192,6 +1289,51 @@ describe('/gaia-x/legal-participant', () => {
 					})
 				jest.resetAllMocks()
 			})
+			it('fail to get parentOrganization', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				jest.spyOn(Utils, 'issueRegistrationNumberVC').mockImplementation(async () => {
+					return legalRegistrationNumberJson
+				})
+				jest.spyOn(Utils, 'getInnerVCs').mockImplementation(async () => {
+					throw new Error(`gx:parentOrganization VC ID not found or required vc type not found`)
+				})
+				const error = {
+					error: `gx:parentOrganization VC ID not found or required vc type not found`,
+					message: AppMessages.VP_FAILED
+				}
+				const { validReqJSON: validJSON } = legalParticipantTestJSON
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toEqual(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
+			it('network error', async () => {
+				jest.spyOn(axios, 'post').mockImplementation(async () => {
+					throw new AxiosError('', AxiosError.ECONNABORTED, undefined, {}, {
+						status: 409
+					} as any)
+				})
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				jest.spyOn(Utils, 'issueRegistrationNumberVC').mockImplementation(async () => {
+					return legalRegistrationNumberJson
+				})
+				const { validReqJSON: validJSON } = legalParticipantTestJSON
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toEqual(STATUS_CODES.CONFLICT)
+					})
+				jest.resetAllMocks()
+			})
 			it('internal server error', async () => {
 				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
 					return { didDocument: holderDdoJson }
@@ -1223,6 +1365,29 @@ describe('/gaia-x/legal-participant', () => {
 			await supertest(app)
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
 				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+		it('compliance legal participant with vault', async () => {
+			jest.spyOn(axios, 'post').mockImplementation(async () => {
+				const { validComplianceResponse } = legalParticipantTestJSON
+				return validComplianceResponse
+			})
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			jest.spyOn(Utils, 'issueRegistrationNumberVC').mockImplementation(async () => {
+				return legalRegistrationNumberJson
+			})
+			jest.spyOn(VaultService.prototype, 'getSecrets').mockImplementation(async () => {
+				return ''
+			})
+			const { validReqJSON: validJSON } = legalParticipantTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.LEGAL_PARTICIPANT}`)
+				.send({ ...validJSON, isVault: true })
 				.expect((response) => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
 				})
@@ -1336,6 +1501,27 @@ describe('/gaia-x/resource', () => {
 					})
 				jest.resetAllMocks()
 			})
+			it('fail to get copyrightOwnedBy', async () => {
+				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+					return { didDocument: holderDdoJson }
+				})
+				const { validVirtualDataResourceReqJSON: validJSON } = resourceTestJSON
+				jest.spyOn(Utils, 'getInnerVCs').mockImplementation(async () => {
+					throw new Error(`gx:copyrightOwnedBy VC ID not found or required vc type not found`)
+				})
+				const error = {
+					error: `gx:copyrightOwnedBy VC ID not found or required vc type not found`,
+					message: AppMessages.VP_FAILED
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+					.send(validJSON)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
+						expect(response.body).toEqual(error)
+					})
+				jest.resetAllMocks()
+			})
 			it('internal server error', async () => {
 				jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
 					throw Error('')
@@ -1398,6 +1584,26 @@ describe('/gaia-x/resource', () => {
 			await supertest(app)
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
 				.send(validJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+		it('compliance validVirtualSoftwareResource with vault', async () => {
+			// jest.spyOn(axios, 'post').mockImplementation(async () => {
+			// 	const { validComplianceResponse } = resourceTestJSON
+			// 	return validComplianceResponse
+			// })
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			jest.spyOn(VaultService.prototype, 'getSecrets').mockImplementation(async () => {
+				return ''
+			})
+			const { validVirtualSoftwareResourceReqJSON: validJSON } = resourceTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.RESOURCE}`)
+				.send({ ...validJSON, isVault: true })
 				.expect((response) => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
 				})
@@ -1569,6 +1775,31 @@ describe('/verify-web-did', () => {
 				})
 			jest.resetAllMocks()
 		})
+		it('validate did web with valid true with vault', async () => {
+			const isValid = true
+			jest.spyOn(Utils, 'getDDOfromDID').mockImplementation(async () => {
+				return { didDocument: holderDdoJson }
+			})
+			jest.spyOn(Utils, 'verify').mockImplementation(async () => {
+				return isValid
+			})
+			jest.spyOn(VaultService.prototype, 'getSecrets').mockImplementation(async () => {
+				return ''
+			})
+			const expectedResponse = {
+				data: { isValid },
+				message: isValid ? AppMessages.DID_VERIFY : AppMessages.DID_VERIFY_FAILED
+			}
+			const { validReq: validJSON } = verifyDIDTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY_WEB_DID}`)
+				.send({ ...validJSON, isVault: true })
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+					expect(response.body).toEqual(expectedResponse)
+				})
+			jest.resetAllMocks()
+		})
 	})
 })
 
@@ -1726,6 +1957,19 @@ describe('/gaia-x/label-level', () => {
 			await supertest(app)
 				.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
 				.send(validReqJSON)
+				.expect((response) => {
+					expect(response.status).toEqual(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+		it('Label Level success with vault', async () => {
+			jest.spyOn(VaultService.prototype, 'getSecrets').mockImplementation(async () => {
+				return ''
+			})
+			const { validReqJSON } = labelLevelTestJSON
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.LABEL_LEVEL}`)
+				.send({ ...validReqJSON, isVault: true })
 				.expect((response) => {
 					expect(response.status).toEqual(STATUS_CODES.OK)
 				})
@@ -1895,6 +2139,81 @@ describe('/get/trust-index', () => {
 				.send(request)
 				.expect((response) => {
 					expect(response.status).toBe(STATUS_CODES.OK)
+				})
+			jest.resetAllMocks()
+		})
+	})
+})
+
+describe('/gaia-x/validate-registration-number', () => {
+	describe('Negative scenarios', () => {
+		describe('Validation checks', () => {
+			it('Empty request body', async () => {
+				const error = {
+					error: "Invalid value of param 'legalRegistrationNumber'",
+					message: AppMessages.VALIDATION_ERROR
+				}
+				await supertest(app)
+					.post(`${ROUTES.V1}${ROUTES.V1_APIS.REGISTRATION_NUMBER}`)
+					.expect((response) => {
+						expect(response.status).toBe(STATUS_CODES.UNPROCESSABLE_ENTITY)
+						expect(response.body).toEqual(error)
+					})
+			})
+		})
+	})
+	describe('Positive scenarios', () => {
+		it('RegistrationNumberVC checked true', async () => {
+			const { validReqJSON: validJSON } = legalParticipantTestJSON
+			jest.spyOn(Utils, 'issueRegistrationNumberVC').mockImplementation(async () => {
+				return legalRegistrationNumberJson
+			})
+			const res = {
+				data: { isValid: true },
+				message: AppMessages.RN_VERIFY
+			}
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.REGISTRATION_NUMBER}`)
+				.send({ legalRegistrationNumber: validJSON.vcs.legalRegistrationNumber })
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.OK)
+					expect(response.body).toEqual(res)
+				})
+			jest.resetAllMocks()
+		})
+		it('RegistrationNumberVC checked false', async () => {
+			const { validReqJSON: validJSON } = legalParticipantTestJSON
+			jest.spyOn(Utils, 'issueRegistrationNumberVC').mockImplementation(async () => {
+				throw new Error()
+			})
+			const res = {
+				data: { isValid: false },
+				message: AppMessages.RN_VERIFY_FAILED
+			}
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.REGISTRATION_NUMBER}`)
+				.send({ legalRegistrationNumber: validJSON.vcs.legalRegistrationNumber })
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.OK)
+					expect(response.body).toEqual(res)
+				})
+			jest.resetAllMocks()
+		})
+		it('RegistrationNumberVC checked false', async () => {
+			const { validReqJSON: validJSON } = legalParticipantTestJSON
+			jest.spyOn(Utils, 'issueRegistrationNumberVC').mockImplementation(async () => {
+				return false
+			})
+			const res = {
+				data: { isValid: false },
+				message: AppMessages.RN_VERIFY_FAILED
+			}
+			await supertest(app)
+				.post(`${ROUTES.V1}${ROUTES.V1_APIS.REGISTRATION_NUMBER}`)
+				.send({ legalRegistrationNumber: validJSON.vcs.legalRegistrationNumber })
+				.expect((response) => {
+					expect(response.status).toBe(STATUS_CODES.OK)
+					expect(response.body).toEqual(res)
 				})
 			jest.resetAllMocks()
 		})

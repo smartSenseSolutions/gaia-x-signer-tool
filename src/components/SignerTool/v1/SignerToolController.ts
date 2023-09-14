@@ -45,27 +45,19 @@ class SignerToolController {
 			}
 
 			const vcsMap = new Map()
-			if (legalParticipant.credentialSubject['gx:parentOrganization']) {
-				try {
+			try {
+				if (legalParticipant.credentialSubject['gx:parentOrganization']) {
 					await Utils.getInnerVCs(legalParticipant, 'gx:parentOrganization', ['gx:LegalParticipant'], vcsMap)
-				} catch (e) {
-					res.status(STATUS_CODES.BAD_REQUEST).json({
-						error: (e as Error).message,
-						message: AppMessages.VP_FAILED
-					})
-					return
 				}
-			}
-			if (legalParticipant.credentialSubject['gx:subOrganization']) {
-				try {
+				if (legalParticipant.credentialSubject['gx:subOrganization']) {
 					await Utils.getInnerVCs(legalParticipant, 'gx:subOrganization', ['gx:LegalParticipant'], vcsMap)
-				} catch (e) {
-					res.status(STATUS_CODES.BAD_REQUEST).json({
-						error: (e as Error).message,
-						message: AppMessages.VP_FAILED
-					})
-					return
 				}
+			} catch (e) {
+				res.status(STATUS_CODES.BAD_REQUEST).json({
+					error: (e as Error).message,
+					message: AppMessages.VP_FAILED
+				})
+				return
 			}
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
@@ -663,23 +655,15 @@ class SignerToolController {
 	ValidateRegistrationNumber = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const { legalRegistrationNumber } = req.body
-			try {
-				const isValid = (await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)) ? true : false
-				res.status(STATUS_CODES.OK).json({
-					data: { isValid },
-					message: isValid ? AppMessages.RN_VERIFY : AppMessages.RN_VERIFY_FAILED
-				})
-			} catch (e: any) {
-				logger.error(__filename, 'ValidateRegistrationNumber', e.message, req.custom.uuid)
-				res.status(STATUS_CODES.OK).json({
-					data: { isValid: false },
-					message: AppMessages.RN_VERIFY_FAILED
-				})
-			}
+			const isValid = (await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)) ? true : false
+			res.status(STATUS_CODES.OK).json({
+				data: { isValid },
+				message: isValid ? AppMessages.RN_VERIFY : AppMessages.RN_VERIFY_FAILED
+			})
 		} catch (e: any) {
 			logger.error(__filename, 'ValidateRegistrationNumber', e.message, req.custom.uuid)
-			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
-				error: (e as Error).message,
+			res.status(STATUS_CODES.OK).json({
+				data: { isValid: false },
 				message: AppMessages.RN_VERIFY_FAILED
 			})
 		}

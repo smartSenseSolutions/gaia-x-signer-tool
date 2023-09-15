@@ -434,8 +434,6 @@ class SignerToolController {
 							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vc.credentialSubject.id)[
 								'gx:integrity'
 							]
-							console.log(integrityHash, 'integrityHash')
-							console.log(credIntegrityHash, 'credIntegrityHash')
 							const integrityCheck = integrityHash === credIntegrityHash
 
 							if (!integrityCheck) {

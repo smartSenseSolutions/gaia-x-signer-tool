@@ -57,7 +57,7 @@ describe('commonFunction Testing', () => {
 				await Utils.verification(complianceCred, complianceProof, false, resolver)
 			} catch (error) {
 				isError = true
-				expect((error as Error).message).toBe(`DDO not found for given did: 'did:web:compliance.lab.gaia-x.eu:development' in proof`)
+				expect((error as Error).message).toBe(`DDO not found for given did: 'did:web:compliance.lab.gaia-x.eu:development#X509-JWK2020' in proof`)
 			}
 			expect(isError).toBe(true)
 

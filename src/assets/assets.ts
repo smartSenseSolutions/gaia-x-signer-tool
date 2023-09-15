@@ -513,12 +513,12 @@ export const serviceOfferingTestJSON = {
 			verifiableCredential: [
 				{
 					credentialSubject: {
-						'gx:legalName': 'Pinank',
-						'gx:headquarterAddress': { 'gx:countrySubdivisionCode': 'BE-BRU' },
-						'gx:legalAddress': { 'gx:countrySubdivisionCode': 'BE-BRU' },
-						id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#0',
+						'gx:legalName': 'Smart Sense Consulting Solutions Private Limited',
+						'gx:headquarterAddress': { 'gx:countrySubdivisionCode': 'DE-BE' },
+						'gx:legalAddress': { 'gx:countrySubdivisionCode': 'DE-BE' },
+						id: 'https://smartsense.smart-x.smartsenselabs.com/3452e577-6628-4b98-9ebd-fc6fe14380d9/participant.json#0',
 						type: 'gx:LegalParticipant',
-						'gx:legalRegistrationNumber': { id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#1' }
+						'gx:legalRegistrationNumber': { id: 'https://smartsense.smart-x.smartsenselabs.com/3452e577-6628-4b98-9ebd-fc6fe14380d9/participant.json#1' }
 					},
 					'@context': [
 						'https://www.w3.org/2018/credentials/v1',
@@ -526,37 +526,39 @@ export const serviceOfferingTestJSON = {
 						'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
 					],
 					type: ['VerifiableCredential'],
-					id: 'did:web:lakhani.smart-x.smartsenselabs.com',
-					issuer: 'did:web:lakhani.smart-x.smartsenselabs.com',
-					issuanceDate: '2023-09-11T10:13:42.375138125Z',
+					id: 'did:web:smartsense.smart-x.smartsenselabs.com',
+					issuer: 'did:web:smartsense.smart-x.smartsenselabs.com',
+					issuanceDate: '2023-09-15T07:07:47.009120978Z',
 					proof: {
 						type: 'JsonWebSignature2020',
-						created: '2023-09-11T10:13:44.680Z',
+						created: '2023-09-15T07:07:49.740Z',
 						proofPurpose: 'assertionMethod',
-						verificationMethod: 'did:web:lakhani.smart-x.smartsenselabs.com',
-						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Z5dAge_qUmzLE5yUaJWf7LbEdHHyAGZOdEAN_boNQ6PFiuFysFav2EkXJEW2LfmRX_e2mkJBHvisFtHpMCpm8_i9cXCS2sJ8KS2d0ehOr2hiKjXn4vDZqYcJWugU_uhWlCj4ebiUy-DGjmK2hBHSKrDaUWQ_lOt-5-fBKIM4etxK818vaVOjQ3hNhVYPYMeceiWfp5L0rqWFcE1-2jb9Ue46qwxvdPdQglup9__k2Q5YweLm_N9S7v9lkd7X-JMyoCHyGCH57kGY5mUmFAJVVA-Mn0UIku8_ZQdYnd7FqXqjoUlEZkv7tPneerX4vQ0uoalufxJiMHjZG8C6rwTWaQ'
+						verificationMethod: 'did:web:smartsense.smart-x.smartsenselabs.com',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..pgeY0l8o3NesQfQLrppbndtzM0j5MvuXEjYx3QTDM8gElvGldUxKp1ONidJ68KamhtX1Kdkvy96Iz9XcGTSRpzIu88gptqgLIyibySsAsfpXjHIZxELhjvXckzbkmZw2XLNi07tOvc-ngywM_mSLcCNgwLY7Xn04jXOF1zQMGwiFs4nKo8pdoKnFxVE6jr5dYHVkO5SudDGhoYSNIqtyjTpXXry0q1jd22zzDe00NlEL0yPveruUm46HerVYO2rrIOvngrq5caU1W2lZWAnXROgVj0Rwe--z8KGZ3MvxU9_0qDNewUtWtNF1oIm4jZ6mNBiz6P3BUpNZq0qP3n5Y1g'
 					}
 				},
 				{
 					'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
 					type: ['VerifiableCredential'],
-					id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#1',
+					id: 'https://smartsense.smart-x.smartsenselabs.com/3452e577-6628-4b98-9ebd-fc6fe14380d9/participant.json#1',
 					issuer: 'did:web:registration.lab.gaia-x.eu:development',
-					issuanceDate: '2023-09-11T10:13:43.001Z',
+					issuanceDate: '2023-09-15T07:07:47.896Z',
 					credentialSubject: {
 						'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
 						type: 'gx:legalRegistrationNumber',
-						id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#1',
-						'gx:leiCode': '9695007586GCAKPYJ703',
-						'gx:leiCode-countryCode': 'FR'
+						id: 'https://smartsense.smart-x.smartsenselabs.com/3452e577-6628-4b98-9ebd-fc6fe14380d9/participant.json#1',
+						'gx:vatID': 'FR79537407926',
+						'gx:vatID-countryCode': 'FR'
 					},
-					evidence: [{ 'gx:evidenceURL': 'https://api.gleif.org/api/v1/lei-records/', 'gx:executionDate': '2023-09-11T10:13:43.001Z', 'gx:evidenceOf': 'gx:leiCode' }],
+					evidence: [
+						{ 'gx:evidenceURL': 'http://ec.europa.eu/taxation_customs/vies/services/checkVatService', 'gx:executionDate': '2023-09-15T07:07:47.896Z', 'gx:evidenceOf': 'gx:vatID' }
+					],
 					proof: {
 						type: 'JsonWebSignature2020',
-						created: '2023-09-11T10:13:43.823Z',
+						created: '2023-09-15T07:07:48.806Z',
 						proofPurpose: 'assertionMethod',
 						verificationMethod: 'did:web:registration.lab.gaia-x.eu:development#X509-JWK2020',
-						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..pkPC8wu6cGrW3oeNYIixcjKgT_sRmrEREjinEgezYqI4u46OOqoAwtitr-Xr6IDIyzgZrPmR5PBign0uF-HjT_Pav86lcs0qsZEm1Wwq9VMfeMi4Bivpq1AK2Ty4vH8ZZdiVDhV4wFHneGZhcxHfY-pW5abDZ6WX2ceq5Sxex9pCkuk9EesBZco_HM3gMWIKN1Lm0o5rinYMuUh46pKJacLxuOgdkJiOE-KNarnNaVCxaU8sotNjsRRarIeq06y0ulkuMLwuBfyypiND2n28q-GjZ_wfpFeADlqvPLk_nYSJE8LlsjlWEBSnhC4y96je_8Wm-AUybD7KxoBrCPjI1A'
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..R-PpyUSlW3_LLhlssC8udNZZ8cNnesVhl5-NVVGkigMcdXqzaTnjNnm6vzDqjmSk-8El_Cx4Syy2aHIIFSjWBKI5HHFGRCLpAQS8ymfeZRGnpu8fqhm6IcresCPSpTl2eXg13dJpyzDnC7fiAhREnxGSEAHniHY6exgBPla8BpWoY0-XXKpLSdXNL-W_Gxl-ZUGkD68w_QYJBVEoPdfXuIDD-Ma_RDO3zQSZK-sYiWFIOqcQdti8K053WRspj3llEp0xk6McBEt_NlaHscx_ZXuTDBBGgsZjmBZDrWbwSO53td22hJAhn5aAWUvdaRcQisfPpQCUFUsbSUc564Jnmg'
 					}
 				},
 				{
@@ -573,19 +575,19 @@ export const serviceOfferingTestJSON = {
 						],
 						'gx:termsAndConditions':
 							'The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).',
-						id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#2',
+						id: 'https://smartsense.smart-x.smartsenselabs.com/3452e577-6628-4b98-9ebd-fc6fe14380d9/participant.json#2',
 						type: 'gx:GaiaXTermsAndConditions'
 					},
-					id: 'did:web:lakhani.smart-x.smartsenselabs.com',
-					issuanceDate: '2023-09-11T10:13:42.375138125Z',
-					issuer: 'did:web:lakhani.smart-x.smartsenselabs.com',
+					id: 'did:web:smartsense.smart-x.smartsenselabs.com',
+					issuanceDate: '2023-09-15T07:07:47.009120978Z',
+					issuer: 'did:web:smartsense.smart-x.smartsenselabs.com',
 					type: ['VerifiableCredential'],
 					proof: {
 						type: 'JsonWebSignature2020',
-						created: '2023-09-11T10:13:45.073Z',
+						created: '2023-09-15T07:07:50.044Z',
 						proofPurpose: 'assertionMethod',
-						verificationMethod: 'did:web:lakhani.smart-x.smartsenselabs.com',
-						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..xkXfxFhKRx45N86j9e-1bOAxbfiQmF4jHWcYKl3tZdoNKbY4MIt7CnHD1tnWNd80_ceNlminbhFFq1CyNWJtecY-yWLW4UpdloeM4mkcWikGJHM7iy2Im_VYYwmBkbHl3wKnXUw1T6qnwYLV67SRBlK2B13UkyEamVVUTt6asJQU5jVHquOqG7rH8-Okx5WIvv5kpvALFdXCQmUuRwxkRAI1KZLiDeM6oOe_RjuFkTqEzcBA5DOOKU_rhJjLcrpLFplNKavW3Zik3jsRHWCMKtySy4vaiOa3upcjnAVCJQHnUfF0Y0dTXOrG-7O-cTF4rOrjYWAV5XOD7uUrSfLJZw'
+						verificationMethod: 'did:web:smartsense.smart-x.smartsenselabs.com',
+						jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..PQrCyxgJzYwRsXIdy20IEsxE5R6fgoLuOhElqiSFPppsLpJ8Nu_xsetlUFVdPnS_0VI37FD2gxh4IJmPGyEF8CtFvP8iNuopNNfM9344V94-ljFaUw5wDgaiuN0frmGprT_E-09n5WGDQ1BxmWhzHV22TLROJLzrbAGHrJaLWG_tozj45QyUlAUzNfMbpQzX32dNzZDCjCrrDFVJX-9reZYqFmsQ4p6voXk3pUT5KYaXfzd8UQIyCYhEJfMRZaTjvR10D68a3EOwatN49VL-gc3fSBAwjUczqRSLFnu7qoyNvu2A_HxnO8aMFQuoONA0cIOl1KrABeYs_GOpqAsZqA'
 					}
 				}
 			]
@@ -597,31 +599,31 @@ export const serviceOfferingTestJSON = {
 				'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
 			],
 			type: ['VerifiableCredential'],
-			id: 'https://compliance.lab.gaia-x.eu/development/credential-offers/51494f15-203f-42b3-959b-5e70d401bf46',
+			id: 'https://compliance.lab.gaia-x.eu/development/credential-offers/982e56e9-8831-4b02-867b-239d65e50a53',
 			issuer: 'did:web:compliance.lab.gaia-x.eu:development',
-			issuanceDate: '2023-09-11T10:13:51.591Z',
-			expirationDate: '2023-12-10T10:13:51.591Z',
+			issuanceDate: '2023-09-15T07:07:57.427Z',
+			expirationDate: '2023-12-14T07:07:57.427Z',
 			credentialSubject: [
 				{
 					type: 'gx:compliance',
-					id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#0',
-					'gx:integrity': 'sha256-0663f1d2d85dc79f01c40e8202737d32512a0c9130e9b9929e7960fd59088447',
+					id: 'https://smartsense.smart-x.smartsenselabs.com/3452e577-6628-4b98-9ebd-fc6fe14380d9/participant.json#0',
+					'gx:integrity': 'sha256-cc9c3eb9f06239c4fc94efd72a262e70021f3f1830218cb0183331b48bd5c2e4',
 					'gx:integrityNormalization': 'RFC8785:JCS',
 					'gx:version': '22.10',
 					'gx:type': 'gx:LegalParticipant'
 				},
 				{
 					type: 'gx:compliance',
-					id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#1',
-					'gx:integrity': 'sha256-377ced5831cad1973861a36bbb5f90e4d6388fa8701ca116502e20f2ce14b488',
+					id: 'https://smartsense.smart-x.smartsenselabs.com/3452e577-6628-4b98-9ebd-fc6fe14380d9/participant.json#1',
+					'gx:integrity': 'sha256-001868af59b60e2f771f21155670fd6ede2aaf662cb94200f5a5e31b9b7d12bd',
 					'gx:integrityNormalization': 'RFC8785:JCS',
 					'gx:version': '22.10',
 					'gx:type': 'gx:legalRegistrationNumber'
 				},
 				{
 					type: 'gx:compliance',
-					id: 'https://lakhani.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/participant.json#2',
-					'gx:integrity': 'sha256-6981524102992518de7bae99a8a8851d7b8202341688d84ddff0ddaadac6e4ff',
+					id: 'https://smartsense.smart-x.smartsenselabs.com/3452e577-6628-4b98-9ebd-fc6fe14380d9/participant.json#2',
+					'gx:integrity': 'sha256-2eb381059a4fc20f150a37ef97bcc2b2f2fda9893134939c09abd8e3f01315c6',
 					'gx:integrityNormalization': 'RFC8785:JCS',
 					'gx:version': '22.10',
 					'gx:type': 'gx:GaiaXTermsAndConditions'
@@ -629,9 +631,9 @@ export const serviceOfferingTestJSON = {
 			],
 			proof: {
 				type: 'JsonWebSignature2020',
-				created: '2023-09-11T10:13:51.599Z',
+				created: '2023-09-15T07:07:57.437Z',
 				proofPurpose: 'assertionMethod',
-				jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..rUpKKci06vSw7gk9py4WyOgl93rxoIH1QuPRdwnLch-yFoEkSroQMhcYihrZaqv64TtQ0PQ47TK-IRAT8QOTeflYEgQfSGkjJrtYYtbpm-bt44oVTamWH6g1u2v6397_Sqq2SPECFi1tBilJmDqoWoVr7ILKdtQMIAqe9hNvaMTycv0soCGPc8K6FPqztZ8VCVmIGnK1iJv4v-RfZNQUcBoK43zVf7ag-U-_3zgL4i8W2MZIFYSUHldFJfDUGqTQtSCqfjpX9kcC2CNw87V_BS_MRL28ZRd4HtSJHX3uzOxDpXvzQiwIV_k6QJA7NoBs5sy5doQx-uN1gU_w6N4Few',
+				jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Mqc2ld03gOv2p7JsWfFZCEJRI6KxlqL290vlfGpaMiwDIG4-c6LTDnZ7_wwwqJC8hVqYqNU-P0sytNkaTh927-us7lqKCPwU9ZAaLvpAEOaqWgUszAvO_IQIKgGhEVMfU5HDK8zanbZCfFsuqpBm0c2mqW8q-0gB6UiPDDONJS8OAtuAR5ZA3nPAJx9db3dploqFQToo153gsPXnIIRDAu57rEu152ael0oWrglYq6mv07w1xCjiDuIUD8nNurV3wdNAkrIQt7E0id6Zixp4vD_RvoOQx25Rl-R0Q_ikPL8rPoAaK1U_9RsSvekRGRjoOH0ER9e877FjtWKz2QaiUg',
 				verificationMethod: 'did:web:compliance.lab.gaia-x.eu:development#X509-JWK2020'
 			}
 		}
@@ -1288,8 +1290,8 @@ export const serviceOfferingTestJSON = {
 	veracityResponse: {
 		veracity: 0.25,
 		certificateDetails: {
-			validFrom: 'Sep 11 09:12:50 2023 GMT',
-			validTo: 'Dec 10 09:12:49 2023 GMT',
+			validFrom: 'Sep 15 06:07:13 2023 GMT',
+			validTo: 'Dec 14 06:07:12 2023 GMT',
 			subject: {
 				jurisdictionCountry: null,
 				jurisdictionSate: null,
@@ -1300,7 +1302,7 @@ export const serviceOfferingTestJSON = {
 				state: null,
 				locality: null,
 				organization: null,
-				commonName: 'lakhani.smart-x.smartsenselabs.com'
+				commonName: 'smartsense.smart-x.smartsenselabs.com'
 			},
 			issuer: { commonName: 'R3', organization: "Let's Encrypt", country: 'US' }
 		}

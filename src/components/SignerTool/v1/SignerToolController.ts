@@ -6,7 +6,7 @@ import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
-
+import canonicalize from 'canonicalize'
 import { ComplianceCredential, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
@@ -451,10 +451,14 @@ class SignerToolController {
 						let allChecksPassed = true
 
 						for (const vc of participantJson.selfDescriptionCredential.verifiableCredential) {
-							const integrityHash = `sha256-${createHash('sha256').update(JSON.stringify(vc)).digest('hex')}`
+							const integrityHash = `sha256-${createHash('sha256')
+								.update(canonicalize(vc) as any)
+								.digest('hex')}`
 							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vc.credentialSubject.id)[
 								'gx:integrity'
 							]
+							console.log(integrityHash, 'integrityHash')
+							console.log(credIntegrityHash, 'credIntegrityHash')
 							const integrityCheck = integrityHash === credIntegrityHash
 
 							if (!integrityCheck) {

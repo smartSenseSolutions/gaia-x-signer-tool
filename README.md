@@ -116,9 +116,9 @@ http://localhost:8000/docs/
             <li> Calculate Label Level and prepares Label level unsigned JSON</li> 
             <li> Decode PrivateKey and Self sign Label level unsigned JSON (unsigned → signed)</li> 
         </ol>
-- Then signer tool will request Compliance service for compliance.
+- Then signer tool will request Compliance service for compliance once the support is there.
 - Once the compliance is done, SignerTool will respond User with Label Level VC & Compliance Data.
-
+- At present SignerTool will return self signed VC
 ![create-label-level](docs/create-label-level.png?raw=true)
 
 ### Get Trust Index

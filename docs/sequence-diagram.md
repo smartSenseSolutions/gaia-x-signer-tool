@@ -26,7 +26,7 @@ SignerTool --> SignerTool: Validate the request
 SignerTool --> SignerTool: Fetch Did document and Extract X5U URL
 SignerTool --> SignerTool: Calculate Label Level and prepares Label level unsigned JSON
 SignerTool --> SignerTool: Decode PrivateKey and Self sign Label level unsigned JSON
-SignerTool -> Compliance: Request for compliance
+SignerTool -> Compliance: Request for compliance once support is available
 
 Compliance --> SignerTool: Compliance Response
 SignerTool --> User: Label level VC with compliance

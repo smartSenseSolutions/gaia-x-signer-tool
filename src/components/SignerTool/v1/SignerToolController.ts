@@ -1,4 +1,5 @@
 import axios from 'axios'
+import canonicalize from 'canonicalize'
 import crypto, { createHash } from 'crypto'
 import { Resolver } from 'did-resolver'
 import express, { Request, Response } from 'express'
@@ -6,7 +7,7 @@ import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
-import canonicalize from 'canonicalize'
+
 import { ComplianceCredential, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
@@ -224,6 +225,7 @@ class SignerToolController {
 
 	ServiceOffering = async (req: Request, res: Response): Promise<void> => {
 		try {
+			console.log('=======req.body=======>', JSON.stringify(req.body))
 			let { privateKey } = req.body
 			const {
 				isVault,
@@ -306,6 +308,7 @@ class SignerToolController {
 			// Create VP for service offering
 			const selfDescriptionCredentialVP = Utils.createVP(verifiableCredential)
 
+			console.log('=======selfDescriptionCredentialVP=======>', JSON.stringify(selfDescriptionCredentialVP))
 			// Call compliance service to sign in gaia-x
 			const complianceCredential = await Utils.callServiceOfferingCompliance(selfDescriptionCredentialVP)
 

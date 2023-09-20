@@ -225,7 +225,6 @@ class SignerToolController {
 
 	ServiceOffering = async (req: Request, res: Response): Promise<void> => {
 		try {
-			console.log('=======req.body=======>', JSON.stringify(req.body))
 			let { privateKey } = req.body
 			const {
 				isVault,
@@ -308,7 +307,6 @@ class SignerToolController {
 			// Create VP for service offering
 			const selfDescriptionCredentialVP = Utils.createVP(verifiableCredential)
 
-			console.log('=======selfDescriptionCredentialVP=======>', JSON.stringify(selfDescriptionCredentialVP))
 			// Call compliance service to sign in gaia-x
 			const complianceCredential = await Utils.callServiceOfferingCompliance(selfDescriptionCredentialVP)
 

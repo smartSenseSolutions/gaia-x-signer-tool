@@ -730,7 +730,8 @@ class Utils {
 			for (const rulePoint of levelRules) {
 				// eslint-disable-next-line no-prototype-builtins
 				if (criteria.hasOwnProperty(rulePoint)) {
-					const { response } = criteria[rulePoint]
+					const gxResponseObj = criteria[rulePoint]
+					const response = gxResponseObj['gx:response']
 					// Loop will break if any single response found not confirmed and will return last label level
 					if (response !== 'Confirm') {
 						return resultLabelLevel

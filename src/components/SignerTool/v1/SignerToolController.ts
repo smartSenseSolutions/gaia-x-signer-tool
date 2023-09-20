@@ -1,4 +1,5 @@
 import axios from 'axios'
+import canonicalize from 'canonicalize'
 import crypto, { createHash } from 'crypto'
 import { Resolver } from 'did-resolver'
 import express, { Request, Response } from 'express'
@@ -6,7 +7,7 @@ import STATUS_CODES from 'http-status-codes'
 import * as jose from 'jose'
 import jsonld from 'jsonld'
 import web from 'web-did-resolver'
-import canonicalize from 'canonicalize'
+
 import { ComplianceCredential, VerificationStatus } from '../../../interface'
 import Utils from '../../../utils/common-functions'
 import { AppConst, AppMessages } from '../../../utils/constants'
@@ -426,6 +427,7 @@ class SignerToolController {
 			// }
 
 			const typeName = await Utils.getVcType(verifiableCredential, url)
+			verificationStatus.gxType = typeName
 			if (
 				![
 					'gx:ServiceOffering',

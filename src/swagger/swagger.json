@@ -1697,14 +1697,15 @@
 									"verifyLP": {
 										"summary": "Verify",
 										"value": {
-											"message": "Success",
 											"data": {
+												"valid": true,
+												"gxType": "gx:ServiceOffering",
 												"integrityCheck": true,
 												"holderSignature": true,
 												"complianceSignature": true,
-												"complianceCheck": true,
-												"valid": true
-											}
+												"complianceCheck": true
+											},
+											"message": "Policy verification successful"
 										}
 									}
 								}
@@ -2642,7 +2643,7 @@
 				"properties": {
 					"url": {
 						"type": "string",
-						"example": "https://leicodetest.smart-x.smartsenselabs.com/44b8ed70-988c-4d37-8a95-d92c97a0c0a5/participant.json#0"
+						"example": "https://wizard-api.dev.smart-x.smartsenselabs.com/42573548-3816-4558-a8b1-8bcf70232912/service_swzt.json"
 					},
 					"policies": {
 						"type": "array",

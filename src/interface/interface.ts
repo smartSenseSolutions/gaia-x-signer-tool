@@ -65,6 +65,7 @@ export interface VerificationStatus {
 	holderSignature?: boolean
 	complianceSignature?: boolean
 	complianceCheck?: boolean
+	gxType?: string
 	valid: boolean
 }
 

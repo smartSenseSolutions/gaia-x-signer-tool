@@ -172,8 +172,8 @@ class Utils {
 		const hash = this.sha256(crypto, canonizedSD)
 		logger.debug(__filename, 'generateProof', `📈 Hashed canonized SD ${hash}`, '')
 
-		// const privateKey = (await axios.get(he.decode(privateKeyUrl))).data as string
-		const privateKey = process.env.PRIVATE_KEY as string
+		const privateKey = (await axios.get(he.decode(privateKeyUrl))).data as string
+
 		const proof = await this.createProof(jose, didId, rsaAlso, hash, privateKey)
 		logger.debug(__filename, 'generateProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', '')
 
@@ -730,7 +730,8 @@ class Utils {
 			for (const rulePoint of levelRules) {
 				// eslint-disable-next-line no-prototype-builtins
 				if (criteria.hasOwnProperty(rulePoint)) {
-					const { response } = criteria[rulePoint]
+					const gxResponseObj = criteria[rulePoint]
+					const response = gxResponseObj['gx:response']
 					// Loop will break if any single response found not confirmed and will return last label level
 					if (response !== 'Confirm') {
 						return resultLabelLevel

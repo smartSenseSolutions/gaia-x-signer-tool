@@ -38,154 +38,6 @@ class Utils {
 		return did
 	}
 
-	generateLegalPerson(participantURL: string, didId: string, legalName: string, headquarterAddress: string, legalAddress: string, legalRegistrationNumberVCUrl: string): object {
-		const selfDescription = {
-			'@context': 'https://www.w3.org/2018/credentials/v1',
-			type: ['VerifiablePresentation'],
-			verifiableCredential: [
-				{
-					'@context': [
-						'https://www.w3.org/2018/credentials/v1',
-						'https://w3id.org/security/suites/jws-2020/v1',
-						'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
-					],
-					type: ['VerifiableCredential'],
-					id: didId,
-					issuer: didId,
-					issuanceDate: new Date().toISOString(),
-					credentialSubject: {
-						id: participantURL,
-						type: 'gx:LegalParticipant',
-						'gx:legalName': legalName,
-						'gx:legalRegistrationNumber': {
-							id: legalRegistrationNumberVCUrl
-						},
-						'gx:headquarterAddress': {
-							'gx:countrySubdivisionCode': headquarterAddress
-						},
-						'gx:legalAddress': {
-							'gx:countrySubdivisionCode': legalAddress
-						}
-					}
-				}
-			]
-		}
-		return selfDescription
-	}
-
-	async generateTermsAndConditions(axios: any, didId: string, tandcsURL: string) {
-		// const { text } = (await axios.get(`${process.env.REGISTRY_TRUST_ANCHOR_URL as string}/termsAndConditions`)).data
-		const verifiableCredential = {
-			'@context': [
-				'https://www.w3.org/2018/credentials/v1',
-				'https://w3id.org/security/suites/jws-2020/v1',
-				'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
-			],
-			type: ['VerifiableCredential'],
-			issuanceDate: new Date().toISOString(),
-			credentialSubject: {
-				'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
-				type: 'gx:GaiaXTermsAndConditions',
-				// 'gx:termsAndConditions': text,
-				'gx:termsAndConditions':
-					'The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).',
-				id: tandcsURL
-			},
-			issuer: didId,
-			id: didId
-		}
-		return verifiableCredential
-	}
-
-	async generateRegistrationNumber(axios: any, didId: string, legalRegistrationType: string, legalRegistrationNumber: string, legalRegistrationNumberVCUrl: string) {
-		try {
-			const request = {
-				'@context': ['https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/participant'],
-				type: 'gx:legalRegistrationNumber',
-				id: legalRegistrationNumberVCUrl,
-				[`gx:${legalRegistrationType}`]: legalRegistrationNumber
-			}
-			const url = `${process.env.REGISTRATION_SERVICE as string}?vcid=${legalRegistrationNumberVCUrl}`
-			const regVC = await axios.post(url, request)
-			return regVC.data
-		} catch (error) {
-			logger.error(__filename, 'generateRegistrationNumber', `❌ RegistrationNumber failed | Error: ${error}`, '')
-			throw new Error(`❌ RegistrationNumber failed | Error: ${error}`)
-		}
-	}
-
-	generateServiceOffer(participantURL: string, didId: string, serviceComplianceUrl: string, data: any): object {
-		const { serviceName, description, policyUrl, termsAndConditionsUrl, termsAndConditionsHash, formatType, accessType, requestType } = data
-		const selfDescription = {
-			'@context': 'https://www.w3.org/2018/credentials/v1',
-			type: ['VerifiablePresentation'],
-			verifiableCredential: [
-				{
-					'@context': ['https://www.w3.org/2018/credentials/v1', 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'],
-					type: ['VerifiableCredential'],
-					id: didId,
-					issuer: didId,
-					issuanceDate: new Date().toISOString(),
-					credentialSubject: {
-						id: serviceComplianceUrl,
-						'gx:name': serviceName,
-						'gx:description': description,
-						type: 'gx:ServiceOffering',
-						'gx:providedBy': {
-							id: participantURL
-						},
-						'gx:policy': policyUrl,
-						'gx:termsAndConditions': {
-							'gx:URL': termsAndConditionsUrl,
-							'gx:hash': termsAndConditionsHash
-						},
-						'gx:dataAccountExport': {
-							'gx:requestType': requestType,
-							'gx:accessType': accessType,
-							'gx:formatType': formatType
-						}
-					}
-				}
-			]
-		}
-		return selfDescription
-	}
-
-	async generateProof(
-		jsonld: any,
-		he: any,
-		axios: any,
-		jose: any,
-		crypto: any,
-		verifiableCredential: any,
-		privateKeyUrl: string,
-		didId: string,
-		domain: string,
-		tenant: string,
-		rsaAlso: string
-	) {
-		const canonizedSD = await this.normalize(
-			jsonld,
-			// eslint-disable-next-line
-			verifiableCredential
-		)
-		const hash = this.sha256(crypto, canonizedSD)
-		logger.debug(__filename, 'generateProof', `📈 Hashed canonized SD ${hash}`, '')
-
-		const privateKey = (await axios.get(he.decode(privateKeyUrl))).data as string
-
-		const proof = await this.createProof(jose, didId, rsaAlso, hash, privateKey)
-		logger.debug(__filename, 'generateProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', '')
-
-		const x5uURL = tenant ? `https://${domain}/${tenant}/x509CertificateChain.pem` : `https://${domain}/.well-known/x509CertificateChain.pem`
-		const certificate = (await axios.get(x5uURL)).data as string
-		const publicKeyJwk = await this.generatePublicJWK(jose, rsaAlso, certificate, x5uURL)
-
-		const verificationResult = await this.verify(jose, proof.jws.replace('..', `.${hash}.`), rsaAlso, publicKeyJwk, hash)
-		logger.debug(__filename, 'generateProof', verificationResult ? '✅ Verification successful' : '❌ Verification failed', '')
-		return proof
-	}
-
 	async generatePublicJWK(jose: any, algorithm: string, certificate: string, x5uURL: string): Promise<any> {
 		const x509 = await jose.importX509(certificate, algorithm)
 		const publicKeyJwk = await jose.exportJWK(x509)
@@ -244,26 +96,6 @@ class Utils {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	createVpObj(claims: any): Object {
-		const contextUris: string[] = []
-		for (const claim of claims) {
-			const contextUriArr = claim['@context']
-			for (const uri of contextUriArr) {
-				if (!contextUris.includes(uri)) {
-					contextUris.push(uri)
-				}
-			}
-		}
-
-		const vp = {
-			'@context': contextUris,
-			type: ['VerifiablePresentation'],
-			verifiableCredential: claims
-		}
-		return vp
-	}
-
 	async getDDOfromDID(did: string, resolver: any) {
 		try {
 			const ddo = await resolver.resolve(did)
@@ -274,17 +106,6 @@ class Utils {
 		} catch (error) {
 			logger.error(__filename, 'getDDOfromDID', `❌ Fetching DDO failed for did: ${did}`, '')
 			return undefined
-		}
-	}
-
-	async validateSslFromRegistry(certificates: any, axios: any) {
-		try {
-			certificates = certificates.replace(/\n/gm, '') || undefined
-			const registryRes = await axios.post(`${process.env.REGISTRY_TRUST_ANCHOR_URL as string}/trustAnchor/chain`, { certs: certificates })
-			return registryRes.status === 200
-		} catch (error) {
-			logger.error(__filename, 'validateSslFromRegistry', `❌ Validation from registry failed for certificates | error: ${error}`, '')
-			return false
 		}
 	}
 
@@ -398,15 +219,15 @@ class Utils {
 		if (verifiableCredential.length) {
 			const participantSD = verifiableCredential.find((credential: any) => credential.credentialSubject.type === 'gx:LegalParticipant')
 			const {
-				id: holderDID,
+				issuer: issuerDID,
 				proof: { verificationMethod: participantVM }
 			} = participantSD
 
-			const ddo = await this.getDDOfromDID(holderDID, resolver)
+			const ddo = await this.getDDOfromDID(issuerDID, resolver)
 			if (!ddo) {
 				// Bad Data
-				logger.error(__filename, 'calcVeracity', `❌ DDO not found for given did: '${holderDID}' in proof`, '')
-				throw new Error(`DDO not found for given did: '${holderDID}' in proof`)
+				logger.error(__filename, 'calcVeracity', `❌ DDO not found for given did: '${issuerDID}' in proof`, '')
+				throw new Error(`DDO not found for given did: '${issuerDID}' in proof`)
 			}
 			const {
 				didDocument: { verificationMethod: verificationMethodArray }

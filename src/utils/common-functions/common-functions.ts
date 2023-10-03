@@ -219,15 +219,15 @@ class Utils {
 		if (verifiableCredential.length) {
 			const participantSD = verifiableCredential.find((credential: any) => credential.credentialSubject.type === 'gx:LegalParticipant')
 			const {
-				id: holderDID,
+				issuer: issuerDID,
 				proof: { verificationMethod: participantVM }
 			} = participantSD
 
-			const ddo = await this.getDDOfromDID(holderDID, resolver)
+			const ddo = await this.getDDOfromDID(issuerDID, resolver)
 			if (!ddo) {
 				// Bad Data
-				logger.error(__filename, 'calcVeracity', `❌ DDO not found for given did: '${holderDID}' in proof`, '')
-				throw new Error(`DDO not found for given did: '${holderDID}' in proof`)
+				logger.error(__filename, 'calcVeracity', `❌ DDO not found for given did: '${issuerDID}' in proof`, '')
+				throw new Error(`DDO not found for given did: '${issuerDID}' in proof`)
 			}
 			const {
 				didDocument: { verificationMethod: verificationMethodArray }

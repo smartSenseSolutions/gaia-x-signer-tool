@@ -2,6 +2,7 @@ PORT=8000
 COMPLIANCE_SERVICE="https://compliance.lab.gaia-x.eu/development/api/credential-offers"
 REGISTRATION_SERVICE="https://registrationnumber.notary.lab.gaia-x.eu/development/registrationNumberVC"
 REGISTRY_TRUST_ANCHOR_URL="https://registry.lab.gaia-x.eu/development/api"
+REGISTRY_TRUST_FRAMEWORK_CONTEXT_URL="https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 WIZARD_VAULT_HOST=
 WIZARD_VAULT_SECRETPATH=
 WIZARD_VAULT_ROLEID=

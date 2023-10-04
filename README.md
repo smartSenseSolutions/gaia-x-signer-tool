@@ -103,7 +103,8 @@ http://localhost:8000/docs/
             <li> Validates dependsOn & aggregationOf vc type with allowed types(gx:ServiceOffering,gx:VirtualDataResource,gx:PhysicalResource) and prepares Service offering VP</li>
         </ol>
 - Request compliance service for compliance with VP(verifiable presentation) of service offering
-- Once the compliance is done, Signer tool  will respond User with Self Signed Service offering VP & Compliance Data for the service offering.
+- Once the compliance is done, System  will respond User with Self Signed Service offering VP & Compliance credential for the service offering.
+-  User will have to host this self-description vcs and compliance credential at credential subject id url which is mentioned in requested vc.
 
 ![create-label-level](docs/create-service-offering.png?raw=true)
 

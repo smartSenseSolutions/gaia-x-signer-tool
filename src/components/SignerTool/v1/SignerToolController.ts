@@ -25,7 +25,7 @@ class SignerToolController {
 			const vc = req.body.vcs
 			let { privateKey } = req.body
 			const { legalParticipant, legalRegistrationNumber, gaiaXTermsAndConditions } = vc
-
+			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, { issuer, verificationMethod, isVault, vc })
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
 				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}'`, req.custom.uuid)

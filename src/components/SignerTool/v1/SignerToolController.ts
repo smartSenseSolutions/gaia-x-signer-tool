@@ -79,7 +79,7 @@ class SignerToolController {
 			vcs.push(...Array.from(vcsMap.values()))
 
 			const selfDescription = Utils.createVP(vcs)
-			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, { ...selfDescription })
+			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, { sd: JSON.stringify(selfDescription, null, 2) })
 			const complianceCredential = await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)
 			logger.debug(__filename, 'GXLegalParticipant', 'complianceCRED', req.custom.uuid, { ...complianceCredential })
 

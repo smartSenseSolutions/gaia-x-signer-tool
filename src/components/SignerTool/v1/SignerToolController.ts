@@ -25,7 +25,8 @@ class SignerToolController {
 			const vc = req.body.vcs
 			let { privateKey } = req.body
 			const { legalParticipant, legalRegistrationNumber, gaiaXTermsAndConditions } = vc
-			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, { issuer, verificationMethod, isVault, vc })
+			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, { issuer, verificationMethod, isVault })
+			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, JSON.stringify(vc, null, 2))
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
 				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}'`, req.custom.uuid)
@@ -79,7 +80,7 @@ class SignerToolController {
 			vcs.push(...Array.from(vcsMap.values()))
 
 			const selfDescription = Utils.createVP(vcs)
-			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, { sd: JSON.stringify(selfDescription, null, 2) })
+			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, JSON.stringify(selfDescription, null, 2))
 			const complianceCredential = await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)
 			logger.debug(__filename, 'GXLegalParticipant', 'complianceCRED', req.custom.uuid, { ...complianceCredential })
 

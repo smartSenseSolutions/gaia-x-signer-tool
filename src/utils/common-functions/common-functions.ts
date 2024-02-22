@@ -145,7 +145,7 @@ class Utils {
 
 	async issueRegistrationNumberVC(axios: any, request: LegalRegistrationNumberDto) {
 		try {
-			request.id = request.id.replace('#', '%23')
+			// request.id = request.id.replace('#', '%23')
 			const url = `${process.env.REGISTRATION_SERVICE as string}?vcid=${request.id}`
 			const regVC = await axios.post(url, request)
 			return regVC.data

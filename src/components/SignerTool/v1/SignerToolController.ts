@@ -24,6 +24,9 @@ class SignerToolController {
 			const { issuer, verificationMethod, isVault } = req.body
 			const vc = req.body.vcs
 			let { privateKey } = req.body
+			const requestURI = vc['legalRegistrationNumber'].id.split('#')[0]
+			vc['legalParticipant'].id = requestURI + '#0'
+			vc['gaiaXTermsAndConditions'].id = requestURI + '#2'
 			const { legalParticipant, legalRegistrationNumber, gaiaXTermsAndConditions } = vc
 			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, { issuer, verificationMethod, isVault })
 			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, JSON.stringify(vc, null, 2))
@@ -63,10 +66,12 @@ class SignerToolController {
 			}
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
-			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
+			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumberVc)
 
 			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]
+
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+			// privateKey = process.env.PRIVATE_KEY as string
 
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
@@ -81,6 +86,7 @@ class SignerToolController {
 
 			const selfDescription = Utils.createVP(vcs)
 			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, JSON.stringify(selfDescription, null, 2))
+
 			const complianceCredential = await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)
 			logger.debug(__filename, 'GXLegalParticipant', 'complianceCRED', req.custom.uuid, { ...complianceCredential })
 

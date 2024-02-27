@@ -243,6 +243,7 @@ class SignerToolController {
 				vcs: { serviceOffering }
 			} = req.body
 
+			logger.debug(__filename, 'ServiceOffering', 'Service offering VC', JSON.stringify(serviceOffering))
 			// Data received in provided by will be the LP URL.
 			// Extract it and fetch LP JSON from the URL
 			const legalParticipantURL = serviceOffering['credentialSubject']['gx:providedBy']['id']

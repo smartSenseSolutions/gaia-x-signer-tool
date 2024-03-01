@@ -128,6 +128,8 @@ class SignerToolController {
 			const { resource } = req.body.vcs
 			let { privateKey } = req.body
 
+			logger.debug(__filename, 'Resource', 'Resource Creation', req.body.uuid, JSON.stringify(resource))
+
 			const VC = ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(resource.credentialSubject.type)
 			if (!VC) {
 				logger.error(

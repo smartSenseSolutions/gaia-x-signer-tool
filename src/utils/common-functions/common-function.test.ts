@@ -311,10 +311,10 @@ describe('commonFunction Testing', () => {
 		})
 		it('Certificate parsed successfully', async () => {
 			// get the SSL certificates from x5u url
-			const x5u = 'https://smartsense.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem'
+			// const x5u = 'https://smartsense.dev.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem'
 			const x5uResp = {
-				validFrom: 'Sep 15 06:07:13 2023 GMT',
-				validTo: 'Dec 14 06:07:12 2023 GMT',
+				validFrom: 'Feb 21 04:23:46 2024 GMT',
+				validTo: 'Mar 22 04:23:46 2024 GMT',
 				subject: {
 					jurisdictionCountry: null,
 					jurisdictionSate: null,
@@ -325,21 +325,43 @@ describe('commonFunction Testing', () => {
 					state: null,
 					locality: null,
 					organization: null,
-					commonName: 'smartsense.smart-x.smartsenselabs.com'
+					commonName: 'localhost'
 				},
-				issuer: { commonName: 'R3', organization: "Let's Encrypt", country: 'US' }
+				issuer: { commonName: 'localhost', organization: null, country: null }
 			}
-			jest.spyOn(Utils, 'parseCertificate').mockImplementation(() => {
-				return x5uResp
-			})
+			// jest.spyOn(Utils, 'parseCertificate').mockImplementation(() => {
+			// 	return x5uResp
+			// })
 			let isError = false
 			try {
-				const certificates = (await axios.get(x5u)).data as string
+				// const certificates = (await axios.get(x5u)).data as string
 				// getting object of a PEM encoded X509 Certificate.
+				const certificates = `
+-----BEGIN CERTIFICATE-----
+MIIC8DCCAdigAwIBAgIUL75VSaYzw5PTPVmo0V3e70KncpgwDQYJKoZIhvcNAQEL
+BQAwFDESMBAGA1UEAwwJbG9jYWxob3N0MB4XDTI0MDIyMTA0MjM0NloXDTI0MDMy
+MjA0MjM0NlowFDESMBAGA1UEAwwJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEF
+AAOCAQ8AMIIBCgKCAQEAqnP5hZ2ChVrRg8bou9VVjyJX0QhgRcYfXQPpJBZl6wF8
+HYneuKZL/IzbmuV2OJfyIzJx77GJmTzO7TrpYX5b8D7Gfu1Fegpp5lD05a6z/VVc
+m7TEUQ4prysj7AHRWGQxVbx8rz/3W48GXCX5Q8HaC9mqPRgn8tAgoDOpqhpp6/1h
+onJi8Di2WwGQIhsmDILJL4rDDqnqLiV+VQlhXQptUODzl43Bp4BDih/bjP9tqEB7
+9WIy4RKg9uvJ7RYO4wL0hh4iIS7A3KGstS26B1D/ssKIf6dchJLkpRGBhxKXtlEj
+XJl07wVXh4uYJluQbWuAXHVxKSlRajX33cQReLVThQIDAQABozowODAUBgNVHREE
+DTALgglsb2NhbGhvc3QwCwYDVR0PBAQDAgeAMBMGA1UdJQQMMAoGCCsGAQUFBwMB
+MA0GCSqGSIb3DQEBCwUAA4IBAQA6oq07EQtfemLaw0JdkdaMv51pgsQ3goN8KTMA
+Z0RXhGGk7AZBBBxA3sIxb5ZonWIOyzWP3A9xw1Myvn0z1N2r3nyYZ2nh+sdKKFXw
+UqpxkPTa0h34+Cfi93JRUzgXHnI8shoSxVqe5iTIcJn2wNaG60oFCQxv0bkbdolD
+WHj2QpoQeOVL8Ti1tcuwgBA4xiGQSmEVEk6RpT1ADUiociKgWRcM4Ni/rFXFprGi
+SYQ3tgnr90zCSqL9C+qIBHjabUOXUAGgUHDnf4uy0RzockxRcqbQa9AroD9/Ura9
+OjGl6sHce3jSQiNi9LhwK2dkKGSA7Vh8K69rrgUoMQkIQfcU
+-----END CERTIFICATE-----`
+				// console.log(certificates)
 				const certificate = new X509Certificate(certificates)
 				const response = await Utils.parseCertificate(certificate)
+				console.log(response)
 				expect(response).toEqual(x5uResp)
 			} catch (error) {
+				console.log(error)
 				isError = true
 			}
 			expect(isError).toBe(false)

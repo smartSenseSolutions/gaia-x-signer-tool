@@ -4,7 +4,7 @@ import { Resolver } from 'did-resolver'
 import dotenv from 'dotenv'
 import web from 'web-did-resolver'
 
-import { holderDdoJson2 as holderDdoJson, labelLevelTestJSON, participantJson, serviceOfferingTestJSON } from '../../assets'
+import { holderDdoJson2 as holderDdoJson, labelLevelTestJSON, mockCertificate, participantJson, serviceOfferingTestJSON } from '../../assets'
 import Utils from './common-functions'
 
 dotenv.config()
@@ -336,25 +336,7 @@ describe('commonFunction Testing', () => {
 			try {
 				// const certificates = (await axios.get(x5u)).data as string
 				// getting object of a PEM encoded X509 Certificate.
-				const certificates = `
------BEGIN CERTIFICATE-----
-MIIC8DCCAdigAwIBAgIUL75VSaYzw5PTPVmo0V3e70KncpgwDQYJKoZIhvcNAQEL
-BQAwFDESMBAGA1UEAwwJbG9jYWxob3N0MB4XDTI0MDIyMTA0MjM0NloXDTI0MDMy
-MjA0MjM0NlowFDESMBAGA1UEAwwJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEF
-AAOCAQ8AMIIBCgKCAQEAqnP5hZ2ChVrRg8bou9VVjyJX0QhgRcYfXQPpJBZl6wF8
-HYneuKZL/IzbmuV2OJfyIzJx77GJmTzO7TrpYX5b8D7Gfu1Fegpp5lD05a6z/VVc
-m7TEUQ4prysj7AHRWGQxVbx8rz/3W48GXCX5Q8HaC9mqPRgn8tAgoDOpqhpp6/1h
-onJi8Di2WwGQIhsmDILJL4rDDqnqLiV+VQlhXQptUODzl43Bp4BDih/bjP9tqEB7
-9WIy4RKg9uvJ7RYO4wL0hh4iIS7A3KGstS26B1D/ssKIf6dchJLkpRGBhxKXtlEj
-XJl07wVXh4uYJluQbWuAXHVxKSlRajX33cQReLVThQIDAQABozowODAUBgNVHREE
-DTALgglsb2NhbGhvc3QwCwYDVR0PBAQDAgeAMBMGA1UdJQQMMAoGCCsGAQUFBwMB
-MA0GCSqGSIb3DQEBCwUAA4IBAQA6oq07EQtfemLaw0JdkdaMv51pgsQ3goN8KTMA
-Z0RXhGGk7AZBBBxA3sIxb5ZonWIOyzWP3A9xw1Myvn0z1N2r3nyYZ2nh+sdKKFXw
-UqpxkPTa0h34+Cfi93JRUzgXHnI8shoSxVqe5iTIcJn2wNaG60oFCQxv0bkbdolD
-WHj2QpoQeOVL8Ti1tcuwgBA4xiGQSmEVEk6RpT1ADUiociKgWRcM4Ni/rFXFprGi
-SYQ3tgnr90zCSqL9C+qIBHjabUOXUAGgUHDnf4uy0RzockxRcqbQa9AroD9/Ura9
-OjGl6sHce3jSQiNi9LhwK2dkKGSA7Vh8K69rrgUoMQkIQfcU
------END CERTIFICATE-----`
+				const certificates = mockCertificate
 				// console.log(certificates)
 				const certificate = new X509Certificate(certificates)
 				const response = await Utils.parseCertificate(certificate)

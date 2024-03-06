@@ -420,7 +420,7 @@ describe('commonFunction Testing', () => {
 			} catch (error) {
 				errorMsg = (error as Error).message
 			}
-			expect(errorMsg).toBe('Rule point key not found in criteria json - P5.2.1')
+			expect(errorMsg).toBe('Rule point key not found in criteria json - gx:P5.2.1')
 			jest.resetAllMocks()
 		})
 		it('LabelLevel Calculated BC', async () => {

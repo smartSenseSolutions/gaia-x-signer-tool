@@ -24,9 +24,9 @@ class SignerToolController {
 			const { issuer, verificationMethod, isVault } = req.body
 			const vc = req.body.vcs
 			let { privateKey } = req.body
-			const requestURI = vc['legalRegistrationNumber'].id.split('#')[0]
-			vc['legalParticipant'].id = requestURI + '#0'
-			vc['gaiaXTermsAndConditions'].id = requestURI + '#2'
+			// const requestURI = vc['legalRegistrationNumber'].id.split('#')[0]
+			// vc['legalParticipant'].id = requestURI + '#0'
+			// vc['gaiaXTermsAndConditions'].id = requestURI + '#2'
 			const { legalParticipant, legalRegistrationNumber, gaiaXTermsAndConditions } = vc
 			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, { issuer, verificationMethod, isVault })
 			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, JSON.stringify(vc, null, 2))
@@ -66,7 +66,7 @@ class SignerToolController {
 			}
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
-			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumberVc)
+			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', JSON.stringify(legalRegistrationNumberVc))
 
 			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]
 
@@ -85,7 +85,7 @@ class SignerToolController {
 			vcs.push(...Array.from(vcsMap.values()))
 
 			const selfDescription = Utils.createVP(vcs)
-			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, JSON.stringify(selfDescription, null, 2))
+			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, JSON.stringify(selfDescription))
 
 			const complianceCredential = await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)
 			logger.debug(__filename, 'GXLegalParticipant', 'complianceCRED', req.custom.uuid, { ...complianceCredential })
@@ -156,6 +156,7 @@ class SignerToolController {
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+			// privateKey = process.env.PRIVATE_KEY as string
 			const vcsMap = new Map()
 			try {
 				switch (resource.credentialSubject.type) {
@@ -278,7 +279,7 @@ class SignerToolController {
 
 			// Decrypt private key(received in request) from base64 to raw string
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
-
+			// privateKey = process.env.PRIVATE_KEY as string
 			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 			serviceOffering.proof = proof

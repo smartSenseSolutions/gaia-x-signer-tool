@@ -400,6 +400,7 @@ describe('/v1/gaia-x/verify', () => {
 				const message = {
 					message: AppMessages.SIG_VERIFY_SUCCESS,
 					data: {
+						gxType: 'gx:LegalParticipant',
 						integrityCheck: false,
 						valid: false
 					}
@@ -452,6 +453,7 @@ describe('/v1/gaia-x/verify', () => {
 				const message = {
 					message: AppMessages.SIG_VERIFY_SUCCESS,
 					data: {
+						gxType: 'gx:LegalParticipant',
 						holderSignature: false,
 						valid: false
 					}
@@ -503,6 +505,7 @@ describe('/v1/gaia-x/verify', () => {
 				const message = {
 					message: AppMessages.SIG_VERIFY_SUCCESS,
 					data: {
+						gxType: 'gx:LegalParticipant',
 						complianceSignature: false,
 						valid: false
 					}
@@ -531,6 +534,7 @@ describe('/v1/gaia-x/verify', () => {
 				const message = {
 					message: AppMessages.SIG_VERIFY_SUCCESS,
 					data: {
+						gxType: 'gx:LegalParticipant',
 						integrityCheck: true,
 						valid: true
 					}
@@ -556,6 +560,7 @@ describe('/v1/gaia-x/verify', () => {
 				const message = {
 					message: AppMessages.SIG_VERIFY_SUCCESS,
 					data: {
+						gxType: 'gx:LegalParticipant',
 						holderSignature: true,
 						valid: true
 					}
@@ -581,6 +586,7 @@ describe('/v1/gaia-x/verify', () => {
 				const message = {
 					message: AppMessages.SIG_VERIFY_SUCCESS,
 					data: {
+						gxType: 'gx:LegalParticipant',
 						complianceSignature: true,
 						valid: true
 					}
@@ -607,6 +613,7 @@ describe('/v1/gaia-x/verify', () => {
 				const message = {
 					message: AppMessages.SIG_VERIFY_SUCCESS,
 					data: {
+						gxType: 'gx:LegalParticipant',
 						holderSignature: true,
 						integrityCheck: true,
 						complianceSignature: true,
@@ -638,6 +645,7 @@ describe('/v1/gaia-x/verify', () => {
 				const message = {
 					message: AppMessages.SIG_VERIFY_SUCCESS,
 					data: {
+						gxType: 'gx:LegalParticipant',
 						holderSignature: true,
 						integrityCheck: true,
 						complianceSignature: true,

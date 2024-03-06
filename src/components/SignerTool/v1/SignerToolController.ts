@@ -24,9 +24,6 @@ class SignerToolController {
 			const { issuer, verificationMethod, isVault } = req.body
 			const vc = req.body.vcs
 			let { privateKey } = req.body
-			// const requestURI = vc['legalRegistrationNumber'].id.split('#')[0]
-			// vc['legalParticipant'].id = requestURI + '#0'
-			// vc['gaiaXTermsAndConditions'].id = requestURI + '#2'
 			const { legalParticipant, legalRegistrationNumber, gaiaXTermsAndConditions } = vc
 			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, { issuer, verificationMethod, isVault })
 			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, JSON.stringify(vc, null, 2))

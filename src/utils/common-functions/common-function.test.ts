@@ -337,13 +337,11 @@ describe('commonFunction Testing', () => {
 				// const certificates = (await axios.get(x5u)).data as string
 				// getting object of a PEM encoded X509 Certificate.
 				const certificates = mockCertificate
-				// console.log(certificates)
 				const certificate = new X509Certificate(certificates)
 				const response = await Utils.parseCertificate(certificate)
-				console.log(response)
+
 				expect(response).toEqual(x5uResp)
 			} catch (error) {
-				console.log(error)
 				isError = true
 			}
 			expect(isError).toBe(false)

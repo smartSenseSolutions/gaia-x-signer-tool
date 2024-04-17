@@ -470,7 +470,7 @@ class SignerToolController {
 							const vcProof = JSON.parse(JSON.stringify(vc.proof))
 							const vcCredentialContent = JSON.parse(JSON.stringify(vc))
 							delete vcCredentialContent.proof
-							verificationStatus.holderSignature = await Utils.verification(vcCredentialContent, vcProof, true, resolver)
+							verificationStatus.holderSignature = await Utils.verification(vcCredentialContent, vcProof, process.env.CHECK_SSL == 'true', resolver)
 						}
 						break
 					}
@@ -480,7 +480,8 @@ class SignerToolController {
 						const complianceCred = JSON.parse(JSON.stringify(participantJson.complianceCredential))
 						const complianceProof = JSON.parse(JSON.stringify(complianceCred.proof))
 						delete complianceCred.proof
-						verificationStatus.complianceSignature = await Utils.verification(complianceCred, complianceProof, false, resolver)
+						//it was initially false
+						verificationStatus.complianceSignature = await Utils.verification(complianceCred, complianceProof, process.env.CHECK_SSL == 'true', resolver)
 						break
 					}
 					case AppConst.VERIFY_LP_POLICIES[3]: {

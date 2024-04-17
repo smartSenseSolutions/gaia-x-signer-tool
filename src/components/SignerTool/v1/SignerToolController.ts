@@ -415,6 +415,7 @@ class SignerToolController {
 			}
 
 			const typeName = await Utils.getVcType(verifiableCredential, url)
+
 			verificationStatus.gxType = typeName
 			if (
 				![
@@ -441,12 +442,16 @@ class SignerToolController {
 						let allChecksPassed = true
 
 						for (const vc of participantJson.selfDescriptionCredential.verifiableCredential) {
+							let vcID = ''
 							const integrityHash = `sha256-${createHash('sha256')
 								.update(canonicalize(vc) as any)
 								.digest('hex')}`
-							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vc.credentialSubject.id)[
-								'gx:integrity'
-							]
+							if (Array.isArray(vc.credentialSubject)) {
+								vcID = vc.credentialSubject[0].id
+							} else {
+								vcID = vc.credentialSubject.id
+							}
+							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vcID)['gx:integrity']
 							const integrityCheck = integrityHash === credIntegrityHash
 
 							if (!integrityCheck) {
@@ -476,7 +481,7 @@ class SignerToolController {
 						const complianceProof = JSON.parse(JSON.stringify(complianceCred.proof))
 						delete complianceCred.proof
 						//it was initially false
-						verificationStatus.complianceSignature = await Utils.verification(complianceCred, complianceProof, process.env.CHECK_SSL == 'true', resolver)
+						verificationStatus.complianceSignature = await Utils.verification(complianceCred, complianceProof, false, resolver)
 						break
 					}
 					case AppConst.VERIFY_LP_POLICIES[3]: {
@@ -510,7 +515,6 @@ class SignerToolController {
 			})
 		}
 	}
-
 	GetTrustIndex = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const { participantSD, serviceOfferingSD } = req.body

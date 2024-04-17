@@ -527,11 +527,26 @@ class Utils {
 	}
 
 	getVcType = async (verifiableCredential: any, vcId: string): Promise<string> => {
+		let credentialType = ''
 		const vc = verifiableCredential.find((e: any) => {
-			return e.credentialSubject.id === vcId
+			if (Array.isArray(e.credentialSubject)) {
+				return e.credentialSubject.some((subject: any) => {
+					if (subject.id === vcId) {
+						credentialType = subject.type ? subject.type : ''
+					}
+					return subject.id === vcId
+				})
+			} else {
+				if (e.credentialSubject.id === vcId) {
+					credentialType = e.credentialSubject.type ? vc.credentialSubject.type : ''
+				}
+				return e.credentialSubject.id === vcId
+			}
 		})
-		return vc ? vc.credentialSubject.type : ''
+
+		return credentialType
 	}
+
 	/**
 	 * @dev This function will calculate label level using credencial
 	 * @param veracity Veracity value

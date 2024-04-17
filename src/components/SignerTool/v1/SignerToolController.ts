@@ -481,7 +481,7 @@ class SignerToolController {
 						const complianceProof = JSON.parse(JSON.stringify(complianceCred.proof))
 						delete complianceCred.proof
 						//it was initially false
-						verificationStatus.complianceSignature = await Utils.verification(complianceCred, complianceProof, process.env.CHECK_SSL == 'true', resolver)
+						verificationStatus.complianceSignature = await Utils.verification(complianceCred, complianceProof, false, resolver)
 						break
 					}
 					case AppConst.VERIFY_LP_POLICIES[3]: {

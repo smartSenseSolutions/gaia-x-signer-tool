@@ -538,7 +538,7 @@ class Utils {
 				})
 			} else {
 				if (e.credentialSubject.id === vcId) {
-					credentialType = e.credentialSubject.type ? vc.credentialSubject.type : ''
+					credentialType = e.credentialSubject.type ? e.credentialSubject.type : ''
 				}
 				return e.credentialSubject.id === vcId
 			}

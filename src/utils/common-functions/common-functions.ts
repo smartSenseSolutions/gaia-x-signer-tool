@@ -4,7 +4,7 @@ import * as jose from 'jose'
 import jsonld from 'jsonld'
 
 import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
-import { AppConst, AppMessages, LABEL_LEVEL_RULE } from '../constants'
+import { AppConst, AppMessages, LABEL_LEVEL_RULE, W3C_CONTEXT } from '../constants'
 import { logger } from '../logger'
 
 class Utils {
@@ -48,10 +48,29 @@ class Utils {
 
 	async normalize(jsonld: any, payload: object) {
 		try {
-			const canonized = await jsonld.canonize(payload, {
-				algorithm: 'URDNA2015',
-				format: 'application/n-quads'
-			})
+			const nodeDocumentLoader = jsonld.documentLoaders.node()
+			const customLoader = async (url: string) => {
+				if (url in W3C_CONTEXT) {
+					return {
+						contextUrl: null, // this is for a context via a link header
+						document: W3C_CONTEXT[url], // this is the actual document that was loaded
+						documentUrl: url // this is the actual context URL after redirects
+					}
+				}
+				// call the default documentLoader
+				return nodeDocumentLoader(url)
+			}
+			jsonld.documentLoader = customLoader
+
+			const canonized = await jsonld.canonize(
+				payload,
+				{
+					algorithm: 'URDNA2015',
+					format: 'application/n-quads'
+				},
+				{ nodeDocumentLoader: customLoader }
+			)
+
 			if (canonized === '') throw new Error('Canonized SD is empty')
 			return canonized
 		} catch (error) {

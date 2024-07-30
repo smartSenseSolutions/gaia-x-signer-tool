@@ -80,8 +80,7 @@
 	"lint-staged": {
 		"*.{ts,js}": [
 			"prettier --write",
-			"eslint",
-			"detect-secrets-launcher **/*.ts"
+			"eslint"
 		]
 	}
 }

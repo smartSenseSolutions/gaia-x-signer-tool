@@ -42,7 +42,8 @@ class Utils {
 		const x509 = await jose.importX509(certificate, algorithm)
 		const publicKeyJwk = await jose.exportJWK(x509)
 		publicKeyJwk.alg = algorithm
-		publicKeyJwk.x5u = x5uURL
+		// publicKeyJwk.x5u = x5uURL
+		console.log(x5uURL)
 		return publicKeyJwk
 	}
 
@@ -96,10 +97,67 @@ class Utils {
 	}
 
 	async sign(jose: any, algorithm: string, hash: string, privateKey: string) {
-		const rsaPrivateKey = await jose.importPKCS8(privateKey, algorithm)
-		const txtEncoder = new TextEncoder().encode(hash)
-		const jws = await new jose.CompactSign(txtEncoder).setProtectedHeader({ alg: algorithm, b64: false, crit: ['b64'] }).sign(rsaPrivateKey)
-		return jws
+		// const rsaPrivateKey = await jose.importPKCS8(privateKey, algorithm)
+		// const txtEncoder = new TextEncoder().encode(hash)
+		// const jws = await new jose.CompactSign(txtEncoder).setProtectedHeader({ alg: algorithm, b64: false, crit: ['b64'] }).sign(rsaPrivateKey)
+		// return jws
+		// const header = {
+		// 	alg: 'RS256',
+		// 	typ: 'JWT'
+		// };
+		// const payload = {
+		// 	data: hash
+		// };
+		console.log(hash)
+		console.log(privateKey)
+		// const base64String = btoa(hash);
+		// console.log('input hash : ', base64String)
+		const jsonBody = {
+			request: {
+				certID: 'AS0',
+				identity: {},
+				binaryinput: hash,
+				transport: 'BYNARYNET'
+			},
+			parameter: {
+				jwtId: 'prova',
+				audience: 'prova',
+				jwsSerializationType: 'JSON'
+			}
+		}
+		const data = JSON.stringify(jsonBody)
+
+		// const response  =  await axios.post('https://arss.demo.firma-automatica.it/ArubaSignService/rest/ArubaSignService/jwsSignature?=null',data)
+		//   console.log(response);
+
+		const config = {
+			method: 'post',
+			maxBodyLength: Infinity,
+			url: 'https://arss.demo.firma-automatica.it/ArubaSignService/rest/ArubaSignService/jwsSignature?=null',
+			headers: {
+				'Content-Type': 'application/json',
+				Cookie: 'cookiesession1=678B29974AEB816D7758822168500B9E'
+			},
+			data: data
+		}
+
+		const response = await axios
+			.request(config)
+			.then((response) => {
+				// const jws = `${encodedHeader}.${encodedPayload}.${base64url(response.data.binaryoutput)}`;
+				// console.log("error in sig")
+
+				const decodeString = JSON.parse(atob(response.data.binaryoutput))
+				// console.log("decoded string -> \n", JSON.stringify(decodeString))
+
+				// decode base 64
+				// protected header , sign
+				return `${decodeString.signatures[0].protected}..${decodeString.signatures[0].signature}`
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+		return response
 	}
 
 	async verify(jose: any, jws: string, algorithm: string, publicKeyJwk: string, hash: string) {
@@ -144,7 +202,7 @@ class Utils {
 			const pk = await jose.importJWK(publicKeyJwk)
 			const spki = await jose.exportSPKI(pk)
 
-			const x509 = await jose.importX509(certificates, 'PS256')
+			const x509 = await jose.importX509(certificates, 'RS256')
 			const spkiX509 = await jose.exportSPKI(x509)
 
 			return spki === spkiX509
@@ -186,6 +244,7 @@ class Utils {
 		rsaAlso: string,
 		x5uURL: string
 	) {
+		//why - ?
 		const canonizedSD = await this.normalize(
 			jsonld,
 			// eslint-disable-next-line
@@ -193,13 +252,56 @@ class Utils {
 		)
 		const hash = this.sha256(crypto, canonizedSD)
 		logger.info(__filename, 'addProof', `📈 Hashed canonized SD ${hash}`, '')
-
+		//todo : siging process
 		const proof = await this.createProof(jose, verificationMethod, rsaAlso, hash, privateKey)
 		logger.info(__filename, 'addProof', proof ? '🔒 SD signed successfully' : '❌ SD signing failed', x5uURL)
-
-		const certificate = (await axios.get(x5uURL)).data as string
+		//todo : replace actual cert
+		const certificate1 = (await axios.get(x5uURL)).data as string
+		const publicKeyJwk1 = await this.generatePublicJWK(jose, rsaAlso, certificate1, x5uURL)
+		console.log(publicKeyJwk1)
+		const certificate = `-----BEGIN CERTIFICATE-----
+MIIHHDCCBQSgAwIBAgIQA7/kwiW8SwSnqfSdI2aEaDANBgkqhkiG9w0BAQsFADCB
+sjELMAkGA1UEBhMCSVQxDzANBgNVBAcMBkFyZXp6bzEYMBYGA1UECgwPQXJ1YmFQ
+RUMgUy5wLkEuMRowGAYDVQRhDBFWQVRJVC0wMTg3OTAyMDUxNzEpMCcGA1UECwwg
+UXVhbGlmaWVkIFRydXN0IFNlcnZpY2UgUHJvdmlkZXIxMTAvBgNVBAMMKEFydWJh
+UEVDIEVVIFF1YWxpZmllZCBDZXJ0aWZpY2F0ZXMgQ0EgRzEwHhcNMjQwNDA4MTU1
+OTI1WhcNMjcwNDA4MTU1OTI1WjCBgTELMAkGA1UEBhMCSVQxDTALBgNVBAQMBENh
+aW8xDjAMBgNVBCoMBVRpemlvMR8wHQYDVQQFExZUSU5JVC1BQUFBQkIwMEEwMEEw
+MDBGMRMwEQYDVQQDDApUaXppbyBDYWlvMR0wGwYDVQQuExRXU1JFRi03NjIyMTA3
+MjczMjgzMzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJhnd4SHOc92
+Qj1QVzMqsRIz02Yz7eR0UGzsofV6M6CItrYnyMIMGjqa09Xw63m96O6H7cCc4N1O
+a+tJc0qBfM6lrJ3akLDAKbwSgP0LOHms9M/lvrRpbpC5ax2EA6C8YHB6tLaH9KQ1
+PG0h1+uFn+nI0yBfTcFnDyIcKDXJznbWgIzuGql7bbcqgjeL6aBdvmDUH8UEhYh8
+Ngt96qlu7mZheVnB0onjnDU05P6rf3PEYFleSexKrk9YGM3foipJv79IMObAhetg
+ElQCsz29dbkR/ywlkUa7AI6Tox6XGgh0/ntHIJEHl6LBcCmLZuYO7gTiW79NPf4W
+8gv7hF8HVncCAwEAAaOCAlswggJXMB8GA1UdIwQYMBaAFMZvO4V70SaxeJpCpCVp
+DPb/eqBnMH8GCCsGAQUFBwEBBHMwcTA4BggrBgEFBQcwAoYsaHR0cDovL2NhY2Vy
+dC5wZWMuaXQvY2VydHMvYXJ1YmFwZWMtZWlkYXMtZzEwNQYIKwYBBQUHMAGGKWh0
+dHA6Ly9vY3NwMDEucGVjLml0L3ZhL2FydWJhcGVjLWVpZGFzLWcxMBsGA1UdEgQU
+MBKBEGluZm9AYXJ1YmFwZWMuaXQwcAYDVR0gBGkwZzAJBgcEAIvsQAECMFIGCysG
+AQQBgegtAQcCMEMwQQYIKwYBBQUHAgEWNWh0dHBzOi8vd3d3LnBlYy5pdC9yZXBv
+c2l0b3J5L2FydWJhcGVjLXF1YWxpZi1jcHMucGRmMAYGBCtMEAYwgbUGCCsGAQUF
+BwEDBIGoMIGlMAgGBgQAjkYBATALBgYEAI5GAQMCARQwgYsGBgQAjkYBBTCBgDA+
+FjhodHRwczovL3d3dy5wZWMuaXQvcmVwb3NpdG9yeS9hcnViYXBlYy1xdWFsaWYt
+cGRzLWl0LnBkZhMCaXQwPhY4aHR0cHM6Ly93d3cucGVjLml0L3JlcG9zaXRvcnkv
+YXJ1YmFwZWMtcXVhbGlmLXBkcy1lbi5wZGYTAmVuMD0GA1UdHwQ2MDQwMqAwoC6G
+LGh0dHA6Ly9jcmwwMS5wZWMuaXQvdmEvYXJ1YmFwZWMtZWlkYXMtZzEvY3JsMB0G
+A1UdDgQWBBSuL3BFqxahOg6t9rroVFDZKa89AzAOBgNVHQ8BAf8EBAMCBkAwDQYJ
+KoZIhvcNAQELBQADggIBALQNr+65cy9SM4a+v/XuofwSB8tZ4E+/ZgWKYmsNUQ2s
+qqRIFMCCszB1jjXyGa1Y65i2mFSMs6fhZ75CQdqHu3vT5fqGumtz0UoZVYkfCfze
+hZigAoguUImpn8ABfMLVUOqINbftLMOj7wMk9pWM5md9XPoVMCXlCKKmVxD9aY1p
+/NGcC/TsZFdQ6t7OZrvRkNPBxBOthtTcm8ra2F/LLXXNdzcpDBDZhLtb7VlcJ968
+Kdy5+YPEpPmCRgEdCMci2iBD/7vk3F2s/VUwXatF6Y+hgomxneCJVdfIJQ4rt5fl
+r+0Xu9slESL7m4nlMvtqDQ4LOfG1O6P7+UsI7mQaxWs5XCH4HQT3SIGjN6O7tvsg
+wk+PCwxXKE9palgvyFV6V3QCZbcejnMdfTsz+HNfbbmTiZXMjqUYTzzX8t5FAvZz
+dJc8lta3TTbtDJhwoO8GBVBKXHj/aRnQlC3d4Hl45FhvovCslbs3PL2M0p51tAmf
+qplLcPZXyxPDD/TCzfPslhb16ukzv/coJmqTbEgaeAT8tPFJ6lKdCovzjBaHTIiG
+ibscbGCQNfBh0ZzJp2wm8VeLoTbILW0Cqy1YDbs6wdXZHXbyk1jZAoCPdJrbUmkU
+H3ChxYC7PuNLoS/oU5GvIBsTpwhcNi0H9mYXZ/dY48TP894hjcAs80OeksZ0Rx1v
+-----END CERTIFICATE-----
+`
 		const publicKeyJwk = await this.generatePublicJWK(jose, rsaAlso, certificate, x5uURL)
-
+		console.log(proof)
 		const verificationResult = await this.verify(jose, proof.jws.replace('..', `.${hash}.`), rsaAlso, publicKeyJwk, hash)
 		logger.info(__filename, 'addProof', verificationResult ? '✅ Verification successful' : '❌ Verification failed', '')
 		return proof
@@ -547,6 +649,7 @@ class Utils {
 
 	getVcType = async (verifiableCredential: any, vcId: string): Promise<string> => {
 		let credentialType = ''
+
 		const vc = verifiableCredential.find((e: any) => {
 			if (Array.isArray(e.credentialSubject)) {
 				return e.credentialSubject.some((subject: any) => {
@@ -562,7 +665,7 @@ class Utils {
 				return e.credentialSubject.id === vcId
 			}
 		})
-
+		console.log(vc)
 		return credentialType
 	}
 

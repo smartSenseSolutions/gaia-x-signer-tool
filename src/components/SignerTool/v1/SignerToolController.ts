@@ -45,22 +45,21 @@ class SignerToolController {
 				})
 				return
 			}
-
 			const vcsMap = new Map()
-			try {
-				if (legalParticipant.credentialSubject['gx:parentOrganization']) {
-					await Utils.getInnerVCs(legalParticipant, 'gx:parentOrganization', ['gx:LegalParticipant'], vcsMap)
-				}
-				if (legalParticipant.credentialSubject['gx:subOrganization']) {
-					await Utils.getInnerVCs(legalParticipant, 'gx:subOrganization', ['gx:LegalParticipant'], vcsMap)
-				}
-			} catch (e) {
-				res.status(STATUS_CODES.BAD_REQUEST).json({
-					error: (e as Error).message,
-					message: AppMessages.VP_FAILED
-				})
-				return
-			}
+			// try {
+			// 	if (legalParticipant.credentialSubject['gx:parentOrganization']) {
+			// 		await Utils.getInnerVCs(legalParticipant, 'gx:parentOrganization', ['gx:LegalParticipant'], vcsMap)
+			// 	}
+			// 	if (legalParticipant.credentialSubject['gx:subOrganization']) {
+			// 		await Utils.getInnerVCs(legalParticipant, 'gx:subOrganization', ['gx:LegalParticipant'], vcsMap)
+			// 	}
+			// } catch (e) {
+			// 	res.status(STATUS_CODES.BAD_REQUEST).json({
+			// 		error: (e as Error).message,
+			// 		message: AppMessages.VP_FAILED
+			// 	})
+			// 	return
+			// }
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
 			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', JSON.stringify(legalRegistrationNumberVc))
@@ -72,6 +71,7 @@ class SignerToolController {
 
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
+
 				// eslint-disable-next-line no-prototype-builtins
 				if (!vc.hasOwnProperty('proof')) {
 					const proof = await Utils.addProof(jsonld, axios, jose, crypto, vc, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
@@ -82,6 +82,7 @@ class SignerToolController {
 			vcs.push(...Array.from(vcsMap.values()))
 
 			const selfDescription = Utils.createVP(vcs)
+			console.log(JSON.stringify(selfDescription))
 			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, JSON.stringify(selfDescription))
 
 			const complianceCredential = await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)
@@ -362,8 +363,8 @@ class SignerToolController {
 	Verify = async (req: Request, res: Response): Promise<void> => {
 		/**
 		 * Request Body :
-		  	1. url : EG . https://greenworld.proofsense.in/.well-known/participant.json
-		 	2. policies : policy we want to check
+				1. url : EG . https://greenworld.proofsense.in/.well-known/participant.json
+			  2. policies : policy we want to check
 		 */
 
 		//todo : compliance check is remaining

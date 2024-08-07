@@ -15,7 +15,7 @@ class Utils {
 			verificationMethod: [
 				{
 					'@context': 'https://w3c-ccg.github.io/lds-jws2020/contexts/v1/',
-					id: didId,
+					id: `${didId}#JWK2020-RSA`,
 					type: 'JsonWebKey2020',
 					controller: didId,
 					publicKeyJwk: publicKeyJwk
@@ -88,7 +88,7 @@ class Utils {
 			type: 'JsonWebSignature2020',
 			created: new Date().toISOString(),
 			proofPurpose: 'assertionMethod',
-			verificationMethod: verificationMethod,
+			verificationMethod: verificationMethod + `#JWK2020-RSA`,
 			jws: await this.sign(jose, algorithm, hash, privateKey)
 		}
 
@@ -562,7 +562,7 @@ class Utils {
 				return e.credentialSubject.id === vcId
 			}
 		})
-
+		console.log(vc)
 		return credentialType
 	}
 

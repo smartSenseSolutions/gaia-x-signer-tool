@@ -21,7 +21,7 @@ export class VaultService {
 		await this.loginByApprole()
 		try {
 			const result = await this.vault.read(`${process.env.WIZARD_VAULT_SECRETPATH as string}/data/${path}`)
-			console.log('>>>  Secret: ', path)
+			console.log('>>>  Secret: ', path, result)
 			return result.data.data['pkcs8.key']
 		} catch (ex: any) {
 			if (ex.response.statusCode === 404) {

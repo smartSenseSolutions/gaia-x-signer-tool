@@ -4,7 +4,7 @@ import * as jose from 'jose'
 import jsonld from 'jsonld'
 
 import { DidDocument, LegalRegistrationNumberDto, Service, SignatureDto, VerifiableCredentialDto, VerificationMethod, X509CertificateDetail } from '../../interface'
-import { AppConst, AppMessages, LABEL_LEVEL_RULE } from '../constants'
+import { AppConst, AppMessages, LABEL_LEVEL_RULE, W3C_CONTEXT } from '../constants'
 import { logger } from '../logger'
 
 class Utils {
@@ -15,7 +15,7 @@ class Utils {
 			verificationMethod: [
 				{
 					'@context': 'https://w3c-ccg.github.io/lds-jws2020/contexts/v1/',
-					id: didId,
+					id: `${didId}#JWK2020-RSA`,
 					type: 'JsonWebKey2020',
 					controller: didId,
 					publicKeyJwk: publicKeyJwk
@@ -48,10 +48,29 @@ class Utils {
 
 	async normalize(jsonld: any, payload: object) {
 		try {
-			const canonized = await jsonld.canonize(payload, {
-				algorithm: 'URDNA2015',
-				format: 'application/n-quads'
-			})
+			const nodeDocumentLoader = jsonld.documentLoaders.node()
+			const customLoader = async (url: string) => {
+				if (url in W3C_CONTEXT) {
+					return {
+						contextUrl: null, // this is for a context via a link header
+						document: W3C_CONTEXT[url], // this is the actual document that was loaded
+						documentUrl: url // this is the actual context URL after redirects
+					}
+				}
+				// call the default documentLoader
+				return nodeDocumentLoader(url)
+			}
+			jsonld.documentLoader = customLoader
+
+			const canonized = await jsonld.canonize(
+				payload,
+				{
+					algorithm: 'URDNA2015',
+					format: 'application/n-quads'
+				},
+				{ nodeDocumentLoader: customLoader }
+			)
+
 			if (canonized === '') throw new Error('Canonized SD is empty')
 			return canonized
 		} catch (error) {
@@ -69,7 +88,7 @@ class Utils {
 			type: 'JsonWebSignature2020',
 			created: new Date().toISOString(),
 			proofPurpose: 'assertionMethod',
-			verificationMethod: verificationMethod,
+			verificationMethod: verificationMethod + `#JWK2020-RSA`,
 			jws: await this.sign(jose, algorithm, hash, privateKey)
 		}
 
@@ -145,8 +164,9 @@ class Utils {
 
 	async issueRegistrationNumberVC(axios: any, request: LegalRegistrationNumberDto) {
 		try {
-			request.id = request.id.replace('#', '%23')
-			const url = `${process.env.REGISTRATION_SERVICE as string}?vcid=${request.id}`
+			const id = request.id.replace('#', '%23')
+			// request.id = request.id.replace('#', '%23')
+			const url = `${process.env.REGISTRATION_SERVICE as string}?vcid=${id}`
 			const regVC = await axios.post(url, request)
 			return regVC.data
 		} catch (error) {
@@ -495,7 +515,7 @@ class Utils {
 	 * @dev - common function to fetch ParticipantJson from url
 	 */
 	callServiceOfferingCompliance = async (reqData: any) => {
-		logger.debug(__filename, 'callServiceOfferingCompliance', `📈 Calling ServiceOffering Compliance`, '')
+		logger.debug(__filename, 'callServiceOfferingCompliance', `📈 Calling ServiceOffering Compliance with request data : `, JSON.stringify(reqData))
 		// eslint-disable-next-line no-useless-catch
 		try {
 			const endpoint = process.env.COMPLIANCE_SERVICE as string
@@ -526,11 +546,26 @@ class Utils {
 	}
 
 	getVcType = async (verifiableCredential: any, vcId: string): Promise<string> => {
+		let credentialType = ''
 		const vc = verifiableCredential.find((e: any) => {
-			return e.credentialSubject.id === vcId
+			if (Array.isArray(e.credentialSubject)) {
+				return e.credentialSubject.some((subject: any) => {
+					if (subject.id === vcId) {
+						credentialType = subject.type ? subject.type : ''
+					}
+					return subject.id === vcId
+				})
+			} else {
+				if (e.credentialSubject.id === vcId) {
+					credentialType = e.credentialSubject.type ? e.credentialSubject.type : ''
+				}
+				return e.credentialSubject.id === vcId
+			}
 		})
-		return vc ? vc.credentialSubject.type : ''
+		console.log(vc)
+		return credentialType
 	}
+
 	/**
 	 * @dev This function will calculate label level using credencial
 	 * @param veracity Veracity value

@@ -25,7 +25,8 @@ class SignerToolController {
 			const vc = req.body.vcs
 			let { privateKey } = req.body
 			const { legalParticipant, legalRegistrationNumber, gaiaXTermsAndConditions } = vc
-
+			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, { issuer, verificationMethod, isVault })
+			logger.debug(__filename, 'GXLegalParticipant', 'req.body', req.custom.uuid, JSON.stringify(vc, null, 2))
 			const ddo = await Utils.getDDOfromDID(issuer, resolver)
 			if (!ddo) {
 				logger.error(__filename, 'GXLegalParticipant', `❌ DDO not found for given did: '${issuer}'`, req.custom.uuid)
@@ -62,10 +63,12 @@ class SignerToolController {
 			}
 
 			const legalRegistrationNumberVc = await Utils.issueRegistrationNumberVC(axios, legalRegistrationNumber)
-			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', legalRegistrationNumber)
+			logger.info(__filename, 'GXLegalParticipant', 'legalRegistrationNumber vc created', JSON.stringify(legalRegistrationNumberVc))
 
 			const vcs = [legalParticipant, legalRegistrationNumberVc, gaiaXTermsAndConditions]
+
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+			// privateKey = process.env.PRIVATE_KEY as string
 
 			for (let index = 0; index < vcs.length; index++) {
 				const vc = vcs[index]
@@ -79,13 +82,17 @@ class SignerToolController {
 			vcs.push(...Array.from(vcsMap.values()))
 
 			const selfDescription = Utils.createVP(vcs)
-			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
+			logger.debug(__filename, 'GXLegalParticipant', 'selfDescription', req.custom.uuid, JSON.stringify(selfDescription))
+
+			const complianceCredential = await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)
+			logger.debug(__filename, 'GXLegalParticipant', 'complianceCRED', req.custom.uuid, { ...complianceCredential })
+
 			// const complianceCredential = vcs
 			logger.info(__filename, 'GXLegalParticipant', '🔒 SD signed successfully (compliance service)', req.custom.uuid)
 
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
-				complianceCredential: complianceCredential
+				complianceCredential: complianceCredential.data
 			}
 
 			res.status(STATUS_CODES.OK).json({
@@ -118,6 +125,8 @@ class SignerToolController {
 			const { resource } = req.body.vcs
 			let { privateKey } = req.body
 
+			logger.debug(__filename, 'Resource', 'Resource Creation', req.body.uuid, JSON.stringify(resource))
+
 			const VC = ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(resource.credentialSubject.type)
 			if (!VC) {
 				logger.error(
@@ -144,6 +153,7 @@ class SignerToolController {
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
+			// privateKey = process.env.PRIVATE_KEY as string
 			const vcsMap = new Map()
 			try {
 				switch (resource.credentialSubject.type) {
@@ -233,6 +243,7 @@ class SignerToolController {
 				vcs: { serviceOffering }
 			} = req.body
 
+			logger.debug(__filename, 'ServiceOffering', 'Service offering VC', JSON.stringify(serviceOffering))
 			// Data received in provided by will be the LP URL.
 			// Extract it and fetch LP JSON from the URL
 			const legalParticipantURL = serviceOffering['credentialSubject']['gx:providedBy']['id']
@@ -265,7 +276,7 @@ class SignerToolController {
 
 			// Decrypt private key(received in request) from base64 to raw string
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
-
+			// privateKey = process.env.PRIVATE_KEY as string
 			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 			serviceOffering.proof = proof
@@ -404,6 +415,7 @@ class SignerToolController {
 			}
 
 			const typeName = await Utils.getVcType(verifiableCredential, url)
+
 			verificationStatus.gxType = typeName
 			if (
 				![
@@ -430,12 +442,16 @@ class SignerToolController {
 						let allChecksPassed = true
 
 						for (const vc of participantJson.selfDescriptionCredential.verifiableCredential) {
+							let vcID = ''
 							const integrityHash = `sha256-${createHash('sha256')
 								.update(canonicalize(vc) as any)
 								.digest('hex')}`
-							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vc.credentialSubject.id)[
-								'gx:integrity'
-							]
+							if (Array.isArray(vc.credentialSubject)) {
+								vcID = vc.credentialSubject[0].id
+							} else {
+								vcID = vc.credentialSubject.id
+							}
+							const credIntegrityHash = participantJson.complianceCredential?.credentialSubject?.find((cs: ComplianceCredential) => cs.id == vcID)['gx:integrity']
 							const integrityCheck = integrityHash === credIntegrityHash
 
 							if (!integrityCheck) {
@@ -454,7 +470,7 @@ class SignerToolController {
 							const vcProof = JSON.parse(JSON.stringify(vc.proof))
 							const vcCredentialContent = JSON.parse(JSON.stringify(vc))
 							delete vcCredentialContent.proof
-							verificationStatus.holderSignature = await Utils.verification(vcCredentialContent, vcProof, true, resolver)
+							verificationStatus.holderSignature = await Utils.verification(vcCredentialContent, vcProof, process.env.CHECK_SSL == 'true', resolver)
 						}
 						break
 					}
@@ -464,6 +480,7 @@ class SignerToolController {
 						const complianceCred = JSON.parse(JSON.stringify(participantJson.complianceCredential))
 						const complianceProof = JSON.parse(JSON.stringify(complianceCred.proof))
 						delete complianceCred.proof
+						//it was initially false
 						verificationStatus.complianceSignature = await Utils.verification(complianceCred, complianceProof, false, resolver)
 						break
 					}
@@ -498,7 +515,6 @@ class SignerToolController {
 			})
 		}
 	}
-
 	GetTrustIndex = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const { participantSD, serviceOfferingSD } = req.body

@@ -1,3 +1,5 @@
+import W3C_Credential from '../../assets/credential.json'
+import W3C_JWS from '../../assets/jws-2020.json'
 export class AppConst {
 	static readonly RSA_ALGO = 'PS256'
 	static readonly LEGAL_PARTICIPANT = 'LegalParticipant'
@@ -128,4 +130,8 @@ export const LABEL_LEVEL_RULE: any = {
 	L1: ['gx:P1.1.2', 'gx:P2.1.1', 'gx:P2.2.4', 'gx:P2.3.1']
 	// L2: ['gx:P5.1.1'],
 	// L3: ['gx:P5.1.2', 'gx:P5.1.3', 'gx:P5.1.4', 'gx:P5.1.5', 'gx:P5.1.6', 'gx:P5.1.7']
+}
+export const W3C_CONTEXT: Record<string, any> = {
+	'https://www.w3.org/2018/credentials/v1': W3C_Credential,
+	'https://w3id.org/security/suites/jws-2020/v1': W3C_JWS
 }

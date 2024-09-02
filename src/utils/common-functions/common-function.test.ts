@@ -4,7 +4,7 @@ import { Resolver } from 'did-resolver'
 import dotenv from 'dotenv'
 import web from 'web-did-resolver'
 
-import { holderDdoJson2 as holderDdoJson, labelLevelTestJSON, participantJson, serviceOfferingTestJSON } from '../../assets'
+import { holderDdoJson2 as holderDdoJson, labelLevelTestJSON, mockCertificate, participantJson, serviceOfferingTestJSON } from '../../assets'
 import Utils from './common-functions'
 
 dotenv.config()
@@ -311,10 +311,10 @@ describe('commonFunction Testing', () => {
 		})
 		it('Certificate parsed successfully', async () => {
 			// get the SSL certificates from x5u url
-			const x5u = 'https://smartsense.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem'
+			// const x5u = 'https://smartsense.dev.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem'
 			const x5uResp = {
-				validFrom: 'Sep 15 06:07:13 2023 GMT',
-				validTo: 'Dec 14 06:07:12 2023 GMT',
+				validFrom: 'Feb 21 04:23:46 2024 GMT',
+				validTo: 'Mar 22 04:23:46 2024 GMT',
 				subject: {
 					jurisdictionCountry: null,
 					jurisdictionSate: null,
@@ -325,19 +325,21 @@ describe('commonFunction Testing', () => {
 					state: null,
 					locality: null,
 					organization: null,
-					commonName: 'smartsense.smart-x.smartsenselabs.com'
+					commonName: 'localhost'
 				},
-				issuer: { commonName: 'R3', organization: "Let's Encrypt", country: 'US' }
+				issuer: { commonName: 'localhost', organization: null, country: null }
 			}
-			jest.spyOn(Utils, 'parseCertificate').mockImplementation(() => {
-				return x5uResp
-			})
+			// jest.spyOn(Utils, 'parseCertificate').mockImplementation(() => {
+			// 	return x5uResp
+			// })
 			let isError = false
 			try {
-				const certificates = (await axios.get(x5u)).data as string
+				// const certificates = (await axios.get(x5u)).data as string
 				// getting object of a PEM encoded X509 Certificate.
+				const certificates = mockCertificate
 				const certificate = new X509Certificate(certificates)
 				const response = await Utils.parseCertificate(certificate)
+
 				expect(response).toEqual(x5uResp)
 			} catch (error) {
 				isError = true
@@ -420,7 +422,7 @@ describe('commonFunction Testing', () => {
 			} catch (error) {
 				errorMsg = (error as Error).message
 			}
-			expect(errorMsg).toBe('Rule point key not found in criteria json - P5.2.1')
+			expect(errorMsg).toBe('Rule point key not found in criteria json - gx:P5.2.1')
 			jest.resetAllMocks()
 		})
 		it('LabelLevel Calculated BC', async () => {

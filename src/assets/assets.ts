@@ -185,12 +185,18 @@ export const ServiceOfferingParticipantJson = {
 		verifiableCredential: [
 			{
 				credentialSubject: {
-					'gx:legalName': 'Gaia-x MVP',
-					'gx:headquarterAddress': { 'gx:countrySubdivisionCode': 'AD-07' },
-					'gx:legalAddress': { 'gx:countrySubdivisionCode': 'AD-07' },
-					id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#0',
+					'gx:legalName': 'milton',
+					'gx:headquarterAddress': {
+						'gx:countrySubdivisionCode': 'AD-03'
+					},
+					'gx:legalAddress': {
+						'gx:countrySubdivisionCode': 'AD-03'
+					},
+					id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#0',
 					type: 'gx:LegalParticipant',
-					'gx:legalRegistrationNumber': { id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#1' }
+					'gx:legalRegistrationNumber': {
+						id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#1'
+					}
 				},
 				'@context': [
 					'https://www.w3.org/2018/credentials/v1',
@@ -198,39 +204,43 @@ export const ServiceOfferingParticipantJson = {
 					'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
 				],
 				type: ['VerifiableCredential'],
-				id: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-				issuer: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-				issuanceDate: '2023-09-14T14:34:23.468336874Z',
+				id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#0',
+				issuer: 'did:web:milton.dev.smart-x.smartsenselabs.com',
+				issuanceDate: '2024-03-01T09:19:08.858530778Z',
 				proof: {
 					type: 'JsonWebSignature2020',
-					created: '2023-09-14T14:34:25.781Z',
+					created: '2024-03-01T09:19:15.768Z',
 					proofPurpose: 'assertionMethod',
-					verificationMethod: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..W1RqfbKc96OJGEzmx9IAh22wbQEIvexbdC_2z8V2GTZyfiM0zhCUZ-tfSZqsflYI7Wum0dffnGYklHenBJCn2RBz27XaO2PHW4myPm9Ee6OiFeNV5VnNp29KeaGvoSt6tHOAOpXpFjdAexfxrPBDvexeXqdxwGcu4UGcB7AnN3xmbCXgPtCLEkyC-Gr90pXRRwvdxxgJrC5uFAF6H2Qkf_yx5vff4ZrQrZRyGGlPKf9_ZsWKzOuSvsC_M_OuqX4JfG0u-J7C3XnDStVrMRtYewGUVjRUoJKisvFyKmMe0U1K7zfWMXQkEjy9SSPVB8sPEyFaqMCXWHv7LtABS5fiBQ'
+					verificationMethod: 'did:web:milton.dev.smart-x.smartsenselabs.com',
+					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..g5qv0jPT7y33Pf_8rJxwOzPUtK9TbVt17TB2uAmZgsu98gbkdecl-SIChs8I1OVZjRzsetmM079ysuUuvD0FdVBUl4TfpsoTFbfVd81ZCD6-CcfrypSvh0-KezzA8cG9HfHkm62NkYrIuMjoiAAEJm8Cv36nLb4RPT5nsIGxl7jrCx4NQNWhHbqwlLjAwFZD9QLw7KLOU9Wmb4tP3HnHKdhFJPv6xQlfYZDalkn8SjfXdNQVNnYVhFu7pRVOZ6ajzq3wJMcXZiPnG8LG2QpQKOvUUnBOr6OGE8KuljepuCI7PwTEshVYB2Ve6Tv7XWD6mRTqgQaGoHJTxiB91EKyLg'
 				}
 			},
 			{
 				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
 				type: ['VerifiableCredential'],
-				id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#1',
-				issuer: 'did:web:registration.lab.gaia-x.eu:development',
-				issuanceDate: '2023-09-14T14:34:23.972Z',
+				id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#1',
+				issuer: 'did:web:registrationnumber.notary.lab.gaia-x.eu:main',
+				issuanceDate: '2024-03-01T09:19:13.416+00:00',
 				credentialSubject: {
 					'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
+					id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#1',
 					type: 'gx:legalRegistrationNumber',
-					id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#1',
 					'gx:vatID': 'FR79537407926',
 					'gx:vatID-countryCode': 'FR'
 				},
 				evidence: [
-					{ 'gx:evidenceURL': 'http://ec.europa.eu/taxation_customs/vies/services/checkVatService', 'gx:executionDate': '2023-09-14T14:34:23.972Z', 'gx:evidenceOf': 'gx:vatID' }
+					{
+						'gx:evidenceOf': 'VAT_ID',
+						'gx:evidenceURL': 'http://ec.europa.eu/taxation_customs/vies/services/checkVatService',
+						'gx:executionDate': '2024-03-01T09:19:13.415+00:00'
+					}
 				],
 				proof: {
 					type: 'JsonWebSignature2020',
-					created: '2023-09-14T14:34:24.821Z',
+					created: '2024-03-01T09:19:14.524+00:00',
 					proofPurpose: 'assertionMethod',
-					verificationMethod: 'did:web:registration.lab.gaia-x.eu:development#X509-JWK2020',
-					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TlrHrKuWRSYfxoJVYCACXkr0pZn3ucopTGj1fAxASysdHZZ1uTwBSVPyasbRk88ql0OVGELRuqK4xJF3YFJidvCAM1bO5ZFLA3S2iMrCcYvnIjlT52fe1zBR8aFLnlB6PUTA3-ZUj5kheJZ44YXDkKlGcPSEqBJJdYj11ZReEbOHzjK6ZwZW4eUJRYUatq5QUdYeA1G-yR4oRqQobdWC2MUlVO9EzBba10fcFfvGReudsF5BvhoBS3Ui7D2wtE0_ck4WtzHbadbC-pvV2BE2vpaPhgqzJNnekb8wDvO13hWSrhGWbw-RN01PlHMEd0YNopqvzgSbYvuWVgvwAE3tMw'
+					verificationMethod: 'did:web:registrationnumber.notary.lab.gaia-x.eu:main#X509-JWK2020',
+					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SvMoHF6SiPVlU-nBgpzFdNA1nw13y8Ea6NdeOEnmPH3xsRGhz5Zlworr991tLM-XaExsEB87z8roQTcjhM3ML8ZetTND5a3fe8Mgv6TdCiw5dJP5pKtmBc0QYj7gnKwBZDcEPVqoTthLISitF-wc36_VVvdlG1obFWkWdY08LeNL9TAlP8UjGe6uI812yfFK-53xVncv_eva2PDgwL1wKrrIFIig-Bj0vANekFMFMY_1m8WmZu7oRBQRAW-J_5aX881l2d9UBhvMJqlvUMkNjBOoybbGPVDa-RynILsmIGHYMB2v9G6XURPHx_R8nu1XNZJ024xXS75ieWretj0E-Q'
 				}
 			},
 			{
@@ -240,79 +250,70 @@ export const ServiceOfferingParticipantJson = {
 					'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
 				],
 				credentialSubject: {
-					'@Context': [
+					'gx:termsAndConditions':
+						'The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).',
+					id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#2',
+					type: 'gx:GaiaXTermsAndConditions',
+					'@context': [
 						'https://www.w3.org/2018/credentials/v1',
 						'https://w3id.org/security/suites/jws-2020/v1',
 						'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
-					],
-					'gx:termsAndConditions':
-						'The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).',
-					id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#2',
-					type: 'gx:GaiaXTermsAndConditions'
+					]
 				},
-				id: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-				issuanceDate: '2023-09-14T14:34:23.468336874Z',
-				issuer: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
+				id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#2',
+				issuanceDate: '2024-03-01T09:19:08.858530778Z',
+				issuer: 'did:web:milton.dev.smart-x.smartsenselabs.com',
 				type: ['VerifiableCredential'],
 				proof: {
 					type: 'JsonWebSignature2020',
-					created: '2023-09-14T14:34:26.212Z',
+					created: '2024-03-01T09:19:16.295Z',
 					proofPurpose: 'assertionMethod',
-					verificationMethod: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..m0sAZfWT0a9w_m3ohU_amSwDJQ9NmafiC0l2kQt8t-9nJtyAqy--9TTvg6nP1VQsk3Mr6vhrqgZx6aWGnKdmXp6mBllcqLlzh2TPtOhJVY6CkA6MC2hjdc1rnLA2AXoS_L_uVtfEjLjz2all6GgOnDBiAAn94wo0y5VUmsg4JZkeKdjy7krfdNh9YGMXj5xigZz905yNx6_VWPQcKe2o0Ss-J5uDYcE5dG6p6zmFhsBEC8uCxX4RSiY96hUvHUMOtIzhbh9fYPPX3NGfNg4Tla3f6ZEzQkGME99xpEa7zphv5sH6Fq6XitaUIbXdgpbt5lpA8eqAeeM8iMVym8wgGg'
+					verificationMethod: 'did:web:milton.dev.smart-x.smartsenselabs.com',
+					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..kuC3ZfouSasaQ0zYrPVPuk_6tXDaQ7qHA_BAO1KtBBLNjDOVEDWqFfCY9Ex0UMtJlsRLoV8Z3b93ygcBaXooOGMBG2lMCUmmN2W0Bo97WIIRwVf0OPJLLxaW7a6PKATjA5kVVusUEPFwh4kRtgfSv8Vft6-AyR4Ul-jNTlGto5A3L5c7CHNSxyA8J4gTDLWnJQD9mF-7P5sUoDS5Cf3ElQjHhjaoLqRQIpb22I2h4zQuZJXM4L9ep0d-VEsPdmWrLA9zMn0IdEjqVptoNcltMLrydGwDkVlC0fibgoh3H9EnNZC65fnIyOfGKjHGiVAz-c3F-R-FNRIoVthyIl-4vg'
 				}
 			},
 			{
 				type: 'VerifiableCredential',
-				id: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-				issuer: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-				issuanceDate: '2023-09-15T04:42:15.77729931Z',
+				id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/service_CX5K.json',
+				issuer: 'did:web:milton.dev.smart-x.smartsenselabs.com',
+				issuanceDate: '2024-03-01T10:24:14.620236279Z',
 				credentialSubject: {
-					'gx:termsAndConditions': { 'gx:URL': 'https://www.mgmotor.co.in/', 'gx:hash': '35bed6f56ecbea0868bae78d4f2ba114a5d5944ee79959065822fd051879e65c' },
-					'gx:policy': ['https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/service_OfWM_policy.json'],
-					'gx:dataAccountExport': { 'gx:requestType': 'e-mail', 'gx:accessType': 'Physical', 'gx:formatType': ['application/1d-interleaved-parityfec'] },
-					'gx:aggregationOf': [{ id: 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/resource_86e3a30c-3098-46c2-8c59-1c5acc5cd153.json' }],
-					'gx:dependsOn': [{ id: 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/service_heWk.json' }],
-					'gx:dataProtectionRegime': ['LGPD2019', 'GDPR2016'],
+					'gx:labelLevel': 'https://wizard-api.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/labelLevel_84147f48-2701-4117-a937-73d89f837f7d.json',
+					'gx:aggregationOfExists': [
+						{
+							id: 'https://wizard-api.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/resource_b1af42bc-2ca7-4143-88f7-aacb8ab00b66.json' //pragma: allowlist secret
+						}
+					],
+					'gx:termsAndConditions': {
+						'gx:URL': 'https://www.smartsensesolutions.com/privacy-policy',
+						'gx:hash': 'd280c4c5405658bc150ed874e3761bbd4fd76ff0cbb56e1333c28bb902bd9fcd' //pragma: allowlist secret
+					},
+					'gx:policy': ['https://wizard-api.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/service_CX5K_policy.json'],
+					'gx:dataAccountExport': {
+						'gx:requestType': 'webform',
+						'gx:accessType': 'physical',
+						'gx:formatType': ['application/city+json']
+					},
+					'gx:dataProtectionRegime': ['GDPR2016'],
 					type: 'gx:ServiceOffering',
-					'gx:labelLevel': 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/labelLevel_675173b1-90b4-48fe-8db0-a623351c97d5.json',
-					'gx:providedBy': { id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#0' },
-					id: 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/service_OfWM.json',
-					'gx:name': 'GaiaxMvp2'
+					'gx:providedBy': {
+						id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#0'
+					},
+					id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/service_CX5K.json',
+					'gx:name': 'Chome Browser Data',
+					'gx:description': 'Chome Browser Data'
 				},
-				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
+				'@context': [
+					'https://www.w3.org/2018/credentials/v1',
+					'https://w3id.org/security/suites/jws-2020/v1',
+					'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
+				],
 				proof: {
 					type: 'JsonWebSignature2020',
-					created: '2023-09-15T04:42:16.134Z',
+					created: '2024-03-06T09:50:01.197Z',
 					proofPurpose: 'assertionMethod',
-					verificationMethod: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SC13tHWJqA1FMx3JxzYyUK22KZVmz56d4oMMPgT0waGrYQoJMU1n2LQGrp085ahhJBHa7fM4BM1Y0hfVcVnPdCxYWtL4CvCobXQ1_x4yI7sN-2y74zxXP2dG-PKnGEWUdn833zJA5hi4_eK2DhFk0JtGQqFp0DcPQ6la1b8pOv2qEN5WZUH-C1gGOc0y5kL-CG3ogtnqkEpC3qMSQsM795sTtsbz3UxC6w9pxpyYOmG0HaOwz-eZIQXRXMh1l_zaeHOaYoAvDd-U3W-3c2wHwXr8CEOwpT5AwS4wXKRSH6Tz5Mp_PPdP0udldgi0IHuY06khVeO2KObTF39i3vWKcA'
-				}
-			},
-			{
-				type: 'VerifiableCredential',
-				id: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-				issuer: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-				issuanceDate: '2023-09-14T14:38:20.53048993Z',
-				credentialSubject: {
-					'gx:termsAndConditions': { 'gx:URL': 'https://www.mgmotor.co.in/', 'gx:hash': '35bed6f56ecbea0868bae78d4f2ba114a5d5944ee79959065822fd051879e65c' },
-					'gx:policy': ['https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/service_heWk_policy.json'],
-					'gx:dataAccountExport': { 'gx:requestType': 'API', 'gx:accessType': 'Physical', 'gx:formatType': ['application/1d-interleaved-parityfec'] },
-					'gx:aggregationOf': [{ id: 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/resource_86e3a30c-3098-46c2-8c59-1c5acc5cd153.json' }],
-					'gx:dataProtectionRegime': ['PDPA2012'],
-					type: 'gx:ServiceOffering',
-					'gx:labelLevel': 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/labelLevel_0ccd3764-92d7-4899-8a36-99de47f6d4f8.json',
-					'gx:providedBy': { id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#0' },
-					id: 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/service_heWk.json',
-					'gx:name': 'GaiaxMvp'
-				},
-				'@context': ['https://www.w3.org/2018/credentials/v1', 'https://w3id.org/security/suites/jws-2020/v1'],
-				proof: {
-					type: 'JsonWebSignature2020',
-					created: '2023-09-14T14:38:20.856Z',
-					proofPurpose: 'assertionMethod',
-					verificationMethod: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
-					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..ie5i5oz1wMzBa1IBEYKpSqx7VGFTDkQfcGkRShwuifXU-lZmyYpXUgxaNlRx-auSlIuIS1YvQlEsW3kEmlD8eAWneolAvwNJ9PLBvitprUxRAOx6HxEASqKOXh7JASt3s4YZ_Dbe_pubZlMpJyEgZfUAVqyxb3-uwfIchRVwLXHse13T4E58vEnRZpGUXiam9RswPR4vHav_jH2kf9vw0HTGD70vfnAUHHy1jGJun1ZdFeFSB0xdZ50MVv3JkxPtJFUiJtMLyeSfvRMOkMPq_oYu2vtUkJ3qiXdDhGxb7EOZevbnFYpzJECxV-UgahQywnFoX_ktkOBptnFOl9S5IQ'
+					verificationMethod: 'did:web:milton.dev.smart-x.smartsenselabs.com',
+					jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..gla1fWgW7JSjwTtwdkFnbX_rJIs1y_Gi-ntK3SzOElpdo-K5j478kk17OtKI-r2wTqX48AkS64jtjzp-tJpOj5yzQvl0q1EBJs6450q6qfZqDe6DIZnaCTnag4hehL4vataaxASUG9cxqWgFQFiTFEf0OCjG9Y_euslEU9egR1UPMxrJxXQJ4iIDvHcxr7D_fJ8RQQwsGBwWUjnzQ5dGcBl7ixPchDtxSzQQlp5xGrgvGAR7mnlwm7oV3V2UliVvYmnY6OcxZKn1rQXLdIOPtzuDX7fSg_poAJ6pVj3zlM6kkNnJuBlPbSyy2KqeXnxv6qHrpXlnINagbADeDV6xFg'
 				}
 			}
 		]
@@ -324,47 +325,39 @@ export const ServiceOfferingParticipantJson = {
 			'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#'
 		],
 		type: ['VerifiableCredential'],
-		id: 'https://compliance.lab.gaia-x.eu/development/credential-offers/4d62dd74-9841-4b76-8339-585f2ac52e8d',
+		id: 'https://compliance.lab.gaia-x.eu/development/credential-offers/a6e0b950-2071-4134-8f5e-9b4aa89b4c3a',
 		issuer: 'did:web:compliance.lab.gaia-x.eu:development',
-		issuanceDate: '2023-09-15T04:42:27.306Z',
-		expirationDate: '2023-12-14T04:42:27.306Z',
+		issuanceDate: '2024-03-06T09:50:09.101Z',
+		expirationDate: '2024-06-04T09:50:09.101Z',
 		credentialSubject: [
 			{
 				type: 'gx:compliance',
-				id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#0',
-				'gx:integrity': 'sha256-0e1ade0c72e1ed845a849d58484bdca6e7b9a53fec084202250db5ab10acadb0',
+				id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#0',
+				'gx:integrity': 'sha256-02fb34583773ab01a2080053389aed55f14cb2e87046ba421eeb4e023190f17c',
 				'gx:integrityNormalization': 'RFC8785:JCS',
 				'gx:version': '22.10',
 				'gx:type': 'gx:LegalParticipant'
 			},
 			{
 				type: 'gx:compliance',
-				id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#1',
-				'gx:integrity': 'sha256-84ad42e047996dda5bdcededc8df5f65c1bbacc260f359d5e02117c884bb376d',
+				id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#1',
+				'gx:integrity': 'sha256-728e9be306d6f9eaeb740390d0a65938153480125071f673f0dd63cfa2164a99',
 				'gx:integrityNormalization': 'RFC8785:JCS',
 				'gx:version': '22.10',
 				'gx:type': 'gx:legalRegistrationNumber'
 			},
 			{
 				type: 'gx:compliance',
-				id: 'https://gxmvp.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/participant.json#2',
-				'gx:integrity': 'sha256-e49f54cdb1344df040f755002545e4f22a58c48630b00a7267fab5900ed55ed6',
+				id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/participant.json#2',
+				'gx:integrity': 'sha256-ce6c6bb5b78e0fce40d7e3f4113154810f051c655f7c0ec772cc20acab6a1324',
 				'gx:integrityNormalization': 'RFC8785:JCS',
 				'gx:version': '22.10',
 				'gx:type': 'gx:GaiaXTermsAndConditions'
 			},
 			{
 				type: 'gx:compliance',
-				id: 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/service_OfWM.json',
-				'gx:integrity': 'sha256-7cacad018b9290b4312a40a5fd77868a13e9c0cba11c922fbd40c8512f5a0244',
-				'gx:integrityNormalization': 'RFC8785:JCS',
-				'gx:version': '22.10',
-				'gx:type': 'gx:ServiceOffering'
-			},
-			{
-				type: 'gx:compliance',
-				id: 'https://wizard-api.dev.smart-x.smartsenselabs.com/74245438-c8b8-425f-ab47-20f0a8d4a782/service_heWk.json',
-				'gx:integrity': 'sha256-92562fe11974275e7f739e1ba5a8fea523ae44f4335b7719f7acf4208e6a9306',
+				id: 'https://milton.dev.smart-x.smartsenselabs.com/6723b472-65b0-4a4f-94ce-9d7a4ed9e4af/service_CX5K.json',
+				'gx:integrity': 'sha256-f8daf6ee91aceccf5a540aac08b58bcafd6a48f514fec757c1bb5694b0a8ee38',
 				'gx:integrityNormalization': 'RFC8785:JCS',
 				'gx:version': '22.10',
 				'gx:type': 'gx:ServiceOffering'
@@ -372,10 +365,10 @@ export const ServiceOfferingParticipantJson = {
 		],
 		proof: {
 			type: 'JsonWebSignature2020',
-			created: '2023-09-15T04:42:27.317Z',
+			created: '2024-03-06T09:50:10.516Z',
 			proofPurpose: 'assertionMethod',
-			jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..FWVOaUKmzVVYKX7UCOYvCUjnSYgxbyBBsLlxbEpAB2le04qOU6TsVoLyof1ASYFxvp6U8GSSGPKhF53F-oJkzLgaCnMbLX2t24TTalgnhpiazOUHEXTGhHVbuUwNdi09PH90c8wG_UViu59A1vW_LmhTSMorykuGM391Z-k-XYImK8DIgxRViGtPHIFRRxHIIvvNG5Xd6dh-Yctfn8HafeuY_PAEgiMFfSLCghOxd3LqQh-UXU1V2K_za4rl3mw9XZN7z_Nzmca5J-7_KxrcyVMDlVCmXz8zozRhXr_AeNrpD1TzZv8VGuzMx3njS3X5OBoZwaJ6oRV2xhgAIKdxYQ',
-			verificationMethod: 'did:web:compliance.lab.gaia-x.eu:development#X509-JWK2020'
+			verificationMethod: 'did:web:compliance.lab.gaia-x.eu:development#X509-JWK2020',
+			jws: 'eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..U73LO6F-suGi_tDyzBpW2T8tsFsfAN7iKJBAx1vxqFuFXGlt-3XQVyHO5GUswP_W2UN6se2ne69BKKVQgYuhYmA_azIJZ7Hrrjhy9Vy01sRrzblsf828XDu3tmOX20SbjTRfuZhc_YbfQ-aYyuio5xT7B479aVg0G9PF4rViuIxs9pSQp6hroPD8TSTB2cdRJJkfUm9qgF-FcyizsCk3mRuqxUEPKfH-uSn58VOPNt_YISqfUoTo6NSySg674J44fSislKbAu99DXUEuhGjHPw41gjJ-DmlLAqUBe24Bsce1iVPyP2wyaUomlecNmr-acV3fFF9OLkiVlqSPOlmR8g'
 		}
 	}
 }
@@ -392,7 +385,7 @@ export const holderDdoJson2 = {
 					e: 'AQAB',
 					x5u: 'https://gxmvp.dev.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem',
 					alg: 'PS256',
-					n: 'nyNZ4YKXj8NFHN45N26n16U0BrHCYQs8kPTHKCHHBaXCKNpdL9PLIoZpdpRkOObRwowyFF8SB6B3l_63JIR6KMxQcIb4pVoevW_8-3LJk4jwcYBZq8a6uSt94xM5dkozqSi6OeufrH-f8S8D-zT74KwWLoViNNw6eusjiqWudomsURJxOuIhSEiUzU4lprGjEbXeFIN9o0QoiAqAe5Haj2VfsY7UWd9sYtERnth4cF9XV5nA_Y__uFeW4KkKV3I4lsamRq4PW6DLwano3hzkETRIdzkWo1Zn0_AFjSa-6XWwEydk2STmTuuLBPvKBZg9a06jIQMmnOfk-2c1iUn1pQ'
+					n: 'nyNZ4YKXj8NFHN45N26n16U0BrHCYQs8kPTHKCHHBaXCKNpdL9PLIoZpdpRkOObRwowyFF8SB6B3l_63JIR6KMxQcIb4pVoevW_8-3LJk4jwcYBZq8a6uSt94xM5dkozqSi6OeufrH-f8S8D-zT74KwWLoViNNw6eusjiqWudomsURJxOuIhSEiUzU4lprGjEbXeFIN9o0QoiAqAe5Haj2VfsY7UWd9sYtERnth4cF9XV5nA_Y__uFeW4KkKV3I4lsamRq4PW6DLwano3hzkETRIdzkWo1Zn0_AFjSa-6XWwEydk2STmTuuLBPvKBZg9a06jIQMmnOfk-2c1iUn1pQ' //pragma: allowlist secret
 				},
 				id: 'did:web:gxmvp.dev.smart-x.smartsenselabs.com',
 				type: 'JsonWebKey2020',
@@ -405,21 +398,21 @@ export const holderDdoJson2 = {
 
 export const serviceOfferingTestJSON = {
 	invalidIssuerJSON: {
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidMerificationMethodJSON: {
 		issuer: 'did:web:ferrari.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidSO: {
 		issuer: 'did:web:ferrari.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:ferrari.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	validReqJSON: {
 		issuer: 'did:web:ferrari.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:ferrari.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			serviceOffering: {
 				type: 'VerifiableCredential',
@@ -429,7 +422,7 @@ export const serviceOfferingTestJSON = {
 				credentialSubject: {
 					'gx:termsAndConditions': {
 						'gx:URL': 'https://aws.amazon.com/service-terms/',
-						'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c'
+						'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c' //pragma: allowlist secret
 					},
 					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi_policy.json'],
 					'gx:dataAccountExport': {
@@ -464,7 +457,7 @@ export const serviceOfferingTestJSON = {
 	invalidReqJSON: {
 		issuer: 'did:web:suzuki.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:suzuki.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			serviceOffering: {
 				type: 'VerifiableCredential',
@@ -474,7 +467,7 @@ export const serviceOfferingTestJSON = {
 				credentialSubject: {
 					'gx:termsAndConditions': {
 						'gx:URL': 'https://aws.amazon.com/service-terms/',
-						'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c'
+						'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c' //pragma: allowlist secret
 					},
 					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi_policy.json'],
 					'gx:dataAccountExport': {
@@ -726,7 +719,10 @@ export const serviceOfferingTestJSON = {
 					issuer: 'did:web:lakhani.smart-x.smartsenselabs.com',
 					issuanceDate: '2023-09-11T11:29:49.617289325Z',
 					credentialSubject: {
-						'gx:termsAndConditions': { 'gx:URL': 'https://gaia-x.eu/privacy-policy/', 'gx:hash': '58b01f2e99b346d6b46b01fb1028e0cdc8f1a4e3dfeaabf25a5e4065c9597e37' },
+						'gx:termsAndConditions': {
+							'gx:URL': 'https://gaia-x.eu/privacy-policy/',
+							'gx:hash': '58b01f2e99b346d6b46b01fb1028e0cdc8f1a4e3dfeaabf25a5e4065c9597e37' //pragma: allowlist secret
+						},
 						'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/service_aTRg_policy.json'],
 						'gx:dataAccountExport': { 'gx:requestType': 'API', 'gx:accessType': 'Physical', 'gx:formatType': ['application/ace+cbor'] },
 						'gx:aggregationOf': [
@@ -839,7 +835,7 @@ export const serviceOfferingTestJSON = {
 					credentialSubject: {
 						'gx:termsAndConditions': {
 							'gx:URL': 'https://www.audi.in/in/web/en/models/a4/a4-sedan-2021/engines.html',
-							'gx:hash': 'b5217e4f41bd84580668324f37058e889b7f3cdfc3eb0fc815feb346078ddf61'
+							'gx:hash': 'b5217e4f41bd84580668324f37058e889b7f3cdfc3eb0fc815feb346078ddf61' //pragma: allowlist secret
 						},
 						'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/service_gF20_policy.json'],
 						'gx:dataAccountExport': {
@@ -1061,7 +1057,7 @@ export const serviceOfferingTestJSON = {
 				credentialSubject: {
 					'gx:termsAndConditions': {
 						'gx:URL': 'https://gaia-x.eu/privacy-policy/',
-						'gx:hash': '58b01f2e99b346d6b46b01fb1028e0cdc8f1a4e3dfeaabf25a5e4065c9597e37'
+						'gx:hash': '58b01f2e99b346d6b46b01fb1028e0cdc8f1a4e3dfeaabf25a5e4065c9597e37' //pragma: allowlist secret
 					},
 					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/15ff8691-96e1-4a4b-ad3f-10ed72452102/service_aTRg_policy.json'],
 					'gx:dataAccountExport': {
@@ -1195,7 +1191,7 @@ export const serviceOfferingTestJSON = {
 				credentialSubject: {
 					'gx:termsAndConditions': {
 						'gx:URL': 'https://www.audi.in/in/web/en/models/a4/a4-sedan-2021/engines.html',
-						'gx:hash': 'b5217e4f41bd84580668324f37058e889b7f3cdfc3eb0fc815feb346078ddf61'
+						'gx:hash': 'b5217e4f41bd84580668324f37058e889b7f3cdfc3eb0fc815feb346078ddf61' //pragma: allowlist secret
 					},
 					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/bed7af39-9d5a-488c-9d22-5f77fdac2ef4/service_gF20_policy.json'],
 					'gx:dataAccountExport': {
@@ -1405,7 +1401,7 @@ export const serviceOfferingTestJSON = {
 			credentialSubject: {
 				'gx:termsAndConditions': {
 					'gx:URL': 'https://aws.amazon.com/service-terms/',
-					'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c'
+					'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c' //pragma: allowlist secret
 				},
 				'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi_policy.json'],
 				'gx:dataAccountExport': {
@@ -1450,7 +1446,7 @@ export const serviceOfferingTestJSON = {
 			credentialSubject: {
 				'gx:termsAndConditions': {
 					'gx:URL': 'https://www.volkswagen.co.uk/en/privacy.html',
-					'gx:hash': 'de6375fa23c25ea4efb79a66b91d3ad6f270614e38622d9e730985f4f159cfa1'
+					'gx:hash': 'de6375fa23c25ea4efb79a66b91d3ad6f270614e38622d9e730985f4f159cfa1' //pragma: allowlist secret
 				},
 				'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_Z5RS_policy.json'],
 				'gx:dataAccountExport': {
@@ -1590,7 +1586,7 @@ export const serviceOfferingTestJSON = {
 				credentialSubject: {
 					'gx:termsAndConditions': {
 						'gx:URL': 'https://aws.amazon.com/service-terms/',
-						'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c'
+						'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c' //pragma: allowlist secret
 					},
 					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi_policy.json'],
 					'gx:dataAccountExport': {
@@ -1635,7 +1631,7 @@ export const serviceOfferingTestJSON = {
 				credentialSubject: {
 					'gx:termsAndConditions': {
 						'gx:URL': 'https://www.volkswagen.co.uk/en/privacy.html',
-						'gx:hash': 'de6375fa23c25ea4efb79a66b91d3ad6f270614e38622d9e730985f4f159cfa1'
+						'gx:hash': 'de6375fa23c25ea4efb79a66b91d3ad6f270614e38622d9e730985f4f159cfa1' //pragma: allowlist secret
 					},
 					'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_Z5RS_policy.json'],
 					'gx:dataAccountExport': {
@@ -1772,7 +1768,7 @@ export const serviceOfferingTestJSON = {
 							credentialSubject: {
 								'gx:termsAndConditions': {
 									'gx:URL': 'https://aws.amazon.com/service-terms/',
-									'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c'
+									'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c' //pragma: allowlist secret
 								},
 								'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi_policy.json'],
 								'gx:dataAccountExport': {
@@ -1817,7 +1813,7 @@ export const serviceOfferingTestJSON = {
 							credentialSubject: {
 								'gx:termsAndConditions': {
 									'gx:URL': 'https://www.volkswagen.co.uk/en/privacy.html',
-									'gx:hash': 'de6375fa23c25ea4efb79a66b91d3ad6f270614e38622d9e730985f4f159cfa1'
+									'gx:hash': 'de6375fa23c25ea4efb79a66b91d3ad6f270614e38622d9e730985f4f159cfa1' //pragma: allowlist secret
 								},
 								'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_Z5RS_policy.json'],
 								'gx:dataAccountExport': {
@@ -1934,7 +1930,7 @@ export const serviceOfferingTestJSON = {
 	transparencyCS: {
 		'gx:termsAndConditions': {
 			'gx:URL': 'https://aws.amazon.com/service-terms/',
-			'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c'
+			'gx:hash': 'e9aedbf8c9b87ecb285a45c84444c72c69c546beb9457daa0e3543edd9b3b76c' //pragma: allowlist secret
 		},
 		'gx:policy': ['https://wizard-api.smart-x.smartsenselabs.com/182af7e9-b10b-42da-95f4-7f8289ec330e/service_0Tbi_policy.json'],
 		'gx:dataAccountExport': {
@@ -1972,27 +1968,27 @@ export const serviceOfferingTestJSON = {
 		fingerprint: 'B9:06:F9:81:01:87:B7:AB:9C:E2:2C:DB:66:D1:3D:00:38:87:1A:2A',
 		fingerprint256: '9C:70:44:CE:74:C7:B0:13:2A:06:FB:C0:BC:4C:0A:DF:FE:3F:4F:EC:61:07:AA:92:F7:B5:D0:EC:46:55:88:7B',
 		keyUsage: ['1.3.6.1.5.5.7.3.1', '1.3.6.1.5.5.7.3.2'],
-		serialNumber: '036DF9E324D9C4BC85836AF4E8F33C676CA5'
+		serialNumber: '036DF9E324D9C4BC85836AF4E8F33C676CA5' //pragma: allowlist secret
 	}
 }
 
 export const legalParticipantTestJSON = {
 	invalidIssuerJSON: {
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidVerificationMethodJSON: {
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidLegalParticipant: {
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidLegalRegistrationNumber: {
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			legalParticipant: {}
 		}
@@ -2000,7 +1996,7 @@ export const legalParticipantTestJSON = {
 	invalidGaiaXTermsAndConditions: {
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			legalParticipant: {},
 			legalRegistrationNumber: {}
@@ -2009,7 +2005,7 @@ export const legalParticipantTestJSON = {
 	validReqJSON: {
 		issuer: 'did:web:casio50.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio50.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			legalParticipant: {
 				'@context': [
@@ -2292,27 +2288,27 @@ export const legalParticipantTestJSON = {
 
 export const resourceTestJSON = {
 	invalidIssuerJSON: {
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidVerificationMethodJSON: {
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidResource: {
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidCredentialSubjectResource: {
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			resource: {}
 		}
 	},
 	invalidResourceType: {
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
 		vcs: {
@@ -2324,7 +2320,7 @@ export const resourceTestJSON = {
 		}
 	},
 	validVirtualDataResourceReqJSON: {
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
 		vcs: {
@@ -2362,7 +2358,7 @@ export const resourceTestJSON = {
 		}
 	},
 	validPhysicalResourceReqJSON: {
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
 		vcs: {
@@ -2419,7 +2415,7 @@ export const resourceTestJSON = {
 		}
 	},
 	validVirtualSoftwareResourceReqJSON: {
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		issuer: 'did:web:casio34.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
 		vcs: {
@@ -2629,36 +2625,36 @@ export const resourceTestJSON = {
 
 export const verifyDIDTestJSON = {
 	invalidDidJSON: {
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidVerificationMethodJSON: {
 		did: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidReq: {
 		did: 'did:web:greenworld.proofsense.in',
 		verificationMethod: 'did:web:casio34.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	validReq: {
 		did: 'did:web:greenworld.proofsense.in',
 		verificationMethod: 'did:web:greenworld.proofsense.in',
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	}
 }
 
 export const labelLevelTestJSON = {
 	invalidIssuerJSON: {
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidVerificationMethodJSON: {
 		issuer: 'did:web:ferrari.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	invalidLabelLevel: {
 		issuer: 'did:web:ferrari.smart-x.smartsenselabs.com',
 		verificationMethod: 'did:web:ferrari.smart-x.smartsenselabs.com',
-		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----'
+		privateKey: 'Base64 -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----' //pragma: allowlist secret
 	},
 	holderDid: {
 		assertionMethod: ['did:web:ferrari.smart-x.smartsenselabs.com#JWK2020-RSA'],
@@ -2671,7 +2667,7 @@ export const labelLevelTestJSON = {
 					e: 'AQAB',
 					x5u: 'https://ferrari.smart-x.smartsenselabs.com/.well-known/x509CertificateChain.pem',
 					alg: 'PS256',
-					n: 'n7HP5FAgJ1YP3ffiw8AU1a0c5qpy4UQD2EsSxDe8EVXmda3bnXUHbKqp7g0Fq_fI52sWdxH1h6THShZwVQkL8N-uuj8m2lB-DzTEXJ9Q2Z2GEUN-3un7O2Sj6ipCsorSGFAwX0rk8Q2eblf5b6Oz5Nc8HL9uxLWY-u5J6GwBZU1xUpnoBXd81WE6tRSmIHlhD3_2iSgfOByrJjAsWoMBLJyiqvVNo5kch10ZQ04FRxK7jY4BwgUjnIHTp_MOzy2DNN8ix9QAIgKTaDzXSJJZinEfNndoNmnjOmrEPJwnVYAyj4wgczdR3ktFfh3uLYr__sZv2z681AztZflWCeNafw'
+					n: 'n7HP5FAgJ1YP3ffiw8AU1a0c5qpy4UQD2EsSxDe8EVXmda3bnXUHbKqp7g0Fq_fI52sWdxH1h6THShZwVQkL8N-uuj8m2lB-DzTEXJ9Q2Z2GEUN-3un7O2Sj6ipCsorSGFAwX0rk8Q2eblf5b6Oz5Nc8HL9uxLWY-u5J6GwBZU1xUpnoBXd81WE6tRSmIHlhD3_2iSgfOByrJjAsWoMBLJyiqvVNo5kch10ZQ04FRxK7jY4BwgUjnIHTp_MOzy2DNN8ix9QAIgKTaDzXSJJZinEfNndoNmnjOmrEPJwnVYAyj4wgczdR3ktFfh3uLYr__sZv2z681AztZflWCeNafw' //pragma: allowlist secret
 				},
 				id: 'did:web:ferrari.smart-x.smartsenselabs.com',
 				type: 'JsonWebKey2020',
@@ -2681,7 +2677,7 @@ export const labelLevelTestJSON = {
 		'@context': ['https://www.w3.org/ns/did/v1']
 	},
 	validReqJSON: {
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			labelLevel: {
 				'@context': [
@@ -3264,7 +3260,7 @@ export const labelLevelTestJSON = {
 		issuer: 'did:web:ferrari.smart-x.smartsenselabs.com'
 	},
 	invalidReqJSON: {
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			labelLevel: {
 				'@context': [
@@ -3847,7 +3843,7 @@ export const labelLevelTestJSON = {
 		issuer: 'did:web:suzuki.smart-x.smartsenselabs.com'
 	},
 	emptyCSReqJSON: {
-		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----',
+		privateKey: 'Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----', //pragma: allowlist secret
 		vcs: {
 			labelLevel: {
 				'@context': [
@@ -4456,562 +4452,562 @@ export const labelLevelTestJSON = {
 	},
 	labelLevelCS: {
 		'gx:criteria': {
-			'P1.1.1': {
+			'gx:P1.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.1.2': {
+			'gx:P1.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.1.3': {
+			'gx:P1.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.1.4': {
+			'gx:P1.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.1': {
+			'gx:P1.2.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.2': {
+			'gx:P1.2.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.3': {
+			'gx:P1.2.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.4': {
+			'gx:P1.2.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.5': {
+			'gx:P1.2.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.6': {
+			'gx:P1.2.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.7': {
+			'gx:P1.2.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.8': {
+			'gx:P1.2.8': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.9': {
+			'gx:P1.2.9': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.10': {
+			'gx:P1.2.10': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.1': {
+			'gx:P1.3.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.2': {
+			'gx:P1.3.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.3': {
+			'gx:P1.3.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.4': {
+			'gx:P1.3.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.5': {
+			'gx:P1.3.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.1': {
+			'gx:P2.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.2': {
+			'gx:P2.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.3': {
+			'gx:P2.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.1': {
+			'gx:P2.2.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.2': {
+			'gx:P2.2.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.3': {
+			'gx:P2.2.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.4': {
+			'gx:P2.2.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.5': {
+			'gx:P2.2.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.6': {
+			'gx:P2.2.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.7': {
+			'gx:P2.2.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.1': {
+			'gx:P2.3.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.2': {
+			'gx:P2.3.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.3': {
+			'gx:P2.3.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.1': {
+			'gx:P3.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.2': {
+			'gx:P3.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.3': {
+			'gx:P3.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.4': {
+			'gx:P3.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.5': {
+			'gx:P3.1.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.6': {
+			'gx:P3.1.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.7': {
+			'gx:P3.1.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.8': {
+			'gx:P3.1.8': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.9': {
+			'gx:P3.1.9': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.10': {
+			'gx:P3.1.10': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.11': {
+			'gx:P3.1.11': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.12': {
+			'gx:P3.1.12': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.13': {
+			'gx:P3.1.13': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.14': {
+			'gx:P3.1.14': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.15': {
+			'gx:P3.1.15': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.16': {
+			'gx:P3.1.16': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.17': {
+			'gx:P3.1.17': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.18': {
+			'gx:P3.1.18': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.19': {
+			'gx:P3.1.19': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.20': {
+			'gx:P3.1.20': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P4.1.1': {
+			'gx:P4.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P4.1.2': {
+			'gx:P4.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.1': {
+			'gx:P5.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.2': {
+			'gx:P5.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.3': {
+			'gx:P5.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.4': {
+			'gx:P5.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.5': {
+			'gx:P5.1.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.6': {
+			'gx:P5.1.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.7': {
+			'gx:P5.1.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.2.1': {
+			'gx:P5.2.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			}
 		},
@@ -5021,553 +5017,553 @@ export const labelLevelTestJSON = {
 	},
 	invalidLabelLevelCS: {
 		'gx:criteria': {
-			'P1.1.1': {
+			'gx:P1.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.1.2': {
+			'gx:P1.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.1.3': {
+			'gx:P1.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.1.4': {
+			'gx:P1.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.1': {
+			'gx:P1.2.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.2': {
+			'gx:P1.2.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.3': {
+			'gx:P1.2.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.4': {
+			'gx:P1.2.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.5': {
+			'gx:P1.2.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.6': {
+			'gx:P1.2.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.7': {
+			'gx:P1.2.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.8': {
+			'gx:P1.2.8': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.9': {
+			'gx:P1.2.9': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.10': {
+			'gx:P1.2.10': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.1': {
+			'gx:P1.3.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.2': {
+			'gx:P1.3.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.3': {
+			'gx:P1.3.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.4': {
+			'gx:P1.3.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.5': {
+			'gx:P1.3.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.1': {
+			'gx:P2.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.2': {
+			'gx:P2.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.3': {
+			'gx:P2.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.1': {
+			'gx:P2.2.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.2': {
+			'gx:P2.2.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.3': {
+			'gx:P2.2.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.4': {
+			'gx:P2.2.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.5': {
+			'gx:P2.2.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.6': {
+			'gx:P2.2.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.7': {
+			'gx:P2.2.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.1': {
+			'gx:P2.3.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.2': {
+			'gx:P2.3.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.3': {
+			'gx:P2.3.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.1': {
+			'gx:P3.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.2': {
+			'gx:P3.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.3': {
+			'gx:P3.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.4': {
+			'gx:P3.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.5': {
+			'gx:P3.1.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.6': {
+			'gx:P3.1.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.7': {
+			'gx:P3.1.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.8': {
+			'gx:P3.1.8': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.9': {
+			'gx:P3.1.9': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.10': {
+			'gx:P3.1.10': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.11': {
+			'gx:P3.1.11': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.12': {
+			'gx:P3.1.12': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.13': {
+			'gx:P3.1.13': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.14': {
+			'gx:P3.1.14': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.15': {
+			'gx:P3.1.15': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.16': {
+			'gx:P3.1.16': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.17': {
+			'gx:P3.1.17': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.18': {
+			'gx:P3.1.18': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.19': {
+			'gx:P3.1.19': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.20': {
+			'gx:P3.1.20': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P4.1.1': {
+			'gx:P4.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P4.1.2': {
+			'gx:P4.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.1': {
+			'gx:P5.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.2': {
+			'gx:P5.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.3': {
+			'gx:P5.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.4': {
+			'gx:P5.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.5': {
+			'gx:P5.1.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.6': {
+			'gx:P5.1.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.7': {
+			'gx:P5.1.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
 			'5.2.1': {
@@ -5576,7 +5572,7 @@ export const labelLevelTestJSON = {
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			}
 		},
@@ -5586,562 +5582,562 @@ export const labelLevelTestJSON = {
 	},
 	labelLevelBC: {
 		'gx:criteria': {
-			'P1.1.1': {
+			'gx:P1.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.1.2': {
+			'gx:P1.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Deny',
+				'gx:response': 'Deny',
 				reason: ''
 			},
-			'P1.1.3': {
+			'gx:P1.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.1.4': {
+			'gx:P1.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.1': {
+			'gx:P1.2.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.2': {
+			'gx:P1.2.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.3': {
+			'gx:P1.2.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.4': {
+			'gx:P1.2.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.5': {
+			'gx:P1.2.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.6': {
+			'gx:P1.2.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.7': {
+			'gx:P1.2.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.8': {
+			'gx:P1.2.8': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.9': {
+			'gx:P1.2.9': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.2.10': {
+			'gx:P1.2.10': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.1': {
+			'gx:P1.3.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.2': {
+			'gx:P1.3.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.3': {
+			'gx:P1.3.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.4': {
+			'gx:P1.3.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P1.3.5': {
+			'gx:P1.3.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.1': {
+			'gx:P2.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.2': {
+			'gx:P2.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.1.3': {
+			'gx:P2.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.1': {
+			'gx:P2.2.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.2': {
+			'gx:P2.2.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.3': {
+			'gx:P2.2.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.4': {
+			'gx:P2.2.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.5': {
+			'gx:P2.2.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.6': {
+			'gx:P2.2.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.2.7': {
+			'gx:P2.2.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.1': {
+			'gx:P2.3.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.2': {
+			'gx:P2.3.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P2.3.3': {
+			'gx:P2.3.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.1': {
+			'gx:P3.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.2': {
+			'gx:P3.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.3': {
+			'gx:P3.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.4': {
+			'gx:P3.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.5': {
+			'gx:P3.1.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.6': {
+			'gx:P3.1.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.7': {
+			'gx:P3.1.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.8': {
+			'gx:P3.1.8': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.9': {
+			'gx:P3.1.9': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.10': {
+			'gx:P3.1.10': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.11': {
+			'gx:P3.1.11': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.12': {
+			'gx:P3.1.12': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.13': {
+			'gx:P3.1.13': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.14': {
+			'gx:P3.1.14': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.15': {
+			'gx:P3.1.15': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.16': {
+			'gx:P3.1.16': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.17': {
+			'gx:P3.1.17': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.18': {
+			'gx:P3.1.18': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.19': {
+			'gx:P3.1.19': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P3.1.20': {
+			'gx:P3.1.20': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P4.1.1': {
+			'gx:P4.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P4.1.2': {
+			'gx:P4.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.1': {
+			'gx:P5.1.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.2': {
+			'gx:P5.1.2': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.3': {
+			'gx:P5.1.3': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.4': {
+			'gx:P5.1.4': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.5': {
+			'gx:P5.1.5': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.6': {
+			'gx:P5.1.6': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.1.7': {
+			'gx:P5.1.7': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			},
-			'P5.2.1': {
+			'gx:P5.2.1': {
 				evidence: {
 					website: '',
 					pdf: {},
 					vc: {}
 				},
-				response: 'Confirm',
+				'gx:response': 'Confirm',
 				reason: ''
 			}
 		},
@@ -6150,3 +6146,23 @@ export const labelLevelTestJSON = {
 		type: 'gx:ServiceOfferingLabel'
 	}
 }
+
+export const mockCertificate = `
+-----BEGIN CERTIFICATE-----
+MIIC8DCCAdigAwIBAgIUL75VSaYzw5PTPVmo0V3e70KncpgwDQYJKoZIhvcNAQEL
+BQAwFDESMBAGA1UEAwwJbG9jYWxob3N0MB4XDTI0MDIyMTA0MjM0NloXDTI0MDMy
+MjA0MjM0NlowFDESMBAGA1UEAwwJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEF
+AAOCAQ8AMIIBCgKCAQEAqnP5hZ2ChVrRg8bou9VVjyJX0QhgRcYfXQPpJBZl6wF8
+HYneuKZL/IzbmuV2OJfyIzJx77GJmTzO7TrpYX5b8D7Gfu1Fegpp5lD05a6z/VVc
+m7TEUQ4prysj7AHRWGQxVbx8rz/3W48GXCX5Q8HaC9mqPRgn8tAgoDOpqhpp6/1h
+onJi8Di2WwGQIhsmDILJL4rDDqnqLiV+VQlhXQptUODzl43Bp4BDih/bjP9tqEB7
+9WIy4RKg9uvJ7RYO4wL0hh4iIS7A3KGstS26B1D/ssKIf6dchJLkpRGBhxKXtlEj
+XJl07wVXh4uYJluQbWuAXHVxKSlRajX33cQReLVThQIDAQABozowODAUBgNVHREE
+DTALgglsb2NhbGhvc3QwCwYDVR0PBAQDAgeAMBMGA1UdJQQMMAoGCCsGAQUFBwMB
+MA0GCSqGSIb3DQEBCwUAA4IBAQA6oq07EQtfemLaw0JdkdaMv51pgsQ3goN8KTMA
+Z0RXhGGk7AZBBBxA3sIxb5ZonWIOyzWP3A9xw1Myvn0z1N2r3nyYZ2nh+sdKKFXw
+UqpxkPTa0h34+Cfi93JRUzgXHnI8shoSxVqe5iTIcJn2wNaG60oFCQxv0bkbdolD
+WHj2QpoQeOVL8Ti1tcuwgBA4xiGQSmEVEk6RpT1ADUiociKgWRcM4Ni/rFXFprGi
+SYQ3tgnr90zCSqL9C+qIBHjabUOXUAGgUHDnf4uy0RzockxRcqbQa9AroD9/Ura9
+OjGl6sHce3jSQiNi9LhwK2dkKGSA7Vh8K69rrgUoMQkIQfcU
+-----END CERTIFICATE-----`

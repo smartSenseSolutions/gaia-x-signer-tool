@@ -217,7 +217,7 @@ class SignerToolController {
 
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
-				complianceCredential: {}
+				complianceCredential
 			}
 
 			res.status(STATUS_CODES.OK).json({

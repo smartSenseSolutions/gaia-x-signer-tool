@@ -186,6 +186,7 @@ class Utils {
 		rsaAlso: string,
 		x5uURL: string
 	) {
+		console.log('====privateKey===>', privateKey)
 		const canonizedSD = await this.normalize(
 			jsonld,
 			// eslint-disable-next-line

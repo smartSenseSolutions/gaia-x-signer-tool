@@ -1331,45 +1331,35 @@
 										"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 										"vcs": {
 											"resource": {
-												"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
-												"isVault": false,
+												"@context": [
+													"https://www.w3.org/2018/credentials/v1",
+													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+												],
 												"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
-												"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
-												"vcs": {
-													"resource": {
-														"@context": [
-															"https://www.w3.org/2018/credentials/v1",
-															"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-														],
-														"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
-														"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_561ef50b-69f1-4d5d-89ba-0c9d0150ff5c.json",
-														"type": ["VerifiableCredential"],
-														"issuanceDate": "2024-09-04T09:47:00.458087652Z",
-														"credentialSubject": {
-															"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_561ef50b-69f1-4d5d-89ba-0c9d0150ff5c.json",
-															"type": "gx:DataResource",
-															"gx:name": "AWS",
-															"gx:description": "Fill the following form to publish your service to the relevant Gaia-X catalogue",
-															"gx:copyrightOwnedBy": [
-																{
-																	"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
-																}
-															],
-															"gx:license": ["https://spdx.org/licenses/Abstyles.html"],
-															"gx:producedBy": {
-																"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
-															},
-															"gx:exposedThrough": {
-																"id": "https://wizard-api.dev.smart-x.smartsenselabs.com/b995aaf1-1502-4f2e-a979-c76ff5754a66/service_v23i.json"
-															},
-															"gx:containsPII": true,
-															"gx:legalBasis": "6.1.[a-f]",
-															"gx:email": "lakhanipinank@gmail.com",
-															"gx:policy": [
-																"https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_policy_3c3599fc-555a-4ca1-b663-2ab57feffdb2.json"
-															]
+												"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_561ef50b-69f1-4d5d-89ba-0c9d0150ff5c.json",
+												"type": ["VerifiableCredential"],
+												"issuanceDate": "2024-09-04T09:47:00.458087652Z",
+												"credentialSubject": {
+													"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_561ef50b-69f1-4d5d-89ba-0c9d0150ff5c.json",
+													"type": "gx:DataResource",
+													"gx:name": "AWS",
+													"gx:description": "Fill the following form to publish your service to the relevant Gaia-X catalogue",
+													"gx:copyrightOwnedBy": [
+														{
+															"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 														}
-													}
+													],
+													"gx:producedBy": {
+														"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
+													},
+													"gx:exposedThrough": {
+														"id": "https://ambuja.dev.smart-x.smartsenselabs.com/2c9317d0-f1b2-451b-a80e-ef40750417ce/service_y66P.json"
+													},
+													"gx:containsPII": true,
+													"gx:license": ["https://spdx.org/licenses/Abstyles.html"],
+													"gx:policy": [
+														"https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_policy_3c3599fc-555a-4ca1-b663-2ab57feffdb2.json"
+													]
 												}
 											}
 										}

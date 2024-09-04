@@ -122,7 +122,7 @@ class SignerToolController {
 			const { resource } = req.body.vcs
 			let { privateKey } = req.body
 
-			logger.debug(__filename, 'Resource', 'Resource Creation', req.body.uuid, JSON.stringify(resource))
+			logger.debug(__filename, 'Resource', 'Resource Creation', req.body.uuid)
 
 			const VC = ['gx:DataResource', 'gx:PhysicalResource', 'gx:SoftwareResource'].includes(resource.credentialSubject.type)
 			if (!VC) {
@@ -145,18 +145,26 @@ class SignerToolController {
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
-			// privateKey = process.env.PRIVATE_KEY as string
+			privateKey = process.env.PRIVATE_KEY as string
 			const vcsMap = new Map()
 			try {
 				switch (resource.credentialSubject.type) {
 					case 'gx:DataResource': {
 						if (resource.credentialSubject['gx:copyrightOwnedBy']) {
+							// A list of copyright owners
 							await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
 						}
 
+						// A resolvable link to the participant
 						if (resource.credentialSubject['gx:producedBy']) {
-							await Utils.getInnerVCs(resource, 'gx:producedBy', ['gx:LegalParticipant'], vcsMap)
+							await Utils.getInnerVC(resource, 'gx:producedBy', ['gx:LegalParticipant'], vcsMap)
 						}
+
+						// A resolvable link to the data exchange component that exposes the data resource. Type ServiceOffering
+						if (resource.credentialSubject['gx:exposedThrough']) {
+							await Utils.getInnerVC(resource, 'gx:exposedThrough', ['gx:ServiceOffering'], vcsMap)
+						}
+
 						break
 					}
 					case 'gx:PhysicalResource': {
@@ -166,6 +174,7 @@ class SignerToolController {
 						if (resource.credentialSubject['gx:ownedBy']) {
 							await Utils.getInnerVCs(resource, 'gx:ownedBy', ['gx:LegalParticipant'], vcsMap)
 						}
+						// A list of resolvable links
 						if (resource.credentialSubject['gx:manufacturedBy']) {
 							await Utils.getInnerVCs(resource, 'gx:manufacturedBy', ['gx:LegalParticipant'], vcsMap)
 						}
@@ -224,7 +233,7 @@ class SignerToolController {
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e: any) {
-			logger.error(__filename, 'Resource', e.message, req.custom.uuid, e)
+			logger.error(__filename, 'Resource', e.message, req.custom.uuid)
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED

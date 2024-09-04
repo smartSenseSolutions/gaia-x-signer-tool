@@ -545,6 +545,21 @@ class Utils {
 		}
 	}
 
+	getInnerVC = async (vc: any, key: string, types: string[], vcsMap: any) => {
+		const response = (await axios.get(vc.credentialSubject[key].id)).data
+		const verifiableCredential = response?.selfDescriptionCredential?.verifiableCredential
+		const type = verifiableCredential && (await this.getVcType(verifiableCredential, vc.credentialSubject[key].id))
+		if (!types.includes(type)) {
+			throw new Error(`${key} VC ID not found or required vc type not found`)
+		}
+		for (const vc of verifiableCredential) {
+			const lpId = vc.credentialSubject.id
+			if (!vcsMap.has(lpId)) {
+				vcsMap.set(lpId, vc)
+			}
+		}
+	}
+
 	getVcType = async (verifiableCredential: any, vcId: string): Promise<string> => {
 		let credentialType = ''
 		verifiableCredential.forEach((e: any) => {

@@ -2352,7 +2352,7 @@ export const resourceTestJSON = {
 						id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
 					},
 					'gx:exposedThrough': ['https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2'],
-					'gx:containsPII': true
+					'gx:containsPII': false
 				}
 			}
 		}
@@ -2482,7 +2482,7 @@ export const resourceTestJSON = {
 									id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
 								},
 								'gx:exposedThrough': ['https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2'],
-								'gx:containsPII': true
+								'gx:containsPII': false
 							},
 							proof: {
 								type: 'JsonWebSignature2020',
@@ -2604,7 +2604,7 @@ export const resourceTestJSON = {
 									id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0'
 								},
 								'gx:exposedThrough': ['https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2'],
-								'gx:containsPII': true
+								'gx:containsPII': false
 							},
 							proof: {
 								type: 'JsonWebSignature2020',

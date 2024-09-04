@@ -1355,7 +1355,7 @@
 													"gx:exposedThrough": {
 														"id": "https://ambuja.dev.smart-x.smartsenselabs.com/2c9317d0-f1b2-451b-a80e-ef40750417ce/service_y66P.json"
 													},
-													"gx:containsPII": true,
+													"gx:containsPII": false,
 													"gx:license": ["https://spdx.org/licenses/Abstyles.html"],
 													"gx:policy": [
 														"https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_policy_3c3599fc-555a-4ca1-b663-2ab57feffdb2.json"
@@ -1495,7 +1495,7 @@
 																		"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 																	},
 																	"gx:exposedThrough": ["https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2"],
-																	"gx:containsPII": true
+																	"gx:containsPII": false
 																},
 																"proof": {
 																	"type": "JsonWebSignature2020",
@@ -1619,7 +1619,7 @@
 																		"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 																	},
 																	"gx:exposedThrough": ["https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2"],
-																	"gx:containsPII": true
+																	"gx:containsPII": false
 																},
 																"proof": {
 																	"type": "JsonWebSignature2020",

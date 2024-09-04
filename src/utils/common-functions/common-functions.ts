@@ -547,7 +547,7 @@ class Utils {
 
 	getVcType = async (verifiableCredential: any, vcId: string): Promise<string> => {
 		let credentialType = ''
-		const vc = verifiableCredential.find((e: any) => {
+		verifiableCredential.forEach((e: any) => {
 			if (Array.isArray(e.credentialSubject)) {
 				return e.credentialSubject.some((subject: any) => {
 					if (subject.id === vcId) {
@@ -562,7 +562,6 @@ class Utils {
 				return e.credentialSubject.id === vcId
 			}
 		})
-		console.log(vc)
 		return credentialType
 	}
 

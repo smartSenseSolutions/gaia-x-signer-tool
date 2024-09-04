@@ -163,13 +163,13 @@
 											"data": {
 												"did": {
 													"@context": ["https://www.w3.org/ns/did/v1"],
-													"id": "did:web:casio34.smart-x.smartsenselabs.com",
+													"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 													"verificationMethod": [
 														{
 															"@context": "https://w3c-ccg.github.io/lds-jws2020/contexts/v1/",
-															"id": "did:web:casio34.smart-x.smartsenselabs.com",
+															"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 															"type": "JsonWebKey2020",
-															"controller": "did:web:casio34.smart-x.smartsenselabs.com",
+															"controller": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 															"publicKeyJwk": {
 																"kty": "RSA",
 																"n": "pn9UgWteejXl2DO41TkAtfYCAO_WFaL9PmImbg7mNCyTwQPwHoZgfXwkr5pW6Xl3Npr7LqfybLwb-sjRVWEj8MJmMWIlXM063WdkA8XTVezNcmyXcM4lgK65OpEKPFiGW1UmvOrif9dPU5MlBuCvMMjZfGsIKDM08snCu_mnFQ77VX0DVtgxg259uEo-W9UHGyYCrh-yZuEzOdsYo985aZ4q7myKI-JO-rwbIb8srHIatCnSjBfHfhVL81n3Slavy_fNc-yLrQbCW756_OPtfNB236y3q5nmW03OFOmEsC5MJFjIwoXptr2DCrX-a_XJlmrrAek_FQkLiqkz0bKFiQ",
@@ -179,7 +179,7 @@
 															}
 														}
 													],
-													"assertionMethod": ["did:web:casio34.smart-x.smartsenselabs.com#JWK2020-RSA"]
+													"assertionMethod": ["did:web:lakhani02.dev.smart-x.smartsenselabs.com#JWK2020-RSA"]
 												}
 											},
 											"message": "DID created successfully."
@@ -191,13 +191,13 @@
 											"data": {
 												"did": {
 													"@context": ["https://www.w3.org/ns/did/v1"],
-													"id": "did:web:casio34.smart-x.smartsenselabs.com",
+													"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 													"verificationMethod": [
 														{
 															"@context": "https://w3c-ccg.github.io/lds-jws2020/contexts/v1/",
-															"id": "did:web:casio34.smart-x.smartsenselabs.com",
+															"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 															"type": "JsonWebKey2020",
-															"controller": "did:web:casio34.smart-x.smartsenselabs.com",
+															"controller": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 															"publicKeyJwk": {
 																"kty": "RSA",
 																"n": "pn9UgWteejXl2DO41TkAtfYCAO_WFaL9PmImbg7mNCyTwQPwHoZgfXwkr5pW6Xl3Npr7LqfybLwb-sjRVWEj8MJmMWIlXM063WdkA8XTVezNcmyXcM4lgK65OpEKPFiGW1UmvOrif9dPU5MlBuCvMMjZfGsIKDM08snCu_mnFQ77VX0DVtgxg259uEo-W9UHGyYCrh-yZuEzOdsYo985aZ4q7myKI-JO-rwbIb8srHIatCnSjBfHfhVL81n3Slavy_fNc-yLrQbCW756_OPtfNB236y3q5nmW03OFOmEsC5MJFjIwoXptr2DCrX-a_XJlmrrAek_FQkLiqkz0bKFiQ",
@@ -207,7 +207,7 @@
 															}
 														}
 													],
-													"assertionMethod": ["did:web:casio34.smart-x.smartsenselabs.com#JWK2020-RSA"]
+													"assertionMethod": ["did:web:lakhani02.dev.smart-x.smartsenselabs.com#JWK2020-RSA"]
 												}
 											},
 											"message": "DID created successfully."
@@ -219,13 +219,13 @@
 											"data": {
 												"did": {
 													"@context": ["https://www.w3.org/ns/did/v1"],
-													"id": "did:web:casio34.smart-x.smartsenselabs.com:smart",
+													"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com:smart",
 													"verificationMethod": [
 														{
 															"@context": "https://w3c-ccg.github.io/lds-jws2020/contexts/v1/",
-															"id": "did:web:casio34.smart-x.smartsenselabs.com:smart",
+															"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com:smart",
 															"type": "JsonWebKey2020",
-															"controller": "did:web:casio34.smart-x.smartsenselabs.com:smart",
+															"controller": "did:web:lakhani02.dev.smart-x.smartsenselabs.com:smart",
 															"publicKeyJwk": {
 																"kty": "RSA",
 																"n": "pn9UgWteejXl2DO41TkAtfYCAO_WFaL9PmImbg7mNCyTwQPwHoZgfXwkr5pW6Xl3Npr7LqfybLwb-sjRVWEj8MJmMWIlXM063WdkA8XTVezNcmyXcM4lgK65OpEKPFiGW1UmvOrif9dPU5MlBuCvMMjZfGsIKDM08snCu_mnFQ77VX0DVtgxg259uEo-W9UHGyYCrh-yZuEzOdsYo985aZ4q7myKI-JO-rwbIb8srHIatCnSjBfHfhVL81n3Slavy_fNc-yLrQbCW756_OPtfNB236y3q5nmW03OFOmEsC5MJFjIwoXptr2DCrX-a_XJlmrrAek_FQkLiqkz0bKFiQ",
@@ -235,7 +235,7 @@
 															}
 														}
 													],
-													"assertionMethod": ["did:web:casio34.smart-x.smartsenselabs.com:smart#JWK2020-RSA"]
+													"assertionMethod": ["did:web:lakhani02.dev.smart-x.smartsenselabs.com:smart#JWK2020-RSA"]
 												}
 											},
 											"message": "DID created successfully."
@@ -247,13 +247,13 @@
 											"data": {
 												"did": {
 													"@context": ["https://www.w3.org/ns/did/v1"],
-													"id": "did:web:casio34.smart-x.smartsenselabs.com",
+													"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 													"verificationMethod": [
 														{
 															"@context": "https://w3c-ccg.github.io/lds-jws2020/contexts/v1/",
-															"id": "did:web:casio34.smart-x.smartsenselabs.com",
+															"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 															"type": "JsonWebKey2020",
-															"controller": "did:web:casio34.smart-x.smartsenselabs.com",
+															"controller": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 															"publicKeyJwk": {
 																"kty": "RSA",
 																"n": "pn9UgWteejXl2DO41TkAtfYCAO_WFaL9PmImbg7mNCyTwQPwHoZgfXwkr5pW6Xl3Npr7LqfybLwb-sjRVWEj8MJmMWIlXM063WdkA8XTVezNcmyXcM4lgK65OpEKPFiGW1UmvOrif9dPU5MlBuCvMMjZfGsIKDM08snCu_mnFQ77VX0DVtgxg259uEo-W9UHGyYCrh-yZuEzOdsYo985aZ4q7myKI-JO-rwbIb8srHIatCnSjBfHfhVL81n3Slavy_fNc-yLrQbCW756_OPtfNB236y3q5nmW03OFOmEsC5MJFjIwoXptr2DCrX-a_XJlmrrAek_FQkLiqkz0bKFiQ",
@@ -263,12 +263,12 @@
 															}
 														}
 													],
-													"assertionMethod": ["did:web:casio34.smart-x.smartsenselabs.com#JWK2020-RSA"],
+													"assertionMethod": ["did:web:lakhani02.dev.smart-x.smartsenselabs.com#JWK2020-RSA"],
 													"service": [
 														{
 															"type": "CredentialRegistry",
 															"serviceEndpoint": "https://ssi.eecc.de/api/registry/vcs",
-															"id": "did:web:casio34.smart-x.smartsenselabs.com#credentialregistry"
+															"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com#credentialregistry"
 														}
 													]
 												}
@@ -503,41 +503,40 @@
 									"value": {
 										"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
 										"isVault": false,
-										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+										"issuer": "did:web:lakhani1993.dev.smart-x.smartsenselabs.com",
+										"verificationMethod": "did:web:lakhani1993.dev.smart-x.smartsenselabs.com",
 										"vcs": {
 											"legalParticipant": {
+												"credentialSubject": {
+													"gx:legalName": "pinank1993",
+													"gx:headquarterAddress": {
+														"gx:countrySubdivisionCode": "AD-07"
+													},
+													"gx:legalAddress": {
+														"gx:countrySubdivisionCode": "AF-FRA"
+													},
+													"id": "https://lakhani1993.dev.smart-x.smartsenselabs.com/9a443f46-275d-4568-a3f6-56811c0f4716/participant.json#0",
+													"type": "gx:LegalParticipant",
+													"gx:legalRegistrationNumber": {
+														"id": "https://lakhani1993.dev.smart-x.smartsenselabs.com/9a443f46-275d-4568-a3f6-56811c0f4716/participant.json#1"
+													}
+												},
 												"@context": [
 													"https://www.w3.org/2018/credentials/v1",
 													"https://w3id.org/security/suites/jws-2020/v1",
 													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 												],
 												"type": ["VerifiableCredential"],
-												"id": "did:web:casio34.smart-x.smartsenselabs.com",
-												"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-												"issuanceDate": "2023-07-28T11:13:53.734Z",
-												"credentialSubject": {
-													"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#0",
-													"type": "gx:LegalParticipant",
-													"gx:legalName": "Green World",
-													"gx:legalRegistrationNumber": {
-														"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1"
-													},
-													"gx:headquarterAddress": {
-														"gx:countrySubdivisionCode": "BE-BRU"
-													},
-													"gx:legalAddress": {
-														"gx:countrySubdivisionCode": "BE-BRU"
-													},
-													"gx:parentOrganization": [{ "id": "https://wizard-api.smart-x.smartsenselabs.com/195f8f7a-e0b9-4105-a94f-911455ff88ac/participant.json#0" }],
-													"gx:subOrganization": [{ "id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0" }]
-												}
+												"id": "https://lakhani1993.dev.smart-x.smartsenselabs.com/9a443f46-275d-4568-a3f6-56811c0f4716/participant.json#0",
+												"issuer": "did:web:lakhani1993.dev.smart-x.smartsenselabs.com",
+												"issuanceDate": "2024-09-02T11:10:56.55791193Z"
 											},
 											"legalRegistrationNumber": {
 												"@context": ["https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/participant"],
 												"type": "gx:legalRegistrationNumber",
-												"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#1",
-												"gx:leiCode": "9695007586GCAKPYJ703"
+												"id": "https://lakhani1993.dev.smart-x.smartsenselabs.com/9a443f46-275d-4568-a3f6-56811c0f4716/participant.json#1",
+												"gx:vatID": "FR79537407926",
+												"gx:vatID-countryCode": "FR"
 											},
 											"gaiaXTermsAndConditions": {
 												"@context": [
@@ -545,16 +544,27 @@
 													"https://w3id.org/security/suites/jws-2020/v1",
 													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 												],
-												"type": ["VerifiableCredential"],
-												"issuanceDate": "2023-07-28T11:13:56.533Z",
 												"credentialSubject": {
-													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
-													"type": "gx:GaiaXTermsAndConditions",
 													"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
-													"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#2"
+													"id": "https://lakhani1993.dev.smart-x.smartsenselabs.com/9a443f46-275d-4568-a3f6-56811c0f4716/participant.json#2",
+													"type": "gx:GaiaXTermsAndConditions",
+													"@context": [
+														"https://www.w3.org/2018/credentials/v1",
+														"https://w3id.org/security/suites/jws-2020/v1",
+														"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+													]
 												},
-												"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-												"id": "did:web:casio34.smart-x.smartsenselabs.com"
+												"id": "https://lakhani1993.dev.smart-x.smartsenselabs.com/9a443f46-275d-4568-a3f6-56811c0f4716/participant.json#2",
+												"issuanceDate": "2024-09-02T11:10:56.55791193Z",
+												"issuer": "did:web:lakhani1993.dev.smart-x.smartsenselabs.com",
+												"type": ["VerifiableCredential"],
+												"proof": {
+													"type": "JsonWebSignature2020",
+													"created": "2024-09-03T08:46:39.503Z",
+													"proofPurpose": "assertionMethod",
+													"verificationMethod": "did:web:lakhani1993.dev.smart-x.smartsenselabs.com#JWK2020-RSA",
+													"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..dY89JSGQNYZ87I9dhCmXH_6Px55KKnOCho1JEE_Lww49DS6_x92FoSZEPTIAj3Ud7SxfOoYElTohQtYgXrwEFhVbityCoIoJWxwPGqKjy_VmZUqO5IkcJSpjqSBVgDOtSz4qyNUm_oVx0RDYom6_MizF7ps_5fHEyX-w4LX1lpmOX-rly2LWshypP-LdEXSH-D_5kg3kRpv1ijfMYhdbIwT2mgAhuExJyeBP71z2gJe7TcHB_5UhnKZ5Gsjmm6DzXHMefMYtAUYAgCHWWwm424tRQaoNIaHD0YOBW8WT6lD6kmfkO-eLS0SPMBLI57dnKkNCq5n0UFE5Xa7fSbOEtA"
+												}
 											}
 										}
 									}
@@ -588,8 +598,8 @@
 																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 																],
 																"type": ["VerifiableCredential"],
-																"id": "did:web:casio34.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-07-28T11:13:53.734Z",
 																"credentialSubject": {
 																	"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#0",
@@ -611,7 +621,7 @@
 																	],
 																	"gx:subOrganization": [
 																		{
-																			"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+																			"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 																		}
 																	]
 																},
@@ -619,7 +629,7 @@
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-19T11:07:31.275Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..DPmHzvvn0UbRmGzvmfI404yAMtqlZA-Ieiag9J3OUr6dJtGU2OyYRr37hMjTJf4Q7ersIaNfaGaD71mFInJPIPhj1pMsUNSRNOSOYt6oszZFBB-MjCRqsFPZXMhYQWO05V_WFT9SULDcKDuekykMn-zHxHHpClNokqUeLzxskJsAGo01sT6Sm_8nuSWIiskUdVFKTuqN6SuE-62N4npZoAuFIugt-PKC4-Q1stHTK5UJbVR4NlsllqRGjYhJfr7piEd5hW2iuq9q_X24x3L-9qaBJcISAau-qE1yNs8LOEw3tAp6XyKSIl3LxVoEpnj3RVWhak2qUlA86ot86y46kA"
 																}
 															},
@@ -665,13 +675,13 @@
 																	"gx:termsAndConditions": "The PARTICIPANT signing the Self-Description agrees as follows:\n- to update its descriptions about any changes, be it technical, organizational, or legal - especially but not limited to contractual in regards to the indicated attributes present in the descriptions.\n\nThe keypair used to sign Verifiable Credentials will be revoked where Gaia-X Association becomes aware of any inaccurate statements in regards to the claims which result in a non-compliance with the Trust Framework and policy rules defined in the Policy Rules and Labelling Document (PRLD).",
 																	"id": "https://casio34.smart-x.smartsenselabs.com/d3ef8323-5a75-4a88-a97b-730deb535405/participant.json#2"
 																},
-																"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-																"id": "did:web:casio34.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"proof": {
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-19T11:07:33.146Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..M4DLA5IBQgKOsbX91NDyEMtCMyBvxx6uf5nWCFgnkA1bIQvYTaECACHsi5Ns0q11jplfYPj4p8_IoR1jPpoyKQsvy_XXL6j31XiiKGBTKjTNnKT4kbcwO14Az_02pig3qDjJoeXTiu5ZlR5CEZKQgRFiDO58OSEMaLDs1VfJTlQaZ6RaUoMqhezjkl7ydbfZlVk5Vtat2EbLm-OX7E4nKuDWMn_FQ-6K2kY7kWy59aw1m77WLE55q6f9NUabPJ9HqhW2_xhSP_ZAT7bDFp5wTeC1aaIywVuNzBZfcZ4qcuVjNgcXMPYGKvq9Mh-KGOd2CtuXA9MZ7GIS53suopPDuw"
 																}
 															},
@@ -772,7 +782,7 @@
 																	"gx:legalAddress": {
 																		"gx:countrySubdivisionCode": "BE-BRU"
 																	},
-																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
+																	"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0",
 																	"type": "gx:LegalParticipant",
 																	"gx:legalRegistrationNumber": {
 																		"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1"
@@ -784,14 +794,14 @@
 																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 																],
 																"type": ["VerifiableCredential"],
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
 																"proof": {
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-07T10:34:33.838Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..btTzZ3J0O-DcSe8rumxVLBF1jIrHFmonLQ8FWgvrl0ueQGt9VOnRZF5RFN6fHm7Sgx2N4O9EdTFwvV5II-l4nLKK6qHd_f97zNsonL7BRxQ0RB4GpbE6m0pR_XljCzKIQG6RZVyZTAeOdsyWBzGm1M_2hnmTLkBMB33GAJW8fI1d_ou4KbxUfkPiFCfnTUPM3uP5WXGuqC2XqUInL5NJKFZGD6Ld1l6PzPqEGYn-m1UCGQyh6w7l-2NVRT-FHpo3_HHY-xU7RX2F7tDZffCOTbOeiV15xktZWj233BFrcvhBHZ0a14IfifTVFUH0GYmwUPMF1BSS7LCNldFetkcCWQ"
 																}
 															},
@@ -839,15 +849,15 @@
 																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2",
 																	"type": "gx:GaiaXTermsAndConditions"
 																},
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"type": ["VerifiableCredential"],
 																"proof": {
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-07T10:34:34.513Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SWXsvdPCdnLCnVIkO1cYRca1JMGk0qLVvyW8-cqeHBHn7PbAL0grpW3X0ZyMekncWgJ0-vXBaSdre1OfLSbBXZgpxgqha8OKaCMGqqbSC4IYMmuUeUOvZ_pIAyabFy6OHc45Sm3YT3os7xezF6rl5Kbwn-_nPSZE0izAv269at9Gs_aYUE79UTLyX-_Its4gadRuDdcAhznsrHx4rbNpX9kNh_389zB_lu1lTlt2VqjXBYnbMbknW9-k3lVZZm6giVFxa3fNEAh-1x30-ZdmOs8KNS8mWNl_8SFSE0bmN4BB-3J91bG2aZ8G9GWzu4x3lI-1WmlnEDj5WhaE69Dq0A"
 																}
 															}
@@ -903,7 +913,7 @@
 															},
 															{
 																"type": "gx:compliance",
-																"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
+																"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0",
 																"integrity": "sha256-372994ed4b18b7f4252626a48c510aa170cb3a04717d2501ccf1982ed85a9b12",
 																"version": "22.10"
 															},
@@ -991,7 +1001,7 @@
 																	"gx:legalAddress": {
 																		"gx:countrySubdivisionCode": "BE-BRU"
 																	},
-																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
+																	"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0",
 																	"type": "gx:LegalParticipant",
 																	"gx:legalRegistrationNumber": {
 																		"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1"
@@ -1003,14 +1013,14 @@
 																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 																],
 																"type": ["VerifiableCredential"],
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
 																"proof": {
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-07T10:34:33.838Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..btTzZ3J0O-DcSe8rumxVLBF1jIrHFmonLQ8FWgvrl0ueQGt9VOnRZF5RFN6fHm7Sgx2N4O9EdTFwvV5II-l4nLKK6qHd_f97zNsonL7BRxQ0RB4GpbE6m0pR_XljCzKIQG6RZVyZTAeOdsyWBzGm1M_2hnmTLkBMB33GAJW8fI1d_ou4KbxUfkPiFCfnTUPM3uP5WXGuqC2XqUInL5NJKFZGD6Ld1l6PzPqEGYn-m1UCGQyh6w7l-2NVRT-FHpo3_HHY-xU7RX2F7tDZffCOTbOeiV15xktZWj233BFrcvhBHZ0a14IfifTVFUH0GYmwUPMF1BSS7LCNldFetkcCWQ"
 																}
 															},
@@ -1058,22 +1068,22 @@
 																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2",
 																	"type": "gx:GaiaXTermsAndConditions"
 																},
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"type": ["VerifiableCredential"],
 																"proof": {
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-07T10:34:34.513Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SWXsvdPCdnLCnVIkO1cYRca1JMGk0qLVvyW8-cqeHBHn7PbAL0grpW3X0ZyMekncWgJ0-vXBaSdre1OfLSbBXZgpxgqha8OKaCMGqqbSC4IYMmuUeUOvZ_pIAyabFy6OHc45Sm3YT3os7xezF6rl5Kbwn-_nPSZE0izAv269at9Gs_aYUE79UTLyX-_Its4gadRuDdcAhznsrHx4rbNpX9kNh_389zB_lu1lTlt2VqjXBYnbMbknW9-k3lVZZm6giVFxa3fNEAh-1x30-ZdmOs8KNS8mWNl_8SFSE0bmN4BB-3J91bG2aZ8G9GWzu4x3lI-1WmlnEDj5WhaE69Dq0A"
 																}
 															},
 															{
 																"type": "VerifiableCredential",
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-10T13:13:12.552192251Z",
 																"credentialSubject": {
 																	"gx:termsAndConditions": {
@@ -1105,7 +1115,7 @@
 																	"gx:dataProtectionRegime": "GDPR2016",
 																	"type": "gx:ServiceOffering",
 																	"gx:providedBy": {
-																		"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+																		"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 																	},
 																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_tc3p.json"
 																},
@@ -1114,14 +1124,14 @@
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-16T05:48:51.843Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..QDIhZIb-l-wdyZJiiDpJXD0eGJ06w6vrnCCw2ct_fOXD3PwLhnb7YZ0CmfXE0etX9fARFk6bXR9hAF3VAeZo3BJlm9P4gcJ3QeMNKRvPOc643Ta9UA2bU4cRW2aVw1YOs-dVUnbRY0VLE0uhHxIRx-0Ssqnydsin6pbWRIYgR-bI7XcFT3lOzPZAhyU6K3ybbVPJE7hHvm-g49u_r398svdcoAM1Nw5OaPMRmAt73ZP-Z2ygAJR0Jlvsi62higytfuS672jhk0Idyb2PckCV157AVh2GJIFIP2716fX4H7AMzgSYFcJ2oQTq3LrDS18eGJwG5NEH0enkXqS6tPZYCA"
 																}
 															},
 															{
 																"type": "VerifiableCredential",
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-08T11:27:35.542Z",
 																"credentialSubject": {
 																	"gx:termsAndConditions": {
@@ -1147,14 +1157,14 @@
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-08T11:27:39.660Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..NRX1pJRgbrwmA3jnqSkeGX65BpMXK2BnN5bKnWcEN6ir7UgGEZrkDvHlbzwVtbqgb-sKzFsDm2iEbXW9VJHjB6iO-inAMqFeH-lJjKHe9cVMmvFy6enjeuiJrlfvBq7jLE_qU57lAhSMMNFVJ-lJtcnPSCKQuH99Dg1OsY0dnw_jWQEwQZBth25v0BTb9i3UaMQ6qkZuUlQG6Ukm46DnYhy_5ZfzlrcPV9VwqHsJOMem6SWoodhgfKSM_E8AAAM6Cn3VEljAMGb3GsmLE21GzSei7mZ9CIKfLzReygRjJsVXV9Eis1fZkMn5WMf06xSugQRlsnDtPy0YR5oK1TfIWQ"
 																}
 															},
 															{
 																"type": "VerifiableCredential",
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-08T11:29:26.389Z",
 																"credentialSubject": {
 																	"gx:termsAndConditions": {
@@ -1180,7 +1190,7 @@
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-08T11:29:30.054Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..aPp616viJ513iRXLe2rb5Z3uF4RvghlirrijmeMeBLu5ML7xJenPmpvuAP0qQ8xat9cWjWdBqmEOJ2tnUzPP1Qq1k1mDRYU5n42eaxVDEflDP4yrRMsAEYWZkrb-iMCGa6q-ivh0a9GGkOhLmZcHzN8XLZHhPkqz_eZ4PgP3UVlOsNpMIZFf3J_mCVkEhsIDZe03qU6vc7-japiI4NtJzeUlzyHHKhTuaiRCE87ac7_0D1oQPkll6eFY-50peLiFq_2NjPsNCdW1p7rtqoZSDwuy7_TJ7RT1mBlem4AIumtddBNmkcnvZm5zdADnRzRjJBJZI7O4JSylM3Xo0aB6fA"
 																}
 															}
@@ -1200,7 +1210,7 @@
 														"credentialSubject": [
 															{
 																"type": "gx:compliance",
-																"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
+																"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0",
 																"integrity": "sha256-372994ed4b18b7f4252626a48c510aa170cb3a04717d2501ccf1982ed85a9b12",
 																"version": "22.10"
 															},
@@ -1313,45 +1323,53 @@
 								"$ref": "#/components/schemas/OnBoardGaiaXSchemaBody"
 							},
 							"examples": {
-								"VirtualDataResource": {
+								"DataResource": {
 									"value": {
 										"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
 										"isVault": false,
-										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+										"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+										"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 										"vcs": {
 											"resource": {
-												"@context": [
-													"https://www.w3.org/2018/credentials/v1",
-													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-												],
-												"type": ["VerifiableCredential"],
-												"id": "did:web:casio34.smart-x.smartsenselabs.com",
-												"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-												"issuanceDate": "2023-08-07T16:04:30.307219451Z",
-												"credentialSubject": {
-													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
-													"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json",
-													"type": "gx:VirtualDataResource",
-													"gx:name": "Test Resource 2",
-													"gx:description": "Test Resource 2 description",
-													"gx:aggregationOf": [
-														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json"
+												"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
+												"isVault": false,
+												"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+												"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+												"vcs": {
+													"resource": {
+														"@context": [
+															"https://www.w3.org/2018/credentials/v1",
+															"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+														],
+														"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+														"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_561ef50b-69f1-4d5d-89ba-0c9d0150ff5c.json",
+														"type": ["VerifiableCredential"],
+														"issuanceDate": "2024-09-04T09:47:00.458087652Z",
+														"credentialSubject": {
+															"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_561ef50b-69f1-4d5d-89ba-0c9d0150ff5c.json",
+															"type": "gx:DataResource",
+															"gx:name": "AWS",
+															"gx:description": "Fill the following form to publish your service to the relevant Gaia-X catalogue",
+															"gx:copyrightOwnedBy": [
+																{
+																	"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
+																}
+															],
+															"gx:license": ["https://spdx.org/licenses/Abstyles.html"],
+															"gx:producedBy": {
+																"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
+															},
+															"gx:exposedThrough": {
+																"id": "https://wizard-api.dev.smart-x.smartsenselabs.com/b995aaf1-1502-4f2e-a979-c76ff5754a66/service_v23i.json"
+															},
+															"gx:containsPII": true,
+															"gx:legalBasis": "6.1.[a-f]",
+															"gx:email": "lakhanipinank@gmail.com",
+															"gx:policy": [
+																"https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_policy_3c3599fc-555a-4ca1-b663-2ab57feffdb2.json"
+															]
 														}
-													],
-													"gx:copyrightOwnedBy": [
-														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
-														}
-													],
-													"gx:license": ["http://smartproof.in/.well-known/license"],
-													"gx:policy": ["https://example.com"],
-													"gx:producedBy": {
-														"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
-													},
-													"gx:exposedThrough": ["https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2"],
-													"gx:containsPII": true
+													}
 												}
 											}
 										}
@@ -1361,99 +1379,74 @@
 									"value": {
 										"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
 										"isVault": false,
-										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+										"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+										"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 										"vcs": {
 											"resource": {
 												"@context": [
 													"https://www.w3.org/2018/credentials/v1",
+													"http://www.w3.org/2006/vcard/ns#",
 													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 												],
+												"id": "https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_17a4e1c0-8bf4-4b78-84c6-673fe9ab5d0f.json",
 												"type": ["VerifiableCredential"],
-												"id": "did:web:casio50.smart-x.smartsenselabs.com",
-												"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
-												"issuanceDate": "2023-08-07T16:04:30.307219451Z",
+												"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+												"issuanceDate": "2024-09-04T09:42:59.115876414Z",
 												"credentialSubject": {
-													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
-													"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json",
+													"id": "https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_17a4e1c0-8bf4-4b78-84c6-673fe9ab5d0f.json",
 													"type": "gx:PhysicalResource",
-													"gx:name": "Test Resource 2",
-													"gx:description": "Test Resource 2 description",
-													"gx:aggregationOf": [
-														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json"
-														}
-													],
+													"gx:name": "AWS",
+													"gx:description": "Fill the following form to publish your service to the relevant Gaia-X catalogue",
 													"gx:maintainedBy": [
 														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
-														}
-													],
-													"gx:ownedBy": [
-														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
-														}
-													],
-													"gx:manufacturedBy": [
-														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+															"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 														}
 													],
 													"gx:locationAddress": [
 														{
-															"gx:countryCode": "FR-DE"
-														},
-														{
-															"gx:countryCode": "AA-DE"
+															"@type": "vcard:Address",
+															"vcard:postal-code": "12345",
+															"vcard:street-address": "123 Main St",
+															"gx:countryCode": "US"
 														}
 													],
-													"gx:location": [
-														{
-															"gx:gps": "35.89421911 139.94637467"
-														},
-														{
-															"gx:gps": "31.89421911 133.94637467"
-														}
-													]
+													"gx:location": ["35.89421911 139.94637467"]
 												}
 											}
 										}
 									}
 								},
-								"VirtualSoftwareResource": {
+								"SoftwareResource": {
 									"value": {
 										"privateKey": "Vault Key || Base64 Encoded -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
 										"isVault": false,
-										"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
-										"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+										"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+										"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 										"vcs": {
 											"resource": {
 												"@context": [
 													"https://www.w3.org/2018/credentials/v1",
+													"http://www.w3.org/2006/vcard/ns#",
 													"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 												],
+												"id": "https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_d7d8b214-4748-40ba-9d0e-81de050766d5.json",
 												"type": ["VerifiableCredential"],
-												"id": "did:web:casio50.smart-x.smartsenselabs.com",
-												"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
-												"issuanceDate": "2023-08-07T16:04:30.307219451Z",
+												"issuanceDate": "2024-09-04T09:45:22.716062352Z",
+												"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 												"credentialSubject": {
-													"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
-													"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json",
-													"type": "gx:VirtualSoftwareResource",
-													"gx:name": "Test Resource 2",
-													"gx:description": "Test Resource 2 description",
-													"gx:aggregationOf": [
-														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json"
-														}
-													],
+													"id": "https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_d7d8b214-4748-40ba-9d0e-81de050766d5.json",
+													"type": "gx:SoftwareResource",
+													"gx:name": "AWS",
+													"gx:description": "Fill the following form to publish your service to the relevant Gaia-X catalogue",
 													"gx:copyrightOwnedBy": [
 														{
-															"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+															"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 														}
 													],
-													"gx:license": ["https://wizard-api.smart-x.smartsenselabs.com/license"],
-													"gx:policy": ["https://example.com"]
+													"gx:license": ["https://spdx.org/licenses/Abstyles.html"],
+													"gx:policy": [
+														"https://wizard-api.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/resource_policy_81081183-aa29-4831-9958-d92aa40a8891.json"
+													]
 												}
 											}
 										}
@@ -1472,7 +1465,7 @@
 									"$ref": "#/components/schemas/SuccessSchemaResponse"
 								},
 								"examples": {
-									"VirtualDataResource": {
+									"DataResource": {
 										"summary": "Resource created successfully",
 										"value": {
 											"data": {
@@ -1487,13 +1480,13 @@
 																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 																],
 																"type": ["VerifiableCredential"],
-																"id": "did:web:casio34.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
 																"credentialSubject": {
 																	"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
 																	"id": "https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json",
-																	"type": "gx:VirtualDataResource",
+																	"type": "gx:DataResource",
 																	"gx:name": "Test Resource 2",
 																	"gx:description": "Test Resource 2 description",
 																	"gx:aggregationOf": [
@@ -1503,13 +1496,13 @@
 																	],
 																	"gx:copyrightOwnedBy": [
 																		{
-																			"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+																			"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 																		}
 																	],
 																	"gx:license": ["http://smartproof.in/.well-known/license"],
 																	"gx:policy": ["https://example.com"],
 																	"gx:producedBy": {
-																		"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+																		"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 																	},
 																	"gx:exposedThrough": ["https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2"],
 																	"gx:containsPII": true
@@ -1518,7 +1511,7 @@
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-19T11:12:58.984Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..ZrXhSmUDGhAIBfSYQdpOe2lfkKue_U_d2cORJtKH-q_yE8v5DC8-_zsP-YS0hSz2Etl4MM1zMZJkZqBA4NOx6HNQEsJYPz_sh_ghy1uy1iHQEo78potnZOqea1cuGKLxmfA5xukHYvlAzQmXIGZrb5XlREdtn0Jv50Vb_XUPvCxk2-e4BlvfmFtDuRmkZE3dLo4Dx6fzW15aXoS328gw25pR2A0NzaMBrUJu1VL3sapcvB2gjwX-irDHHh423KVuzgPIBpru1eA1rPJxLd6nCs2Y9HrlXf_656DM00cM1bv7WkG_3IxjOUvJmfGPbxRXOyYCXPOjIzkSMFoFm2JB7g"
 																}
 															},
@@ -1531,7 +1524,7 @@
 																	"gx:legalAddress": {
 																		"gx:countrySubdivisionCode": "BE-BRU"
 																	},
-																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0",
+																	"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0",
 																	"type": "gx:LegalParticipant",
 																	"gx:legalRegistrationNumber": {
 																		"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#1"
@@ -1543,14 +1536,14 @@
 																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 																],
 																"type": ["VerifiableCredential"],
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
 																"proof": {
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-07T10:34:33.838Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..btTzZ3J0O-DcSe8rumxVLBF1jIrHFmonLQ8FWgvrl0ueQGt9VOnRZF5RFN6fHm7Sgx2N4O9EdTFwvV5II-l4nLKK6qHd_f97zNsonL7BRxQ0RB4GpbE6m0pR_XljCzKIQG6RZVyZTAeOdsyWBzGm1M_2hnmTLkBMB33GAJW8fI1d_ou4KbxUfkPiFCfnTUPM3uP5WXGuqC2XqUInL5NJKFZGD6Ld1l6PzPqEGYn-m1UCGQyh6w7l-2NVRT-FHpo3_HHY-xU7RX2F7tDZffCOTbOeiV15xktZWj233BFrcvhBHZ0a14IfifTVFUH0GYmwUPMF1BSS7LCNldFetkcCWQ"
 																}
 															},
@@ -1598,15 +1591,15 @@
 																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#2",
 																	"type": "gx:GaiaXTermsAndConditions"
 																},
-																"id": "did:web:casio50.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
-																"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"type": ["VerifiableCredential"],
 																"proof": {
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-07T10:34:34.513Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..SWXsvdPCdnLCnVIkO1cYRca1JMGk0qLVvyW8-cqeHBHn7PbAL0grpW3X0ZyMekncWgJ0-vXBaSdre1OfLSbBXZgpxgqha8OKaCMGqqbSC4IYMmuUeUOvZ_pIAyabFy6OHc45Sm3YT3os7xezF6rl5Kbwn-_nPSZE0izAv269at9Gs_aYUE79UTLyX-_Its4gadRuDdcAhznsrHx4rbNpX9kNh_389zB_lu1lTlt2VqjXBYnbMbknW9-k3lVZZm6giVFxa3fNEAh-1x30-ZdmOs8KNS8mWNl_8SFSE0bmN4BB-3J91bG2aZ8G9GWzu4x3lI-1WmlnEDj5WhaE69Dq0A"
 																}
 															},
@@ -1616,24 +1609,24 @@
 																	"https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
 																],
 																"type": ["VerifiableCredential"],
-																"id": "did:web:casio34.smart-x.smartsenselabs.com",
-																"issuer": "did:web:casio34.smart-x.smartsenselabs.com",
+																"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+																"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																"issuanceDate": "2023-08-07T16:04:30.307219451Z",
 																"credentialSubject": {
 																	"@context": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
 																	"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json",
-																	"type": "gx:VirtualDataResource",
+																	"type": "gx:DataResource",
 																	"gx:name": "Test Resource 2",
 																	"gx:description": "Test Resource 2 description",
 																	"gx:copyrightOwnedBy": [
 																		{
-																			"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+																			"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 																		}
 																	],
 																	"gx:license": ["http://smartproof.in/.well-known/license"],
 																	"gx:policy": ["https://example.com"],
 																	"gx:producedBy": {
-																		"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+																		"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 																	},
 																	"gx:exposedThrough": ["https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2"],
 																	"gx:containsPII": true
@@ -1642,7 +1635,7 @@
 																	"type": "JsonWebSignature2020",
 																	"created": "2023-08-18T06:32:44.671Z",
 																	"proofPurpose": "assertionMethod",
-																	"verificationMethod": "did:web:casio34.smart-x.smartsenselabs.com",
+																	"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 																	"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..pHopKLDdKeTFLwPDAHk9S54JJyl-4EaUWJL1BtEVCIbmLbTAX33UbYYiBAVwJIteZrDKPLeh4t3Rx2V2EWtlchBiMDT_8so24EBoo-iUiDehBgLeA6ugGFizBF5ZvCleL2EDmRqW7VqKWHwsjA3z33DCb5TSChi9WLO6iOrZU_lntJr-d_fn_ATUy1Ij4DddhZSMGvnoc-OEhWk9PmDEFhiL8pm0RYMIX46BEYfbW_CWbgHOTDsXJk67G6Rgj-xv7rcQpZ56WBbX96Y6fZYGeFIK6NMeaOFB6S13v42FLV0qQUTToWb3GyhRfe4AelUD8Semiiix0QrWeeLmBIX0qA"
 																}
 															}
@@ -2357,7 +2350,7 @@
 														"type": "JsonWebSignature2020",
 														"created": "2023-08-21T12:03:29.744Z",
 														"proofPurpose": "assertionMethod",
-														"verificationMethod": "did:web:casio50.smart-x.smartsenselabs.com",
+														"verificationMethod": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 														"jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..GTjbMHPjwRS4HA2sXncGqdxKEEH85z_aDlQdz7lSBeAQ3EIck9tcornqJIbM94TsCdoOL39gPWOnXOpg4qTSBgkLqowy3P0LB40VBlROCz5-isooeEmdCAmVevOearDQY3TaiV2e18QJIGTi52gtuvPlnBTJSHdffq2Kl2q-lka27nBXrN5Tc1L1zWfiN8Pi5pQbD38M2g78FRJxKYi2OoPCnuyYLQdzaU5GHfNqYH8vLAoeWyHBBdfdHe6Ryjl-UPX2epzzteczXixCfkGLtSrGxE9KLy4mDYv7K1BD3tj2WEFVI0W3hCjhQXrcoVuxehj5IckcHgSqsArTXtsLcg"
 													}
 												},
@@ -2523,11 +2516,11 @@
 				"properties": {
 					"did": {
 						"type": "string",
-						"example": "did:web:casio34.smart-x.smartsenselabs.com"
+						"example": "did:web:lakhani02.dev.smart-x.smartsenselabs.com"
 					},
 					"verificationMethod": {
 						"type": "string",
-						"example": "did:web:casio34.smart-x.smartsenselabs.com"
+						"example": "did:web:lakhani02.dev.smart-x.smartsenselabs.com"
 					},
 					"privateKey": {
 						"type": "string",
@@ -2584,19 +2577,19 @@
 					"isVault": { "type": "boolean", "example": "false" },
 					"issuer": {
 						"type": "string",
-						"example": "did:web:casio50.smart-x.smartsenselabs.com"
+						"example": "did:web:lakhani02.dev.smart-x.smartsenselabs.com"
 					},
 					"verificationMethod": {
 						"type": "string",
-						"example": "did:web:casio50.smart-x.smartsenselabs.com"
+						"example": "did:web:lakhani02.dev.smart-x.smartsenselabs.com"
 					},
 					"vcs": {
 						"type": "object",
 						"example": {
 							"serviceOffering": {
 								"type": "VerifiableCredential",
-								"id": "did:web:casio50.smart-x.smartsenselabs.com",
-								"issuer": "did:web:casio50.smart-x.smartsenselabs.com",
+								"id": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
+								"issuer": "did:web:lakhani02.dev.smart-x.smartsenselabs.com",
 								"issuanceDate": "2023-08-10T13:13:12.552192251Z",
 								"credentialSubject": {
 									"gx:termsAndConditions": {
@@ -2628,7 +2621,7 @@
 									"gx:dataProtectionRegime": "GDPR2016",
 									"type": "gx:ServiceOffering",
 									"gx:providedBy": {
-										"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/participant.json#0"
+										"id": "https://lakhani02.dev.smart-x.smartsenselabs.com/0ae2975f-367a-4cf5-920f-1bef6c32f252/participant.json#0"
 									},
 									"id": "https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/service_tc3p.json"
 								},
@@ -2683,11 +2676,11 @@
 					"isVault": { "type": "boolean", "example": "false" },
 					"issuer": {
 						"type": "string",
-						"example": "did:web:casio50.smart-x.smartsenselabs.com"
+						"example": "did:web:lakhani02.dev.smart-x.smartsenselabs.com"
 					},
 					"verificationMethod": {
 						"type": "string",
-						"example": "did:web:casio50.smart-x.smartsenselabs.com"
+						"example": "did:web:lakhani02.dev.smart-x.smartsenselabs.com"
 					},
 					"vcs": {
 						"type": "object",

@@ -8,7 +8,9 @@
 		"detect-secrets": "detect-secrets-launcher **/*.ts",
 		"lint:check": "eslint \"./src/**/*.ts\"",
 		"lint:fix": "eslint --fix .",
-		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+		"dev:tsc": "tsc -w",
+		"dev:node": "nodemon -q dist/server.js",
+		"dev": "npm run lint:check && concurrently npm:dev:*",
 		"test": "jest",
 		"coverage": "jest --coverage",
 		"prepare": "husky install"

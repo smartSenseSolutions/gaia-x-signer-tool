@@ -103,9 +103,6 @@ class SignerToolController {
 			logger.error(__filename, 'GXLegalParticipant', error.message, req.custom.uuid)
 			if (error.response) {
 				// If server responded with a status code for a request
-				// console.log('Data', error.response.data)
-				// console.log('Status', error.response.status)
-				// console.log('Headers', error.response.headers)
 				res.status(error.response.status).json({
 					error: error.response.data,
 					message: AppMessages.VP_FAILED
@@ -127,16 +124,11 @@ class SignerToolController {
 
 			logger.debug(__filename, 'Resource', 'Resource Creation', req.body.uuid, JSON.stringify(resource))
 
-			const VC = ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'].includes(resource.credentialSubject.type)
+			const VC = ['gx:DataResource', 'gx:PhysicalResource', 'gx:SoftwareResource'].includes(resource.credentialSubject.type)
 			if (!VC) {
-				logger.error(
-					__filename,
-					'Verify',
-					`❌ Verifiable Credential doesn't have type 'gx:VirtualDataResource' or  'gx:PhysicalResource' or 'gx:VirtualSoftwareResource'`,
-					req.custom.uuid
-				)
+				logger.error(__filename, 'Verify', `❌ Verifiable Credential doesn't have type 'gx:DataResource' or  'gx:PhysicalResource' or 'gx:SoftwareResource'`, req.custom.uuid)
 				res.status(STATUS_CODES.UNPROCESSABLE_ENTITY).json({
-					error: `VC with type 'gx:VirtualDataResource' or 'gx:PhysicalResource' or 'gx:VirtualSoftwareResource' not found!!`,
+					error: `VC with type 'gx:DataResource' or 'gx:PhysicalResource' or 'gx:SoftwareResource' not found!!`,
 					message: AppMessages.VP_FAILED
 				})
 				return
@@ -157,7 +149,7 @@ class SignerToolController {
 			const vcsMap = new Map()
 			try {
 				switch (resource.credentialSubject.type) {
-					case 'gx:VirtualDataResource': {
+					case 'gx:DataResource': {
 						if (resource.credentialSubject['gx:copyrightOwnedBy']) {
 							await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
 						}
@@ -179,7 +171,7 @@ class SignerToolController {
 						}
 						break
 					}
-					case 'gx:VirtualSoftwareResource': {
+					case 'gx:SoftwareResource': {
 						if (resource.credentialSubject['gx:copyrightOwnedBy']) {
 							await Utils.getInnerVCs(resource, 'gx:copyrightOwnedBy', ['gx:LegalParticipant'], vcsMap)
 						}
@@ -188,7 +180,7 @@ class SignerToolController {
 				}
 
 				if (resource.credentialSubject['gx:aggregationOf']) {
-					await Utils.getInnerVCs(resource, 'gx:aggregationOf', ['gx:VirtualDataResource', 'gx:PhysicalResource', 'gx:VirtualSoftwareResource'], vcsMap)
+					await Utils.getInnerVCs(resource, 'gx:aggregationOf', ['gx:DataResource', 'gx:PhysicalResource', 'gx:SoftwareResource'], vcsMap)
 				}
 			} catch (e) {
 				res.status(STATUS_CODES.BAD_REQUEST).json({
@@ -213,9 +205,14 @@ class SignerToolController {
 
 			const selfDescription = Utils.createVP(vcs)
 
-			logger.info(__filename, 'GXLegalParticipant', "", "", {url: process.env.COMPLIANCE_SERVICE, selfDescription: JSON.stringify(selfDescription)})
+			logger.info(__filename, 'GXLegalParticipant', '', '', { url: process.env.COMPLIANCE_SERVICE, selfDescription: JSON.stringify(selfDescription) })
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
-			logger.info(__filename, 'GXLegalParticipant', complianceCredential? '🔒 SD signed successfully (compliance service)':'❌ SD signing failed (compliance service)', req.custom.uuid)
+			logger.info(
+				__filename,
+				'GXLegalParticipant',
+				complianceCredential ? '🔒 SD signed successfully (compliance service)' : '❌ SD signing failed (compliance service)',
+				req.custom.uuid
+			)
 
 			const completeSD = {
 				selfDescriptionCredential: selfDescription,
@@ -423,9 +420,9 @@ class SignerToolController {
 				![
 					'gx:ServiceOffering',
 					'gx:LegalParticipant',
-					'gx:VirtualDataResource',
+					'gx:DataResource',
 					'gx:PhysicalResource',
-					'gx:VirtualSoftwareResource',
+					'gx:SoftwareResource',
 					'gx:legalRegistrationNumber',
 					'gx:GaiaXTermsAndConditions'
 				].includes(typeName)

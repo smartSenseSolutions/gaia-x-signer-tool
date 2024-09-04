@@ -2333,7 +2333,7 @@ export const resourceTestJSON = {
 				credentialSubject: {
 					'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
 					id: 'https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json',
-					type: 'gx:VirtualDataResource',
+					type: 'gx:DataResource',
 					'gx:name': 'Test Resource 2',
 					'gx:description': 'Test Resource 2 description',
 					'gx:aggregationOf': [
@@ -2428,7 +2428,7 @@ export const resourceTestJSON = {
 				credentialSubject: {
 					'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
 					id: 'https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json',
-					type: 'gx:VirtualSoftwareResource',
+					type: 'gx:SoftwareResource',
 					'gx:name': 'Test Resource 2',
 					'gx:description': 'Test Resource 2 description',
 					'gx:aggregationOf': [
@@ -2463,7 +2463,7 @@ export const resourceTestJSON = {
 							credentialSubject: {
 								'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
 								id: 'https://wizard-api.smart-x.smartsenselabs.com/uuid/test-resource-2.json',
-								type: 'gx:VirtualDataResource',
+								type: 'gx:DataResource',
 								'gx:name': 'Test Resource 2',
 								'gx:description': 'Test Resource 2 description',
 								'gx:aggregationOf': [
@@ -2590,7 +2590,7 @@ export const resourceTestJSON = {
 							credentialSubject: {
 								'@context': 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#',
 								id: 'https://wizard-api.smart-x.smartsenselabs.com/12081064-8878-477e-8092-564a240c69e2/resource_f288e078-c580-4cfe-9c25-2013174c4324.json',
-								type: 'gx:VirtualDataResource',
+								type: 'gx:DataResource',
 								'gx:name': 'Test Resource 2',
 								'gx:description': 'Test Resource 2 description',
 								'gx:copyrightOwnedBy': [

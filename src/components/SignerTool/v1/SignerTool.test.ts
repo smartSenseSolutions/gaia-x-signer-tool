@@ -280,7 +280,6 @@ describe('/v1/gaia-x/verify', () => {
 			// 		.post(`${ROUTES.V1}${ROUTES.V1_APIS.VERIFY}`)
 			// 		.send(body)
 			// 		.expect((response) => {
-			// 			console.log(response.body,)
 			// 			expect(response.status).toBe(STATUS_CODES.BAD_REQUEST)
 			// 			expect(response.body).toEqual(error)
 			// 		})
@@ -1478,7 +1477,7 @@ describe('/gaia-x/resource', () => {
 			it('Invalid resource type', async () => {
 				const { invalidResourceType } = resourceTestJSON
 				const error = {
-					error: `VC with type 'gx:VirtualDataResource' or 'gx:PhysicalResource' or 'gx:VirtualSoftwareResource' not found!!`,
+					error: `VC with type 'gx:DataResource' or 'gx:PhysicalResource' or 'gx:SoftwareResource' not found!!`,
 					message: AppMessages.VP_FAILED
 				}
 				await supertest(app)

@@ -370,7 +370,6 @@ describe('commonFunction Testing', () => {
 				validSOComplianceReq = JSON.parse(JSON.stringify(validSOComplianceReq))
 				await Utils.callServiceOfferingCompliance(validSOComplianceReq)
 			} catch (error) {
-				console.log(error)
 				isError = true
 			}
 			expect(isError).toBe(false)

@@ -145,7 +145,7 @@ class SignerToolController {
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
-			// privateKey = process.env.PRIVATE_KEY as string
+			privateKey = process.env.PRIVATE_KEY as string
 			const vcsMap = new Map()
 			try {
 				switch (resource.credentialSubject.type) {
@@ -214,6 +214,7 @@ class SignerToolController {
 
 			const selfDescription = Utils.createVP(vcs)
 
+			logger.debug(__filename, 'Resource', 'Resource Compliance', 'data', { url: process.env.COMPLIANCE_SERVICE, selfDescription })
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
 			logger.info(
 				__filename,

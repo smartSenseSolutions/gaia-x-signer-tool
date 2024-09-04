@@ -233,7 +233,7 @@ class SignerToolController {
 				message: AppMessages.VP_SUCCESS
 			})
 		} catch (e: any) {
-			logger.error(__filename, 'Resource', e.message, req.custom.uuid)
+			logger.error(__filename, 'Resource', e.message, req.custom.uuid, e)
 			res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({
 				error: (e as Error).message,
 				message: AppMessages.VP_FAILED

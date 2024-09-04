@@ -214,7 +214,6 @@ class SignerToolController {
 
 			const selfDescription = Utils.createVP(vcs)
 
-			logger.info(__filename, 'GXLegalParticipant', '', '', { url: process.env.COMPLIANCE_SERVICE, selfDescription: JSON.stringify(selfDescription) })
 			const complianceCredential = (await axios.post(process.env.COMPLIANCE_SERVICE as string, selfDescription)).data
 			logger.info(
 				__filename,

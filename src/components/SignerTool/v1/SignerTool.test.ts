@@ -119,6 +119,7 @@ jest.mock('../../../utils/service/vault.service', () => {
 		}
 	}
 })
+
 describe('/v1/gaia-x/verify', () => {
 	const validBody = {
 		policies: ['integrityCheck', 'holderSignature', 'complianceSignature', 'complianceCheck'],
@@ -1544,6 +1545,7 @@ describe('/gaia-x/resource', () => {
 			})
 		})
 	})
+
 	describe('Positive scenarios', () => {
 		it('compliance validPhysicalResource', async () => {
 			// jest.spyOn(axios, 'post').mockImplementation(async () => {

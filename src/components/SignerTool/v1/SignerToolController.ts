@@ -145,7 +145,7 @@ class SignerToolController {
 			}
 			const { x5u } = await Utils.getPublicKeys(ddo.didDocument)
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
-			privateKey = process.env.PRIVATE_KEY as string
+			// privateKey = process.env.PRIVATE_KEY as string
 			const vcsMap = new Map()
 			try {
 				switch (resource.credentialSubject.type) {

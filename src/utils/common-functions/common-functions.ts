@@ -167,7 +167,7 @@ class Utils {
 			const id = request.id.replace('#', '%23')
 			// request.id = request.id.replace('#', '%23')
 			const url = `${process.env.REGISTRATION_SERVICE as string}?vcid=${id}`
-			const regVC = await axios.post(url, request.credentialSubject)
+			const regVC = await axios.post(url, request)
 			return regVC.data
 		} catch (error) {
 			logger.error(__filename, 'issueRegistrationNumberVC', `❌ RegistrationNumber failed | Error: ${error}`, '')

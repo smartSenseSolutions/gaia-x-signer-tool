@@ -285,6 +285,10 @@ class SignerToolController {
 			// Decrypt private key(received in request) from base64 to raw string
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
 			// privateKey = process.env.PRIVATE_KEY as string
+			const cloudWalletResponse = await axios.post('https://cloud-wallet.xfsc.learn.smartsenselabs.com/issuing-demo/store-vc', serviceOffering)
+			console.log(cloudWalletResponse)
+			const serviceOfferingId = cloudWalletResponse.data.uuid
+			serviceOffering.credentialSubject['gx:accessCredential'] = `https://cloud-wallet.xfsc.learn.smartsenselabs.com/issuing-demo/vc/${serviceOfferingId}/offer`
 			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 			serviceOffering.proof = proof
@@ -370,8 +374,8 @@ class SignerToolController {
 	Verify = async (req: Request, res: Response): Promise<void> => {
 		/**
 		 * Request Body :
-		  	1. url : EG . https://greenworld.proofsense.in/.well-known/participant.json
-		 	2. policies : policy we want to check
+				1. url : EG . https://greenworld.proofsense.in/.well-known/participant.json
+			  2. policies : policy we want to check
 		 */
 
 		//todo : compliance check is remaining

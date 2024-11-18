@@ -285,10 +285,16 @@ class SignerToolController {
 			// Decrypt private key(received in request) from base64 to raw string
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
 			// privateKey = process.env.PRIVATE_KEY as string
-			const cloudWalletResponse = await axios.post('https://cloud-wallet.xfsc.learn.smartsenselabs.com/issuing-demo/store-vc', serviceOffering)
+			try {
+				const cloudWalletResponse = await axios.post(`${process.env.CLOUD_WALLET_URL}/issuing-demo/store-vc`, serviceOffering)
+				const serviceOfferingId = cloudWalletResponse.data.groupId
 
-			const serviceOfferingId = cloudWalletResponse.data.uuid
-			serviceOffering.credentialSubject['gx:accessCredential'] = `https://cloud-wallet.xfsc.learn.smartsenselabs.com/issuing-demo/vc/${serviceOfferingId}/offer`
+				serviceOffering.credentialSubject['gx:accessCredential'] = `${process.env.CLOUD_WALLET_URL}/issuing-demo/create-offer/${serviceOfferingId}`
+				logger.debug(__filename, 'ServiceOffering', '🔒 Got service offering id from cloud wallet', serviceOfferingId)
+			} catch (cloudWalletError) {
+				logger.error(__filename, 'ServiceOffering', 'Failed to get service offering id from cloud wallet', '', cloudWalletError)
+			}
+
 			// Sign service offering self description with private key(received in request)
 			const proof = await Utils.addProof(jsonld, axios, jose, crypto, serviceOffering, privateKey, verificationMethod, AppConst.RSA_ALGO, x5u)
 			serviceOffering.proof = proof

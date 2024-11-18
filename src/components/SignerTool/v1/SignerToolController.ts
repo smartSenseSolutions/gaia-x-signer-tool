@@ -286,7 +286,7 @@ class SignerToolController {
 			privateKey = isVault ? await vaultService.getSecrets(privateKey) : Buffer.from(privateKey, 'base64').toString('ascii')
 			// privateKey = process.env.PRIVATE_KEY as string
 			const cloudWalletResponse = await axios.post('https://cloud-wallet.xfsc.learn.smartsenselabs.com/issuing-demo/store-vc', serviceOffering)
-			console.log(cloudWalletResponse)
+
 			const serviceOfferingId = cloudWalletResponse.data.uuid
 			serviceOffering.credentialSubject['gx:accessCredential'] = `https://cloud-wallet.xfsc.learn.smartsenselabs.com/issuing-demo/vc/${serviceOfferingId}/offer`
 			// Sign service offering self description with private key(received in request)
